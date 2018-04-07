@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>ece.ing3.java</groupId>
@@ -25,30 +25,29 @@
 			<artifactId>mysql-connector-java</artifactId>
 			<version>6.0.6</version>
 		</dependency>
-		<!-- Ebean ORM -->
+		<!-- Apache Commons Bean Utils -->
 		<dependency>
-			<groupId>io.ebean</groupId>
-			<artifactId>ebean</artifactId>
-			<version>11.15.3</version>
+			<groupId>commons-beanutils</groupId>
+			<artifactId>commons-beanutils</artifactId>
+			<version>1.9.3</version>
 		</dependency>
-		<!-- Ebean ORM Query beans -->
+		<!-- Apache Commons Configuration 2 -->
 		<dependency>
-			<groupId>io.ebean</groupId>
-			<artifactId>ebean-querybean</artifactId>
-			<version>11.2.1</version>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-configuration2</artifactId>
+			<version>2.2</version>
 		</dependency>
-		<!-- Java annotation processor to generate query beans -->
+		<!-- BeanShell REPL -->
 		<dependency>
-			<groupId>io.ebean</groupId>
-			<artifactId>querybean-generator</artifactId>
-			<version>11.1.2</version>
-			<scope>provided</scope>
+			<groupId>org.beanshell</groupId>
+			<artifactId>bsh</artifactId>
+			<version>2.0b5</version>
 		</dependency>
-		<!-- Validation API for Ebean ORM -->
+		<!-- SLF4J Logger -->
 		<dependency>
-			<groupId>javax.validation</groupId>
-			<artifactId>validation-api</artifactId>
-			<version>1.0.0.GA</version>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-log4j12</artifactId>
+			<version>1.7.25</version>
 		</dependency>
 		<!-- JFreeChart Chart Library -->
 		<dependency>
@@ -66,6 +65,11 @@
 				<targetPath>.</targetPath>
 				<filtering>true</filtering>
 				<directory>src/main/resources</directory>
+			</resource>
+			<resource>
+				<targetPath>.</targetPath>
+				<filtering>true</filtering>
+				<directory>src/main/private-resources</directory>
 			</resource>
 		</resources>
 
@@ -99,15 +103,16 @@
 			</plugin>
 
 			<plugin>
-				<groupId>io.repaint.maven</groupId>
-				<artifactId>tiles-maven-plugin</artifactId>
-				<version>2.11</version>
-				<extensions>true</extensions>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-javadoc-plugin</artifactId>
+				<version>3.0.0</version>
 				<configuration>
-					<tiles>
-						<tile>org.avaje.tile:java-compile:1.1</tile>
-						<tile>io.ebean.tile:enhancement:5.2</tile>
-					</tiles>
+					<aggregate>true</aggregate>
+					<show>public</show>
+					<nohelp>true</nohelp>
+					<header>${project.name}, ${project.version}</header>
+					<footer>${project.name}, ${project.version}</footer>
+					<doctitle>${project.name}, ${project.version}</doctitle>
 				</configuration>
 			</plugin>
 		</plugins>
