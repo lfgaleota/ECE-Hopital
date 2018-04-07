@@ -15,6 +15,7 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<maven.compiler.target>1.8</maven.compiler.target>
 		<maven.compiler.source>1.8</maven.compiler.source>
+		<ebean-maven-plugin.args>debug=2</ebean-maven-plugin.args>
 	</properties>
 
 	<dependencies>
@@ -29,6 +30,25 @@
 			<groupId>io.ebean</groupId>
 			<artifactId>ebean</artifactId>
 			<version>11.15.3</version>
+		</dependency>
+		<!-- Ebean ORM Query beans -->
+		<dependency>
+			<groupId>io.ebean</groupId>
+			<artifactId>ebean-querybean</artifactId>
+			<version>11.2.1</version>
+		</dependency>
+		<!-- Java annotation processor to generate query beans -->
+		<dependency>
+			<groupId>io.ebean</groupId>
+			<artifactId>querybean-generator</artifactId>
+			<version>11.1.2</version>
+			<scope>provided</scope>
+		</dependency>
+		<!-- Validation API for Ebean ORM -->
+		<dependency>
+			<groupId>javax.validation</groupId>
+			<artifactId>validation-api</artifactId>
+			<version>1.0.0.GA</version>
 		</dependency>
 		<!-- JFreeChart Chart Library -->
 		<dependency>
@@ -85,6 +105,7 @@
 				<extensions>true</extensions>
 				<configuration>
 					<tiles>
+						<tile>org.avaje.tile:java-compile:1.1</tile>
 						<tile>io.ebean.tile:enhancement:5.2</tile>
 					</tiles>
 				</configuration>
