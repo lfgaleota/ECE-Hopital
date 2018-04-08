@@ -112,7 +112,7 @@ public class InfirmierFinder {
 			ResultSet rs = this.finder.find();
 
 			while( rs.next() ) {
-				Infirmiers.add( this.fromResultSet( rs ) );
+				Infirmiers.add( fromResultSet( rs ) );
 			}
 
 			return Infirmiers;
@@ -128,6 +128,6 @@ public class InfirmierFinder {
 	 * @throws DatabaseException Erreur lors de la recherche en base de donnée
 	 */
 	public Infirmier findUnique() throws DatabaseException {
-		return this.fromResultSet( this.finder.findUnique() );
+		return fromResultSet( this.finder.findUnique() );
 	}
 }

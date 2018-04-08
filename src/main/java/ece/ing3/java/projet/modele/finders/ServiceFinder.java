@@ -92,7 +92,7 @@ public class ServiceFinder {
 			ResultSet rs = this.finder.find();
 
 			while( rs.next() ) {
-				services.add( this.fromResultSet( rs ) );
+				services.add( fromResultSet( rs ) );
 			}
 
 			return services;
@@ -108,6 +108,6 @@ public class ServiceFinder {
 	 * @throws DatabaseException Erreur lors de la recherche en base de donnée
 	 */
 	public Service findUnique() throws DatabaseException {
-		return this.fromResultSet( this.finder.findUnique() );
+		return fromResultSet( this.finder.findUnique() );
 	}
 }

@@ -103,7 +103,7 @@ public class EmployeFinder {
 			ResultSet rs = this.finder.find();
 
 			while( rs.next() ) {
-				Employes.add( this.fromResultSet( rs ) );
+				Employes.add( fromResultSet( rs ) );
 			}
 
 			return Employes;
@@ -119,6 +119,6 @@ public class EmployeFinder {
 	 * @throws DatabaseException Erreur lors de la recherche en base de donnée
 	 */
 	public Employe findUnique() throws DatabaseException {
-		return this.fromResultSet( this.finder.findUnique() );
+		return fromResultSet( this.finder.findUnique() );
 	}
 }
