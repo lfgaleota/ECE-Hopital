@@ -1,6 +1,9 @@
-package ece.ing3.java.projet.database.sql;
+package ece.ing3.java.projet.database.sql.queries;
 
 import ece.ing3.java.projet.database.Database;
+import ece.ing3.java.projet.database.sql.Model;
+import ece.ing3.java.projet.database.sql.enumerations.Order;
+import ece.ing3.java.projet.database.sql.clauses.OrderBy;
 import ece.ing3.java.projet.exceptions.DatabaseException;
 
 import java.sql.PreparedStatement;
@@ -14,10 +17,9 @@ import java.util.Collections;
  * <p>
  * Provides a convenient way to build select SQL queries, reactive-style, for a provided model class.
  */
-public class SQLSelect {
+public class SQLSelect extends SQLWhereQuery<SQLSelect> {
 	private String[] tableNames;
 	private String[] selectedColumns;
-	private Where where;
 	private OrderBy orderBy;
 	private String[] joinClause;
 	private String[] joinCondition;
@@ -88,7 +90,6 @@ public class SQLSelect {
 	 */
 	public SQLSelect( Class<? extends Model>[] modelClasses, String[] joinClause, String[] joinCondition, String... selectedColumns ) throws IllegalArgumentException {
 		tableNames = Arrays.stream( modelClasses ).map( Model::getTableName ).toArray( String[]::new );
-		this.where = null;
 		this.orderBy = null;
 		this.joinClause = joinClause;
 		this.joinCondition = joinCondition;
@@ -101,85 +102,6 @@ public class SQLSelect {
 		if( joinCondition != null && joinCondition.length != ( tableNames.length - 1 ) ) {
 			throw new IllegalArgumentException( "Malformed join condition, expected " + ( tableNames.length - 1 ) + " conditions, got " + joinCondition.length );
 		}
-	}
-
-	/**
-	 * Init a new where clause.
-	 *
-	 * @param condition Where clause to use
-	 * @return This SQL select helper
-	 */
-	public SQLSelect where( Where condition ) {
-		where = condition;
-		return this;
-	}
-
-	/**
-	 * Chain a new Where clause using the boolean AND.
-	 *
-	 * @param condition Where clause to chain
-	 * @return This SQL select helper
-	 */
-	public SQLSelect andWhere( Where condition ) {
-		if( where == null ) {
-			where = condition;
-			return this;
-		}
-
-		where.and( condition );
-		return this;
-	}
-
-	/**
-	 * Chain a Where clause using the boolean OR.
-	 *
-	 * @param condition Where clause to chain
-	 * @return This SQL select helper
-	 */
-	public SQLSelect orWhere( Where condition ) {
-		if( where == null ) {
-			where = condition;
-			return this;
-		}
-
-		where.or( condition );
-		return this;
-	}
-
-	/**
-	 * Init a new Where clause using the provided values.
-	 *
-	 * @param column     Column to target
-	 * @param comparator Comparator to use
-	 * @param value      Comparison value
-	 * @return This SQL select helper
-	 */
-	public SQLSelect where( String column, String comparator, Object value ) {
-		return this.where( new Where( column, comparator, value ) );
-	}
-
-	/**
-	 * Chain a Where clause using the boolean AND, using the provided values.
-	 *
-	 * @param column     Column to target
-	 * @param comparator Comparator to use
-	 * @param value      Comparison value
-	 * @return This SQL select helper
-	 */
-	public SQLSelect andWhere( String column, String comparator, Object value ) {
-		return this.andWhere( new Where( column, comparator, value ) );
-	}
-
-	/**
-	 * Chain a Where clause using the boolean OR, using the provided values.
-	 *
-	 * @param column     Column to target
-	 * @param comparator Comparator to use
-	 * @param value      Comparison value
-	 * @return This SQL select helper
-	 */
-	public SQLSelect orWhere( String column, String comparator, Object value ) {
-		return this.orWhere( new Where( column, comparator, value ) );
 	}
 
 	/**
@@ -314,10 +236,7 @@ public class SQLSelect {
 
 		appendTableNames( sb );
 
-		if( where != null ) {
-			sb.append( " WHERE " );
-			sb.append( where.toString() );
-		}
+		appendWhereClause( sb );
 
 		if( orderBy != null ) {
 			sb.append( " ORDER BY " );

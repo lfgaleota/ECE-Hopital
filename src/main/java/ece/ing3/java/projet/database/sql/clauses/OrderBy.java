@@ -1,4 +1,6 @@
-package ece.ing3.java.projet.database.sql;
+package ece.ing3.java.projet.database.sql.clauses;
+
+import ece.ing3.java.projet.database.sql.enumerations.Order;
 
 /**
  * Order By clause helper.

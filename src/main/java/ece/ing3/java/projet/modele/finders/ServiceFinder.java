@@ -1,8 +1,7 @@
 package ece.ing3.java.projet.modele.finders;
 
-import ece.ing3.java.projet.database.sql.SQLSelect;
+import ece.ing3.java.projet.database.sql.queries.SQLSelect;
 import ece.ing3.java.projet.modele.administration.Service;
-import ece.ing3.java.projet.modele.employe.Docteur;
 import ece.ing3.java.projet.exceptions.DatabaseException;
 
 import java.sql.ResultSet;
