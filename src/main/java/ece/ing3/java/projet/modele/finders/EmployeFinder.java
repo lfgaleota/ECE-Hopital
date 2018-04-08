@@ -69,11 +69,11 @@ public class EmployeFinder {
 	/**
 	 * Conditionne le paramètre "tel" de l'Employe
 	 *
-	 * @param tel Numéro de téléphone exact qui sera utilisé pour la sélection
+	 * @param numeroTelephone Numéro de téléphone exact qui sera utilisé pour la sélection
 	 * @return Utilitaire de recherche
 	 */
-	public EmployeFinder tel( String tel ) {
-		this.finder.andWhere( "tel", "=", tel );
+	public EmployeFinder tel( String numeroTelephone ) {
+		this.finder.andWhere( "tel", "=", numeroTelephone );
 		return this;
 	}
 

@@ -18,7 +18,7 @@ public class DocteurFinder {
 	private SQLSelect finder;
 
 	/**
-	 * Initialise un nouveau utilitaire de recherche de Docteur
+	 * Initialise un nouveau utilitaire de recherche du Docteur
 	 */
 	@SuppressWarnings( "unchecked" )
 	public DocteurFinder() {
@@ -26,7 +26,7 @@ public class DocteurFinder {
 	}
 
 	/**
-	 * Conditionne le paramètre "numero" de Docteur
+	 * Conditionne le paramètre "numero" du Docteur
 	 *
 	 * @param numero Numéro exact qui sera utilisé pour la sélection
 	 * @return Utilitaire de recherche
@@ -37,7 +37,7 @@ public class DocteurFinder {
 	}
 
 	/**
-	 * Conditionne le paramètre "nom" de Docteur
+	 * Conditionne le paramètre "nom" du Docteur
 	 *
 	 * @param nom Nom exact qui sera utilisé pour la sélection
 	 * @return Utilitaire de recherche
@@ -48,7 +48,7 @@ public class DocteurFinder {
 	}
 
 	/**
-	 * Conditionne le paramètre "prenom" de Docteur
+	 * Conditionne le paramètre "prenom" du Docteur
 	 *
 	 * @param prenom Prénom exact qui sera utilisé pour la sélection
 	 * @return Utilitaire de recherche
@@ -59,7 +59,7 @@ public class DocteurFinder {
 	}
 
 	/**
-	 * Conditionne le paramètre "adresse" de Docteur
+	 * Conditionne le paramètre "adresse" du Docteur
 	 *
 	 * @param adresse Adresse exact qui sera utilisé pour la sélection
 	 * @return Utilitaire de recherche
@@ -70,13 +70,24 @@ public class DocteurFinder {
 	}
 
 	/**
-	 * Conditionne le paramètre "tel" de Docteur
+	 * Conditionne le paramètre "tel" du Docteur
 	 *
-	 * @param tel Numéro de téléphone exact qui sera utilisé pour la sélection
+	 * @param numeroTelephone Numéro de téléphone exact qui sera utilisé pour la sélection
 	 * @return Utilitaire de recherche
 	 */
-	public DocteurFinder tel( String tel ) {
-		this.finder.andWhere( "tel", "=", tel );
+	public DocteurFinder numeroTelephone( String numeroTelephone ) {
+		this.finder.andWhere( "tel", "=", numeroTelephone );
+		return this;
+	}
+
+	/**
+	 * Conditionne le paramètre "specialite" du Docteur
+	 *
+	 * @param specialite Spécialité exact qui sera utilisé pour la sélection
+	 * @return Utilitaire de recherche
+	 */
+	public DocteurFinder specialite( Specialite specialite ) {
+		this.finder.andWhere( "specialite", "=", specialite );
 		return this;
 	}
 

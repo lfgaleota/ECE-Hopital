@@ -73,11 +73,44 @@ public class InfirmierFinder {
 	/**
 	 * Conditionne le paramètre "tel" de l'Infirmier
 	 *
-	 * @param tel Numéro de téléphone exact qui sera utilisé pour la sélection
+	 * @param numeroTelephone Numéro de téléphone exact qui sera utilisé pour la sélection
 	 * @return Utilitaire de recherche
 	 */
-	public InfirmierFinder tel( String tel ) {
-		this.finder.andWhere( "tel", "=", tel );
+	public InfirmierFinder numeroTelephone( String numeroTelephone ) {
+		this.finder.andWhere( "tel", "=", numeroTelephone );
+		return this;
+	}
+
+	/**
+	 * Conditionne le paramètre "rotation" de l'Infirmier
+	 *
+	 * @param rotation Période de rotation exact qui sera utilisé pour la sélection
+	 * @return Utilitaire de recherche
+	 */
+	public InfirmierFinder rotation( Rotation rotation ) {
+		this.finder.andWhere( "rotation", "=", rotation );
+		return this;
+	}
+
+	/**
+	 * Conditionne le paramètre "salaire" de l'Infirmier
+	 *
+	 * @param salaire Salaire exact qui sera utilisé pour la sélection
+	 * @return Utilitaire de recherche
+	 */
+	public InfirmierFinder salaire( Float salaire ) {
+		this.finder.andWhere( "salaire", "=", salaire );
+		return this;
+	}
+
+	/**
+	 * Conditionne le paramètre "code_service" de l'Infirmier
+	 *
+	 * @param codeService Code de service exact qui sera utilisé pour la sélection
+	 * @return Utilitaire de recherche
+	 */
+	public InfirmierFinder codeService( String codeService ) {
+		this.finder.andWhere( "code_service", "=", codeService );
 		return this;
 	}
 
