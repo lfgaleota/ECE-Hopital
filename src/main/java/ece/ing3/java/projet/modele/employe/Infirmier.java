@@ -40,7 +40,7 @@ public class Infirmier extends Employe {
 	/**
 	 * Récupère la période de rotation de l'infirmier
 	 *
-	 * @return
+	 * @return Période de rotation de l'infirmier
 	 */
 	public Rotation getRotation() {
 		return rotation;
@@ -77,7 +77,6 @@ public class Infirmier extends Employe {
 	 * Récupère le code du service auquel est rattaché l'infirmier
 	 *
 	 * @return Code du service auquel est rattaché l'infirmier
-	 * @throws DatabaseException Récupération depuis la BDD échouée
 	 */
 	public String getCodeService() {
 		return code_service;

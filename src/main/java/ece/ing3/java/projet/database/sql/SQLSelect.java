@@ -80,9 +80,10 @@ public class SQLSelect {
 	/**
 	 * Creates a new helper for multiple model classes, joining them with the provided join clause and using the provided join condition, retrieving only the provided columns.
 	 *
-	 * @param modelClasses  Model classes
-	 * @param joinClause    Join clause
-	 * @param joinCondition Join condition
+	 * @param modelClasses    Model classes
+	 * @param joinClause      Join clause
+	 * @param joinCondition   Join condition
+	 * @param selectedColumns Columns to retrieve
 	 * @throws IllegalArgumentException Join clause or condition is malformed
 	 */
 	public SQLSelect( Class<? extends Model>[] modelClasses, String[] joinClause, String[] joinCondition, String... selectedColumns ) throws IllegalArgumentException {
