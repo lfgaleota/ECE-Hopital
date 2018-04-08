@@ -6,5 +6,6 @@ ece.ing3.java.projet.enums
 ece.ing3.java.projet.exceptions
 ece.ing3.java.projet.modele.administration
 ece.ing3.java.projet.modele.employe
+ece.ing3.java.projet.modele.finders
 ece.ing3.java.projet.modele.hopital
 ece.ing3.java.projet.utils
