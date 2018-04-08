@@ -109,7 +109,7 @@ public class DocteurFinder {
 			ResultSet rs = this.finder.find();
 
 			while( rs.next() ) {
-				Docteurs.add( this.fromResultSet( rs ) );
+				Docteurs.add( fromResultSet( rs ) );
 			}
 
 			return Docteurs;
@@ -125,6 +125,6 @@ public class DocteurFinder {
 	 * @throws DatabaseException Erreur lors de la recherche en base de donnée
 	 */
 	public Docteur findUnique() throws DatabaseException {
-		return this.fromResultSet( this.finder.findUnique() );
+		return fromResultSet( this.finder.findUnique() );
 	}
 }
