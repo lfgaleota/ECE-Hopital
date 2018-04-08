@@ -20,19 +20,20 @@ public class Infirmier extends Employe {
 	/**
 	 * Créer un nouvel infirmier
 	 *
-	 * @param numero   Numéro d'employé
-	 * @param nom      Nom de l'infirmier
-	 * @param prenom   Prénom de l'infirmier
-	 * @param adresse  Adresse de l'infirmier
-	 * @param tel      Numéro de téléphone de l'infirmier
-	 * @param rotation Période de rotation de l'infirmier
-	 * @param salaire  Salaire de l'infirmier
+	 * @param numero          Numéro d'employé
+	 * @param nom             Nom de l'infirmier
+	 * @param prenom          Prénom de l'infirmier
+	 * @param adresse         Adresse de l'infirmier
+	 * @param numeroTelephone Numéro de téléphone de l'infirmier
+	 * @param rotation        Période de rotation de l'infirmier
+	 * @param salaire         Salaire de l'infirmier
+	 * @param codeService     Code de service de l'infirmier
 	 */
-	public Infirmier( Long numero, String nom, String prenom, String adresse, String tel, Rotation rotation, Float salaire, String code_service ) {
-		super( numero, nom, prenom, adresse, tel );
+	public Infirmier( Long numero, String nom, String prenom, String adresse, String numeroTelephone, Rotation rotation, Float salaire, String codeService ) {
+		super( numero, nom, prenom, adresse, numeroTelephone );
 		this.rotation = rotation;
 		this.salaire = salaire;
-		this.code_service = code_service;
+		this.code_service = codeService;
 	}
 
 	/**
