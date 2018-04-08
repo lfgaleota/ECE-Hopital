@@ -1,4 +1,4 @@
-package ece.ing3.java.projet.database.sql;
+package ece.ing3.java.projet.database.sql.clauses;
 
 import java.util.ArrayList;
 import java.util.List;

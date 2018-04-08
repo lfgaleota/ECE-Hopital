@@ -1,9 +1,8 @@
 package ece.ing3.java.projet.modele.finders;
 
-import ece.ing3.java.projet.database.sql.SQLSelect;
+import ece.ing3.java.projet.database.sql.queries.SQLSelect;
 import ece.ing3.java.projet.enums.Rotation;
 import ece.ing3.java.projet.exceptions.DatabaseException;
-import ece.ing3.java.projet.modele.administration.Service;
 import ece.ing3.java.projet.modele.employe.Employe;
 import ece.ing3.java.projet.modele.employe.Infirmier;
 
