@@ -19,7 +19,7 @@ public class InfirmierFinder {
 	private SQLSelect finder;
 
 	/**
-	 * Initialise un nouveau utilitaire de recherche de Infirmier
+	 * Initialise un nouveau utilitaire de recherche d'Infirmier
 	 */
 	@SuppressWarnings( "unchecked" )
 	public InfirmierFinder() {
@@ -27,7 +27,7 @@ public class InfirmierFinder {
 	}
 
 	/**
-	 * Conditionne le paramètre "numero" de Infirmier
+	 * Conditionne le paramètre "numero" de l'Infirmier
 	 *
 	 * @param numero Numéro exact qui sera utilisé pour la sélection
 	 * @return Utilitaire de recherche
@@ -38,7 +38,7 @@ public class InfirmierFinder {
 	}
 
 	/**
-	 * Conditionne le paramètre "nom" de Infirmier
+	 * Conditionne le paramètre "nom" de l'Infirmier
 	 *
 	 * @param nom Nom exact qui sera utilisé pour la sélection
 	 * @return Utilitaire de recherche
@@ -49,7 +49,7 @@ public class InfirmierFinder {
 	}
 
 	/**
-	 * Conditionne le paramètre "prenom" de Infirmier
+	 * Conditionne le paramètre "prenom" de l'Infirmier
 	 *
 	 * @param prenom Prénom exact qui sera utilisé pour la sélection
 	 * @return Utilitaire de recherche
@@ -60,7 +60,7 @@ public class InfirmierFinder {
 	}
 
 	/**
-	 * Conditionne le paramètre "adresse" de Infirmier
+	 * Conditionne le paramètre "adresse" de l'Infirmier
 	 *
 	 * @param adresse Adresse exact qui sera utilisé pour la sélection
 	 * @return Utilitaire de recherche
@@ -71,7 +71,7 @@ public class InfirmierFinder {
 	}
 
 	/**
-	 * Conditionne le paramètre "tel" de Infirmier
+	 * Conditionne le paramètre "tel" de l'Infirmier
 	 *
 	 * @param tel Numéro de téléphone exact qui sera utilisé pour la sélection
 	 * @return Utilitaire de recherche

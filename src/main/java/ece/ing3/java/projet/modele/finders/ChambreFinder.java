@@ -23,7 +23,7 @@ public class ChambreFinder {
 	}
 
 	/**
-	 * Conditionne le paramètre "no_chambre" du Chambre
+	 * Conditionne le paramètre "no_chambre" de la Chambre
 	 *
 	 * @param numeroChambre Numéro de chambre exact qui sera utilisé pour la sélection
 	 * @return Utilitaire de recherche
@@ -34,7 +34,7 @@ public class ChambreFinder {
 	}
 
 	/**
-	 * Conditionne le paramètre "surveillant" du Chambre
+	 * Conditionne le paramètre "surveillant" de la Chambre
 	 *
 	 * @param numeroSurveillant Numéro de surveillant exact qui sera utilisé pour la sélection
 	 * @return Utilitaire de recherche
@@ -45,7 +45,7 @@ public class ChambreFinder {
 	}
 
 	/**
-	 * Conditionne le paramètre "code_service" du Chambre
+	 * Conditionne le paramètre "code_service" de la Chambre
 	 *
 	 * @param codeServiceRattache Code du service de rattachement exact qui sera utilisé pour la sélection
 	 * @return Utilitaire de recherche
@@ -56,9 +56,9 @@ public class ChambreFinder {
 	}
 
 	/**
-	 * Conditionne le paramètre "nb_lits" du Chambre
+	 * Conditionne le paramètre "nb_lits" de la Chambre
 	 *
-	 * @param nombreLits Nom exact qui sera utilisé pour la sélection
+	 * @param nombreLits Nombre de lits exact qui sera utilisé pour la sélection
 	 * @return Utilitaire de recherche
 	 */
 	public ChambreFinder nombreLits( Integer nombreLits ) {
@@ -101,9 +101,9 @@ public class ChambreFinder {
 	}
 
 	/**
-	 * Récupère un unique Chambre répondant aux conditions
+	 * Récupère une unique Chambre répondant aux conditions
 	 *
-	 * @return Premier Chambre répondant aux conditions
+	 * @return Première Chambre répondant aux conditions
 	 * @throws DatabaseException Erreur lors de la recherche en base de donnée
 	 */
 	public Chambre findUnique() throws DatabaseException {

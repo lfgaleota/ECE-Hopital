@@ -120,7 +120,7 @@ public class Chambre extends Model {
 	 *
 	 * @param numeroChambre Numéro de chambre à rechercher
 	 * @param codeServiceRattache Code du service de rattachement à rechercher
-	 * @return Chambre de code donnée ou {@code null}
+	 * @return Chambre donnée ou {@code null}
 	 * @throws DatabaseException Erreur lors de la recherche en base de donnée
 	 */
 	public static Chambre find( Long numeroChambre, String codeServiceRattache ) throws DatabaseException {

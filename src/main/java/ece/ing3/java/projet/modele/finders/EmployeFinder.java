@@ -16,7 +16,7 @@ public class EmployeFinder {
 	private SQLSelect finder;
 
 	/**
-	 * Initialise un nouveau utilitaire de recherche de l'Employe
+	 * Initialise un nouveau utilitaire de recherche d'Employe
 	 */
 	public EmployeFinder() {
 		this.finder = new SQLSelect( Employe.class );
