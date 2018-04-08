@@ -1,6 +1,7 @@
-package ece.ing3.java.projet.modele.administration;
+package ece.ing3.java.projet.modele.finders;
 
 import ece.ing3.java.projet.database.sql.SQLSelect;
+import ece.ing3.java.projet.modele.administration.Service;
 import ece.ing3.java.projet.modele.employe.Docteur;
 import ece.ing3.java.projet.exceptions.DatabaseException;
 
@@ -66,15 +67,13 @@ public class ServiceFinder {
 		return this;
 	}
 
-	private Service fromResultSet( ResultSet rs ) throws DatabaseException {
+	static Service fromResultSet( ResultSet rs ) throws DatabaseException {
 		try {
-			Docteur directeur = Docteur.find( rs.getLong( "directeur" ) );
-
 			return new Service(
 					rs.getString( "code" ),
 					rs.getString( "nom" ),
 					rs.getString( "batiment" ),
-					directeur
+					rs.getLong( "directeur" )
 			);
 		} catch( SQLException e ) {
 			throw new DatabaseException( e );

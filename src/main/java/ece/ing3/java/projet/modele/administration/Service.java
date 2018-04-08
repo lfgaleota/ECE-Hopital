@@ -4,6 +4,7 @@ import ece.ing3.java.projet.database.sql.Model;
 import ece.ing3.java.projet.modele.employe.Docteur;
 import ece.ing3.java.projet.modele.employe.Infirmier;
 import ece.ing3.java.projet.exceptions.DatabaseException;
+import ece.ing3.java.projet.modele.finders.ServiceFinder;
 import ece.ing3.java.projet.modele.hopital.Chambre;
 
 import java.util.List;
@@ -15,20 +16,21 @@ public class Service extends Model {
 	private String code;
 	private String nom;
 	private String batiment;
+	private Long directeur;
 
 	/**
 	 * Créer un nouveau service
 	 *
-	 * @param code      Code du service
-	 * @param nom       Nom du service
-	 * @param batiment  Bâtiment où le service se trouve
-	 * @param directeur Directeur du service
+	 * @param code            Code du service
+	 * @param nom             Nom du service
+	 * @param batiment        Bâtiment où le service se trouve
+	 * @param numeroDirecteur Numéro de docteur du directeur de département
 	 */
-	public Service( String code, String nom, String batiment, Docteur directeur ) {
+	public Service( String code, String nom, String batiment, Long numeroDirecteur ) {
 		this.code = code;
 		this.nom = nom;
 		this.batiment = batiment;
-		setDirecteur( directeur );
+		this.directeur = numeroDirecteur;
 	}
 
 	/**
@@ -87,13 +89,22 @@ public class Service extends Model {
 	}
 
 	/**
+	 * Récupère le numéro du directeur du service
+	 *
+	 * @return Numéro du directeur du service
+	 */
+	public Long getNumeroDirecteur() {
+		return directeur;
+	}
+
+	/**
 	 * Récupère le directeur du service
 	 *
 	 * @return Directeur du service
+	 * @throws DatabaseException Récupération depuis la BDD échouée
 	 */
-	public Docteur getDirecteur() {
-		// TODO : Récupération du directeur de service
-		return null;
+	public Docteur getDirecteur() throws DatabaseException {
+		return Docteur.find( directeur );
 	}
 
 	/**
@@ -147,7 +158,7 @@ public class Service extends Model {
 				"code=" + getCode() +
 				", nom='" + getNom() + '\'' +
 				", batiment='" + getBatiment() + '\'' +
-				", directeur=" + getDirecteur() +
+				", directeur=" + getNumeroDirecteur() +
 				'}';
 	}
 }
