@@ -6,6 +6,8 @@ import ece.ing3.java.projet.exceptions.DatabaseException;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Arrays;
+import java.util.Collections;
 
 /**
  * SQL selector helper.
@@ -13,10 +15,11 @@ import java.sql.SQLException;
  * Provides a convenient way to build select SQL queries, reactive-style, for a provided model class.
  */
 public class SQLSelect {
-	private String tableName;
+	private String[] tableNames;
 	private String[] selectedColumns;
 	private Where where;
-	private String clauseOrderBy;
+	private String[] joinClause;
+	private String[] joinCondition;
 
 	/**
 	 * Creates a new helper for a model class
@@ -24,10 +27,7 @@ public class SQLSelect {
 	 * @param modelClass Model class
 	 */
 	public SQLSelect( Class<? extends Model> modelClass ) {
-		tableName = Model.getTableName( modelClass );
-		this.clauseOrderBy = "";
-		this.where = null;
-		this.selectedColumns = null;
+		this( modelClass, (String[]) null );
 	}
 
 	/**
@@ -36,9 +36,68 @@ public class SQLSelect {
 	 * @param modelClass      Model class
 	 * @param selectedColumns Columns to retrieve
 	 */
+	@SuppressWarnings( "unchecked" )
 	public SQLSelect( Class<? extends Model> modelClass, String... selectedColumns ) {
-		this( modelClass );
+		this( new Class[]{ modelClass }, selectedColumns );
+	}
+
+	/**
+	 * Creates a new helper for multiple model classes, assuming they are joined by NATURAL JOIN.
+	 *
+	 * @param modelClasses Model classes
+	 */
+	public SQLSelect( Class<? extends Model>[] modelClasses ) {
+		this( modelClasses, (String[]) null );
+	}
+
+	/**
+	 * Creates a new helper for multiple model classes, assuming they are joined by NATURAL JOIN, retrieving only the provided columns.
+	 *
+	 * @param modelClasses    Model classes
+	 * @param selectedColumns Columns to retrieve
+	 */
+	public SQLSelect( Class<? extends Model>[] modelClasses, String... selectedColumns ) {
+		this(
+				modelClasses,
+				modelClasses.length > 1 ? Collections.nCopies( modelClasses.length - 1, "NATURAL JOIN" ).toArray( new String[ modelClasses.length - 1 ] ) : null,
+				modelClasses.length > 1 ? Collections.nCopies( modelClasses.length - 1, "" ).toArray( new String[ modelClasses.length - 1 ] ) : null,
+				selectedColumns
+		);
+	}
+
+	/**
+	 * Creates a new helper for multiple model classes, joining them with the provided join clause and using the provided join condition.
+	 *
+	 * @param modelClasses  Model classes
+	 * @param joinClause    Join clause
+	 * @param joinCondition Join condition
+	 */
+	public SQLSelect( Class<? extends Model>[] modelClasses, String[] joinClause, String[] joinCondition ) {
+		this( modelClasses, joinClause, joinCondition, (String[]) null );
+	}
+
+	/**
+	 * Creates a new helper for multiple model classes, joining them with the provided join clause and using the provided join condition, retrieving only the provided columns.
+	 *
+	 * @param modelClasses  Model classes
+	 * @param joinClause    Join clause
+	 * @param joinCondition Join condition
+	 * @throws IllegalArgumentException Join clause or condition is malformed
+	 */
+	public SQLSelect( Class<? extends Model>[] modelClasses, String[] joinClause, String[] joinCondition, String... selectedColumns ) throws IllegalArgumentException {
+		tableNames = Arrays.stream( modelClasses ).map( Model::getTableName ).toArray( String[]::new );
+		this.where = null;
+		this.joinClause = joinClause;
+		this.joinCondition = joinCondition;
 		this.selectedColumns = selectedColumns;
+
+		if( joinClause != null && joinClause.length != ( tableNames.length - 1 ) ) {
+			throw new IllegalArgumentException( "Malformed join clause, expected " + ( tableNames.length - 1 ) + " clauses, got " + joinClause.length );
+		}
+
+		if( joinCondition != null && joinCondition.length != ( tableNames.length - 1 ) ) {
+			throw new IllegalArgumentException( "Malformed join condition, expected " + ( tableNames.length - 1 ) + " conditions, got " + joinCondition.length );
+		}
 	}
 
 	/**
@@ -185,6 +244,24 @@ public class SQLSelect {
 		return find( toString() );
 	}
 
+	private void appendTableNames( StringBuilder sb ) {
+		if( tableNames.length == 1 ) {
+			sb.append( tableNames[ 0 ] );
+			return;
+		}
+
+		sb.append( tableNames[ 0 ] );
+
+		for( int i = 0; i < tableNames.length - 1; i++ ) {
+			sb.append( " " );
+			sb.append( joinClause[ i ] );
+			sb.append( " " );
+			sb.append( tableNames[ i + 1 ] );
+			sb.append( " " );
+			sb.append( joinCondition[ i ] );
+		}
+	}
+
 	/**
 	 * Generate the SQL query for this select helper.
 	 *
@@ -199,15 +276,14 @@ public class SQLSelect {
 			sb.append( "*" );
 		}
 		sb.append( " FROM " );
-		sb.append( tableName );
+
+		appendTableNames( sb );
+
 		if( where != null ) {
 			sb.append( " WHERE " );
 			sb.append( where.toString() );
 		}
-		if( clauseOrderBy.length() > 0 ) {
-			sb.append( " ORDER BY " );
-			sb.append( clauseOrderBy );
-		}
+
 		sb.append( ";" );
 		return sb.toString();
 	}
