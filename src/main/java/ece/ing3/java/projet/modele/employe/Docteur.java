@@ -3,6 +3,7 @@ package ece.ing3.java.projet.modele.employe;
 import ece.ing3.java.projet.exceptions.DatabaseException;
 import ece.ing3.java.projet.modele.administration.Service;
 import ece.ing3.java.projet.enums.Specialite;
+import ece.ing3.java.projet.modele.finders.DocteurFinder;
 
 import java.util.List;
 
@@ -76,8 +77,16 @@ public class Docteur extends Employe {
 	 * @throws DatabaseException Erreur lors de la recherche en base de donnée
 	 */
 	public static Docteur find( Long numero ) throws DatabaseException {
-		// TODO : Recherche de docteur par numéro
-		Employe employe = Employe.find( numero );
-		return null;
+		return ( new DocteurFinder() ).numero( numero ).findUnique();
+	}
+
+	/**
+	 * Récupère l'ensemble des docteurs
+	 *
+	 * @return Liste des docteurs
+	 * @throws DatabaseException Erreur lors de la recherche en base de donnée
+	 */
+	public static List<Docteur> findList() throws DatabaseException {
+		return ( new DocteurFinder() ).findList();
 	}
 }

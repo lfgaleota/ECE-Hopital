@@ -3,6 +3,7 @@ package ece.ing3.java.projet.modele.employe;
 import ece.ing3.java.projet.enums.Rotation;
 import ece.ing3.java.projet.exceptions.DatabaseException;
 import ece.ing3.java.projet.modele.administration.Service;
+import ece.ing3.java.projet.modele.finders.InfirmierFinder;
 import ece.ing3.java.projet.modele.hopital.Chambre;
 
 import java.util.List;
@@ -14,6 +15,8 @@ public class Infirmier extends Employe {
 	private Rotation rotation;
 	private Float salaire;
 
+	private String code_service;
+
 	/**
 	 * Créer un nouvel infirmier
 	 *
@@ -24,13 +27,12 @@ public class Infirmier extends Employe {
 	 * @param tel      Numéro de téléphone de l'infirmier
 	 * @param rotation Période de rotation de l'infirmier
 	 * @param salaire  Salaire de l'infirmier
-	 * @param service  Service auquel est rattaché l'infirmier
 	 */
-	public Infirmier( Long numero, String nom, String prenom, String adresse, String tel, Rotation rotation, Float salaire, Service service ) {
+	public Infirmier( Long numero, String nom, String prenom, String adresse, String tel, Rotation rotation, Float salaire, String code_service ) {
 		super( numero, nom, prenom, adresse, tel );
 		this.rotation = rotation;
 		this.salaire = salaire;
-		setService( service );
+		this.code_service = code_service;
 	}
 
 	/**
@@ -70,13 +72,23 @@ public class Infirmier extends Employe {
 	}
 
 	/**
+	 * Récupère le code du service auquel est rattaché l'infirmier
+	 *
+	 * @return Code du service auquel est rattaché l'infirmier
+	 * @throws DatabaseException Récupération depuis la BDD échouée
+	 */
+	public String getCodeService() {
+		return code_service;
+	}
+
+	/**
 	 * Récupère le service auquel est rattaché l'infirmier
 	 *
 	 * @return Service auquel est rattaché l'infirmier
+	 * @throws DatabaseException Récupération depuis la BDD échouée
 	 */
-	public Service getService() {
-		// TODO : Récupération du service auquel est rattaché l'infirmier
-		return null;
+	public Service getService() throws DatabaseException {
+		return Service.find( this.code_service );
 	}
 
 	/**
@@ -108,7 +120,7 @@ public class Infirmier extends Employe {
 		return "Infirmier{" +
 				"rotation=" + getRotation() +
 				", salaire=" + getSalaire() +
-				", service=" + getService() +
+				", code_service=" + getCodeService() +
 				" =>" + super.toString() +
 				'}';
 	}
@@ -121,8 +133,16 @@ public class Infirmier extends Employe {
 	 * @throws DatabaseException Erreur lors de la recherche en base de donnée
 	 */
 	public static Infirmier find( Long numero ) throws DatabaseException {
-		// TODO : Recherche d'infirmier par numéro
-		Employe employe = Employe.find( numero );
-		return null;
+		return ( new InfirmierFinder() ).numero( numero ).findUnique();
+	}
+
+	/**
+	 * Récupère l'ensemble des infirmiers
+	 *
+	 * @return Liste des infirmiers
+	 * @throws DatabaseException Erreur lors de la recherche en base de donnée
+	 */
+	public static List<Infirmier> findList() throws DatabaseException {
+		return ( new InfirmierFinder() ).findList();
 	}
 }

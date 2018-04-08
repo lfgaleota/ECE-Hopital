@@ -2,6 +2,9 @@ package ece.ing3.java.projet.modele.employe;
 
 import ece.ing3.java.projet.database.sql.Model;
 import ece.ing3.java.projet.exceptions.DatabaseException;
+import ece.ing3.java.projet.modele.finders.EmployeFinder;
+
+import java.util.List;
 
 /**
  * Modèle d'Employé stocké en base de donnée
@@ -135,7 +138,16 @@ public class Employe extends Model {
 	 * @throws DatabaseException Erreur lors de la recherche en base de donnée
 	 */
 	public static Employe find( Long numero ) throws DatabaseException {
-		// TODO : Recherche d'employé par numéro
-		return null;
+		return ( new EmployeFinder() ).numero( numero ).findUnique();
+	}
+
+	/**
+	 * Récupère l'ensemble des employés
+	 *
+	 * @return Liste des employés
+	 * @throws DatabaseException Erreur lors de la recherche en base de donnée
+	 */
+	public static List<Employe> findBaseList() throws DatabaseException {
+		return ( new EmployeFinder() ).findList();
 	}
 }
