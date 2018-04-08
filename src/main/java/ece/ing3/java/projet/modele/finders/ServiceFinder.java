@@ -81,9 +81,9 @@ public class ServiceFinder {
 	}
 
 	/**
-	 * Récupère l'ensemble des services répondant aux conditions
+	 * Récupère l'ensemble des Services répondant aux conditions
 	 *
-	 * @return Liste des services répondant aux conditions
+	 * @return Liste des Services répondant aux conditions
 	 * @throws DatabaseException Erreur lors de la recherche en base de donnée
 	 */
 	public List<Service> findList() throws DatabaseException {
@@ -102,9 +102,9 @@ public class ServiceFinder {
 	}
 
 	/**
-	 * Récupère un unique service répondant aux conditions
+	 * Récupère un unique Service répondant aux conditions
 	 *
-	 * @return Premier service répondant aux conditions
+	 * @return Premier Service répondant aux conditions
 	 * @throws DatabaseException Erreur lors de la recherche en base de donnée
 	 */
 	public Service findUnique() throws DatabaseException {
