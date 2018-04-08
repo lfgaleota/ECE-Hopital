@@ -59,11 +59,11 @@ public class ServiceFinder {
 	/**
 	 * Conditionne le paramètre "directeur" du Service
 	 *
-	 * @param directeur Directeur exact qui sera utilisé pour la sélection
+	 * @param numeroDirecteur Numéro du directeur exact qui sera utilisé pour la sélection
 	 * @return Utilitaire de recherche
 	 */
-	public ServiceFinder directeur( Docteur directeur ) {
-		this.finder.andWhere( "directeur", "=", directeur.getNumero() );
+	public ServiceFinder numeroDirecteur( Long numeroDirecteur ) {
+		this.finder.andWhere( "directeur", "=", numeroDirecteur );
 		return this;
 	}
 

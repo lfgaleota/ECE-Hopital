@@ -5,6 +5,7 @@ import ece.ing3.java.projet.exceptions.DatabaseException;
 import ece.ing3.java.projet.modele.administration.Service;
 import ece.ing3.java.projet.modele.employe.Infirmier;
 import ece.ing3.java.projet.modele.finders.ChambreFinder;
+import ece.ing3.java.projet.modele.finders.HospitalisationFinder;
 
 import java.util.List;
 
@@ -109,10 +110,10 @@ public class Chambre extends Model {
 	/**
 	 * Récupère les hospitalisations liées à cette chambre
 	 * @return Liste des hospitalisations liées à la chambre
+	 * @throws DatabaseException Erreur lors de la recherche en base de donnée
 	 */
-	public Service getHospitalisations() {
-		// TODO : Récupération des hospitalisations d'une chambre
-		return null;
+	public List<Hospitalisation> getHospitalisations() throws DatabaseException {
+		return ( new HospitalisationFinder() ).numeroChambre( getNumeroChambre() ).codeService( getCodeServiceRattache() ).findList();
 	}
 
 	/**
