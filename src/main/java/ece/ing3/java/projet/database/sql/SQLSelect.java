@@ -18,6 +18,7 @@ public class SQLSelect {
 	private String[] tableNames;
 	private String[] selectedColumns;
 	private Where where;
+	private OrderBy orderBy;
 	private String[] joinClause;
 	private String[] joinCondition;
 
@@ -87,6 +88,7 @@ public class SQLSelect {
 	public SQLSelect( Class<? extends Model>[] modelClasses, String[] joinClause, String[] joinCondition, String... selectedColumns ) throws IllegalArgumentException {
 		tableNames = Arrays.stream( modelClasses ).map( Model::getTableName ).toArray( String[]::new );
 		this.where = null;
+		this.orderBy = null;
 		this.joinClause = joinClause;
 		this.joinCondition = joinCondition;
 		this.selectedColumns = selectedColumns;
@@ -112,7 +114,7 @@ public class SQLSelect {
 	}
 
 	/**
-	 * Chain a new where clause using the boolean AND.
+	 * Chain a new Where clause using the boolean AND.
 	 *
 	 * @param condition Where clause to chain
 	 * @return This SQL select helper
@@ -128,7 +130,7 @@ public class SQLSelect {
 	}
 
 	/**
-	 * Chain a where clause using the boolean OR.
+	 * Chain a Where clause using the boolean OR.
 	 *
 	 * @param condition Where clause to chain
 	 * @return This SQL select helper
@@ -152,12 +154,11 @@ public class SQLSelect {
 	 * @return This SQL select helper
 	 */
 	public SQLSelect where( String column, String comparator, Object value ) {
-		where = new Where( column, comparator, value );
-		return this;
+		return this.where( new Where( column, comparator, value ) );
 	}
 
 	/**
-	 * Chaine a where clause using the boolean AND, using the provided values.
+	 * Chain a Where clause using the boolean AND, using the provided values.
 	 *
 	 * @param column     Column to target
 	 * @param comparator Comparator to use
@@ -165,19 +166,11 @@ public class SQLSelect {
 	 * @return This SQL select helper
 	 */
 	public SQLSelect andWhere( String column, String comparator, Object value ) {
-		Where newCondition = new Where( column, comparator, value );
-
-		if( where == null ) {
-			where = newCondition;
-			return this;
-		}
-
-		where.and( newCondition );
-		return this;
+		return this.andWhere( new Where( column, comparator, value ) );
 	}
 
 	/**
-	 * Chaine a where clause using the boolean OR, using the provided values.
+	 * Chain a Where clause using the boolean OR, using the provided values.
 	 *
 	 * @param column     Column to target
 	 * @param comparator Comparator to use
@@ -185,15 +178,56 @@ public class SQLSelect {
 	 * @return This SQL select helper
 	 */
 	public SQLSelect orWhere( String column, String comparator, Object value ) {
-		Where newCondition = new Where( column, comparator, value );
+		return this.orWhere( new Where( column, comparator, value ) );
+	}
 
-		if( where == null ) {
-			where = newCondition;
+	/**
+	 * Init a new Order By clause.
+	 *
+	 * @param condition Order By clause to use
+	 * @return This SQL select helper
+	 */
+	public SQLSelect orderBy( OrderBy condition ) {
+		orderBy = condition;
+		return this;
+	}
+
+	/**
+	 * Chain another Order By condition using the provided values.
+	 *
+	 * @param condition Order By clause to chain
+	 * @return This SQL select helper
+	 */
+	public SQLSelect andOrderBy( OrderBy condition ) {
+		if( orderBy == null ) {
+			orderBy = condition;
 			return this;
 		}
 
-		where.or( newCondition );
+		orderBy.and( condition );
 		return this;
+	}
+
+	/**
+	 * Init a new Order By clause using the provided values.
+	 *
+	 * @param column Column to target
+	 * @param order  Order to target
+	 * @return This SQL select helper
+	 */
+	public SQLSelect orderBy( String column, Order order ) {
+		return this.orderBy( new OrderBy( column, order ) );
+	}
+
+	/**
+	 * Chain another Order By condition using the provided values.
+	 *
+	 * @param column Column to target
+	 * @param order  Order to target
+	 * @return This SQL select helper
+	 */
+	public SQLSelect andOrderBy( String column, Order order ) {
+		return this.orderBy( new OrderBy( column, order ) );
 	}
 
 	private ResultSet find( String query ) throws DatabaseException {
@@ -282,6 +316,11 @@ public class SQLSelect {
 		if( where != null ) {
 			sb.append( " WHERE " );
 			sb.append( where.toString() );
+		}
+
+		if( orderBy != null ) {
+			sb.append( " ORDER BY " );
+			sb.append( orderBy.toString() );
 		}
 
 		sb.append( ";" );
