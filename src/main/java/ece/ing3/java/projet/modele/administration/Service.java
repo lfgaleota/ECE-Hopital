@@ -4,6 +4,8 @@ import ece.ing3.java.projet.database.sql.Model;
 import ece.ing3.java.projet.modele.employe.Docteur;
 import ece.ing3.java.projet.modele.employe.Infirmier;
 import ece.ing3.java.projet.exceptions.DatabaseException;
+import ece.ing3.java.projet.modele.finders.ChambreFinder;
+import ece.ing3.java.projet.modele.finders.InfirmierFinder;
 import ece.ing3.java.projet.modele.finders.ServiceFinder;
 import ece.ing3.java.projet.modele.hopital.Chambre;
 
@@ -82,10 +84,10 @@ public class Service extends Model {
 	 * Récupère les infirmiers rattachés au service
 	 *
 	 * @return Liste d'infirmiers rattachés au service
+	 * @throws DatabaseException Erreur lors de la recherche en base de donnée
 	 */
-	public List<Infirmier> getInfirmiersRattaches() {
-		// TODO : Récupération des infirmiers rattachés au service
-		return null;
+	public List<Infirmier> getInfirmiersRattaches() throws DatabaseException {
+		return ( new InfirmierFinder() ).codeService( getCode() ).findList();
 	}
 
 	/**
@@ -120,10 +122,10 @@ public class Service extends Model {
 	 * Récupère les chambres rattachées au service
 	 *
 	 * @return Liste des chambres rattachées au service
+	 * @throws DatabaseException Erreur lors de la recherche en base de donnée
 	 */
-	public List<Chambre> getChambresRattachees() {
-		// TODO : Récupération des chambres rattachées au service
-		return null;
+	public List<Chambre> getChambresRattachees() throws DatabaseException {
+		return ( new ChambreFinder() ).codeServiceRattache( code ).findList();
 	}
 
 	/**

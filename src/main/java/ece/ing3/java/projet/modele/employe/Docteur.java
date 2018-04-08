@@ -4,6 +4,7 @@ import ece.ing3.java.projet.exceptions.DatabaseException;
 import ece.ing3.java.projet.modele.administration.Service;
 import ece.ing3.java.projet.enums.Specialite;
 import ece.ing3.java.projet.modele.finders.DocteurFinder;
+import ece.ing3.java.projet.modele.finders.ServiceFinder;
 
 import java.util.List;
 
@@ -50,10 +51,10 @@ public class Docteur extends Employe {
 	 * Récupère les services dirigés par le docteur
 	 *
 	 * @return Liste des services dirigés par le docteur
+	 * @throws DatabaseException Erreur lors de la recherche en base de donnée
 	 */
-	public List<Service> getServicesDiriges() {
-		// TODO : Récupération des services dirigés
-		return null;
+	public List<Service> getServicesDiriges() throws DatabaseException {
+		return ( new ServiceFinder() ).numeroDirecteur( getNumero() ).findList();
 	}
 
 	/**

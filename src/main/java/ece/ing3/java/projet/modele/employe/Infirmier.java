@@ -3,6 +3,7 @@ package ece.ing3.java.projet.modele.employe;
 import ece.ing3.java.projet.enums.Rotation;
 import ece.ing3.java.projet.exceptions.DatabaseException;
 import ece.ing3.java.projet.modele.administration.Service;
+import ece.ing3.java.projet.modele.finders.ChambreFinder;
 import ece.ing3.java.projet.modele.finders.InfirmierFinder;
 import ece.ing3.java.projet.modele.hopital.Chambre;
 
@@ -96,19 +97,20 @@ public class Infirmier extends Employe {
 	 * Modifie le service auquel est rattaché l'infirmier
 	 *
 	 * @param service Nouveau service auquel est rattaché l'infirmier
+	 * @throws DatabaseException Erreur lors de la recherche en base de donnée
 	 */
-	public void setService( Service service ) {
-		// TODO : Récupération du service auquel est rattaché l'infirmier
+	public void setService( Service service ) throws DatabaseException {
+		// TODO : Modification du service auquel est rattaché l'infirmier
 	}
 
 	/**
 	 * Récupère les chambres surveillées par l'infirmier
 	 *
 	 * @return Liste des chambres surveillées par l'infirmier
+	 * @throws DatabaseException Erreur lors de la recherche en base de donnée
 	 */
-	public List<Chambre> getChambresSurveillees() {
-		// TODO : Récupération des chambres surveillées
-		return null;
+	public List<Chambre> getChambresSurveillees() throws DatabaseException {
+		return ( new ChambreFinder() ).numeroSurveillant( getNumero() ).findList();
 	}
 
 	/**
