@@ -1,8 +1,12 @@
 package ece.ing3.java.projet.modele.hopital;
 
 import ece.ing3.java.projet.database.sql.Model;
+import ece.ing3.java.projet.exceptions.DatabaseException;
 import ece.ing3.java.projet.modele.administration.Service;
 import ece.ing3.java.projet.modele.employe.Infirmier;
+import ece.ing3.java.projet.modele.finders.ChambreFinder;
+
+import java.util.List;
 
 /**
  * Modèle de Chambre stocké en base de donnée
@@ -10,20 +14,22 @@ import ece.ing3.java.projet.modele.employe.Infirmier;
 public class Chambre extends Model {
 	private Long no_chambre;
 	private Integer nb_lits;
+	private Long surveillant;
+	private String code_service;
 
 	/**
 	 * Créer une nouvelle chambre
 	 *
 	 * @param numeroChambre Numéro de la chambre
 	 * @param nombreLits Nombre de lits dans la chambre
-	 * @param surveillant  Infirmier surveillant la chambre
-	 * @param serviceRattache Service auquel est rattaché la chambre
+	 * @param numeroSurveillant  Numéro de l'infirmier surveillant la chambre
+	 * @param codeServiceRattache Code du service auquel est rattaché la chambre
 	 */
-	public Chambre( Long numeroChambre, Integer nombreLits, Infirmier surveillant, Service serviceRattache ) {
+	public Chambre( Long numeroChambre, Integer nombreLits, Long numeroSurveillant, String codeServiceRattache ) {
 		this.no_chambre = numeroChambre;
 		this.nb_lits = nombreLits;
-		setSurveillant( surveillant );
-		setServiceRattache( serviceRattache );
+		this.surveillant = numeroSurveillant;
+		this.code_service = codeServiceRattache;
 	}
 
 	/**
@@ -51,12 +57,20 @@ public class Chambre extends Model {
 	}
 
 	/**
+	 * Récupère le numéro du infirmier surveillant la chambre
+	 * @return Numéro d'infirmier surveillant la chambre
+	 */
+	public Long getNumeroSurveillant() {
+		return surveillant;
+	}
+
+	/**
 	 * Récupère l'infirmier surveillant la chambre
 	 * @return Infirmier surveillant la chambre
+	 * @throws DatabaseException Erreur lors de la recherche en base de donnée
 	 */
-	public Infirmier getSurveillant() {
-		// TODO : Récupération du surveillant de chambre
-		return null;
+	public Infirmier getSurveillant() throws DatabaseException {
+		return Infirmier.find( surveillant );
 	}
 
 	/**
@@ -68,12 +82,20 @@ public class Chambre extends Model {
 	}
 
 	/**
+	 * Récupère le code du service auquel est rattaché la chambre
+	 * @return Code du service auquel est rattaché la chambre
+	 */
+	public String getCodeServiceRattache() {
+		return code_service;
+	}
+
+	/**
 	 * Récupère le service auquel est rattaché la chambre
 	 * @return Service auquel est rattaché la chambre
+	 * @throws DatabaseException Erreur lors de la recherche en base de donnée
 	 */
-	public Service getServiceRattache() {
-		// TODO : Récupération du service auquel est rattaché la chambre
-		return null;
+	public Service getServiceRattache() throws DatabaseException {
+		return Service.find( code_service );
 	}
 
 	/**
@@ -94,6 +116,28 @@ public class Chambre extends Model {
 	}
 
 	/**
+	 * Recherche une chambre de numéro et code service spécifique
+	 *
+	 * @param numeroChambre Numéro de chambre à rechercher
+	 * @param codeServiceRattache Code du service de rattachement à rechercher
+	 * @return Chambre de code donnée ou {@code null}
+	 * @throws DatabaseException Erreur lors de la recherche en base de donnée
+	 */
+	public static Chambre find( Long numeroChambre, String codeServiceRattache ) throws DatabaseException {
+		return ( new ChambreFinder() ).codeServiceRattache( codeServiceRattache ).numeroChambre( numeroChambre ).findUnique();
+	}
+
+	/**
+	 * Récupère l'ensemble des chambres
+	 *
+	 * @return Liste des chambres
+	 * @throws DatabaseException Erreur lors de la recherche en base de donnée
+	 */
+	public static List<Chambre> findList() throws DatabaseException {
+		return ( new ChambreFinder() ).findList();
+	}
+
+	/**
 	 * Génère une représentation textuelle de la chambre
 	 * @return Représentation textuelle de la chambre
 	 */
@@ -102,8 +146,8 @@ public class Chambre extends Model {
 		return "Chambre{" +
 				"no_chambre=" + getNumeroChambre() +
 				", nb_lits=" + getNombreLits() +
-				", surveillant=" + getSurveillant() +
-				", service=" + getServiceRattache() +
+				", surveillant=" + getNumeroSurveillant() +
+				", service=" + getCodeServiceRattache() +
 				'}';
 	}
 }
