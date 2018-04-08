@@ -21,7 +21,7 @@ public class Where {
 	 * @param value      Comparison value
 	 */
 	public Where( String column, String comparator, Object value ) {
-		query = column + " " + comparator + " ?";
+		query = "(" + column + " " + comparator + " ?)";
 		parameters.add( value );
 	}
 
