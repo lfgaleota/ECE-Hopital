@@ -1,6 +1,8 @@
 package ece.ing3.java.projet.modele.hopital;
 
 import ece.ing3.java.projet.database.sql.Model;
+import ece.ing3.java.projet.exceptions.DatabaseException;
+import ece.ing3.java.projet.modele.finders.MaladeFinder;
 
 import java.util.List;
 
@@ -21,15 +23,15 @@ public class Malade extends Model {
 	 * @param nom Nom du malade
 	 * @param prenom Prénom du malade
 	 * @param adresse Adresse du malade
-	 * @param tel Numéro de téléphone du malade
+	 * @param numeroTelephone Numéro de téléphone du malade
 	 * @param mutuelle Mutuelle du malade
 	 */
-	public Malade( Long numero, String nom, String prenom, String adresse, String tel, String mutuelle ) {
+	public Malade( Long numero, String nom, String prenom, String adresse, String numeroTelephone, String mutuelle ) {
 		this.numero = numero;
 		this.nom = nom;
 		this.prenom = prenom;
 		this.adresse = adresse;
-		this.tel = tel;
+		this.tel = numeroTelephone;
 		this.mutuelle = mutuelle;
 	}
 
@@ -124,9 +126,47 @@ public class Malade extends Model {
 	/**
 	 * Récupère l'hospitalisation en cours du malade
 	 * @return Hospitalisation en cours ou {@code null}
+	 * @throws DatabaseException Erreur lors de la recherche en base de donnée
 	 */
-	public Hospitalisation getHospitalisation() {
-		// TODO : Récupération de l'hospitalisation du malade
-		return null;
+	public Hospitalisation getHospitalisation() throws DatabaseException {
+		return Hospitalisation.find( numero );
+	}
+
+	/**
+	 * Recherche un malade pour un numéro donné
+	 *
+	 * @param numero Numéro de malade de l'hospitalisation à rechercher
+	 * @return Malade de numéro donné ou {@code null}
+	 * @throws DatabaseException Erreur lors de la recherche en base de donnée
+	 */
+	public static Malade find( Long numero ) throws DatabaseException {
+		return ( new MaladeFinder() ).numero( numero ).findUnique();
+	}
+
+	/**
+	 * Récupère l'ensemble des malades
+	 *
+	 * @return Liste des malades
+	 * @throws DatabaseException Erreur lors de la recherche en base de donnée
+	 */
+	public static List<Malade> findList() throws DatabaseException {
+		return ( new MaladeFinder() ).findList();
+	}
+
+	/**
+	 * Génère une représentation textuelle du malade
+	 *
+	 * @return Représentation textuelle du malade
+	 */
+	@Override
+	public String toString() {
+		return "Malade{" +
+				"numero=" + getNumero() +
+				", nom='" + getNom() + '\'' +
+				", prenom='" + getPrenom() + '\'' +
+				", adresse='" + getAdresse() + '\'' +
+				", tel='" + getNumeroTelephone() + '\'' +
+				", mutuelle='" + getMutuelle() + '\'' +
+				'}';
 	}
 }
