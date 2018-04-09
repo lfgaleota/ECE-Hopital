@@ -24,6 +24,7 @@ public class BasePanel extends JPanel {
 	private static int COUNT = 0;
 	private String message = "";
 
+
 	/// CONSTRUCTEUR D UN PANNEAU (CONTENU D UN ONGLET)
 	/// CONSTRUCTEUR PAR DEFAUT
 	public BasePanel() {
