@@ -13,11 +13,8 @@ public class BarChart
 	public static ChartPanel chartPanel;
 	public static JFreeChart chart;
 	
-	public BarChart() { }
-	
-	
-	public ChartPanel Creer_BarChart()
-	{
+	public BarChart() {
+		
 		dataset = new DefaultCategoryDataset();
 		dataset.addValue(1.0, "Row 1", "Column 1");
 		dataset.addValue(5.0, "Row 1", "Column 2");
@@ -39,7 +36,11 @@ public class BarChart
 		
 		chartPanel = new ChartPanel(chart, false);
 		chartPanel.setPreferredSize(new Dimension(400, 200));
-		
+
+	}
+	
+	public ChartPanel getBarChart()
+	{
 		return chartPanel;
 	}
 	
