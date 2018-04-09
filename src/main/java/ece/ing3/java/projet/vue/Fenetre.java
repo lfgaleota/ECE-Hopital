@@ -16,6 +16,9 @@ import javax.swing.JFrame;
 import javax.swing.JSplitPane;
 import javax.swing.JTabbedPane;
 
+import ece.ing3.java.projet.vue.panels.BasePanel;
+import ece.ing3.java.projet.vue.panels.LogoPanel;
+
 /**
  *
  * @author Virgile
@@ -46,7 +49,7 @@ public class Fenetre extends JFrame {
     ongletandhaut.setDividerSize(1);
     ongletandhaut.setDividerLocation(100);
       
-    Panneau panboutons = new Panneau();
+    BasePanel panboutons = new BasePanel();
     panboutons.setBackground(Color.blue);
     panboutons.add(boutonstat);
     panboutons.add(boutonrechercher);
@@ -54,7 +57,7 @@ public class Fenetre extends JFrame {
     panboutons.add(boutonAjouter);
     panboutons.add(boutonSup);
     
-    Panneau panlogo = new Panneau(1);
+    BasePanel panlogo = new LogoPanel();
     
      ///JSplitpane pour boutons/Logo
     JSplitPane logoandboutons = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT ,panlogo,panboutons); // ou VERTICAL_SPLIT
@@ -64,14 +67,14 @@ public class Fenetre extends JFrame {
 
   
     ///LES DIFFERENTS PANNEAUX ONGLETS SONT CREER ICI , AVEC UN CONSTRUCTEUR UTILISANT UNE COULEUR EN PARAMETRE
-    Panneau[] tPan = {   new Panneau(Color.RED), new Panneau(Color.GREEN), new Panneau(Color.BLUE),new Panneau(Color.YELLOW),new Panneau(Color.BLACK),new Panneau(Color.RED)};
+    BasePanel[] tPan = {   new BasePanel(Color.RED), new BasePanel(Color.GREEN), new BasePanel(Color.BLUE),new BasePanel(Color.YELLOW),new BasePanel(Color.BLACK),new BasePanel(Color.RED)};
       
     ///LE CONTENEUR D ONGLET QUE L ON MET A GAUCHE DE LA FENETRE
     onglet = new JTabbedPane(JTabbedPane.LEFT);
     
     ///METHODE PRISE SUR OPENCLASSROOM
     int i = 0;
-    for(Panneau pan : tPan){
+    for(BasePanel pan : tPan){
       //Méthode d'ajout d'onglet
       ///CHAQUE VALEUR DE I CORRESPOND A UN INDICE D ONGLET
       /// L ONGLET 0 CORRESPOND A L ACCEUIL QUAND ON CLIQUE SUR LE LOGO
