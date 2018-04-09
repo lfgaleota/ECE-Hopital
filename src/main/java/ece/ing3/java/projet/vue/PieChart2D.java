@@ -12,10 +12,7 @@ public class PieChart2D {
 	private static JFreeChart chart;
 	private static ChartPanel chartpanel;
  
-	public PieChart2D()  { }
-	
-	public ChartPanel Creer_2DPie()
-	{
+	public PieChart2D()  { 
 		dataset = new DefaultPieDataset();
 		dataset.setValue("Category 1", 43.2);
 		dataset.setValue("Category 2", 27.9);
@@ -27,6 +24,8 @@ public class PieChart2D {
 				);
 		
 		chartpanel = new ChartPanel(chart);
-		return chartpanel;
 	}
+	
+	public ChartPanel getPieChart2D()
+	{ return chartpanel; }
 }

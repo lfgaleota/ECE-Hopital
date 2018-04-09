@@ -31,14 +31,10 @@ public class Statistiques  extends JFrame {
 		PieChart3D P3= new PieChart3D();
 		BarChart B = new BarChart();
 		
-		this.getContentPane().add(P.Creer_2DPie());
-		this.getContentPane().add(P.Creer_2DPie());
-		this.getContentPane().add(P3.Creer_3DPie());
-		this.getContentPane().add(B.Creer_BarChart());
-		this.getContentPane().add(P3.Creer_3DPie());
-		this.getContentPane().add(B.Creer_BarChart());
-		this.getContentPane().add(B.Creer_BarChart());
-		this.getContentPane().add(P.Creer_2DPie());
+		this.getContentPane().add(P.getPieChart2D());
+		this.getContentPane().add(P3.getPieChart3D());
+		this.getContentPane().add(B.getBarChart());
+		
 		this.pack();
 	}
 }
