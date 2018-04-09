@@ -7,7 +7,7 @@ import org.jfree.chart.JFreeChart;
 import org.jfree.chart.plot.PiePlot3D;
 import org.jfree.data.general.DefaultPieDataset;
 
-public class PieChart3D {
+public class PieChart3D extends JPanel {
 
 	private static final long serialVersionUID = 5686202670543030890L;
 	private DefaultPieDataset dataset = new DefaultPieDataset();  
@@ -42,7 +42,7 @@ public class PieChart3D {
 	      File pieChart3D = new File( "pie_Chart3D.jpeg" );                           
 	      ChartUtilities.saveChartAsJPEG( pieChart3D , chart , width , height );*/
 	      this.chartpanel = new ChartPanel(chart);
-	      //this.add(chartpanel);
+	      this.add(chartpanel);
 	      
 	      return chartpanel;
 	}
