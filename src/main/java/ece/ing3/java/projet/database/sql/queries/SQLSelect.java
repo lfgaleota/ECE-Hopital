@@ -342,7 +342,7 @@ public class SQLSelect<M extends Model> extends SQLWhereQuery<SQLSelect> {
 	 * @return {@code true} if has at least one result
 	 * @throws DatabaseException Database error
 	 */
-	public boolean hasUnique() throws DatabaseException {
+	public boolean hasAtLeastOne() throws DatabaseException {
 		return findUnique() != null;
 	}
 

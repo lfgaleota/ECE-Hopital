@@ -233,7 +233,7 @@ public abstract class Model {
 
 		selectByIds( selectHelper );
 
-		if( selectHelper.hasUnique() ) {
+		if( selectHelper.hasAtLeastOne() ) {
 			return insert();
 		}
 
