@@ -97,7 +97,7 @@ public class Chambre extends Model {
 	 * @param surveillant Infirmier surveillant la chambre
 	 */
 	public void setSurveillant( Infirmier surveillant ) {
-		// TODO : Modification du surveillant de chambre
+		this.numeroSurveillant = surveillant.getNumero();
 	}
 
 	/**
@@ -122,7 +122,7 @@ public class Chambre extends Model {
 	 * @param service Nouveau service auquel est rattaché la chambre
 	 */
 	public void setServiceRattache( Service service ) {
-		// TODO : Modification du service auquel est rattaché la chambre
+		this.codeServiceRattache = service.getCode();
 	}
 
 	/**

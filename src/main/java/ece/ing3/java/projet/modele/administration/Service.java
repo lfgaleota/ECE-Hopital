@@ -140,7 +140,7 @@ public class Service extends Model {
 	 * @param directeur Nouveau directeur du service
 	 */
 	public void setDirecteur( Docteur directeur ) {
-		// TODO : Modification du directeur de service
+		this.numeroDirecteur = directeur.getNumero();
 	}
 
 	/**
