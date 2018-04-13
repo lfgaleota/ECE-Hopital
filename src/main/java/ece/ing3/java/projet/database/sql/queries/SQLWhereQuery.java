@@ -1,6 +1,13 @@
 package ece.ing3.java.projet.database.sql.queries;
 
+import ece.ing3.java.projet.database.Database;
 import ece.ing3.java.projet.database.sql.clauses.Where;
+import ece.ing3.java.projet.exceptions.DatabaseException;
+import org.apache.commons.dbutils.QueryRunner;
+import org.apache.commons.dbutils.handlers.BeanHandler;
+import org.apache.commons.dbutils.handlers.BeanListHandler;
+
+import java.sql.SQLException;
 
 /**
  * SQL helper for queries supporting Where clause.
@@ -8,7 +15,7 @@ import ece.ing3.java.projet.database.sql.clauses.Where;
  *
  * @param <T> SQL helper class
  */
-abstract class SQLWhereQuery<T> {
+abstract class SQLWhereQuery<T> implements SQLRequest {
 	Where where = null;
 
 	/**
@@ -102,6 +109,20 @@ abstract class SQLWhereQuery<T> {
 		if( where != null ) {
 			sb.append( " WHERE " );
 			sb.append( where.toString() );
+		}
+	}
+
+	public int update() throws DatabaseException {
+		QueryRunner run = new QueryRunner();
+
+		try {
+			if( where != null ) {
+				return run.update( Database.get(), toString(), where.getParameters() );
+			}
+
+			return run.update( Database.get(), toString() );
+		} catch( SQLException e ) {
+			throw new DatabaseException( e );
 		}
 	}
 }
