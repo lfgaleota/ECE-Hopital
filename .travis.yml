@@ -1,0 +1,25 @@
+language: java
+
+sudo: false
+
+jdk:
+  - oraclejdk8
+
+env:
+  global:
+  - secure: "oVQ18F9mt0xm2MG546IBt/a+tIOGiUzsCtQdq6aU4SjrWGrpNQQXp+kxYGNnTGi3p3rtoq/EZ8RB9itdL9IaFZgh4Nv/wFE79eQeRh1uo7ZA+mtgCzbIkSl35zLKrFxg3Ys2l7kGctgpYMCQ4NDEU5B1HTondoB1BtRmJrrYlaPlNFjP0Vao/BItQDUIFWs5s+Ty6grITM44xl//C0xzYZTNuL3GA21U51CvsgYmUjYbdWPZaf4kQ5OOZ+YRdTuLF7swlls9mNfdw4zjARUmkF5YhaWp5Rnt0nZ8YmlXeocKJxFIxhRSyy6cc0MCblZMa3F+IxcmFV8gicpKggNUWyt2n4XUHhJTsOzIbGJxPee5qNQDCCxKHyG1+wDBzB5HvsX34WmXFiO/Up/vECI4dpnxbXiH0lGaggStm4SEcDfn3e6nznGkXGSNd4nbPp/TV9JGYwp4rl7eG3iN7tEcojXOpssvyeOeaqjdhP9qfYLVQ/xfoZ1UldXA7rqJZ5mwaVHFgIQ+rFhyuZrdD5m8mh1C1PIi82211jISq9hcsWDQ1OAg/hrkAhuenBpIvrGZeQAbupRTJup5NNvz4Y4NmcM+3wCyVIAYOy2miTAWUnco8jvhDic4nLePZ5bpMkDCW8LZ1fx7a/dq1llOsvEjsYNSpVenbDKuFC+uaioWgMw="
+
+cache:
+ directories:
+   - $HOME/.m2
+
+before_install:
+  - export MAVEN_SKIP_RC=true
+  - mvn -Xmx32M -v | grep 1.7.0; if [ $? = 0 ]; then export MAVEN_OPTS="-XX:MaxPermSize=240M"; else export MAVEN_OPTS="-XX:MaxMetaspaceSize=240M -XX:CompressedClassSpaceSize=240M"; fi
+  - export MAVEN_OPTS="-Xmx512M $MAVEN_OPTS"
+
+script:
+  - mvn javadoc:javadoc
+
+after_success:
+  - .utility/push-javadoc-to-gh-pages.sh

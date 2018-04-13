@@ -1,4 +1,4 @@
-# ECE-Hopital
+# ECE-Hopital [![Build Status](https://www.travis-ci.com/louisfelix90/ECE-Hopital.svg?token=ELbB1pLDWUVazPTNRLJJ&branch=master)](https://www.travis-ci.com/louisfelix90/ECE-Hopital)
 
 Projet d'informatique du second semestre pour la première année du cycle ingénieur de l'ECE.
 
