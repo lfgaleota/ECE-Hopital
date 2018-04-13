@@ -9,7 +9,7 @@ import java.util.List;
  * Provides a convenient way to build Where clause, reactive-style.
  * Supports where clause nesting.
  * </p>
- * <br />
+ * <br>
  * <p>
  * Where clauses can be chained using either {@link Where#and(Where)} and {@link Where#or(Where)}, depending on the desired operator.
  * </p>
@@ -17,22 +17,26 @@ import java.util.List;
  * Each {@link Where#and(Where)} and {@link Where#or(Where)} have shortcut methods, respectively {@link Where#and(String, String, Object)} and {@link Where#or(String, String, Object)}, to avoid creating new unnecessary Where clauses.
  * </p>
  * <p>
- * Nesting is supported by simply chaining another Where clause.<br />
- * {@code ( new Where( "col1", "=", "val1" ) ).or( ( new Where( "col2", "<", "val2" ) ).and( "col3", ">=", "val3" ) ).toString();}<br />
- * will generate : {@code (col1 = 'val1' OR ((col2 < 'val2') AND (col3 > 'val3')))}
+ * Nesting is supported by simply chaining another Where clause.<br>
+ * {@code ( new Where( "col1", "=", "val1" ) ).or( ( new Where( "col2", "{@literal <}", "val2" ) ).and( "col3", "{@literal >=}", "val3" ) ).toString();}<br>
+ * will generate : {@code (col1 = 'val1' OR ((col2 {@literal <} 'val2') AND (col3 {@literal >=} 'val3')))}
  * </p>
  * <p>
- * Where supports Reactive-style programming to create more compact code.<br />
+ * Where supports Reactive-style programming to create more compact code.<br>
  * As such,
+ * </p>
  * <pre>
  * Where o = new Where( "col1", "=", "val1" );
- * o.and( "col2", "<", "val2" );
+ * o.and( "col2", "{@literal <}", "val2" );
  * String v = o.toString();
  * </pre>
+ * <p>
  * can be written
+ * </p>
  * <pre>
- * String v = ( new Where( "col1", "=", "val1" ) ).and( "col2", "<", "val2" ).toString();
+ * String v = ( new Where( "col1", "=", "val1" ) ).and( "col2", "{@literal <}", "val2" ).toString();
  * </pre>
+ * <p>
  * Nesting is still supported when using reactive-style programming.
  * </p>
  */

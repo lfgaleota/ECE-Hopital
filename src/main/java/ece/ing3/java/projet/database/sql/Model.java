@@ -21,19 +21,20 @@ import java.util.Map;
  * Models should inherit from this class to be able to use other helpers.
  * </p>
  * <p>
- * A model is an object that represent a database entry.<br />
- * Table name is the model's lowercase class name.<br />
- * Each field is automatically mapped to a column, if it is not excluded with the {@link ExcludedField} annotation.<br />
- * A field's corresponding column name is either described by a {@link Column} annotation or by using directly the lowercase field name.<br />
+ * A model is an object that represent a database entry.<br>
+ * Table name is the model's lowercase class name.<br>
+ * Each field is automatically mapped to a column, if it is not excluded with the {@link ExcludedField} annotation.<br>
+ * A field's corresponding column name is either described by a {@link Column} annotation or by using directly the lowercase field name.<br>
  * A field can be described as being used as primary key in database using the {@link Id} annotation.
  * </p>
  * <p>
  * Each model must have <b>a default constructor</b>, <b>getters and setters for each field</b>.
  * Failing in following this rule <b>will lead to undefined behavior</b>.
  * </p>
- * <br />
+ * <br>
  * <p>
  * One example of model can be :
+ * </p>
  * <pre>
  * public class ExampleModel extends Model {
  *     {@literal @}Id
@@ -50,7 +51,6 @@ import java.util.Map;
  *     // ... getters and setters for exampleId and exampleString ...
  * }
  * </pre>
- * </p>
  */
 public abstract class Model {
 	private static Map<Class<? extends Model>, Map<String, String>> columnFieldNames = new HashMap<>();

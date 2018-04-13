@@ -22,15 +22,15 @@ import java.util.Map;
  * <p>
  * Provides a convenient way to build select SQL queries, reactive-style, for a provided model class.
  * </p>
- * <br />
+ * <br>
  * <p>
- * SQL Select provides multiple ways to create SQL queries.<br />
+ * SQL Select provides multiple ways to create SQL queries.<br>
  * Table name is directly inferred the from model class and column names are either gathered as defined by the model fields.
  * </p>
- * <br />
+ * <br>
  * <p>
- * SQLSelect supports conditioning using where clauses.<br />
- * Nesting where clauses is directly supported as a byproduct of using {@link Where} under the hood.<br />
+ * SQLSelect supports conditioning using where clauses.<br>
+ * Nesting where clauses is directly supported as a byproduct of using {@link Where} under the hood.<br>
  * For this, several methods are provided.
  * </p>
  * <p>
@@ -42,9 +42,9 @@ import java.util.Map;
  * <p>
  * Each {@link SQLSelect#where(Where)}, {@link SQLSelect#andWhere(Where)} and {@link SQLSelect#orWhere(Where)} have shortcut methods, respectively {@link SQLSelect#where(String, String, Object)}, {@link SQLSelect#andWhere(String, String, Object)} and {@link SQLSelect#orWhere(String, String, Object)}, to avoid creating new unnecessary {@link Where} clauses.
  * </p>
- * <br />
+ * <br>
  * <p>
- * Similarly, SQLSelect supports order by clauses.<br />
+ * Similarly, SQLSelect supports order by clauses.<br>
  * Again, several methods are provided.
  * </p>
  * <p>
@@ -56,26 +56,29 @@ import java.util.Map;
  * <p>
  * {@link SQLSelect#orderBy(String, Order)} and {@link SQLSelect#andOrderBy(OrderBy)} have shortcut methods, respectively {@link SQLSelect#orderBy(String, Order)} and {@link SQLSelect#andOrderBy(String, Order)}, to avoid creating new unnecessary {@link OrderBy} clauses.
  * </p>
- * <br />
+ * <br>
  * <p>
- * SQLSelect supports Reactive-style programming to create more compact code.<br />
+ * SQLSelect supports Reactive-style programming to create more compact code.<br>
  * Instead of creating a new object and calling methods on it repeatedly, line by line, calls can be chained directly, eliminating the need to ceate a temprary object and significantly shorting the code.
+ * </p>
  * <pre>
- * SQLSelect<Model> s = new SQLSelect<Model>( Model.class );
+ * SQLSelect{@literal <}Model{@literal >} s = new SQLSelect{@literal <}{@literal >}( Model.class );
  * s.where( "col1", "=", "val1" );
- * s.andWhere( "col2", "<", "56" );
+ * s.andWhere( "col2", "{@literal <}", "56" );
  * s.orderBy( "col3", Order.DESC );
  * Model m = s.findUnique();
  * </pre>
- * is strictly equivalent to
- * <pre>
- * Model m = ( new SQLSelect<Model>( Model.class ) ).where( "col1", "=", "val1" ).andWhere( "col2", "<", "56" ).orderBy( "col3", Order.DESC ).findUnique();
- * </pre>
- * </p>
- * <br />
  * <p>
- * Let us see some example usage.<br />
+ * is strictly equivalent to
+ * </p>
+ * <pre>
+ * Model m = ( new SQLSelect{@literal <}Model{@literal >}( Model.class ) ).where( "col1", "=", "val1" ).andWhere( "col2", "{@literal <}", "56" ).orderBy( "col3", Order.DESC ).findUnique();
+ * </pre>
+ * <br>
+ * <p>
+ * Let us see some example usage.<br>
  * For this, let us consider the following models:
+ * </p>
  * <pre>
  * public class ExampleModel extends Model {
  *     {@literal @}Id
@@ -109,29 +112,28 @@ import java.util.Map;
  *     }
  * }
  * </pre>
- * </p>
  * <p>
- * The simplest query is built by just passing a model class.<br />
- * {@code SQLSelect<ExampleModel> s = new SQLSelect<>( ExampleModel.class );}<br />
- * will generate : {@code SELECT id as exampleId FROM examplemodel;}<br />
+ * The simplest query is built by just passing a model class.<br>
+ * {@code SQLSelect<ExampleModel> s = new SQLSelect<>( ExampleModel.class );}<br>
+ * will generate : {@code SELECT id as exampleId FROM examplemodel;}<br>
  * Column names are automatically retrieved and mapped accordingly.
  * </p>
  * <p>
- * Multiple classes can be passed to create a {@code NATURAL JOIN} request between them. The most complete model should be passed as generic type.<br />
- * {@code SQLSelect<InheritedExampleModel> s = new SQLSelect<>( new Class[]{ InheritedExampleModel.class, ExampleModel.class } );}<br />
+ * Multiple classes can be passed to create a {@code NATURAL JOIN} request between them. The most complete model should be passed as generic type.<br>
+ * {@code SQLSelect<InheritedExampleModel> s = new SQLSelect<>( new Class[]{ InheritedExampleModel.class, ExampleModel.class } );}<br>
  * will generate : {@code SELECT id as exampleId, num as number FROM inheritedexamplemodel NATURAL JOIN examplemodel;}
  * </p>
  * <p>
- * If {@code NATURAL JOIN} is not the desired join clause, custom join clauses and conditions can be passed as parameters.<br />
- * There should be <b>exactly one less</b> join clauses and conditions than passed model classes.<br />
- * {@code SQLSelect<InheritedExampleModel> s = new SQLSelect<>( new Class[]{ InheritedExampleModel.class, ExampleModel.class }, new String[]{ 'LEFT OUTER JOIN' }, new String[]{ 'ON inheritedexamplemodel.id = examplemodel.id' } );}<br />
+ * If {@code NATURAL JOIN} is not the desired join clause, custom join clauses and conditions can be passed as parameters.<br>
+ * There should be <b>exactly one less</b> join clauses and conditions than passed model classes.<br>
+ * {@code SQLSelect<InheritedExampleModel> s = new SQLSelect<>( new Class[]{ InheritedExampleModel.class, ExampleModel.class }, new String[]{ 'LEFT OUTER JOIN' }, new String[]{ 'ON inheritedexamplemodel.id = examplemodel.id' } );}<br>
  * will generate : {@code SELECT id as exampleId, num as number FROM inheritedexamplemodel LEFT INNER JOIN examplemodel ON inheritedexamplemodel.id = examplemodel.id;}
  * </p>
  * <p>
- * For each possible combinations, it is possible to pass <b>field names</b> as last parameters or a column name String array to select specific columns.<br />
- * {@code SQLSelect<ExampleModel> s = new SQLSelect<>( ExampleModel.class, "exampleId" );}<br />
- * will generate : {@code SELECT id as exampleId FROM examplemodel;}<br />
- * {@code SQLSelect<InheritedExampleModel> s = new SQLSelect<>( new Class[]{ InheritedExampleModel.class, ExampleModel.class }, "number" );}<br />
+ * For each possible combinations, it is possible to pass <b>field names</b> as last parameters or a column name String array to select specific columns.<br>
+ * {@code SQLSelect<ExampleModel> s = new SQLSelect<>( ExampleModel.class, "exampleId" );}<br>
+ * will generate : {@code SELECT id as exampleId FROM examplemodel;}<br>
+ * {@code SQLSelect<InheritedExampleModel> s = new SQLSelect<>( new Class[]{ InheritedExampleModel.class, ExampleModel.class }, "number" );}<br>
  * will generate : {@code SELECT num as number FROM inheritedexamplemodel NATURAL JOIN examplemodel;}
  * </p>
  *
