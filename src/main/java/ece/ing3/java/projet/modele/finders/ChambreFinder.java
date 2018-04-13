@@ -13,13 +13,13 @@ import java.util.List;
  * Utilitaire de recherche de modèle Chambre
  */
 public class ChambreFinder {
-	private SQLSelect finder;
+	private SQLSelect<Chambre> finder;
 
 	/**
 	 * Initialise un nouveau utilitaire de recherche de Chambre
 	 */
 	public ChambreFinder() {
-		this.finder = new SQLSelect( Chambre.class );
+		this.finder = new SQLSelect<>( Chambre.class );
 	}
 
 	/**
@@ -66,19 +66,6 @@ public class ChambreFinder {
 		return this;
 	}
 
-	static Chambre fromResultSet( ResultSet rs ) throws DatabaseException {
-		try {
-			return new Chambre(
-					rs.getLong( "no_chambre" ),
-					rs.getInt( "nb_lits" ),
-					rs.getLong( "surveillant" ),
-					rs.getString( "code_service" )
-			);
-		} catch( SQLException e ) {
-			throw new DatabaseException( e );
-		}
-	}
-
 	/**
 	 * Récupère l'ensemble des Chambres répondant aux conditions
 	 *
@@ -86,18 +73,7 @@ public class ChambreFinder {
 	 * @throws DatabaseException Erreur lors de la recherche en base de donnée
 	 */
 	public List<Chambre> findList() throws DatabaseException {
-		try {
-			List<Chambre> Chambres = new LinkedList<>();
-			ResultSet rs = this.finder.find();
-
-			while( rs.next() ) {
-				Chambres.add( fromResultSet( rs ) );
-			}
-
-			return Chambres;
-		} catch( SQLException e ) {
-			throw new DatabaseException( e );
-		}
+		return this.finder.findList();
 	}
 
 	/**
@@ -107,6 +83,6 @@ public class ChambreFinder {
 	 * @throws DatabaseException Erreur lors de la recherche en base de donnée
 	 */
 	public Chambre findUnique() throws DatabaseException {
-		return fromResultSet( this.finder.findUnique() );
+		return this.finder.findUnique();
 	}
 }

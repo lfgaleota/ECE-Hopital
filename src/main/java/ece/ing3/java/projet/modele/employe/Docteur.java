@@ -15,6 +15,11 @@ public class Docteur extends Employe {
 	private Specialite specialite;
 
 	/**
+	 * Créer un nouveau docteur vide
+	 */
+	public Docteur() {}
+
+	/**
 	 * Créer un nouveau docteur
 	 *
 	 * @param numero     Numéro d'employé
@@ -66,7 +71,7 @@ public class Docteur extends Employe {
 	public String toString() {
 		return "Docteur{" +
 				"specialite=" + getSpecialite() +
-				" =>" + super.toString() +
+				" => " + super.toString() +
 				'}';
 	}
 

@@ -13,13 +13,13 @@ import java.util.List;
  * Utilitaire de recherche de modèle Employe
  */
 public class EmployeFinder {
-	private SQLSelect finder;
+	private SQLSelect<Employe> finder;
 
 	/**
 	 * Initialise un nouveau utilitaire de recherche d'Employe
 	 */
 	public EmployeFinder() {
-		this.finder = new SQLSelect( Employe.class );
+		this.finder = new SQLSelect<>( Employe.class );
 	}
 
 	/**
@@ -72,23 +72,9 @@ public class EmployeFinder {
 	 * @param numeroTelephone Numéro de téléphone exact qui sera utilisé pour la sélection
 	 * @return Utilitaire de recherche
 	 */
-	public EmployeFinder tel( String numeroTelephone ) {
+	public EmployeFinder numeroTelephone( String numeroTelephone ) {
 		this.finder.andWhere( "tel", "=", numeroTelephone );
 		return this;
-	}
-
-	static Employe fromResultSet( ResultSet rs ) throws DatabaseException {
-		try {
-			return new Employe(
-					rs.getLong( "numero" ),
-					rs.getString( "nom" ),
-					rs.getString( "prenom" ),
-					rs.getString( "adresse" ),
-					rs.getString( "tel" )
-			);
-		} catch( SQLException e ) {
-			throw new DatabaseException( e );
-		}
 	}
 
 	/**
@@ -98,18 +84,7 @@ public class EmployeFinder {
 	 * @throws DatabaseException Erreur lors de la recherche en base de donnée
 	 */
 	public List<Employe> findList() throws DatabaseException {
-		try {
-			List<Employe> Employes = new LinkedList<>();
-			ResultSet rs = this.finder.find();
-
-			while( rs.next() ) {
-				Employes.add( fromResultSet( rs ) );
-			}
-
-			return Employes;
-		} catch( SQLException e ) {
-			throw new DatabaseException( e );
-		}
+		return this.finder.findList();
 	}
 
 	/**
@@ -119,6 +94,6 @@ public class EmployeFinder {
 	 * @throws DatabaseException Erreur lors de la recherche en base de donnée
 	 */
 	public Employe findUnique() throws DatabaseException {
-		return fromResultSet( this.finder.findUnique() );
+		return this.finder.findUnique();
 	}
 }

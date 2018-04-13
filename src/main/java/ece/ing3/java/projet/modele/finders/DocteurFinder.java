@@ -15,14 +15,14 @@ import java.util.List;
  * Utilitaire de recherche de modèle Docteur
  */
 public class DocteurFinder {
-	private SQLSelect finder;
+	private SQLSelect<Docteur> finder;
 
 	/**
 	 * Initialise un nouveau utilitaire de recherche du Docteur
 	 */
 	@SuppressWarnings( "unchecked" )
 	public DocteurFinder() {
-		this.finder = new SQLSelect( new Class[]{ Docteur.class, Employe.class } );
+		this.finder = new SQLSelect<>( new Class[]{ Docteur.class, Employe.class } );
 	}
 
 	/**
@@ -91,23 +91,6 @@ public class DocteurFinder {
 		return this;
 	}
 
-	static Docteur fromResultSet( ResultSet rs ) throws DatabaseException {
-		try {
-			return new Docteur(
-					rs.getLong( "numero" ),
-					rs.getString( "nom" ),
-					rs.getString( "prenom" ),
-					rs.getString( "adresse" ),
-					rs.getString( "tel" ),
-					Specialite.valueOf( rs.getString( "specialite" ).toUpperCase() )
-			);
-		} catch( IllegalArgumentException e ) {
-			throw new DatabaseException( "Invalid 'specialite' in database.", e );
-		} catch( SQLException e ) {
-			throw new DatabaseException( e );
-		}
-	}
-
 	/**
 	 * Récupère l'ensemble des Docteurs répondant aux conditions
 	 *
@@ -115,18 +98,7 @@ public class DocteurFinder {
 	 * @throws DatabaseException Erreur lors de la recherche en base de donnée
 	 */
 	public List<Docteur> findList() throws DatabaseException {
-		try {
-			List<Docteur> Docteurs = new LinkedList<>();
-			ResultSet rs = this.finder.find();
-
-			while( rs.next() ) {
-				Docteurs.add( fromResultSet( rs ) );
-			}
-
-			return Docteurs;
-		} catch( SQLException e ) {
-			throw new DatabaseException( e );
-		}
+		return this.finder.findList();
 	}
 
 	/**
@@ -136,6 +108,6 @@ public class DocteurFinder {
 	 * @throws DatabaseException Erreur lors de la recherche en base de donnée
 	 */
 	public Docteur findUnique() throws DatabaseException {
-		return fromResultSet( this.finder.findUnique() );
+		return this.finder.findUnique();
 	}
 }

@@ -1,6 +1,7 @@
 package ece.ing3.java.projet.modele.employe;
 
 import ece.ing3.java.projet.database.sql.Model;
+import ece.ing3.java.projet.database.sql.annotations.Column;
 import ece.ing3.java.projet.exceptions.DatabaseException;
 import ece.ing3.java.projet.modele.finders.EmployeFinder;
 
@@ -14,23 +15,29 @@ public class Employe extends Model {
 	private String nom;
 	private String prenom;
 	private String adresse;
-	private String tel;
+	@Column( name = "tel" )
+	private String numeroTelephone;
+
+	/**
+	 * Créer un noueau employé vide
+	 */
+	public Employe() {}
 
 	/**
 	 * Créer un nouveau employé
 	 *
-	 * @param numero  Numéro d'employé
-	 * @param nom     Nom de l'employé
-	 * @param prenom  Prénom de l'employé
-	 * @param adresse Adresse de l'employé
-	 * @param tel     Numéro de téléphone de l'employé
+	 * @param numero          Numéro d'employé
+	 * @param nom             Nom de l'employé
+	 * @param prenom          Prénom de l'employé
+	 * @param adresse         Adresse de l'employé
+	 * @param numeroTelephone Numéro de téléphone de l'employé
 	 */
-	public Employe( Long numero, String nom, String prenom, String adresse, String tel ) {
+	public Employe( Long numero, String nom, String prenom, String adresse, String numeroTelephone ) {
 		this.numero = numero;
 		this.nom = nom;
 		this.prenom = prenom;
 		this.adresse = adresse;
-		this.tel = tel;
+		this.numeroTelephone = numeroTelephone;
 	}
 
 	/**
@@ -40,6 +47,15 @@ public class Employe extends Model {
 	 */
 	public Long getNumero() {
 		return numero;
+	}
+
+	/**
+	 * Modifie le numéro d'employé
+	 *
+	 * @param numero Nouveau numéro de l'employé
+	 */
+	public void setNumero( Long numero ) {
+		this.numero = numero;
 	}
 
 	/**
@@ -102,7 +118,7 @@ public class Employe extends Model {
 	 * @return Numéro de téléphone de l'employé
 	 */
 	public String getNumeroTelephone() {
-		return tel;
+		return numeroTelephone;
 	}
 
 	/**
@@ -111,7 +127,7 @@ public class Employe extends Model {
 	 * @param numeroTelephone Nouveau numéro de téléphone de l'employé
 	 */
 	public void setNumeroTelephone( String numeroTelephone ) {
-		this.tel = numeroTelephone;
+		this.numeroTelephone = numeroTelephone;
 	}
 
 	/**
@@ -126,7 +142,7 @@ public class Employe extends Model {
 				", nom='" + getNom() + '\'' +
 				", prenom='" + getPrenom() + '\'' +
 				", adresse='" + getAdresse() + '\'' +
-				", tel='" + getNumeroTelephone() + '\'' +
+				", numeroTelephone='" + getNumeroTelephone() + '\'' +
 				'}';
 	}
 

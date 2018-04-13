@@ -13,13 +13,13 @@ import java.util.List;
  * Utilitaire de recherche de modèle Hospitalisation
  */
 public class HospitalisationFinder {
-	private SQLSelect finder;
+	private SQLSelect<Hospitalisation> finder;
 
 	/**
 	 * Initialise un nouveau utilitaire de recherche de Hospitalisation
 	 */
 	public HospitalisationFinder() {
-		this.finder = new SQLSelect( Hospitalisation.class );
+		this.finder = new SQLSelect<>( Hospitalisation.class );
 	}
 
 	/**
@@ -66,19 +66,6 @@ public class HospitalisationFinder {
 		return this;
 	}
 
-	static Hospitalisation fromResultSet( ResultSet rs ) throws DatabaseException {
-		try {
-			return new Hospitalisation(
-					rs.getLong( "no_malade" ),
-					rs.getString( "code_service" ),
-					rs.getLong( "no_chambre" ),
-					rs.getInt( "lit" )
-			);
-		} catch( SQLException e ) {
-			throw new DatabaseException( e );
-		}
-	}
-
 	/**
 	 * Récupère l'ensemble des Hospitalisations répondant aux conditions
 	 *
@@ -86,18 +73,7 @@ public class HospitalisationFinder {
 	 * @throws DatabaseException Erreur lors de la recherche en base de donnée
 	 */
 	public List<Hospitalisation> findList() throws DatabaseException {
-		try {
-			List<Hospitalisation> Hospitalisations = new LinkedList<>();
-			ResultSet rs = this.finder.find();
-
-			while( rs.next() ) {
-				Hospitalisations.add( fromResultSet( rs ) );
-			}
-
-			return Hospitalisations;
-		} catch( SQLException e ) {
-			throw new DatabaseException( e );
-		}
+		return this.finder.findList();
 	}
 
 	/**
@@ -107,6 +83,6 @@ public class HospitalisationFinder {
 	 * @throws DatabaseException Erreur lors de la recherche en base de donnée
 	 */
 	public Hospitalisation findUnique() throws DatabaseException {
-		return fromResultSet( this.finder.findUnique() );
+		return this.finder.findUnique();
 	}
 }
