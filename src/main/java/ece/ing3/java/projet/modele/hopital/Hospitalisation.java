@@ -130,7 +130,7 @@ public class Hospitalisation extends Model {
 	 * @param malade Nouveau malade lié à l'hospitalisation
 	 */
 	public void setMalade( Malade malade ) {
-		// TODO : Modification du malade d'une hospitalisation
+		this.numeroMalade = malade.getNumero();
 	}
 
 	/**
@@ -149,7 +149,7 @@ public class Hospitalisation extends Model {
 	 * @param service Nouveau service lié à l'hospitalisation
 	 */
 	public void setService( Service service ) {
-		// TODO : Modification du service d'une hospitalisation
+		this.codeService = service.getCode();
 	}
 
 	/**
@@ -168,7 +168,7 @@ public class Hospitalisation extends Model {
 	 * @param chambre Nouvelle chambre liée à l'hospitalisation
 	 */
 	public void setChambre( Chambre chambre ) {
-		// TODO : Modification du chambre d'une hospitalisation
+		this.numeroChambre = chambre.getNumeroChambre();
 	}
 
 	/**
