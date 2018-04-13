@@ -69,10 +69,10 @@ public class Chambre extends Model {
 
 	/**
 	 * Modifie le nombre de lits dans la chambre
-	 * @param nb_lits Nombre de lits dans la chambre
+	 * @param nombreLits Nombre de lits dans la chambre
 	 */
-	public void setNombreLits( Integer nb_lits ) {
-		this.nombreLits = nb_lits;
+	public void setNombreLits( Integer nombreLits ) {
+		this.nombreLits = nombreLits;
 	}
 
 	/**
