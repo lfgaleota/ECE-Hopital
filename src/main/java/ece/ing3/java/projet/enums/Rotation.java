@@ -5,5 +5,5 @@ package ece.ing3.java.projet.enums;
  */
 public enum Rotation {
 	JOUR,
-	NUIT;
+	NUIT
 }

@@ -17,8 +17,8 @@ import java.util.Map;
  * Provides a convenient way to build update SQL queries, reactive-style, for a provided model class.
  */
 public class SQLUpdate extends SQLWhereQuery<SQLUpdate> {
-	Class<? extends Model> modelClass;
-	private String tableName;
+	final Class<? extends Model> modelClass;
+	final private String tableName;
 	private Map<Integer, String> columns;
 	private Map<Integer, Object> values;
 

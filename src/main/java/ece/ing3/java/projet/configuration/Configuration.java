@@ -45,7 +45,7 @@ public class Configuration {
 	/**
 	 * Save the configuration to file.
 	 *
-	 * @throws ConfigurationException
+	 * @throws ConfigurationException Error while saving to file.
 	 */
 	public static void save() throws ConfigurationException {
 		builder.save();
