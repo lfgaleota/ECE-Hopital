@@ -109,18 +109,4 @@ abstract class SQLWhereQuery<T> implements SQLRequest {
 			sb.append( where.toString() );
 		}
 	}
-
-	public int update() throws DatabaseException {
-		QueryRunner run = new QueryRunner();
-
-		try {
-			if( where != null ) {
-				return run.update( Database.get(), toString(), where.getParameters() );
-			}
-
-			return run.update( Database.get(), toString() );
-		} catch( SQLException e ) {
-			throw new DatabaseException( e );
-		}
-	}
 }
