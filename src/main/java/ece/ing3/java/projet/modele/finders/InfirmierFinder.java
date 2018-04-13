@@ -7,7 +7,6 @@ import ece.ing3.java.projet.modele.employe.Employe;
 import ece.ing3.java.projet.modele.employe.Infirmier;
 
 import java.util.List;
-//System.out.println( ( new ece.ing3.java.projet.modele.finders.InfirmierFinder() ).findList() );
 /**
  * Utilitaire de recherche de modèle Infirmier
  */
