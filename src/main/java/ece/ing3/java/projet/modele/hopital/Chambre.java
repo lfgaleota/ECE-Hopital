@@ -1,6 +1,7 @@
 package ece.ing3.java.projet.modele.hopital;
 
 import ece.ing3.java.projet.database.sql.Model;
+import ece.ing3.java.projet.database.sql.annotations.Column;
 import ece.ing3.java.projet.exceptions.DatabaseException;
 import ece.ing3.java.projet.modele.administration.Service;
 import ece.ing3.java.projet.modele.employe.Infirmier;
@@ -13,10 +14,19 @@ import java.util.List;
  * Modèle de Chambre stocké en base de donnée
  */
 public class Chambre extends Model {
-	private Long no_chambre;
-	private Integer nb_lits;
-	private Long surveillant;
-	private String code_service;
+	@Column( name = "no_chambre" )
+	private Long numeroChambre;
+	@Column( name = "nb_lits" )
+	private Integer nombreLits;
+	@Column( name = "surveillant" )
+	private Long numeroSurveillant;
+	@Column( name = "code_service" )
+	private String codeServiceRattache;
+
+	/**
+	 * Créer une nouvelle chambre vide
+	 */
+	public Chambre() {}
 
 	/**
 	 * Créer une nouvelle chambre
@@ -27,10 +37,10 @@ public class Chambre extends Model {
 	 * @param codeServiceRattache Code du service auquel est rattaché la chambre
 	 */
 	public Chambre( Long numeroChambre, Integer nombreLits, Long numeroSurveillant, String codeServiceRattache ) {
-		this.no_chambre = numeroChambre;
-		this.nb_lits = nombreLits;
-		this.surveillant = numeroSurveillant;
-		this.code_service = codeServiceRattache;
+		this.numeroChambre = numeroChambre;
+		this.nombreLits = nombreLits;
+		this.numeroSurveillant = numeroSurveillant;
+		this.codeServiceRattache = codeServiceRattache;
 	}
 
 	/**
@@ -38,7 +48,15 @@ public class Chambre extends Model {
 	 * @return Numéro de la chambre
 	 */
 	public Long getNumeroChambre() {
-		return no_chambre;
+		return numeroChambre;
+	}
+
+	/**
+	 * Modifie le numéro de la chambre
+	 * @param numeroChambre Nouveau numéro de la chambre
+	 */
+	public void getNumeroChambre( Long numeroChambre ) {
+		this.numeroChambre = numeroChambre;
 	}
 
 	/**
@@ -46,7 +64,7 @@ public class Chambre extends Model {
 	 * @return Nombre de lits dans la chambre
 	 */
 	public Integer getNombreLits() {
-		return nb_lits;
+		return nombreLits;
 	}
 
 	/**
@@ -54,7 +72,7 @@ public class Chambre extends Model {
 	 * @param nb_lits Nombre de lits dans la chambre
 	 */
 	public void setNombreLits( Integer nb_lits ) {
-		this.nb_lits = nb_lits;
+		this.nombreLits = nb_lits;
 	}
 
 	/**
@@ -62,7 +80,7 @@ public class Chambre extends Model {
 	 * @return Numéro d'infirmier surveillant la chambre
 	 */
 	public Long getNumeroSurveillant() {
-		return surveillant;
+		return numeroSurveillant;
 	}
 
 	/**
@@ -71,7 +89,7 @@ public class Chambre extends Model {
 	 * @throws DatabaseException Erreur lors de la recherche en base de donnée
 	 */
 	public Infirmier getSurveillant() throws DatabaseException {
-		return Infirmier.find( surveillant );
+		return Infirmier.find( numeroSurveillant );
 	}
 
 	/**
@@ -87,7 +105,7 @@ public class Chambre extends Model {
 	 * @return Code du service auquel est rattaché la chambre
 	 */
 	public String getCodeServiceRattache() {
-		return code_service;
+		return codeServiceRattache;
 	}
 
 	/**
@@ -96,7 +114,7 @@ public class Chambre extends Model {
 	 * @throws DatabaseException Erreur lors de la recherche en base de donnée
 	 */
 	public Service getServiceRattache() throws DatabaseException {
-		return Service.find( code_service );
+		return Service.find( codeServiceRattache );
 	}
 
 	/**
@@ -151,4 +169,6 @@ public class Chambre extends Model {
 				", service=" + getCodeServiceRattache() +
 				'}';
 	}
+
+
 }

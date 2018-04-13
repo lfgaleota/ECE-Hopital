@@ -13,13 +13,13 @@ import java.util.List;
  * Utilitaire de recherche de modèle Service
  */
 public class ServiceFinder {
-	private SQLSelect finder;
+	private SQLSelect<Service> finder;
 
 	/**
 	 * Initialise un nouveau utilitaire de recherche de Service
 	 */
 	public ServiceFinder() {
-		this.finder = new SQLSelect( Service.class );
+		this.finder = new SQLSelect<>( Service.class );
 	}
 
 	/**
@@ -66,19 +66,6 @@ public class ServiceFinder {
 		return this;
 	}
 
-	static Service fromResultSet( ResultSet rs ) throws DatabaseException {
-		try {
-			return new Service(
-					rs.getString( "code" ),
-					rs.getString( "nom" ),
-					rs.getString( "batiment" ),
-					rs.getLong( "directeur" )
-			);
-		} catch( SQLException e ) {
-			throw new DatabaseException( e );
-		}
-	}
-
 	/**
 	 * Récupère l'ensemble des Services répondant aux conditions
 	 *
@@ -86,18 +73,7 @@ public class ServiceFinder {
 	 * @throws DatabaseException Erreur lors de la recherche en base de donnée
 	 */
 	public List<Service> findList() throws DatabaseException {
-		try {
-			List<Service> services = new LinkedList<>();
-			ResultSet rs = this.finder.find();
-
-			while( rs.next() ) {
-				services.add( fromResultSet( rs ) );
-			}
-
-			return services;
-		} catch( SQLException e ) {
-			throw new DatabaseException( e );
-		}
+		return this.finder.findList();
 	}
 
 	/**
@@ -107,6 +83,6 @@ public class ServiceFinder {
 	 * @throws DatabaseException Erreur lors de la recherche en base de donnée
 	 */
 	public Service findUnique() throws DatabaseException {
-		return fromResultSet( this.finder.findUnique() );
+		return this.finder.findUnique();
 	}
 }

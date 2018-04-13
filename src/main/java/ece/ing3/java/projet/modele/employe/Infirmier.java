@@ -1,5 +1,6 @@
 package ece.ing3.java.projet.modele.employe;
 
+import ece.ing3.java.projet.database.sql.annotations.Column;
 import ece.ing3.java.projet.enums.Rotation;
 import ece.ing3.java.projet.exceptions.DatabaseException;
 import ece.ing3.java.projet.modele.administration.Service;
@@ -15,8 +16,13 @@ import java.util.List;
 public class Infirmier extends Employe {
 	private Rotation rotation;
 	private Float salaire;
+	@Column( name = "code_service" )
+	private String codeService;
 
-	private String code_service;
+	/**
+	 * Créer un nouvel infirmier vide
+	 */
+	public Infirmier() {}
 
 	/**
 	 * Créer un nouvel infirmier
@@ -34,7 +40,7 @@ public class Infirmier extends Employe {
 		super( numero, nom, prenom, adresse, numeroTelephone );
 		this.rotation = rotation;
 		this.salaire = salaire;
-		this.code_service = codeService;
+		this.codeService = codeService;
 	}
 
 	/**
@@ -79,7 +85,16 @@ public class Infirmier extends Employe {
 	 * @return Code du service auquel est rattaché l'infirmier
 	 */
 	public String getCodeService() {
-		return code_service;
+		return codeService;
+	}
+
+	/**
+	 * Récupère le code du service auquel est rattaché l'infirmier
+	 *
+	 * @param codeService Code du service auquel est rattaché l'infirmier
+	 */
+	public void setCodeService( String codeService ) {
+		this.codeService = codeService;
 	}
 
 	/**
@@ -89,7 +104,7 @@ public class Infirmier extends Employe {
 	 * @throws DatabaseException Récupération depuis la BDD échouée
 	 */
 	public Service getService() throws DatabaseException {
-		return Service.find( this.code_service );
+		return Service.find( this.codeService );
 	}
 
 	/**
@@ -122,8 +137,8 @@ public class Infirmier extends Employe {
 		return "Infirmier{" +
 				"rotation=" + getRotation() +
 				", salaire=" + getSalaire() +
-				", code_service=" + getCodeService() +
-				" =>" + super.toString() +
+				", codeService=" + getCodeService() +
+				" => " + super.toString() +
 				'}';
 	}
 

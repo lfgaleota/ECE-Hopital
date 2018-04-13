@@ -13,13 +13,13 @@ import java.util.List;
  * Utilitaire de recherche de modèle Malade
  */
 public class MaladeFinder {
-	private SQLSelect finder;
+	private SQLSelect<Malade> finder;
 
 	/**
 	 * Initialise un nouveau utilitaire de recherche de Malade
 	 */
 	public MaladeFinder() {
-		this.finder = new SQLSelect( Malade.class );
+		this.finder = new SQLSelect<>( Malade.class );
 	}
 
 	/**
@@ -88,21 +88,6 @@ public class MaladeFinder {
 		return this;
 	}
 
-	static Malade fromResultSet( ResultSet rs ) throws DatabaseException {
-		try {
-			return new Malade(
-					rs.getLong( "numero" ),
-					rs.getString( "nom" ),
-					rs.getString( "prenom" ),
-					rs.getString( "adresse" ),
-					rs.getString( "tel" ),
-					rs.getString( "mutuelle" )
-			);
-		} catch( SQLException e ) {
-			throw new DatabaseException( e );
-		}
-	}
-
 	/**
 	 * Récupère l'ensemble des Malades répondant aux conditions
 	 *
@@ -110,18 +95,7 @@ public class MaladeFinder {
 	 * @throws DatabaseException Erreur lors de la recherche en base de donnée
 	 */
 	public List<Malade> findList() throws DatabaseException {
-		try {
-			List<Malade> Malades = new LinkedList<>();
-			ResultSet rs = this.finder.find();
-
-			while( rs.next() ) {
-				Malades.add( fromResultSet( rs ) );
-			}
-
-			return Malades;
-		} catch( SQLException e ) {
-			throw new DatabaseException( e );
-		}
+		return this.finder.findList();
 	}
 
 	/**
@@ -131,6 +105,6 @@ public class MaladeFinder {
 	 * @throws DatabaseException Erreur lors de la recherche en base de donnée
 	 */
 	public Malade findUnique() throws DatabaseException {
-		return fromResultSet( this.finder.findUnique() );
+		return this.finder.findUnique();
 	}
 }

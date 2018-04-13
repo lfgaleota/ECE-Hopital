@@ -10,19 +10,19 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.LinkedList;
 import java.util.List;
-
+//System.out.println( ( new ece.ing3.java.projet.modele.finders.InfirmierFinder() ).findList() );
 /**
  * Utilitaire de recherche de modèle Infirmier
  */
 public class InfirmierFinder {
-	private SQLSelect finder;
+	private SQLSelect<Infirmier> finder;
 
 	/**
 	 * Initialise un nouveau utilitaire de recherche d'Infirmier
 	 */
 	@SuppressWarnings( "unchecked" )
 	public InfirmierFinder() {
-		this.finder = new SQLSelect( new Class[]{ Infirmier.class, Employe.class } );
+		this.finder = new SQLSelect<>( new Class[]{ Infirmier.class, Employe.class } );
 	}
 
 	/**
@@ -113,25 +113,6 @@ public class InfirmierFinder {
 		return this;
 	}
 
-	static Infirmier fromResultSet( ResultSet rs ) throws DatabaseException {
-		try {
-			return new Infirmier(
-					rs.getLong( "numero" ),
-					rs.getString( "nom" ),
-					rs.getString( "prenom" ),
-					rs.getString( "adresse" ),
-					rs.getString( "tel" ),
-					Rotation.valueOf( rs.getString( "rotation" ).toUpperCase() ),
-					rs.getFloat( "salaire" ),
-					rs.getString( "code_service" )
-			);
-		} catch( IllegalArgumentException e ) {
-			throw new DatabaseException( "Invalid 'specialite' in database.", e );
-		} catch( SQLException e ) {
-			throw new DatabaseException( e );
-		}
-	}
-
 	/**
 	 * Récupère l'ensemble des Infirmiers répondant aux conditions
 	 *
@@ -139,18 +120,7 @@ public class InfirmierFinder {
 	 * @throws DatabaseException Erreur lors de la recherche en base de donnée
 	 */
 	public List<Infirmier> findList() throws DatabaseException {
-		try {
-			List<Infirmier> Infirmiers = new LinkedList<>();
-			ResultSet rs = this.finder.find();
-
-			while( rs.next() ) {
-				Infirmiers.add( fromResultSet( rs ) );
-			}
-
-			return Infirmiers;
-		} catch( SQLException e ) {
-			throw new DatabaseException( e );
-		}
+		return this.finder.findList();
 	}
 
 	/**
@@ -160,6 +130,6 @@ public class InfirmierFinder {
 	 * @throws DatabaseException Erreur lors de la recherche en base de donnée
 	 */
 	public Infirmier findUnique() throws DatabaseException {
-		return fromResultSet( this.finder.findUnique() );
+		return this.finder.findUnique();
 	}
 }

@@ -1,6 +1,7 @@
 package ece.ing3.java.projet.modele.hopital;
 
 import ece.ing3.java.projet.database.sql.Model;
+import ece.ing3.java.projet.database.sql.annotations.Column;
 import ece.ing3.java.projet.exceptions.DatabaseException;
 import ece.ing3.java.projet.modele.administration.Service;
 import ece.ing3.java.projet.modele.finders.HospitalisationFinder;
@@ -11,10 +12,20 @@ import java.util.List;
  * Modèle d'une Hospitalisation stocké en base de donnée
  */
 public class Hospitalisation extends Model {
-	private Long no_malade;
-	private String code_service;
-	private Long no_chambre;
-	private Integer lit;
+	@Column( name = "no_malade" )
+	private Long numeroMalade;
+	@Column( name = "codeS_service" )
+	private String codeService;
+	@Column( name = "no_hambre" )
+	private Long numeroChambre;
+	@Column( name = "lit" )
+	private Integer numeroLit;
+
+	/**
+	 * Créer une nouvelle hospitalisation
+	 */
+	public Hospitalisation() {
+	}
 
 	/**
 	 * Créer une nouvelle hospitalisation
@@ -22,31 +33,31 @@ public class Hospitalisation extends Model {
 	 * @param numeroMalade  Numéro du malade lié à l'hospitalisation
 	 * @param codeService   Code du service lié à l'hospitalisation
 	 * @param numeroChambre Numéro de chambre liée à l'hospitalisation
-	 * @param numeroLit           Numéro de lit occupé par le malade
+	 * @param numeroLit     Numéro de numeroLit occupé par le malade
 	 */
 	public Hospitalisation( Long numeroMalade, String codeService, Long numeroChambre, Integer numeroLit ) {
-		this.no_malade = numeroMalade;
-		this.code_service = codeService;
-		this.no_chambre = numeroChambre;
-		this.lit = numeroLit;
+		this.numeroMalade = numeroMalade;
+		this.codeService = codeService;
+		this.numeroChambre = numeroChambre;
+		this.numeroLit = numeroLit;
 	}
 
 	/**
 	 * Récupère le numéro de lit occupé par le malade
 	 *
-	 * @return Numéro de lit occupé par le malade
+	 * @return Numéro de numeroLit occupé par le malade
 	 */
-	public Integer getLit() {
-		return lit;
+	public Integer getNumeroLit() {
+		return numeroLit;
 	}
 
 	/**
 	 * Modifie le numéro de lit occupé par le malade
 	 *
-	 * @param lit Nouveau numéro de lit occupé par le malade
+	 * @param numeroLit Nouveau numéro de numeroLit occupé par le malade
 	 */
-	public void setLit( Integer lit ) {
-		this.lit = lit;
+	public void setNumeroLit( Integer numeroLit ) {
+		this.numeroLit = numeroLit;
 	}
 
 	/**
@@ -55,7 +66,16 @@ public class Hospitalisation extends Model {
 	 * @return Numéro du malade lié à l'hospitalisation
 	 */
 	public Long getNumeroMalade() {
-		return no_malade;
+		return numeroMalade;
+	}
+
+	/**
+	 * Modifie le numéro du malade lié à l'hospitalisation
+	 *
+	 * @param numeroMalade Nouveau numéro du malade lié à l'hospitalisation
+	 */
+	public void setNumeroMalade( Long numeroMalade ) {
+		this.numeroMalade = numeroMalade;
 	}
 
 	/**
@@ -64,7 +84,16 @@ public class Hospitalisation extends Model {
 	 * @return Code du service lié à l'hospitalisation
 	 */
 	public String getCodeService() {
-		return code_service;
+		return codeService;
+	}
+
+	/**
+	 * Modifie le code du service lié à l'hospitalisation
+	 *
+	 * @param codeService Nouveau code du service lié à l'hospitalisation
+	 */
+	public void setCodeService( String codeService ) {
+		this.codeService = codeService;
 	}
 
 	/**
@@ -73,7 +102,16 @@ public class Hospitalisation extends Model {
 	 * @return Numéro de chambre liée à l'hospitalisation
 	 */
 	public Long getNumeroChambre() {
-		return no_chambre;
+		return numeroChambre;
+	}
+
+	/**
+	 * Modifie le numéro de chambre liée à l'hospitalisation
+	 *
+	 * @param numeroChambre Nouveau numéro de chambre liée à l'hospitalisation
+	 */
+	public void setNumeroChambre( Long numeroChambre ) {
+		this.numeroChambre = numeroChambre;
 	}
 
 	/**
@@ -83,7 +121,7 @@ public class Hospitalisation extends Model {
 	 * @throws DatabaseException Erreur lors de la recherche en base de donnée
 	 */
 	public Malade getMalade() throws DatabaseException {
-		return Malade.find( no_malade );
+		return Malade.find( numeroMalade );
 	}
 
 	/**
@@ -102,7 +140,7 @@ public class Hospitalisation extends Model {
 	 * @throws DatabaseException Erreur lors de la recherche en base de donnée
 	 */
 	public Service getService() throws DatabaseException {
-		return Service.find( code_service );
+		return Service.find( codeService );
 	}
 
 	/**
@@ -121,7 +159,7 @@ public class Hospitalisation extends Model {
 	 * @throws DatabaseException Erreur lors de la recherche en base de donnée
 	 */
 	public Chambre getChambre() throws DatabaseException {
-		return Chambre.find( no_chambre, code_service );
+		return Chambre.find( numeroChambre, codeService );
 	}
 
 	/**
@@ -162,10 +200,10 @@ public class Hospitalisation extends Model {
 	@Override
 	public String toString() {
 		return "Hospitalisation{" +
-				"no_malade=" + no_malade +
-				", code_service='" + code_service + '\'' +
-				", no_chambre=" + no_chambre +
-				", lit=" + lit +
+				"numeroMalade=" + numeroMalade +
+				", codeService='" + codeService + '\'' +
+				", numeroChambre=" + numeroChambre +
+				", numeroLit=" + numeroLit +
 				'}';
 	}
 }
