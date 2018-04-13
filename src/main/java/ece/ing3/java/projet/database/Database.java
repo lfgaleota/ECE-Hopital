@@ -2,6 +2,9 @@ package ece.ing3.java.projet.database;
 
 import ece.ing3.java.projet.configuration.Configuration;
 import ece.ing3.java.projet.exceptions.DatabaseException;
+import org.apache.commons.dbutils.DbUtils;
+import javax.sql.DataSource;
+import org.apache.commons.dbcp2.BasicDataSource;
 
 import java.sql.*;
 
@@ -13,6 +16,7 @@ import java.sql.*;
  */
 public class Database {
 	private static Connection connection;
+	private static BasicDataSource dataSource;
 
 	/**
 	 * Init the database and connect to it.
@@ -21,17 +25,33 @@ public class Database {
 	 */
 	public static void init() throws DatabaseException {
 		try {
-			// The newInstance() call is a work around for some broken Java implementations
-			Class.forName( Configuration.getString( "database.driver" ) ).newInstance();
-		} catch( Exception ex ) {
-			throw new DatabaseException( "JDBC connector not available. Verify if the application is installed and configured correctly." );
-		}
-
-		try {
-			connection = DriverManager.getConnection( Configuration.getString( "database.url" ), Configuration.getString( "database.username" ), Configuration.getString( "database.password" ) );
+			dataSource = new BasicDataSource();
+			dataSource.setDriverClassName( Configuration.getString( "database.driver" ) );
+			dataSource.setUsername( Configuration.getString( "database.username" ) );
+			dataSource.setPassword( Configuration.getString( "database.password" ) );
+			dataSource.setUrl( Configuration.getString( "database.url" ) );
+			connection = dataSource.getConnection();
 		} catch( SQLException e ) {
 			throw new DatabaseException( e );
 		}
+	}
+
+	/**
+	 * Gets the data source.
+	 *
+	 * @return Data source
+	 */
+	public static DataSource getDataSource() {
+		return dataSource;
+	}
+
+	/**
+	 * Gets the current connection.
+	 *
+	 * @return Connection
+	 */
+	public static Connection get() {
+		return connection;
 	}
 
 	/**
@@ -85,7 +105,7 @@ public class Database {
 	 */
 	public static void close() throws DatabaseException {
 		try {
-			connection.close();
+			DbUtils.close( connection );
 		} catch( SQLException e ) {
 			throw new DatabaseException( e );
 		}
