@@ -2,10 +2,17 @@ package ece.ing3.java.projet.database.sql;
 
 import ece.ing3.java.projet.database.sql.annotations.Column;
 import ece.ing3.java.projet.database.sql.annotations.ExcludedField;
+import ece.ing3.java.projet.database.sql.annotations.Id;
+import ece.ing3.java.projet.database.sql.queries.SQLInsert;
+import ece.ing3.java.projet.database.sql.queries.SQLSelect;
+import ece.ing3.java.projet.database.sql.queries.SQLUpdate;
+import ece.ing3.java.projet.exceptions.DatabaseException;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
 import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -110,5 +117,94 @@ public abstract class Model {
 		}
 
 		columnFieldNames.put( modelClass, map );
+	}
+
+	private void selectByIds( SQLSelect selectHelper ) {
+		List<String> idColumnNames = new LinkedList<>();
+
+		try {
+			processFields( getClass(), field -> {
+				if( !field.isAnnotationPresent( ExcludedField.class ) && field.isAnnotationPresent( Id.class ) ) {
+					if( !field.isAccessible() ) {
+						field.setAccessible( true );
+					}
+
+					idColumnNames.add( field.getName() );
+				}
+			}, true );
+		} catch( IllegalAccessException e ) {
+			e.printStackTrace();
+		}
+
+		selectHelper.setSelectedColumns( idColumnNames.toArray( new String[ idColumnNames.size() ] ) );
+	}
+
+	private int insert() throws DatabaseException {
+		SQLInsert req = new SQLInsert( getClass() );
+
+		try {
+			processFields( getClass(), field -> {
+				if( !field.isAnnotationPresent( ExcludedField.class ) ) {
+					if( !field.isAccessible() ) {
+						field.setAccessible( true );
+					}
+
+					Object val = field.get( this );
+					if( val == null ) {
+						throw new NullPointerException( "Model instance has a field as null" );
+					}
+
+					req.add( getColumnName( field ), val );
+				}
+			}, false );
+		} catch( IllegalAccessException e ) {
+			throw new DatabaseException( "Unable to access model field.", e );
+		} catch( NullPointerException e ) {
+			throw new DatabaseException( e );
+		}
+
+		return req.insert();
+	}
+
+	private int update() throws DatabaseException {
+		SQLUpdate req = new SQLUpdate( getClass() );
+
+		try {
+			processFields( getClass(), field -> {
+				if( !field.isAnnotationPresent( ExcludedField.class ) ) {
+					if( !field.isAccessible() ) {
+						field.setAccessible( true );
+					}
+
+					Object value = field.get( this );
+
+					if( value != null ) {
+						req.set( getColumnName( field ), value );
+					}
+				}
+			}, false );
+		} catch( IllegalAccessException e ) {
+			throw new DatabaseException( "Unable to access model field.", e );
+		}
+
+		return req.update();
+	}
+
+	/**
+	 * Saves a model instance to database, using the model's attribute values.
+	 *
+	 * @return Either (1) the row count for SQL Data Manipulation Language (DML) statements or (2) 0 for SQL statements that return nothing
+	 * @throws DatabaseException Error occurred while saving to database
+	 */
+	public int save() throws DatabaseException {
+		SQLSelect selectHelper = new SQLSelect( getClass() );
+
+		selectByIds( selectHelper );
+
+		if( selectHelper.hasUnique() ) {
+			return insert();
+		}
+
+		return update();
 	}
 }
