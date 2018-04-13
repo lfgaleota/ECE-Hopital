@@ -2,6 +2,10 @@ ece.ing3.java.projet
 ece.ing3.java.projet.configuration
 ece.ing3.java.projet.database
 ece.ing3.java.projet.database.sql
+ece.ing3.java.projet.database.sql.annotations
+ece.ing3.java.projet.database.sql.clauses
+ece.ing3.java.projet.database.sql.enumerations
+ece.ing3.java.projet.database.sql.queries
 ece.ing3.java.projet.enums
 ece.ing3.java.projet.exceptions
 ece.ing3.java.projet.modele.administration
