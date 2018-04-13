@@ -111,9 +111,8 @@ public class Infirmier extends Employe {
 	 * Modifie le service auquel est rattaché l'infirmier
 	 *
 	 * @param service Nouveau service auquel est rattaché l'infirmier
-	 * @throws DatabaseException Erreur lors de la recherche en base de donnée
 	 */
-	public void setService( Service service ) throws DatabaseException {
+	public void setService( Service service ) {
 		this.codeService = service.getCode();
 	}
 

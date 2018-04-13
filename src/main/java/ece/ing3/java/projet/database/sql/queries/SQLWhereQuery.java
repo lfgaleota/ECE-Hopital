@@ -4,8 +4,6 @@ import ece.ing3.java.projet.database.Database;
 import ece.ing3.java.projet.database.sql.clauses.Where;
 import ece.ing3.java.projet.exceptions.DatabaseException;
 import org.apache.commons.dbutils.QueryRunner;
-import org.apache.commons.dbutils.handlers.BeanHandler;
-import org.apache.commons.dbutils.handlers.BeanListHandler;
 
 import java.sql.SQLException;
 

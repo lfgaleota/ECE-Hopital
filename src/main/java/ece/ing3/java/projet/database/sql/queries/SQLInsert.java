@@ -15,8 +15,8 @@ import java.util.Map;
  * Provides a convenient way to build insert SQL queries, reactive-style, for a provided model class.
  */
 public class SQLInsert implements SQLRequest {
-	Class<? extends Model> modelClass;
-	private String tableName;
+	final Class<? extends Model> modelClass;
+	final private String tableName;
 	private Map<Integer, String> columns;
 	private Map<Integer, Object> values;
 

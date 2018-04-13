@@ -6,9 +6,6 @@ import ece.ing3.java.projet.exceptions.DatabaseException;
 import ece.ing3.java.projet.modele.employe.Employe;
 import ece.ing3.java.projet.modele.employe.Infirmier;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.LinkedList;
 import java.util.List;
 //System.out.println( ( new ece.ing3.java.projet.modele.finders.InfirmierFinder() ).findList() );
 /**

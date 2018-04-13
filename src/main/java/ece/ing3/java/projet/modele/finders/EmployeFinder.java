@@ -4,9 +4,6 @@ import ece.ing3.java.projet.database.sql.queries.SQLSelect;
 import ece.ing3.java.projet.exceptions.DatabaseException;
 import ece.ing3.java.projet.modele.employe.Employe;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.LinkedList;
 import java.util.List;
 
 /**

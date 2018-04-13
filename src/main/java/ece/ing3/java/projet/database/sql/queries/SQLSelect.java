@@ -190,6 +190,7 @@ public class SQLSelect<M extends Model> extends SQLWhereQuery<SQLSelect> {
 	public M findUnique() throws DatabaseException {
 		QueryRunner run = new QueryRunner();
 		ResultSetHandler<M> h = new BeanHandler<>( ( Class<M> ) getModelClass() );
+
 		try {
 			if( where != null ) {
 				return run.query( Database.get(), toString(), h, where.getParameters() );
