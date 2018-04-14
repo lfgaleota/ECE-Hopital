@@ -33,6 +33,11 @@ import ece.ing3.java.projet.vue.panels.LogoPanel;
  * @author Virgile
  */
 
+/**
+ * Fenetre principale de l'application
+ * @author Nicolas
+ *
+ */
 public class Fenetre extends JFrame implements ActionListener, MouseListener {
 	private JTabbedPane onglet;
 	/// LE JSPLIT QUIVA PERMETTRE D AVOIR DEUX PANNEAUX PAR ONGLET , UN POUR LES
