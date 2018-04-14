@@ -42,14 +42,45 @@ public class Fenetre extends JFrame implements ActionListener, MouseListener {
 	private JTabbedPane onglet;
 	/// LE JSPLIT QUIVA PERMETTRE D AVOIR DEUX PANNEAUX PAR ONGLET , UN POUR LES
 	/// BOUTONS DU HAUT L AUTRE POUR L AFFICHAGE
-	JSplitPane ongletandhaut = new JSplitPane(JSplitPane.VERTICAL_SPLIT); // ou VERTICAL_SPLIT
+	//JSplitPane ongletandhaut = new JSplitPane(JSplitPane.VERTICAL_SPLIT); // ou VERTICAL_SPLIT ///METHODE AVEC ONGLET/BOUTONS INDEPENDANT
+        private JSplitPane split ;
 
-	/// LES 5 BOUTONS DU HAUT
+	/// LES 5 BOUTONS DE CHAQUE ONGLET ICI ONGLET0
 	private JButton boutonstat = new JButton("Statistiques");
 	private JButton boutonrechercher = new JButton("Rechercher");
 	private JButton boutonMA = new JButton("MAJ");
 	private JButton boutonAjouter = new JButton("Ajouter");
 	private JButton boutonSup = new JButton("Supprimer");
+        
+        	/// LES 5 BOUTONS DE CHAQUE ONGLET ICI ONGLET 1
+	private JButton boutonstat1 = new JButton("Statistiques");
+	private JButton boutonrechercher1 = new JButton("Rechercher");
+	private JButton boutonMA1 = new JButton("MAJ");
+	private JButton boutonAjouter1 = new JButton("Ajouter");
+	private JButton boutonSup1 = new JButton("Supprimer");
+        
+        	/// LES 5 BOUTONS DE CHAQUE ONGLET ICI ONGLET 2
+	private JButton boutonstat2 = new JButton("Statistiques");
+	private JButton boutonrechercher2 = new JButton("Rechercher");
+	private JButton boutonMA2 = new JButton("MAJ");
+	private JButton boutonAjouter2 = new JButton("Ajouter");
+	private JButton boutonSup2 = new JButton("Supprimer");
+        
+        	/// LES 5 BOUTONS DE CHAQUE ONGLET ICI ONGLET 3
+	private JButton boutonstat3 = new JButton("Statistiques");
+	private JButton boutonrechercher3 = new JButton("Rechercher");
+	private JButton boutonMA3 = new JButton("MAJ");
+	private JButton boutonAjouter3 = new JButton("Ajouter");
+	private JButton boutonSup3 = new JButton("Supprimer");
+        
+        	/// LES 5 BOUTONS DE CHAQUE ONGLET ICI ONGLET 4
+	private JButton boutonstat4 = new JButton("Statistiques");
+	private JButton boutonrechercher4 = new JButton("Rechercher");
+	private JButton boutonMA4 = new JButton("MAJ");
+	private JButton boutonAjouter4 = new JButton("Ajouter");
+	private JButton boutonSup4 = new JButton("Supprimer");
+    
+	
 
 	/// LA FENETRE CONTIENT LES PANNEAUX (CONTENU DES ONGLETS)
 	public Fenetre() {
@@ -57,26 +88,61 @@ public class Fenetre extends JFrame implements ActionListener, MouseListener {
 		this.setTitle("Projet Hopital");
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setSize(1100, 900);
+                
+                /* MMETHODE ONGLET/BOUTONS INDEPENDANT
 		/// LA LIGNE DE SEPARATION A UNE LARGEUR DE PX ET EST EN 80
 		ongletandhaut.setDividerSize(1);
 		ongletandhaut.setDividerLocation(100);
-
-		BasePanel panboutons = new BasePanel();
-		panboutons.setBackground(Color.blue);
+                */
+                
+            
+                ///CHAQUE PANEL DE BOUTONS CONTIENT LES BOUTONS ( TOUS DIFFERENTS
+                BasePanel panboutons = new BasePanel();
 		panboutons.add(boutonstat);
 		panboutons.add(boutonrechercher);
 		panboutons.add(boutonMA);
 		panboutons.add(boutonAjouter);
 		panboutons.add(boutonSup);
+                
+                BasePanel panboutons1 = new BasePanel();
+		panboutons1.add(boutonstat1);
+		panboutons1.add(boutonrechercher1);
+		panboutons1.add(boutonMA1);
+		panboutons1.add(boutonAjouter1);
+		panboutons1.add(boutonSup1);
+                
+                
+                BasePanel panboutons2 = new BasePanel();
+		panboutons2.add(boutonstat2);
+		panboutons2.add(boutonrechercher2);
+		panboutons2.add(boutonMA2);
+		panboutons2.add(boutonAjouter2);
+		panboutons2.add(boutonSup2);
+                
+                
+                BasePanel panboutons3 = new BasePanel();
+		panboutons3.add(boutonstat3);
+		panboutons3.add(boutonrechercher3);
+		panboutons3.add(boutonMA3);
+		panboutons3.add(boutonAjouter3);
+		panboutons3.add(boutonSup3);
+                
+                
+                BasePanel panboutons4 = new BasePanel();
+		panboutons4.add(boutonstat4);
+		panboutons4.add(boutonrechercher4);
+		panboutons4.add(boutonMA4);
+		panboutons4.add(boutonAjouter4);
+		panboutons4.add(boutonSup4);
 
-		BasePanel panlogo = new LogoPanel();
+		//BasePanel panlogo = new LogoPanel();
 
 		/// JSplitpane pour boutons/Logo
-		JSplitPane logoandboutons = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, panlogo, panboutons); // ou
+		//JSplitPane logoandboutons = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, panlogo, panboutons); // ou
 																										// VERTICAL_SPLIT
 		/// LA LIGNE DE SEPARATION A UNE LARGEUR DE PX ET EST EN 80
-		logoandboutons.setDividerSize(1);
-		logoandboutons.setDividerLocation(112);
+		//logoandboutons.setDividerSize(1);
+		//logoandboutons.setDividerLocation(112);
 
 		/// LES DIFFERENTS PANNEAUX ONGLETS SONT CREER ICI , AVEC UN CONSTRUCTEUR
 		/// UTILISANT UNE COULEUR EN PARAMETRE
@@ -91,12 +157,15 @@ public class Fenetre extends JFrame implements ActionListener, MouseListener {
 		for (BasePanel pan : tPan) {
 			// Méthode d'ajout d'onglet
 			/// CHAQUE VALEUR DE I CORRESPOND A UN INDICE D ONGLET
-			/// L ONGLET 0 CORRESPOND A L ACCEUIL QUAND ON CLIQUE SUR LE LOGO
+			
 			if (i == 0) {
-
-				onglet.add("Services", pan);
+                                
+                                //SEPARE EN DEUX LE CONTENU DE L ONGLET AVEC LE PANBOUTONS CORRESPONDANT ET LE PANNEAU 
+                                split = new JSplitPane(JSplitPane.VERTICAL_SPLIT, panboutons, pan);
+                                //L'ONGLET CONTIENT CETTTE SEPARATION
+				onglet.add("Services", split);
 				/*
-				 * 
+				 * POUR AVOIR UNE IMAGE DANS L ONGLET
 				 * onglet.add (pan); onglet.setIconAt((i), new ImageIcon("logo.jpg"));
 				 * 
 				 * 
@@ -105,20 +174,22 @@ public class Fenetre extends JFrame implements ActionListener, MouseListener {
 
 			}
 			if (i == 1) {
-				// JSplitPane split = new JSplitPane(JSplitPane.VERTICAL_SPLIT, panboutons1,
-				// pan);
-				onglet.add("Chambres", pan);
+                                split = new JSplitPane(JSplitPane.VERTICAL_SPLIT, panboutons1, pan);
+				onglet.add("Chambres", split);
 
 			}
 			if (i == 2) {
-				onglet.add("Employés", pan);
+                                split = new JSplitPane(JSplitPane.VERTICAL_SPLIT, panboutons2, pan);
+				onglet.add("Employés", split);
 
 			}
 			if (i == 3) {
-				onglet.add("Patients", pan);
+                                split = new JSplitPane(JSplitPane.VERTICAL_SPLIT, panboutons3, pan);
+				onglet.add("Patients", split);
 			}
 			if (i == 4) {
-				onglet.add("Hospitalisations", pan);
+                                split = new JSplitPane(JSplitPane.VERTICAL_SPLIT, panboutons4, pan);
+				onglet.add("Hospitalisations",split);
 
 			}
 
@@ -127,10 +198,10 @@ public class Fenetre extends JFrame implements ActionListener, MouseListener {
 			i++;
 		}
 		// On passe ensuite les onglets au content pane
-		ongletandhaut.add(logoandboutons);
-		ongletandhaut.add(onglet);
+		//ongletandhaut.add(logoandboutons);
+		//ongletandhaut.add(onglet);
 
-		this.getContentPane().add(ongletandhaut);
+		this.getContentPane().add(onglet);
 		this.setVisible(true);
 		
 		boutonstat.addActionListener(this);
