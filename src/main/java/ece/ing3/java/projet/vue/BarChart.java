@@ -7,12 +7,23 @@ import org.jfree.chart.JFreeChart;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.data.category.DefaultCategoryDataset;
 
+
+/**
+ * Classe modèle pour les diagrammes en batons.
+ * 
+ * @author Nicolas
+ *
+ */
 public class BarChart
 {
 	public static DefaultCategoryDataset dataset;
 	public static ChartPanel chartPanel;
 	public static JFreeChart chart;
 	
+	/**
+	 * Constructeur par défaut -> Complete les informations du diagramme 
+	 * -> Rempli et affiche le diagramme en batons dans un panel
+	 */
 	public BarChart() {
 		
 		dataset = new DefaultCategoryDataset();
@@ -38,7 +49,11 @@ public class BarChart
 		chartPanel.setPreferredSize(new Dimension(400, 200));
 
 	}
-	
+	/**
+	 * Getter
+	 * 
+	 * @return un panel contenant le diagramme en baton
+	 */
 	public ChartPanel getBarChart()
 	{
 		return chartPanel;

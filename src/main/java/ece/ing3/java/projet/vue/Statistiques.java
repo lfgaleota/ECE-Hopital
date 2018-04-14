@@ -4,9 +4,18 @@ import java.awt.GridLayout;
 
 import javax.swing.JFrame;
 
+/**
+ * Classe d'affichage de la fenetre de statistiques.
+ * @author Nicolas
+ *
+ */
 public class Statistiques  extends JFrame {
 	private static final long serialVersionUID = 1L;
 
+	/**
+	 * Constructeur par défaut de la classe
+	 * Donne les principales caractéristiques de la fenêtre
+	 */
 	public Statistiques()
 	{
 		this.setTitle ("Statistiques de l'Hôpital");
