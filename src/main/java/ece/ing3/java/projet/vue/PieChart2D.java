@@ -19,8 +19,7 @@ public class PieChart2D {
 
 	/**
 	 * Constructeur par défaut -> Complete les informations du diagramme 
-	 * -> Rempli
-	 * et affiche le diagramme circulaire dans un panel
+	 * -> Rempli et affiche le diagramme circulaire dans un panel
 	 */
 	public PieChart2D() {
 		dataset = new DefaultPieDataset();
