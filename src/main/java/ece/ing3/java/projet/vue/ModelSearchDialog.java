@@ -34,10 +34,12 @@ public class ModelSearchDialog extends JFrame implements ActionListener {
 
 		//on récupère la taille de la liste
 		int size = modelList.getModel().getSize();
+		//création d'un nouveau panel
 		recherche =  new JPanel();
 		GridLayout g =  new GridLayout(size+1,1);
 		recherche.setLayout(g);
 
+		///on parcourt notre Map
 		for( Entry<String, String> parameter : parameters.entrySet() ) {
 			JTextField field = new JTextField( Constants.UI_TEXTFIELD_MAXLENGTH );
 			textFields.put( parameter.getKey(), field );
@@ -55,8 +57,10 @@ public class ModelSearchDialog extends JFrame implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource() == submit)
 		{
-			//test la correspondance avec la JListe
+			// TEST CORRESPONDANCE AVEC LA JLISTE
 			System.out.println("Validation");
+			
+			
 			//On ferme la fenêtre et les informations (s'il y en a )apparaissent sur la table centrale
 			this.dispose();
 	
