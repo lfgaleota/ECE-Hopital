@@ -87,6 +87,9 @@ public class Fenetre extends JFrame implements ActionListener, MouseListener {
 	private JButton boutonMA4 = new JButton("MAJ");
 	private JButton boutonAjouter4 = new JButton("Ajouter");
 	private JButton boutonSup4 = new JButton("Supprimer");
+        
+        private JButton boutonSup5 = new JButton("ALALALALLA");
+
 
 	private JButton configuration = new JButton();
 	private Image config_img;
@@ -149,6 +152,7 @@ public class Fenetre extends JFrame implements ActionListener, MouseListener {
 		panboutons4.add(boutonSup4);
 
 		BasePanel panboutons5 = new BasePanel();
+                panboutons5.add(boutonSup5);
 
 		/// JSplitpane pour boutons/Logo
 		// JSplitPane logoandboutons = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT,
@@ -166,9 +170,6 @@ public class Fenetre extends JFrame implements ActionListener, MouseListener {
 		/// LE CONTENEUR D ONGLET QUE L ON MET A GAUCHE DE LA FENETRE
 		onglet = new JTabbedPane(JTabbedPane.LEFT);
 
-		// configuration.setIcon( new ImageIcon(Constants.RESOURCE_PATH_CONFIGLOGO) );
-
-		onglet.add(configuration);
 
 		/// METHODE PRISE SUR OPENCLASSROOM
 		int i = 0;
@@ -189,43 +190,44 @@ public class Fenetre extends JFrame implements ActionListener, MouseListener {
 			}
 			if (i == 1) {
 				split = new JSplitPane(JSplitPane.VERTICAL_SPLIT, panboutons, pan);
-				onglet.add(pan);
+				onglet.add(split);
 				onglet.setIconAt(i, new ImageIcon(
 						(new ImageIcon(Constants.RESOURCE_PATH_SERVICELOGO).getImage().getScaledInstance(this.width / 7, this.height / 11, Image.SCALE_DEFAULT))));
 
 			}
 			if (i == 2) {
 				split = new JSplitPane(JSplitPane.VERTICAL_SPLIT, panboutons1, pan);
-				onglet.add(pan);
+				onglet.add(split);
 				onglet.setIconAt(i, new ImageIcon(
 						(new ImageIcon(Constants.RESOURCE_PATH_CHAMBRELOGO).getImage().getScaledInstance(this.width / 7, this.height / 11, Image.SCALE_DEFAULT))));
 			}
 			if (i == 3) {
 				split = new JSplitPane(JSplitPane.VERTICAL_SPLIT, panboutons2, pan);
-				onglet.add(pan);
+				onglet.add(split);
 				onglet.setIconAt(i, new ImageIcon(
 						(new ImageIcon(Constants.RESOURCE_PATH_EMPLOYELOGO).getImage().getScaledInstance(this.width / 7, this.height / 11, Image.SCALE_DEFAULT))));
 
 			}
 			if (i == 4) {
 				split = new JSplitPane(JSplitPane.VERTICAL_SPLIT, panboutons3, pan);
-				onglet.add(pan);
+				onglet.add(split);
 				onglet.setIconAt(i, new ImageIcon(
 						(new ImageIcon(Constants.RESOURCE_PATH_PATIENTLOGO).getImage().getScaledInstance(this.width / 7, this.height / 11, Image.SCALE_DEFAULT))));
 			}
 			if (i == 5) {
 				split = new JSplitPane(JSplitPane.VERTICAL_SPLIT, panboutons4, pan);
-				onglet.add(pan);
+				onglet.add(split);
 				onglet.setIconAt(i, new ImageIcon(
 						(new ImageIcon(Constants.RESOURCE_PATH_HOSPITALISATIONLOGO).getImage().getScaledInstance(this.width / 7, this.height / 11, Image.SCALE_DEFAULT))));
 			}
-			if (i == 6) {
-				split = new JSplitPane(JSplitPane.VERTICAL_SPLIT, panboutons5, pan);
+                        
+                        if (i == 6) {
+				//split = new JSplitPane(JSplitPane.VERTICAL_SPLIT, panboutons4, pan);
+				onglet.add(pan);
 				onglet.setIconAt(i, new ImageIcon(
-						(new ImageIcon(Constants.RESOURCE_PATH_CONFIGLOGO).getImage().getScaledInstance(this.width / 7 , this.height / 7, Image.SCALE_DEFAULT))));
-					/* Constants.RESOURCE_PATH_CONFIGLOGO */
-
+						(new ImageIcon(Constants.RESOURCE_PATH_CONFIGLOGO).getImage().getScaledInstance(this.width / 7, this.height / 11, Image.SCALE_DEFAULT))));
 			}
+
 
 			// onglet.add("Onglet n° "+(++i), pan);
 
