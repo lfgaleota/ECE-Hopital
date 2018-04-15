@@ -35,6 +35,7 @@ import javax.swing.JTabbedPane;
 import ece.ing3.java.projet.utils.Constants;
 import ece.ing3.java.projet.utils.Utils;
 import ece.ing3.java.projet.vue.panels.BasePanel;
+import javax.swing.JScrollPane;
 
 /**
  *
@@ -98,6 +99,11 @@ public class Fenetre extends JFrame implements ActionListener, MouseListener {
 	
 	private static int width = 1100;
 	private static int height = 900;
+        
+       /// LES DIFFERENTS PANNEAUX ONGLETS SONT CREES ICI , AVEC UN CONSTRUCTEUR
+        /// UTILISANT UNE COULEUR EN PARAMETRE
+        private BasePanel[] tPan = { new BasePanel(Color.RED), new BasePanel(Color.GREEN), new BasePanel(Color.BLUE),
+				new BasePanel(Color.YELLOW), new BasePanel(Color.BLACK), new BasePanel(Color.RED), new BasePanel(Color.GRAY) };
 	
 	/// LA FENETRE CONTIENT LES PANNEAUX (CONTENU DES ONGLETS)
 	public Fenetre() {
@@ -164,10 +170,8 @@ public class Fenetre extends JFrame implements ActionListener, MouseListener {
 		// logoandboutons.setDividerSize(1);
 		// logoandboutons.setDividerLocation(112);
 
-		/// LES DIFFERENTS PANNEAUX ONGLETS SONT CREES ICI , AVEC UN CONSTRUCTEUR
-		/// UTILISANT UNE COULEUR EN PARAMETRE
-		BasePanel[] tPan = { new BasePanel(Color.RED), new BasePanel(Color.GREEN), new BasePanel(Color.BLUE),
-				new BasePanel(Color.YELLOW), new BasePanel(Color.BLACK), new BasePanel(Color.RED), new BasePanel(Color.GRAY) };
+
+	
 
 		/// LE CONTENEUR D ONGLET QUE L ON MET A GAUCHE DE LA FENETRE
 		onglet = new JTabbedPane(JTabbedPane.LEFT);
@@ -179,6 +183,7 @@ public class Fenetre extends JFrame implements ActionListener, MouseListener {
 			// Méthode d'ajout d'onglet
 			/// CHAQUE VALEUR DE I CORRESPOND A UN INDICE D ONGLETS
 
+                    
 			if (i == 0) {
 				// SEPARE EN DEUX LE CONTENU DE L ONGLET AVEC LE PANBOUTONS CORRESPONDANT ET LE
 				// PANNEAU
@@ -247,7 +252,14 @@ public class Fenetre extends JFrame implements ActionListener, MouseListener {
 		boutonstat2.addActionListener(this);
 		boutonstat3.addActionListener(this);
 		boutonstat4.addActionListener(this);
-		boutonrechercher.addActionListener(this);
+                
+                ///LES BOUTONS RECHERCHER SONT TOUS SOUS ECOUTE
+                        boutonrechercher.addActionListener(this);
+                	boutonrechercher1.addActionListener(this);
+                        boutonrechercher2.addActionListener(this);
+                        boutonrechercher3.addActionListener(this);
+                        boutonrechercher4.addActionListener(this);
+                        
 		boutonMA.addActionListener(this);
 		boutonAjouter.addActionListener(this);
 		boutonSup.addActionListener(this);
@@ -260,19 +272,37 @@ public class Fenetre extends JFrame implements ActionListener, MouseListener {
 			Statistiques mesStats = new Statistiques();
 			mesStats.creer_Statistiques();
 		}
-
+/*
+                ///TOUT LES BOUTONS RECHERCHER FONT LA MEME ACTION
 		if ( (e.getSource() == boutonrechercher) || (e.getSource() == boutonrechercher1)  ||(e.getSource() == boutonrechercher2) 
 				|| (e.getSource() == boutonrechercher3)  || (e.getSource() == boutonrechercher4) )
+		{
+                */
+
+                ///ACTION DU BOUTON RECHERCHER 1 : POUR LE MOMENT AFFICHE UNIQUEMENT LA LISTE AU MILIEU DU JPANEL CORRESPONDANT
+	if ( (e.getSource() == boutonrechercher) )
 		{
 			
 			//test remplissage manuel
 			 Vector<String> monvecteur = new Vector<String>();
-			 monvecteur.add(new String("23"));
+			 JList<String> maliste = new JList<String>(monvecteur);
+                         
+                         monvecteur.add(new String("ONGLET SERVICE"));
 			 monvecteur.add(new String("Nom"));
 			 monvecteur.add(new String("Prenom"));
 			 monvecteur.add(new String("06"));
 			 monvecteur.add(new String("Paris"));
-			 JList<String> maliste = new JList<String>(monvecteur);
+                         
+                         /**
+                         ///Fenetre d affichage du contenu de la liste (ne marche pas si on affiche deja dans nos JPanel;
+                        JFrame frame = new JFrame();
+                        frame.add(new JScrollPane(maliste));
+                        frame.setSize(300, 200);
+                        frame.setVisible(true);
+                        */
+                        
+                        tPan[1].add(maliste);
+                        
 			 
 			 Map<String, String> mamap = new HashMap<>();
 			 mamap.put("a", "1");
@@ -281,7 +311,169 @@ public class Fenetre extends JFrame implements ActionListener, MouseListener {
 			 mamap.put("d", "4");
 			 mamap.put("e", "5");
 			 
-			 ModelSearchDialog marecherche = new ModelSearchDialog( maliste, mamap );
+                         ModelSearchDialog marecherche = new ModelSearchDialog( maliste, mamap );
+                         
+                         this.repaint();
+                         
+                       //  marecherche.
+
+		}
+        
+                ///MEME ACTION QUE POUR BOUTON RECHERCHER 1 MAIS AFFICHE DANS UN AUTRE ONGLET
+        	if ( (e.getSource() == boutonrechercher1) )
+		{
+			
+			//test remplissage manuel
+			 Vector<String> monvecteur = new Vector<String>();
+			 JList<String> maliste = new JList<String>(monvecteur);
+                         
+                         monvecteur.add(new String("ONGLET CHAMBRE"));
+			 monvecteur.add(new String("Nom"));
+			 monvecteur.add(new String("Prenom"));
+			 monvecteur.add(new String("06"));
+			 monvecteur.add(new String("Paris"));
+                         
+                         /**
+                         ///Fenetre d affichage du contenu de la liste (ne marche pas si on affiche deja dans nos JPanel;
+                        JFrame frame = new JFrame();
+                        frame.add(new JScrollPane(maliste));
+                        frame.setSize(300, 200);
+                        frame.setVisible(true);
+                        */
+                        
+                        tPan[2].add(maliste);
+                        
+			 
+			 Map<String, String> mamap = new HashMap<>();
+			 mamap.put("a", "1");
+			 mamap.put("b", "2");
+			 mamap.put("c", "3");
+			 mamap.put("d", "4");
+			 mamap.put("e", "5");
+			 
+                         ModelSearchDialog marecherche = new ModelSearchDialog( maliste, mamap );
+                         
+                            this.repaint();
+                         
+                       //  marecherche.
+
+		}
+                
+                     ///MEME ACTION QUE POUR BOUTON RECHERCHER 1 MAIS AFFICHE DANS UN AUTRE ONGLET
+                if ( (e.getSource() == boutonrechercher2) )
+		{
+			
+			//test remplissage manuel
+			 Vector<String> monvecteur = new Vector<String>();
+			 JList<String> maliste = new JList<String>(monvecteur);
+                         
+                         monvecteur.add(new String("ONGLET EMPLOYES"));
+			 monvecteur.add(new String("Nom"));
+			 monvecteur.add(new String("Prenom"));
+			 monvecteur.add(new String("06"));
+			 monvecteur.add(new String("Paris"));
+                         
+                         /**
+                         ///Fenetre d affichage du contenu de la liste (ne marche pas si on affiche deja dans nos JPanel;
+                        JFrame frame = new JFrame();
+                        frame.add(new JScrollPane(maliste));
+                        frame.setSize(300, 200);
+                        frame.setVisible(true);
+                        */
+                        
+                        tPan[3].add(maliste);
+                        
+			 
+			 Map<String, String> mamap = new HashMap<>();
+			 mamap.put("a", "1");
+			 mamap.put("b", "2");
+			 mamap.put("c", "3");
+			 mamap.put("d", "4");
+			 mamap.put("e", "5");
+			 
+                         ModelSearchDialog marecherche = new ModelSearchDialog( maliste, mamap );
+                         
+                            this.repaint();
+                         
+                       //  marecherche.
+
+		}
+                     ///MEME ACTION QUE POUR BOUTON RECHERCHER 1 MAIS AFFICHE DANS UN AUTRE ONGLET
+                if ( (e.getSource() == boutonrechercher3) )
+		{
+			
+			//test remplissage manuel
+			 Vector<String> monvecteur = new Vector<String>();
+			 JList<String> maliste = new JList<String>(monvecteur);
+                         
+                         monvecteur.add(new String("ONGLET PATIENT"));
+			 monvecteur.add(new String("Nom"));
+			 monvecteur.add(new String("Prenom"));
+			 monvecteur.add(new String("06"));
+			 monvecteur.add(new String("Paris"));
+                         
+                         /**
+                         ///Fenetre d affichage du contenu de la liste (ne marche pas si on affiche deja dans nos JPanel;
+                        JFrame frame = new JFrame();
+                        frame.add(new JScrollPane(maliste));
+                        frame.setSize(300, 200);
+                        frame.setVisible(true);
+                        */
+                        
+                        tPan[4].add(maliste);
+                        
+			 
+			 Map<String, String> mamap = new HashMap<>();
+			 mamap.put("a", "1");
+			 mamap.put("b", "2");
+			 mamap.put("c", "3");
+			 mamap.put("d", "4");
+			 mamap.put("e", "5");
+			 
+                         ModelSearchDialog marecherche = new ModelSearchDialog( maliste, mamap );
+                         
+                            this.repaint();
+                         
+                       //  marecherche.
+
+		}
+                     ///MEME ACTION QUE POUR BOUTON RECHERCHER 1 MAIS AFFICHE DANS UN AUTRE ONGLET
+                if ( (e.getSource() == boutonrechercher4) )
+		{
+			
+			//test remplissage manuel
+			 Vector<String> monvecteur = new Vector<String>();
+			 JList<String> maliste = new JList<String>(monvecteur);
+                         
+                         monvecteur.add(new String("ONGLET HOSPITALISATION"));
+			 monvecteur.add(new String("Nom"));
+			 monvecteur.add(new String("Prenom"));
+			 monvecteur.add(new String("06"));
+			 monvecteur.add(new String("Paris"));
+                         
+                         /**
+                         ///Fenetre d affichage du contenu de la liste (ne marche pas si on affiche deja dans nos JPanel;
+                        JFrame frame = new JFrame();
+                        frame.add(new JScrollPane(maliste));
+                        frame.setSize(300, 200);
+                        frame.setVisible(true);
+                        */
+                        
+                        tPan[5].add(maliste);
+                        
+			 
+			 Map<String, String> mamap = new HashMap<>();
+			 mamap.put("a", "1");
+			 mamap.put("b", "2");
+			 mamap.put("c", "3");
+			 mamap.put("d", "4");
+			 mamap.put("e", "5");
+			 
+                         ModelSearchDialog marecherche = new ModelSearchDialog( maliste, mamap );
+                         
+                            this.repaint();
+                         
+                       //  marecherche.
 
 		}
 
