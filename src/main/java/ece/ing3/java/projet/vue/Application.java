@@ -124,8 +124,8 @@ public class Application extends JFrame implements ActionListener, MouseListener
 
 	/// LES DIFFERENTS PANNEAUX ONGLETS SONT CREES ICI , AVEC UN CONSTRUCTEUR
 	/// UTILISANT UNE COULEUR EN PARAMETRE
-	private BasePanel[] tPan = { new BasePanel(Color.RED), new BasePanel(Color.GREEN), new BasePanel(Color.BLUE),
-			new BasePanel(Color.YELLOW), new BasePanel(Color.BLACK), new BasePanel(Color.RED),
+	private BasePanel[] tPan = { new BasePanel(Color.GRAY), new BasePanel(Color.WHITE), new BasePanel(Color.WHITE),
+			new BasePanel(Color.WHITE), new BasePanel(Color.WHITE), new BasePanel(Color.WHITE),
 			new BasePanel(Color.GRAY) };
 
 	/// LA FENETRE CONTIENT LES PANNEAUX (CONTENU DES ONGLETS)
@@ -137,6 +137,7 @@ public class Application extends JFrame implements ActionListener, MouseListener
 		this.setSize((int) getToolkit().getScreenSize().getWidth(), ((int) getToolkit().getScreenSize().getHeight()));
 		this.setResizable(true);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		this.toFront(); // mettre au 1er plan 
 		// this.setSize( width, height );
 
 		/*
@@ -144,11 +145,26 @@ public class Application extends JFrame implements ActionListener, MouseListener
 		 * DE PX ET EST EN 80 ongletandhaut.setDividerSize(1);
 		 * ongletandhaut.setDividerLocation(100);
 		 */
+		
+		//Mise en forme des boutons
+		boutonstat.setBackground(Color.WHITE);boutonstat1.setBackground(Color.WHITE);boutonstat2.setBackground(Color.WHITE);boutonstat3.setBackground(Color.WHITE);boutonstat4.setBackground(Color.WHITE);
+		boutonstat.setBorderPainted(false);boutonstat1.setBorderPainted(false);boutonstat2.setBorderPainted(false);boutonstat3.setBorderPainted(false);boutonstat4.setBorderPainted(false);
+		
+		boutonrechercher.setBackground(Color.WHITE);boutonrechercher1.setBackground(Color.WHITE);boutonrechercher2.setBackground(Color.WHITE);boutonrechercher3.setBackground(Color.WHITE);boutonrechercher4.setBackground(Color.WHITE);
+		boutonrechercher.setBorderPainted(false);boutonrechercher1.setBorderPainted(false);boutonrechercher2.setBorderPainted(false);boutonrechercher3.setBorderPainted(false);boutonrechercher4.setBorderPainted(false);
 
+		boutonMA.setBackground(Color.WHITE);boutonMA1.setBackground(Color.WHITE);boutonMA2.setBackground(Color.WHITE);boutonMA3.setBackground(Color.WHITE);boutonMA4.setBackground(Color.WHITE);
+		boutonMA.setBorderPainted(false);boutonMA1.setBorderPainted(false);boutonMA2.setBorderPainted(false);boutonMA3.setBorderPainted(false);boutonMA4.setBorderPainted(false);
+
+		boutonAjouter.setBackground(Color.WHITE);boutonAjouter1.setBackground(Color.WHITE);boutonAjouter2.setBackground(Color.WHITE);boutonAjouter3.setBackground(Color.WHITE);boutonAjouter4.setBackground(Color.WHITE);
+		boutonAjouter.setBorderPainted(false);boutonAjouter1.setBorderPainted(false);boutonAjouter2.setBorderPainted(false);boutonAjouter3.setBorderPainted(false);boutonAjouter4.setBorderPainted(false);
+
+		boutonSup.setBackground(Color.WHITE);boutonSup1.setBackground(Color.WHITE);boutonSup2.setBackground(Color.WHITE);boutonSup3.setBackground(Color.WHITE);boutonSup4.setBackground(Color.WHITE);
+		boutonSup.setBorderPainted(false);boutonSup1.setBorderPainted(false);boutonSup2.setBorderPainted(false);boutonSup3.setBorderPainted(false);boutonSup4.setBorderPainted(false);
+				
 		/// CHAQUE PANEL DE BOUTONS CONTIENT LES BOUTONS ( TOUS DIFFERENTS)
-
 		BasePanel panlogo = new BasePanel();
-
+		
 		BasePanel panboutons = new BasePanel();
 		panboutons.add(boutonstat);
 		panboutons.add(boutonrechercher);
@@ -212,40 +228,42 @@ public class Application extends JFrame implements ActionListener, MouseListener
 				onglet.add(pan);
 				onglet.setIconAt(i, new ImageIcon((new ImageIcon(Constants.RESOURCE_PATH_APPLOGO).getImage()
 						.getScaledInstance(this.width / 7, this.height / 7, Image.SCALE_DEFAULT))));
-				/* Constants.RESOURCE_PATH_APPLOGO */
-
+				onglet.setBackgroundAt(i, Color.WHITE);
 			}
 			if (i == 1) {
 				split = new JSplitPane(JSplitPane.VERTICAL_SPLIT, panboutons, pan);
 				onglet.add(split);
 				onglet.setIconAt(i, new ImageIcon((new ImageIcon(Constants.RESOURCE_PATH_SERVICELOGO).getImage()
 						.getScaledInstance(this.width / 7, this.height / 11, Image.SCALE_DEFAULT))));
-
+				onglet.setBackgroundAt(i, Color.decode("#5DBFF4"));
 			}
 			if (i == 2) {
 				split = new JSplitPane(JSplitPane.VERTICAL_SPLIT, panboutons1, pan);
 				onglet.add(split);
 				onglet.setIconAt(i, new ImageIcon((new ImageIcon(Constants.RESOURCE_PATH_CHAMBRELOGO).getImage()
 						.getScaledInstance(this.width / 7, this.height / 11, Image.SCALE_DEFAULT))));
+				onglet.setBackgroundAt(i, Color.decode("#70F96C"));
 			}
 			if (i == 3) {
 				split = new JSplitPane(JSplitPane.VERTICAL_SPLIT, panboutons2, pan);
 				onglet.add(split);
 				onglet.setIconAt(i, new ImageIcon((new ImageIcon(Constants.RESOURCE_PATH_EMPLOYELOGO).getImage()
 						.getScaledInstance(this.width / 7, this.height / 11, Image.SCALE_DEFAULT))));
-
+				onglet.setBackgroundAt(i, Color.decode("#FEF154"));
 			}
 			if (i == 4) {
 				split = new JSplitPane(JSplitPane.VERTICAL_SPLIT, panboutons3, pan);
 				onglet.add(split);
 				onglet.setIconAt(i, new ImageIcon((new ImageIcon(Constants.RESOURCE_PATH_PATIENTLOGO).getImage()
 						.getScaledInstance(this.width / 7, this.height / 11, Image.SCALE_DEFAULT))));
+				onglet.setBackgroundAt(i, Color.decode("#A55DFF"));
 			}
 			if (i == 5) {
 				split = new JSplitPane(JSplitPane.VERTICAL_SPLIT, panboutons4, pan);
 				onglet.add(split);
 				onglet.setIconAt(i, new ImageIcon((new ImageIcon(Constants.RESOURCE_PATH_HOSPITALISATIONLOGO).getImage()
 						.getScaledInstance(this.width / 7, this.height / 11, Image.SCALE_DEFAULT))));
+				onglet.setBackgroundAt(i, Color.decode("#FE3D1B"));
 			}
 
 			if (i == 6) {
@@ -253,6 +271,7 @@ public class Application extends JFrame implements ActionListener, MouseListener
 				onglet.add(pan);
 				onglet.setIconAt(i, new ImageIcon((new ImageIcon(Constants.RESOURCE_PATH_CONFIGLOGO).getImage()
 						.getScaledInstance(this.width / 7, this.height / 6, Image.SCALE_DEFAULT))));
+				onglet.setBackgroundAt(i, Color.WHITE);
 			}
 
 			// onglet.add("Onglet n° "+(++i), pan);
