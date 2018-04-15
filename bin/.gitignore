@@ -97,5 +97,3 @@ buildNumber.properties
 !/.mvn/wrapper/maven-wrapper.jar
 
 src/main/private-resources/*
-!src/main/private-resources/.empty
-/bin/

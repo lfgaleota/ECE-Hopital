@@ -7,6 +7,9 @@ import java.net.URISyntaxException;
 import java.net.URL;
 import java.nio.file.Paths;
 
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
+
 /**
  * Utility functions
  */
@@ -29,5 +32,14 @@ public class Utils {
 		} catch( URISyntaxException e ) {
 			throw new FileNotFoundException( "Resource '" + path + "' not found." + e.getLocalizedMessage() );
 		}
+	}
+
+	/**
+	 * Get the UI logger.
+	 * 
+	 * @return UI logger
+	 */
+	public static Logger getUILogger() {
+		return LogManager.getLogger( Constants.LOGGER_NAME_UI );
 	}
 }
