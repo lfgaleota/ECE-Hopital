@@ -20,6 +20,8 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Vector;
 
 import javax.imageio.ImageIO;
@@ -259,15 +261,27 @@ public class Fenetre extends JFrame implements ActionListener, MouseListener {
 			mesStats.creer_Statistiques();
 		}
 
-		if (e.getSource() == boutonrechercher) {
-			/*
-			 * Vector<String> monvecteur = new Vector<String>(); monvecteur.add(new
-			 * String("23")); /// Numéro monvecteur.add(new String("Nom")); /// Nom
-			 * monvecteur.add(new String("Prenom")); /// Prenom monvecteur.add(new
-			 * String("06")); /// Tel monvecteur.add(new String("Paris")); /// Adresse
-			 * JList<String> maliste = new JList<String>(monvecteur);
-			 */
-			// ModelSearchDialog marecherche = new ModelSearchDialog();
+		if ( (e.getSource() == boutonrechercher) || (e.getSource() == boutonrechercher1)  ||(e.getSource() == boutonrechercher2) 
+				|| (e.getSource() == boutonrechercher3)  || (e.getSource() == boutonrechercher4) )
+		{
+			
+			//test remplissage manuel
+			 Vector<String> monvecteur = new Vector<String>();
+			 monvecteur.add(new String("23"));
+			 monvecteur.add(new String("Nom"));
+			 monvecteur.add(new String("Prenom"));
+			 monvecteur.add(new String("06"));
+			 monvecteur.add(new String("Paris"));
+			 JList<String> maliste = new JList<String>(monvecteur);
+			 
+			 Map<String, String> mamap = new HashMap<>();
+			 mamap.put("a", "1");
+			 mamap.put("b", "2");
+			 mamap.put("c", "3");
+			 mamap.put("d", "4");
+			 mamap.put("e", "5");
+			 
+			 ModelSearchDialog marecherche = new ModelSearchDialog( maliste, mamap );
 
 		}
 
