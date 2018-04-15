@@ -32,6 +32,7 @@ import javax.swing.JFrame;
 import javax.swing.JSplitPane;
 import javax.swing.JTabbedPane;
 
+import ece.ing3.java.projet.controleur.ApplicationController;
 import ece.ing3.java.projet.utils.Constants;
 import ece.ing3.java.projet.utils.Utils;
 import ece.ing3.java.projet.vue.panels.BasePanel;
@@ -44,11 +45,11 @@ import javax.swing.JScrollPane;
 
 /**
  * Fenetre principale de l'application
- * 
+ *
  * @author Nicolas
  *
  */
-public class Fenetre extends JFrame implements ActionListener, MouseListener {
+public class Application extends JFrame implements ActionListener, MouseListener {
 	private JTabbedPane onglet;
 	/// LE JSPLIT QUIVA PERMETTRE D AVOIR DEUX PANNEAUX PAR ONGLET , UN POUR LES
 	/// BOUTONS DU HAUT L AUTRE POUR L AFFICHAGE
@@ -128,7 +129,9 @@ public class Fenetre extends JFrame implements ActionListener, MouseListener {
 			new BasePanel(Color.GRAY) };
 
 	/// LA FENETRE CONTIENT LES PANNEAUX (CONTENU DES ONGLETS)
-	public Fenetre() {
+	public Application() {
+		new ApplicationController( this );
+
 		// this.setLocationRelativeTo(null);
 		this.setTitle("Projet Hopital");
 		this.setSize((int) getToolkit().getScreenSize().getWidth(), ((int) getToolkit().getScreenSize().getHeight()));
