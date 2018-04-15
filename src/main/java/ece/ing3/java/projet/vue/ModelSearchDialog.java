@@ -23,7 +23,7 @@ public class ModelSearchDialog extends JFrame implements ActionListener {
 	JButton submit;
 	Map<String, JTextField> textFields;
 
-	public ModelSearchDialog(JList modelList, Map<String, String> parameters ) {
+	public ModelSearchDialog(JList modelList/*, Map<String, String> parameters*/) {
 		this.setTitle ("Recherche");
 		this.setSize(500,300);
 		this.setResizable(true);
@@ -40,12 +40,14 @@ public class ModelSearchDialog extends JFrame implements ActionListener {
 		recherche.setLayout(g);
 
 		///on parcourt notre Map
-		for( Entry<String, String> parameter : parameters.entrySet() ) {
+		//for( Entry<String, String> parameter : parameters.entrySet() ) {
+		/*for ( String elem : modelList)
+		{ System.out.println(elem); 
 			JTextField field = new JTextField( Constants.UI_TEXTFIELD_MAXLENGTH );
 			textFields.put( parameter.getKey(), field );
 			recherche.add( new JLabel( parameter.getValue() ) );
 			recherche.add( field );
-		}
+		}*/
 
 		submit = new JButton("Valider");
 		recherche.add(submit);
