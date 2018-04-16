@@ -21,4 +21,7 @@ public class Constants {
 	
 	public static final String LOGGER_NAME_UI = "UI";
 	public static final Integer UI_TEXTFIELD_MAXLENGTH = 255;
+	
+	public static final Integer WIDTH_FRAME = 1100;
+	public static final Integer HEIGHT_FRAME = 800;
 }

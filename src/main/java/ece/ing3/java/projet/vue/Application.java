@@ -11,45 +11,42 @@ package ece.ing3.java.projet.vue;
 import javax.swing.JFrame;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
+import javax.swing.JScrollPane;
 
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
+
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Vector;
 
-import javax.imageio.ImageIO;
-import javax.swing.Icon;
+
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JFrame;
 import javax.swing.JSplitPane;
 import javax.swing.JTabbedPane;
+import javax.swing.JTable;
+import javax.swing.JTextField;
 
 import ece.ing3.java.projet.controleur.ApplicationController;
+import ece.ing3.java.projet.exceptions.DatabaseException;
+import ece.ing3.java.projet.modele.administration.Service;
+import ece.ing3.java.projet.modele.employe.Employe;
 import ece.ing3.java.projet.utils.Constants;
-import ece.ing3.java.projet.utils.Utils;
 import ece.ing3.java.projet.vue.panels.BasePanel;
-import javax.swing.JScrollPane;
-
-/**
- *
- * @author Virgile
- */
 
 /**
  * Fenetre principale de l'application
  *
- * @author Nicolas
+ * @author Nicolas & Virgile
  *
  */
-public class Application extends JFrame implements ActionListener, MouseListener {
+public class Application extends JFrame implements ActionListener {
+
+	private static final long serialVersionUID = 1L;
 	private JTabbedPane onglet;
 	/// LE JSPLIT QUIVA PERMETTRE D AVOIR DEUX PANNEAUX PAR ONGLET , UN POUR LES
 	/// BOUTONS DU HAUT L AUTRE POUR L AFFICHAGE
@@ -59,68 +56,68 @@ public class Application extends JFrame implements ActionListener, MouseListener
 
 	/// LES 5 BOUTONS DE CHAQUE ONGLET ICI ONGLET0
 	private JButton boutonstat = new JButton(new ImageIcon((new ImageIcon(Constants.RESOURCE_PATH_STATLOGO).getImage()
-			.getScaledInstance(this.width / 6, this.height / 7, Image.SCALE_DEFAULT))));
+			.getScaledInstance(Constants.WIDTH_FRAME / 6, Constants.HEIGHT_FRAME / 7, Image.SCALE_DEFAULT))));
 	private JButton boutonrechercher = new JButton(new ImageIcon((new ImageIcon(Constants.RESOURCE_PATH_RECHERCHERLOGO).getImage()
-			.getScaledInstance(this.width / 8, this.height / 7, Image.SCALE_DEFAULT))));
+			.getScaledInstance(Constants.WIDTH_FRAME / 8, Constants.HEIGHT_FRAME / 7, Image.SCALE_DEFAULT))));
 	private JButton boutonMA = new JButton(new ImageIcon((new ImageIcon(Constants.RESOURCE_PATH_MODIFIERLOGO).getImage()
-			.getScaledInstance(this.width /8, this.height / 7, Image.SCALE_DEFAULT))));
+			.getScaledInstance(Constants.WIDTH_FRAME /8, Constants.HEIGHT_FRAME / 7, Image.SCALE_DEFAULT))));
 	private JButton boutonAjouter = new JButton(new ImageIcon((new ImageIcon(Constants.RESOURCE_PATH_AJOUTERLOGO).getImage()
-			.getScaledInstance(this.width /8, this.height / 7, Image.SCALE_DEFAULT))));
+			.getScaledInstance(Constants.WIDTH_FRAME /8, Constants.HEIGHT_FRAME / 7, Image.SCALE_DEFAULT))));
 	private JButton boutonSup = new JButton(new ImageIcon((new ImageIcon(Constants.RESOURCE_PATH_SUPPRIMERLOGO).getImage()
-			.getScaledInstance(this.width /8, this.height / 7, Image.SCALE_DEFAULT))));
+			.getScaledInstance(Constants.WIDTH_FRAME /8, Constants.HEIGHT_FRAME / 7, Image.SCALE_DEFAULT))));
 
 	/// LES 5 BOUTONS DE CHAQUE ONGLET ICI ONGLET 1
 	private JButton boutonstat1 = new JButton(new ImageIcon((new ImageIcon(Constants.RESOURCE_PATH_STATLOGO).getImage()
-			.getScaledInstance(this.width / 6, this.height / 7, Image.SCALE_DEFAULT))));
+			.getScaledInstance(Constants.WIDTH_FRAME / 6, Constants.HEIGHT_FRAME / 7, Image.SCALE_DEFAULT))));
 	private JButton boutonrechercher1 = new JButton(new ImageIcon((new ImageIcon(Constants.RESOURCE_PATH_RECHERCHERLOGO).getImage()
-			.getScaledInstance(this.width / 8, this.height / 7, Image.SCALE_DEFAULT))));
+			.getScaledInstance(Constants.WIDTH_FRAME / 8, Constants.HEIGHT_FRAME / 7, Image.SCALE_DEFAULT))));
 	private JButton boutonMA1 = new JButton(new ImageIcon((new ImageIcon(Constants.RESOURCE_PATH_MODIFIERLOGO).getImage()
-			.getScaledInstance(this.width / 8, this.height / 7, Image.SCALE_DEFAULT))));
+			.getScaledInstance(Constants.WIDTH_FRAME / 8, Constants.HEIGHT_FRAME / 7, Image.SCALE_DEFAULT))));
 	private JButton boutonAjouter1 = new JButton(new ImageIcon((new ImageIcon(Constants.RESOURCE_PATH_AJOUTERLOGO).getImage()
-			.getScaledInstance(this.width /8, this.height / 7, Image.SCALE_DEFAULT))));
+			.getScaledInstance(Constants.WIDTH_FRAME /8, Constants.HEIGHT_FRAME / 7, Image.SCALE_DEFAULT))));
 	private JButton boutonSup1 = new JButton(new ImageIcon((new ImageIcon(Constants.RESOURCE_PATH_SUPPRIMERLOGO).getImage()
-			.getScaledInstance(this.width /8, this.height / 7, Image.SCALE_DEFAULT))));
+			.getScaledInstance(Constants.WIDTH_FRAME /8, Constants.HEIGHT_FRAME / 7, Image.SCALE_DEFAULT))));
 
 	/// LES 5 BOUTONS DE CHAQUE ONGLET ICI ONGLET 2
 	private JButton boutonstat2 = new JButton(new ImageIcon((new ImageIcon(Constants.RESOURCE_PATH_STATLOGO).getImage()
-			.getScaledInstance(this.width / 6, this.height / 7, Image.SCALE_DEFAULT))));
+			.getScaledInstance(Constants.WIDTH_FRAME / 6, Constants.HEIGHT_FRAME / 7, Image.SCALE_DEFAULT))));
 	private JButton boutonrechercher2 = new JButton(new ImageIcon((new ImageIcon(Constants.RESOURCE_PATH_RECHERCHERLOGO).getImage()
-			.getScaledInstance(this.width / 8, this.height / 7, Image.SCALE_DEFAULT))));
+			.getScaledInstance(Constants.WIDTH_FRAME / 8, Constants.HEIGHT_FRAME / 7, Image.SCALE_DEFAULT))));
 	private JButton boutonMA2 = new JButton(new ImageIcon((new ImageIcon(Constants.RESOURCE_PATH_MODIFIERLOGO).getImage()
-			.getScaledInstance(this.width / 8, this.height / 7, Image.SCALE_DEFAULT))));
+			.getScaledInstance(Constants.WIDTH_FRAME / 8, Constants.HEIGHT_FRAME / 7, Image.SCALE_DEFAULT))));
 	private JButton boutonAjouter2 = new JButton(new ImageIcon((new ImageIcon(Constants.RESOURCE_PATH_AJOUTERLOGO).getImage()
-			.getScaledInstance(this.width /8, this.height / 7, Image.SCALE_DEFAULT))));
+			.getScaledInstance(Constants.WIDTH_FRAME /8, Constants.HEIGHT_FRAME / 7, Image.SCALE_DEFAULT))));
 	private JButton boutonSup2 = new JButton(new ImageIcon((new ImageIcon(Constants.RESOURCE_PATH_SUPPRIMERLOGO).getImage()
-			.getScaledInstance(this.width /8, this.height / 7, Image.SCALE_DEFAULT))));
+			.getScaledInstance(Constants.WIDTH_FRAME /8, Constants.HEIGHT_FRAME / 7, Image.SCALE_DEFAULT))));
 
 	/// LES 5 BOUTONS DE CHAQUE ONGLET ICI ONGLET 3
 	private JButton boutonstat3 = new JButton(new ImageIcon((new ImageIcon(Constants.RESOURCE_PATH_STATLOGO).getImage()
-			.getScaledInstance(this.width / 6, this.height / 7, Image.SCALE_DEFAULT))));
+			.getScaledInstance(Constants.WIDTH_FRAME / 6, Constants.HEIGHT_FRAME / 7, Image.SCALE_DEFAULT))));
 	private JButton boutonrechercher3 = new JButton(new ImageIcon((new ImageIcon(Constants.RESOURCE_PATH_RECHERCHERLOGO).getImage()
-			.getScaledInstance(this.width / 8, this.height / 7, Image.SCALE_DEFAULT))));
+			.getScaledInstance(Constants.WIDTH_FRAME / 8, Constants.HEIGHT_FRAME / 7, Image.SCALE_DEFAULT))));
 	private JButton boutonMA3 = new JButton(new ImageIcon((new ImageIcon(Constants.RESOURCE_PATH_MODIFIERLOGO).getImage()
-			.getScaledInstance(this.width / 8, this.height / 7, Image.SCALE_DEFAULT))));;
+			.getScaledInstance(Constants.WIDTH_FRAME / 8, Constants.HEIGHT_FRAME / 7, Image.SCALE_DEFAULT))));;
 	private JButton boutonAjouter3 = new JButton(new ImageIcon((new ImageIcon(Constants.RESOURCE_PATH_AJOUTERLOGO).getImage()
-			.getScaledInstance(this.width /8, this.height / 7, Image.SCALE_DEFAULT))));
+			.getScaledInstance(Constants.WIDTH_FRAME /8, Constants.HEIGHT_FRAME / 7, Image.SCALE_DEFAULT))));
 	private JButton boutonSup3 = new JButton(new ImageIcon((new ImageIcon(Constants.RESOURCE_PATH_SUPPRIMERLOGO).getImage()
-			.getScaledInstance(this.width /8, this.height / 7, Image.SCALE_DEFAULT))));
+			.getScaledInstance(Constants.WIDTH_FRAME /8, Constants.HEIGHT_FRAME / 7, Image.SCALE_DEFAULT))));
 
 	/// LES 5 BOUTONS DE CHAQUE ONGLET ICI ONGLET 4
 	private JButton boutonstat4 = new JButton(new ImageIcon((new ImageIcon(Constants.RESOURCE_PATH_STATLOGO).getImage()
-			.getScaledInstance(this.width / 6, this.height / 7, Image.SCALE_DEFAULT))));
+			.getScaledInstance(Constants.WIDTH_FRAME / 6, Constants.HEIGHT_FRAME / 7, Image.SCALE_DEFAULT))));
 	private JButton boutonrechercher4 = new JButton(new ImageIcon((new ImageIcon(Constants.RESOURCE_PATH_RECHERCHERLOGO).getImage()
-			.getScaledInstance(this.width / 8, this.height / 7, Image.SCALE_DEFAULT))));
+			.getScaledInstance(Constants.WIDTH_FRAME / 8, Constants.HEIGHT_FRAME / 7, Image.SCALE_DEFAULT))));
 	private JButton boutonMA4 = new JButton(new ImageIcon((new ImageIcon(Constants.RESOURCE_PATH_MODIFIERLOGO).getImage()
-			.getScaledInstance(this.width / 8, this.height / 7, Image.SCALE_DEFAULT))));
+			.getScaledInstance(Constants.WIDTH_FRAME / 8, Constants.HEIGHT_FRAME / 7, Image.SCALE_DEFAULT))));
 	private JButton boutonAjouter4 = new JButton(new ImageIcon((new ImageIcon(Constants.RESOURCE_PATH_AJOUTERLOGO).getImage()
-			.getScaledInstance(this.width /8, this.height / 7, Image.SCALE_DEFAULT))));
+			.getScaledInstance(Constants.WIDTH_FRAME /8, Constants.HEIGHT_FRAME / 7, Image.SCALE_DEFAULT))));
 	private JButton boutonSup4 = new JButton(new ImageIcon((new ImageIcon(Constants.RESOURCE_PATH_SUPPRIMERLOGO).getImage()
-			.getScaledInstance(this.width /8, this.height / 7, Image.SCALE_DEFAULT))));
+			.getScaledInstance(Constants.WIDTH_FRAME /8, Constants.HEIGHT_FRAME / 7, Image.SCALE_DEFAULT))));
 
-	private JButton boutonSup5 = new JButton("ALALALALLA");
+	//private JButton boutonSup5 = new JButton("ALALALALLA");
 
-	private static int width = 1100;
-	private static int height = 900;
+	//private static int width = 1100;
+//	private static int height = 900;
 
 	/// LES DIFFERENTS PANNEAUX ONGLETS SONT CREES ICI , AVEC UN CONSTRUCTEUR
 	/// UTILISANT UNE COULEUR EN PARAMETRE
@@ -135,13 +132,12 @@ public class Application extends JFrame implements ActionListener, MouseListener
 		// this.setLocationRelativeTo(null);
 		this.setTitle("Projet Hopital");
 		this.setSize((int) getToolkit().getScreenSize().getWidth(), ((int) getToolkit().getScreenSize().getHeight()));
-		this.setResizable(true);
+		this.setResizable(false);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.toFront(); // mettre au 1er plan 
-		// this.setSize( width, height );
 
 		/*
-		 * MMETHODE ONGLET/BOUTONS INDEPENDANT /// LA LIGNE DE SEPARATION A UNE LARGEUR
+		 * METHODE ONGLET/BOUTONS INDEPENDANT /// LA LIGNE DE SEPARATION A UNE LARGEUR
 		 * DE PX ET EST EN 80 ongletandhaut.setDividerSize(1);
 		 * ongletandhaut.setDividerLocation(100);
 		 */
@@ -201,7 +197,7 @@ public class Application extends JFrame implements ActionListener, MouseListener
 		panboutons4.add(boutonSup4);
 
 		BasePanel panboutons5 = new BasePanel();
-		panboutons5.add(boutonSup5);
+		//panboutons5.add(boutonSup5);
 
 		/// JSplitpane pour boutons/Logo
 		// JSplitPane logoandboutons = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT,
@@ -216,7 +212,7 @@ public class Application extends JFrame implements ActionListener, MouseListener
 
 		/// METHODE PRISE SUR OPENCLASSROOM
 		int i = 0;
-		for (BasePanel pan : tPan) {
+		for ( BasePanel pan : tPan) {
 			// Méthode d'ajout d'onglet
 			/// CHAQUE VALEUR DE I CORRESPOND A UN INDICE D ONGLETS
 
@@ -227,42 +223,53 @@ public class Application extends JFrame implements ActionListener, MouseListener
 				// L'ONGLET CONTIENT CETTTE SEPARATION
 				onglet.add(pan);
 				onglet.setIconAt(i, new ImageIcon((new ImageIcon(Constants.RESOURCE_PATH_APPLOGO).getImage()
-						.getScaledInstance(this.width / 7, this.height / 7, Image.SCALE_DEFAULT))));
+						.getScaledInstance(Constants.WIDTH_FRAME / 7, Constants.HEIGHT_FRAME / 7, Image.SCALE_DEFAULT))));
 				onglet.setBackgroundAt(i, Color.WHITE);
 			}
+			
 			if (i == 1) {
 				split = new JSplitPane(JSplitPane.VERTICAL_SPLIT, panboutons, pan);
 				onglet.add(split);
 				onglet.setIconAt(i, new ImageIcon((new ImageIcon(Constants.RESOURCE_PATH_SERVICELOGO).getImage()
-						.getScaledInstance(this.width / 7, this.height / 11, Image.SCALE_DEFAULT))));
+						.getScaledInstance(Constants.WIDTH_FRAME / 7, Constants.HEIGHT_FRAME / 11, Image.SCALE_DEFAULT))));
 				onglet.setBackgroundAt(i, Color.decode("#5DBFF4"));
+				pan.add(display_Services()); // methode qui affiche la table dans le panel
+	
 			}
+			
 			if (i == 2) {
 				split = new JSplitPane(JSplitPane.VERTICAL_SPLIT, panboutons1, pan);
 				onglet.add(split);
 				onglet.setIconAt(i, new ImageIcon((new ImageIcon(Constants.RESOURCE_PATH_CHAMBRELOGO).getImage()
-						.getScaledInstance(this.width / 7, this.height / 11, Image.SCALE_DEFAULT))));
+						.getScaledInstance(Constants.WIDTH_FRAME / 7, Constants.HEIGHT_FRAME / 11, Image.SCALE_DEFAULT))));
 				onglet.setBackgroundAt(i, Color.decode("#70F96C"));
+
 			}
+			
 			if (i == 3) {
 				split = new JSplitPane(JSplitPane.VERTICAL_SPLIT, panboutons2, pan);
 				onglet.add(split);
 				onglet.setIconAt(i, new ImageIcon((new ImageIcon(Constants.RESOURCE_PATH_EMPLOYELOGO).getImage()
-						.getScaledInstance(this.width / 7, this.height / 11, Image.SCALE_DEFAULT))));
+						.getScaledInstance(Constants.WIDTH_FRAME / 7, Constants.HEIGHT_FRAME / 11, Image.SCALE_DEFAULT))));
 				onglet.setBackgroundAt(i, Color.decode("#FEF154"));
+				pan.add(display_Employes()); // methode qui affiche la table dans le panel
+
 			}
+			
 			if (i == 4) {
 				split = new JSplitPane(JSplitPane.VERTICAL_SPLIT, panboutons3, pan);
 				onglet.add(split);
 				onglet.setIconAt(i, new ImageIcon((new ImageIcon(Constants.RESOURCE_PATH_PATIENTLOGO).getImage()
-						.getScaledInstance(this.width / 7, this.height / 11, Image.SCALE_DEFAULT))));
+						.getScaledInstance(Constants.WIDTH_FRAME / 7,Constants.HEIGHT_FRAME / 11, Image.SCALE_DEFAULT))));
 				onglet.setBackgroundAt(i, Color.decode("#A55DFF"));
+
 			}
+			
 			if (i == 5) {
 				split = new JSplitPane(JSplitPane.VERTICAL_SPLIT, panboutons4, pan);
 				onglet.add(split);
 				onglet.setIconAt(i, new ImageIcon((new ImageIcon(Constants.RESOURCE_PATH_HOSPITALISATIONLOGO).getImage()
-						.getScaledInstance(this.width / 7, this.height / 11, Image.SCALE_DEFAULT))));
+						.getScaledInstance(Constants.WIDTH_FRAME / 7,Constants.HEIGHT_FRAME / 11, Image.SCALE_DEFAULT))));
 				onglet.setBackgroundAt(i, Color.decode("#FE3D1B"));
 			}
 
@@ -270,7 +277,7 @@ public class Application extends JFrame implements ActionListener, MouseListener
 				// split = new JSplitPane(JSplitPane.VERTICAL_SPLIT, panboutons4, pan);
 				onglet.add(pan);
 				onglet.setIconAt(i, new ImageIcon((new ImageIcon(Constants.RESOURCE_PATH_CONFIGLOGO).getImage()
-						.getScaledInstance(this.width / 7, this.height / 6, Image.SCALE_DEFAULT))));
+						.getScaledInstance(Constants.WIDTH_FRAME / 7, Constants.HEIGHT_FRAME / 6, Image.SCALE_DEFAULT))));
 				onglet.setBackgroundAt(i, Color.WHITE);
 			}
 
@@ -321,32 +328,16 @@ public class Application extends JFrame implements ActionListener, MouseListener
 		/// AU MILIEU DU JPANEL CORRESPONDANT
 		if ((e.getSource() == boutonrechercher)) {
 
-			// test remplissage manuel
-			Vector<String> monvecteur = new Vector<String>();
-			JList<String> maliste = new JList<String>(monvecteur);
-
-			monvecteur.add(new String("ONGLET SERVICE"));
-			monvecteur.add(new String("Nom"));
-			monvecteur.add(new String("Prenom"));
-			monvecteur.add(new String("06"));
-			monvecteur.add(new String("Paris"));
-
 			/**
 			 * ///Fenetre d affichage du contenu de la liste (ne marche pas si on affiche
 			 * deja dans nos JPanel; JFrame frame = new JFrame(); frame.add(new
 			 * JScrollPane(maliste)); frame.setSize(300, 200); frame.setVisible(true);
 			 */
 
-			tPan[1].add(maliste);
+			
 
-			Map<String, String> mamap = new HashMap<>();
-			mamap.put("a", "1");
-			mamap.put("b", "2");
-			mamap.put("c", "3");
-			mamap.put("d", "4");
-			mamap.put("e", "5");
 
-			ModelSearchDialog marecherche = new ModelSearchDialog(maliste);
+		//	ModelSearchDialog marecherche = new ModelSearchDialog(maliste);
 
 			this.repaint();
 
@@ -372,8 +363,6 @@ public class Application extends JFrame implements ActionListener, MouseListener
 			ModelSearchDialog marecherche = new ModelSearchDialog(maliste);
 
 			this.repaint();
-
-
 
 		}
 
@@ -462,35 +451,121 @@ public class Application extends JFrame implements ActionListener, MouseListener
 		}
 
 	}
-
-	@Override
-	public void mouseClicked(MouseEvent arg0) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void mouseEntered(MouseEvent arg0) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void mouseExited(MouseEvent arg0) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void mousePressed(MouseEvent arg0) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void mouseReleased(MouseEvent arg0) {
-		// TODO Auto-generated method stub
-
-	}
+	
+	/**
+	 * Methode pour recupérer la liste des services de la bdd et afficher la table des employes
+	 * @return un jscrollbar contenant la table des services
+	 */
+	public JScrollPane display_Services()
+	{	//On crée un liste vide
+		List<Service> maliste = new ArrayList<Service>();
+		try {
+			maliste = Service.findList(); // récuperation des données de la bdd concernant les employes 
+		} catch (DatabaseException e1) {
+			e1.printStackTrace();
+		}
+		
+		//création d'un tableau d'objet et tranfert des info de la liste vers le tableau Object.
+		Object[][] donnees = new Object[ maliste.size()][5];
+		 int i = 0;
+	        while (i < maliste.size()){
+	        	donnees[i][0] = maliste.get(i).getCode();
+	        	donnees[i][1] = maliste.get(i).getNom();
+	        	donnees[i][2] = maliste.get(i).getBatiment();
+	        	donnees[i][3] = maliste.get(i).getNumeroDirecteur();
+	            i++; 
+	        }
+		//test affichage console
+		for(Service elem : maliste)
+		{		
+			System.out.println( 	
+					elem.getCode() + "|" + 
+					elem.getNom() + "|" + 
+					elem.getBatiment() + "|" + 
+					elem.getNumeroDirecteur() + "\n");
+		}
+		
+	    // Nom des colonnes.
+		String[] colonnes = { "Code" , "Nom" , "Batiment" , "Numéro du directeur" };
+		// Création de la table.
+		JTable data_employes =  new JTable( donnees , colonnes );
+		
+		//Gestion de la taille des cellules de la table.
+		data_employes.getColumnModel().getColumn(0).setPreferredWidth(100);
+		data_employes.getColumnModel().getColumn(1).setPreferredWidth(100);
+		data_employes.getColumnModel().getColumn(2).setPreferredWidth(100);
+		data_employes.getColumnModel().getColumn(3).setPreferredWidth(300);
+		data_employes.setRowHeight(20);
+		 
+		data_employes.setRowHeight(20);
+		
+		//Création du scrollpane et insertion de la table dedans.
+		JScrollPane monscrollPane = new JScrollPane();
+		monscrollPane.getViewport().add(data_employes);
+		monscrollPane.setPreferredSize( new Dimension(1100,570));
+		
+		//on retourne le scrollpane.
+		return monscrollPane;
+	 }
+	
+	
+	
+	/**
+	 * Methode pour recupérer la liste des employés de la bdd et afficher la table des employes
+	 * @return un jscrollbar contenant la table des employes
+	 */
+	public JScrollPane display_Employes()
+	{	//On crée un liste vide
+		List<Employe> maliste = new ArrayList<Employe>();
+		try {
+			maliste = Employe.findBaseList(); // récuperation des données de la bdd concernant les employes 
+		} catch (DatabaseException e1) {
+			e1.printStackTrace();
+		}
+		
+		//création d'un tableau d'objet et tranfert des info de la liste vers le tableau Object.
+		Object[][] donnees = new Object[ maliste.size()][5];
+		 int i = 0;
+	        while (i < maliste.size()){
+	        	donnees[i][0] = maliste.get(i).getNumero();
+	        	donnees[i][1] = maliste.get(i).getNom();
+	        	donnees[i][2] = maliste.get(i).getPrenom();
+	        	donnees[i][3] = maliste.get(i).getAdresse();
+	        	donnees[i][4] = maliste.get(i).getNumeroTelephone();
+	            i++; 
+	        }
+		//test affichage console
+		/*for(Employe elem : maliste)
+		{		
+			System.out.println( 	elem.getNumero() + "|" + 
+					elem.getNom() + "|" + 
+					elem.getPrenom() + "|" + 
+					elem.getAdresse() + "|" + 
+					elem.getNumeroTelephone() + "\n");
+		}*/
+		
+	    // Nom des colonnes.
+		String[] colonnes = { "Numéro" , "Nom" , "Prénom" , "Adresse" , "Numéro de Téléphone" };
+		// Création de la table.
+		JTable data_employes =  new JTable( donnees , colonnes );
+		
+		//Gestion de la taille des cellules de la table.
+		data_employes.getColumnModel().getColumn(0).setPreferredWidth(100);
+		data_employes.getColumnModel().getColumn(1).setPreferredWidth(100);
+		data_employes.getColumnModel().getColumn(2).setPreferredWidth(100);
+		data_employes.getColumnModel().getColumn(3).setPreferredWidth(300);
+		data_employes.getColumnModel().getColumn(4).setPreferredWidth(200); 
+		data_employes.setRowHeight(20);
+		
+		//Création du scrollpane et insertion de la table dedans.
+		JScrollPane monscrollPane = new JScrollPane();
+		monscrollPane.getViewport().add(data_employes);
+		monscrollPane.setPreferredSize( new Dimension(1100,570));
+		
+		//on retourne le scrollpane.
+		return monscrollPane;
+	 }
+	
+	
 
 }
