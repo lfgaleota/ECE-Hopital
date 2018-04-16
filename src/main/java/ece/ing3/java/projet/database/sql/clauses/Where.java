@@ -88,7 +88,7 @@ public class Where {
 		if( query.length() > 0 ) {
 			query += " OR ";
 		}
-		query +=  condition;
+		query += condition;
 		parameters.addAll( condition.parameters );
 		return this;
 	}
@@ -134,5 +134,14 @@ public class Where {
 	 */
 	public List<Object> getParameters() {
 		return parameters;
+	}
+
+	/**
+	 * Gets the parameters to use in the prepared statement.
+	 *
+	 * @return Statement parameters
+	 */
+	public Object[] getParametersArray() {
+		return parameters.toArray();
 	}
 }

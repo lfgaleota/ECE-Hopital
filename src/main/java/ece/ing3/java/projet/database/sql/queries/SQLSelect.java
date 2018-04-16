@@ -306,10 +306,10 @@ public class SQLSelect<M extends Model> extends SQLWhereQuery<SQLSelect> {
 		ResultSetHandler<M> h = new BeanHandler<>( (Class<M>) getModelClass() );
 
 		try {
-			if( where != null ) {
+			if( where != null && where.toString().length() > 0 ) {
 				System.out.println( "Executing find unique with : " + toString() );
 				System.out.println( "Parameters : " + where.getParameters() );
-				return run.query( Database.get(), toString(), h, where.getParameters() );
+				return run.query( Database.get(), toString(), h, where.getParametersArray() );
 			}
 
 			System.out.println( "Executing find unique with : " + toString() );
@@ -331,10 +331,10 @@ public class SQLSelect<M extends Model> extends SQLWhereQuery<SQLSelect> {
 		BeanListHandler<M> h = new BeanListHandler<>( (Class<M>) getModelClass() );
 
 		try {
-			if( where != null ) {
+			if( where != null && where.toString().length() > 0 ) {
 				System.out.println( "Executing find list with : " + toString() );
 				System.out.println( "Parameters : " + where.getParameters() );
-				return run.query( Database.get(), toString(), h, where.getParameters() );
+				return run.query( Database.get(), toString(), h, where.getParametersArray() );
 			}
 
 			System.out.println( "Executing find list with : " + toString() );
