@@ -25,7 +25,7 @@ import java.util.Map;
  * <br>
  * <p>
  * SQL Select provides multiple ways to create SQL queries.<br>
- * Table name is directly inferred the from model class and column names are either gathered as defined by the model fields.
+ * Table name is directly inferred the from model class and column names are either gathered as defined by the model inputs.
  * </p>
  * <br>
  * <p>
