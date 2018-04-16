@@ -70,7 +70,10 @@ public class Where {
 	 * @return This Where clause helper
 	 */
 	public Where and( Where condition ) {
-		query += " AND " + condition;
+		if( query.length() > 0 ) {
+			query += " AND ";
+		}
+		query += condition;
 		parameters.addAll( condition.parameters );
 		return this;
 	}
@@ -82,7 +85,10 @@ public class Where {
 	 * @return This Where clause helper
 	 */
 	public Where or( Where condition ) {
-		query += " OR " + condition;
+		if( query.length() > 0 ) {
+			query += " OR ";
+		}
+		query +=  condition;
 		parameters.addAll( condition.parameters );
 		return this;
 	}

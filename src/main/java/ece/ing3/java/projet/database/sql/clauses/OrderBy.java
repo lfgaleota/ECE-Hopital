@@ -55,7 +55,10 @@ public class OrderBy {
 	 * @return This Order By clause helper
 	 */
 	public OrderBy and( OrderBy condition ) {
-		query += ", " + condition;
+		if( query.length() > 0 ) {
+			query += ", ";
+		}
+		query += condition;
 		return this;
 	}
 
