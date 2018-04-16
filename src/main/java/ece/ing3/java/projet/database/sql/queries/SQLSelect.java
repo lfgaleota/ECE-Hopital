@@ -307,9 +307,12 @@ public class SQLSelect<M extends Model> extends SQLWhereQuery<SQLSelect> {
 
 		try {
 			if( where != null ) {
+				System.out.println( "Executing find unique with : " + toString() );
+				System.out.println( "Parameters : " + where.getParameters() );
 				return run.query( Database.get(), toString(), h, where.getParameters() );
 			}
 
+			System.out.println( "Executing find unique with : " + toString() );
 			return run.query( Database.get(), toString(), h );
 		} catch( SQLException e ) {
 			throw new DatabaseException( e );
@@ -329,9 +332,12 @@ public class SQLSelect<M extends Model> extends SQLWhereQuery<SQLSelect> {
 
 		try {
 			if( where != null ) {
+				System.out.println( "Executing find list with : " + toString() );
+				System.out.println( "Parameters : " + where.getParameters() );
 				return run.query( Database.get(), toString(), h, where.getParameters() );
 			}
 
+			System.out.println( "Executing find list with : " + toString() );
 			return run.query( Database.get(), toString(), h );
 		} catch( SQLException e ) {
 			throw new DatabaseException( e );
