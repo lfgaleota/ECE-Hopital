@@ -1,18 +1,23 @@
 package ece.ing3.java.projet.vue.components;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionListener;
 
 public class ModelToolbar extends JToolBar {
 	private JButton buttonRemove, buttonAdd, buttonModify, buttonSearch, buttonStats;
 
-	public ModelToolbar() {
+	public ModelToolbar( String modelName ) {
 		buttonRemove = new JButton( "X" );
 		buttonAdd = new JButton( "+" );
 		buttonModify = new JButton( "M" );
 		buttonSearch = new JButton( "S" );
 		buttonStats = new JButton( "St" );
 
+		JLabel label = new JLabel( modelName );
+		label.setFont( new Font( label.getName(), Font.BOLD, 18 ) );
+		add( label );
+		add( Box.createHorizontalGlue() );
 		add( buttonStats );
 		add( buttonSearch );
 		add( buttonAdd );

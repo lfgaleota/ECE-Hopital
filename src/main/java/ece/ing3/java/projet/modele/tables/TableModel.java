@@ -11,8 +11,8 @@ public abstract class TableModel<M extends Model> extends AbstractTableModel {
 	List<M> instances;
 	protected static String[] fieldNames;
 
-	public TableModel( Class<M> modelClass ) {
-		fieldNames = Model.getFieldNames( modelClass );
+	public TableModel() {
+		fieldNames = Model.getFieldNames( getModelClass() );
 	}
 
 	public List<M> getList() {
@@ -24,6 +24,8 @@ public abstract class TableModel<M extends Model> extends AbstractTableModel {
 		fireTableStructureChanged();
 		fireTableDataChanged();
 	}
+
+	protected abstract Class<? extends Model> getModelClass();
 
 	@Override
 	public String getColumnName( int col ) {

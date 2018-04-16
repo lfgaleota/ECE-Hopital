@@ -1,13 +1,15 @@
 package ece.ing3.java.projet.vue.components;
 
+import ece.ing3.java.projet.database.sql.Model;
 import ece.ing3.java.projet.modele.hopital.Malade;
 import ece.ing3.java.projet.vue.components.inputs.BaseInput;
 import ece.ing3.java.projet.vue.components.inputs.LongInput;
 import ece.ing3.java.projet.vue.components.inputs.StringInput;
 
 public class MaladeInputList extends ModelInputList {
-	public MaladeInputList() {
-		super( Malade.class );
+	@Override
+	protected Class<? extends Model> getModelClass() {
+		return Malade.class;
 	}
 
 	@Override

@@ -19,8 +19,6 @@ import java.util.List;
 import java.util.concurrent.ExecutionException;
 
 public abstract class ModelPanelController<M extends Model> implements ActionListener {
-	protected Class<? extends Model> modelClass;
-
 	protected ModelPanel<M> panel;
 	protected TableModel<M> tableModel;
 	protected Where whereClause;
@@ -28,11 +26,18 @@ public abstract class ModelPanelController<M extends Model> implements ActionLis
 
 	protected ModelSearchDialog dialogSearch;
 
-	protected ModelPanelController( Class<? extends Model> modelClass ) {
-		this.modelClass = modelClass;
+	protected ModelPanelController() {
 		this.whereClause = null;
 		this.orderByClause = null;
+		this.tableModel = buildTableModel();
+		this.panel = buildModelPanel( this.tableModel );
+		this.panel.getToolbar().addActionListener( this );
+		this.update();
 	}
+
+	protected abstract Class<? extends Model> getModelClass();
+	protected abstract TableModel<M> buildTableModel();
+	protected abstract ModelPanel<M> buildModelPanel( TableModel<M> tableModel );
 
 	private SwingWorker<List<M>, Object> createUpdateWorker() {
 		return new SwingWorker<List<M>, Object>() {
@@ -40,7 +45,7 @@ public abstract class ModelPanelController<M extends Model> implements ActionLis
 			protected List<M> doInBackground() {
 				System.out.println( "Update started" );
 				try {
-					SQLSelect<M> sql = ( new SQLSelect<>( modelClass ) );
+					SQLSelect<M> sql = ( new SQLSelect<>( getModelClass() ) );
 					if( whereClause != null ) {
 						sql.where( whereClause );
 					}
@@ -73,17 +78,6 @@ public abstract class ModelPanelController<M extends Model> implements ActionLis
 				panel.outOfUpdate();
 			}
 		};
-	}
-
-	protected void init( ModelPanel<M> panel, TableModel<M> tableModel ) {
-		this.panel = panel;
-		this.tableModel = tableModel;
-		panel.getToolbar().addActionListener( this );
-		this.update();
-	}
-
-	public Class<? extends Model> getModelClass() {
-		return modelClass;
 	}
 
 	public ModelPanel<M> getPanel() {
