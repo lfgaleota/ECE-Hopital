@@ -10,6 +10,8 @@ import java.nio.file.Paths;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
+import javax.swing.*;
+
 /**
  * Utility functions
  */
@@ -36,10 +38,48 @@ public class Utils {
 
 	/**
 	 * Get the UI logger.
-	 * 
+	 *
 	 * @return UI logger
 	 */
 	public static Logger getUILogger() {
 		return LogManager.getLogger( Constants.LOGGER_NAME_UI );
+	}
+
+	/**
+	 * Affiche un message général à l'utilisateur
+	 *
+	 * @param message Message à afficher
+	 */
+	public static void message( String message ) {
+		message( null, message );
+	}
+
+	/**
+	 * Affiche un message général à l'utilisateur
+	 *
+	 * @param parent Fenêtre parente
+	 * @param message Message à afficher
+	 */
+	public static void message( JFrame parent, String message ) {
+		JOptionPane.showMessageDialog( parent, message, "Information", JOptionPane.INFORMATION_MESSAGE );
+	}
+
+	/**
+	 * Affiche un message d'erreur à l'utilisateur
+	 *
+	 * @param message Message d'erreur à afficher
+	 */
+	public static void error( String message ) {
+		error( null, message );
+	}
+
+	/**
+	 * Affiche un message d'erreur à l'utilisateur
+	 *
+	 * @param parent Fenêtre parente
+	 * @param message Message d'erreur à afficher
+	 */
+	public static void error( JFrame parent, String message ) {
+		JOptionPane.showMessageDialog( parent, message, "Erreur", JOptionPane.ERROR_MESSAGE );
 	}
 }
