@@ -120,8 +120,8 @@ public class Application extends JFrame implements ActionListener {
 //	private static int height = 900;
 
 	/// LES DIFFERENTS PANNEAUX ONGLETS SONT CREES ICI , AVEC UN CONSTRUCTEUR
-	/// UTILISANT UNE COULEUR EN PARAMETRE
-	private BasePanel[] tPan = { new BasePanel(Color.GRAY), new BasePanel(Color.WHITE), new BasePanel(Color.WHITE),
+	/// UTILISANT UNE COULEUR EN PARAMETRE      LE BASEPANEL(1) est  onglet d accueil
+	private BasePanel[] tPan = { new BasePanel(1), new BasePanel(Color.WHITE), new BasePanel(Color.WHITE),
 			new BasePanel(Color.WHITE), new BasePanel(Color.WHITE), new BasePanel(Color.WHITE),
 			new BasePanel(Color.GRAY) };
 

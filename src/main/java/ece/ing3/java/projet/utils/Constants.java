@@ -18,6 +18,7 @@ public class Constants {
 	public static final String RESOURCE_PATH_CHAMBRELOGO = "src/main/resources/imgs/chambres.png";
 	public static final String RESOURCE_PATH_EMPLOYELOGO = "src/main/resources/imgs/employes.png";
 	public static final String RESOURCE_PATH_HOSPITALISATIONLOGO = "src/main/resources/imgs/hospitalisations.png";
+        public static final String RESOURCE_PATH_HOMELOGO = "src/main/resources/imgs/accueil.png";
 	
 	public static final String LOGGER_NAME_UI = "UI";
 	public static final Integer UI_TEXTFIELD_MAXLENGTH = 255;
