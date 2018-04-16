@@ -32,6 +32,13 @@ public class OrderBy {
 	private String query;
 
 	/**
+	 * Creates a new chainable, empty Order By clause.
+	 */
+	public OrderBy() {
+		query = "";
+	}
+
+	/**
 	 * Creates a new chainable Order By clause.
 	 *
 	 * @param column Column to target

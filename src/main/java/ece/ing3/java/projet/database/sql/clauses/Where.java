@@ -45,6 +45,13 @@ public class Where {
 	private List<Object> parameters = new ArrayList<>();
 
 	/**
+	 * Creates a new chainable, empty Where clause.
+	 */
+	public Where() {
+		query = "";
+	}
+
+	/**
 	 * Creates a new chainable Where clause.
 	 *
 	 * @param column     Column to target
@@ -111,7 +118,7 @@ public class Where {
 	 */
 	@Override
 	public String toString() {
-		return "(" + query + ")";
+		return query.length() > 0 ? "(" + query + ")" : "";
 	}
 
 	/**
