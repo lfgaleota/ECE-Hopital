@@ -351,7 +351,7 @@ public class SQLSelect<M extends Model> extends SQLWhereQuery<SQLSelect> {
 	private void appendSelectors( StringBuilder sb ) {
 		if( selectedFields != null && selectedFields.length > 0 ) {
 			for( String selectedColumn : selectedFields ) {
-				sb.append( Model.getColumnName( modelClass, selectedColumn ) );
+				sb.append( Model.getFieldNameFromColumnName( modelClass, selectedColumn ) );
 				sb.append( " AS " );
 				sb.append( selectedColumn );
 				sb.append( "," );

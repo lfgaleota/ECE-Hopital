@@ -51,6 +51,7 @@ import java.util.*;
  */
 public abstract class Model {
 	private static Map<Class<? extends Model>, Map<String, String>> columnFieldNames = new HashMap<>();
+	private static Map<Class<? extends Model>, Map<String, String>> fieldColumnNames = new HashMap<>();
 	private static Map<Class<? extends Model>, String[]> fieldNames = new HashMap<>();
 
 	private interface FieldProcessor {
@@ -93,10 +94,23 @@ public abstract class Model {
 	 * @param columnName Column name
 	 * @return Column's name field name or {@code null} if field should be excluded
 	 */
-	public static String getColumnName( Class<? extends Model> modelClass, String columnName ) {
+	public static String getFieldNameFromColumnName( Class<? extends Model> modelClass, String columnName ) {
 		if( !columnFieldNames.containsKey( modelClass ) )
-			buildColumnNames( modelClass );
+			buildNames( modelClass );
 		return columnFieldNames.get( modelClass ).get( columnName );
+	}
+
+	/**
+	 * Get the corresponding field name of a column for a defined model class.
+	 *
+	 * @param modelClass Model class
+	 * @param fieldName Field name
+	 * @return Field's column name or {@code null} if field should be excluded
+	 */
+	public static String getColumnNameFromFieldName( Class<? extends Model> modelClass, String fieldName ) {
+		if( !fieldColumnNames.containsKey( modelClass ) )
+			buildNames( modelClass );
+		return fieldColumnNames.get( modelClass ).get( fieldName );
 	}
 
 	/**
@@ -107,7 +121,7 @@ public abstract class Model {
 	 */
 	public static Map<String, String> getColumnFieldNames( Class<? extends Model> modelClass ) {
 		if( !columnFieldNames.containsKey( modelClass ) )
-			buildColumnNames( modelClass );
+			buildNames( modelClass );
 		return columnFieldNames.get( modelClass );
 	}
 
@@ -119,7 +133,7 @@ public abstract class Model {
 	 */
 	public static String[] getFieldNames( Class<? extends Model> modelClass ) {
 		if( !fieldNames.containsKey( modelClass ) )
-			buildColumnNames( modelClass );
+			buildNames( modelClass );
 		return fieldNames.get( modelClass );
 	}
 
@@ -141,8 +155,9 @@ public abstract class Model {
 		}
 	}
 
-	private static void buildColumnNames( Class<? extends Model> modelClass ) {
-		Map<String, String> map = new HashMap<>();
+	private static void buildNames( Class<? extends Model> modelClass ) {
+		Map<String, String> columnMap = new HashMap<>();
+		Map<String, String> fieldMap = new HashMap<>();
 		List<String> fieldNameList = new ArrayList<>();
 
 		try {
@@ -152,7 +167,8 @@ public abstract class Model {
 						field.setAccessible( true );
 					}
 
-					map.put( getColumnName( field ), field.getName() );
+					columnMap.put( getColumnName( field ), field.getName() );
+					fieldMap.put( field.getName(), getColumnName( field ) );
 					fieldNameList.add( field.getName() );
 				}
 			}, true );
@@ -160,7 +176,8 @@ public abstract class Model {
 			e.printStackTrace();
 		}
 
-		columnFieldNames.put( modelClass, map );
+		columnFieldNames.put( modelClass, columnMap );
+		fieldColumnNames.put( modelClass, fieldMap );
 		fieldNames.put( modelClass, fieldNameList.toArray( new String[ 0 ] ) );
 	}
 
