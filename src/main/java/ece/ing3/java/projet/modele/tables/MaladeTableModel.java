@@ -1,10 +1,12 @@
 package ece.ing3.java.projet.modele.tables;
 
+import ece.ing3.java.projet.database.sql.Model;
 import ece.ing3.java.projet.modele.hopital.Malade;
 
 public class MaladeTableModel extends TableModel<Malade> {
-	public MaladeTableModel() {
-		super( Malade.class );
+	@Override
+	protected Class<? extends Model> getModelClass() {
+		return Malade.class;
 	}
 
 	@Override

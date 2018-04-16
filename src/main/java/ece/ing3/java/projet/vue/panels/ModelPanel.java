@@ -14,10 +14,10 @@ public class ModelPanel<M extends Model> extends JPanel {
 	private LoadingPanel loading;
 	private JScrollPane listContainer;
 
-	public ModelPanel( TableModel<M> tableModel ) {
+	public ModelPanel( String modelName, TableModel<M> tableModel ) {
 		setLayout( new BorderLayout() );
 
-		toolbar = new ModelToolbar();
+		toolbar = new ModelToolbar( modelName );
 		list = new ModelList<>( tableModel );
 		loading = new LoadingPanel();
 		listContainer = new JScrollPane( list );

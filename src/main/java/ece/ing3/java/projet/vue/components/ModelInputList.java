@@ -12,15 +12,17 @@ import java.util.Map;
 public abstract class ModelInputList extends JPanel {
 	protected Map<String, BaseInput> inputMap = new HashMap<>();
 
-	public ModelInputList( Class<? extends Model> modelClass ) {
-		String[] fieldNames = Model.getFieldNames( modelClass );
+	public ModelInputList() {
+		String[] fieldNames = Model.getFieldNames( getModelClass() );
 		setLayout( new GridLayout( fieldNames.length, 2 ) );
 		for( String fieldName : fieldNames ) {
-			BaseInput input = getInputForField( fieldName, Model.getColumnNameFromFieldName( modelClass, fieldName ) );
+			BaseInput input = getInputForField( fieldName, Model.getColumnNameFromFieldName( getModelClass(), fieldName ) );
 			inputMap.put( fieldName, input );
 			createInput( fieldName, input );
 		}
 	}
+
+	protected abstract Class<? extends Model> getModelClass();
 
 	private void createInput( String fieldName, BaseInput input ) {
 		add( new JLabel( Strings.getModel( fieldName ) ) );
