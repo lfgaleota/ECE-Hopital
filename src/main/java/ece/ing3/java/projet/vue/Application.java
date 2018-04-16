@@ -8,46 +8,29 @@
 
 package ece.ing3.java.projet.vue;
 
-import javax.swing.JFrame;
-import javax.swing.JList;
-import javax.swing.JOptionPane;
-import javax.swing.JScrollPane;
+import javax.swing.*;
 
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.Image;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Vector;
-
-
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JSplitPane;
-import javax.swing.JTabbedPane;
-import javax.swing.JTable;
-import javax.swing.JTextField;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
 import ece.ing3.java.projet.controleur.ApplicationController;
-import ece.ing3.java.projet.exceptions.DatabaseException;
-import ece.ing3.java.projet.modele.administration.Service;
-import ece.ing3.java.projet.modele.employe.Employe;
-import ece.ing3.java.projet.utils.Constants;
-import ece.ing3.java.projet.vue.panels.BasePanel;
+import ece.ing3.java.projet.enums.ModelControllers;
+import ece.ing3.java.projet.vue.panels.TabPanel;
+
+/**
+ * @author Virgile
+ */
 
 /**
  * Fenetre principale de l'application
  *
- * @author Nicolas & Virgile
- *
+ * @author Nicolas
  */
 public class Application extends JFrame implements ActionListener {
-
-	private static final long serialVersionUID = 1L;
-	private JTabbedPane onglet;
+	private JTabbedPane tabs;
 	/// LE JSPLIT QUIVA PERMETTRE D AVOIR DEUX PANNEAUX PAR ONGLET , UN POUR LES
 	/// BOUTONS DU HAUT L AUTRE POUR L AFFICHAGE
 	// JSplitPane ongletandhaut = new JSplitPane(JSplitPane.VERTICAL_SPLIT); // ou
@@ -55,7 +38,7 @@ public class Application extends JFrame implements ActionListener {
 	private JSplitPane split;
 
 	/// LES 5 BOUTONS DE CHAQUE ONGLET ICI ONGLET0
-	private JButton boutonstat = new JButton(new ImageIcon((new ImageIcon(Constants.RESOURCE_PATH_STATLOGO).getImage()
+	/*private JButton boutonstat = new JButton(new ImageIcon((new ImageIcon(Constants.RESOURCE_PATH_STATLOGO).getImage()
 			.getScaledInstance(Constants.WIDTH_FRAME / 6, Constants.HEIGHT_FRAME / 7, Image.SCALE_DEFAULT))));
 	private JButton boutonrechercher = new JButton(new ImageIcon((new ImageIcon(Constants.RESOURCE_PATH_RECHERCHERLOGO).getImage()
 			.getScaledInstance(Constants.WIDTH_FRAME / 8, Constants.HEIGHT_FRAME / 7, Image.SCALE_DEFAULT))));
@@ -123,29 +106,25 @@ public class Application extends JFrame implements ActionListener {
 	/// UTILISANT UNE COULEUR EN PARAMETRE      LE BASEPANEL(1) est  onglet d accueil
 	private BasePanel[] tPan = { new BasePanel(1), new BasePanel(Color.WHITE), new BasePanel(Color.WHITE),
 			new BasePanel(Color.WHITE), new BasePanel(Color.WHITE), new BasePanel(Color.WHITE),
-			new BasePanel(Color.GRAY) };
+			new BasePanel(Color.GRAY) };*/
 
 	/// LA FENETRE CONTIENT LES PANNEAUX (CONTENU DES ONGLETS)
 	public Application() {
-		new ApplicationController( this );
-
 		// this.setLocationRelativeTo(null);
-		this.setTitle("Projet Hopital");
-		this.setSize((int) getToolkit().getScreenSize().getWidth(), ((int) getToolkit().getScreenSize().getHeight()));
-		this.setResizable(false);
-		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		this.toFront(); // mettre au 1er plan 
+		this.setTitle( "Projet Hopital" );
+		this.setSize( ( int ) getToolkit().getScreenSize().getWidth(), ( ( int ) getToolkit().getScreenSize().getHeight() ) );
+		this.setResizable( true );
+		this.setDefaultCloseOperation( JFrame.EXIT_ON_CLOSE );
+		this.toFront(); // mettre au 1er plan
 
-		/*
-		 * METHODE ONGLET/BOUTONS INDEPENDANT /// LA LIGNE DE SEPARATION A UNE LARGEUR
-		 * DE PX ET EST EN 80 ongletandhaut.setDividerSize(1);
-		 * ongletandhaut.setDividerLocation(100);
-		 */
-		
+		// MMETHODE ONGLET/BOUTONS INDEPENDANT /// LA LIGNE DE SEPARATION A UNE LARGEUR
+		// DE PX ET EST EN 80 ongletandhaut.setDividerSize(1);
+		// ongletandhaut.setDividerLocation(100);
+
 		//Mise en forme des boutons
-		boutonstat.setBackground(Color.WHITE);boutonstat1.setBackground(Color.WHITE);boutonstat2.setBackground(Color.WHITE);boutonstat3.setBackground(Color.WHITE);boutonstat4.setBackground(Color.WHITE);
+		/*boutonstat.setBackground(Color.WHITE);boutonstat1.setBackground(Color.WHITE);boutonstat2.setBackground(Color.WHITE);boutonstat3.setBackground(Color.WHITE);boutonstat4.setBackground(Color.WHITE);
 		boutonstat.setBorderPainted(false);boutonstat1.setBorderPainted(false);boutonstat2.setBorderPainted(false);boutonstat3.setBorderPainted(false);boutonstat4.setBorderPainted(false);
-		
+
 		boutonrechercher.setBackground(Color.WHITE);boutonrechercher1.setBackground(Color.WHITE);boutonrechercher2.setBackground(Color.WHITE);boutonrechercher3.setBackground(Color.WHITE);boutonrechercher4.setBackground(Color.WHITE);
 		boutonrechercher.setBorderPainted(false);boutonrechercher1.setBorderPainted(false);boutonrechercher2.setBorderPainted(false);boutonrechercher3.setBorderPainted(false);boutonrechercher4.setBorderPainted(false);
 
@@ -157,10 +136,10 @@ public class Application extends JFrame implements ActionListener {
 
 		boutonSup.setBackground(Color.WHITE);boutonSup1.setBackground(Color.WHITE);boutonSup2.setBackground(Color.WHITE);boutonSup3.setBackground(Color.WHITE);boutonSup4.setBackground(Color.WHITE);
 		boutonSup.setBorderPainted(false);boutonSup1.setBorderPainted(false);boutonSup2.setBorderPainted(false);boutonSup3.setBorderPainted(false);boutonSup4.setBorderPainted(false);
-				
+
 		/// CHAQUE PANEL DE BOUTONS CONTIENT LES BOUTONS ( TOUS DIFFERENTS)
 		BasePanel panlogo = new BasePanel();
-		
+
 		BasePanel panboutons = new BasePanel();
 		panboutons.add(boutonstat);
 		panboutons.add(boutonrechercher);
@@ -208,7 +187,7 @@ public class Application extends JFrame implements ActionListener {
 		// logoandboutons.setDividerLocation(112);
 
 		/// LE CONTENEUR D ONGLET QUE L ON MET A GAUCHE DE LA FENETRE
-		onglet = new JTabbedPane(JTabbedPane.LEFT);
+		tabs = new JTabbedPane(JTabbedPane.LEFT);
 
 		/// METHODE PRISE SUR OPENCLASSROOM
 		int i = 0;
@@ -221,67 +200,59 @@ public class Application extends JFrame implements ActionListener {
 				// PANNEAU
 				split = new JSplitPane(JSplitPane.VERTICAL_SPLIT, panlogo, pan);
 				// L'ONGLET CONTIENT CETTTE SEPARATION
-				onglet.add(pan);
-				onglet.setIconAt(i, new ImageIcon((new ImageIcon(Constants.RESOURCE_PATH_APPLOGO).getImage()
+				tabs.add(pan);
+				tabs.setIconAt(i, new ImageIcon((new ImageIcon(Constants.RESOURCE_PATH_APPLOGO).getImage()
 						.getScaledInstance(Constants.WIDTH_FRAME / 7, Constants.HEIGHT_FRAME / 7, Image.SCALE_DEFAULT))));
-				onglet.setBackgroundAt(i, Color.WHITE);
+				tabs.setBackgroundAt(i, Color.WHITE);
 			}
-			
 			if (i == 1) {
 				split = new JSplitPane(JSplitPane.VERTICAL_SPLIT, panboutons, pan);
-				onglet.add(split);
-				onglet.setIconAt(i, new ImageIcon((new ImageIcon(Constants.RESOURCE_PATH_SERVICELOGO).getImage()
+				tabs.add(split);
+				tabs.setIconAt(i, new ImageIcon((new ImageIcon(Constants.RESOURCE_PATH_SERVICELOGO).getImage()
 						.getScaledInstance(Constants.WIDTH_FRAME / 7, Constants.HEIGHT_FRAME / 11, Image.SCALE_DEFAULT))));
-				onglet.setBackgroundAt(i, Color.decode("#5DBFF4"));
+				tabs.setBackgroundAt(i, Color.decode("#5DBFF4"));
 				pan.add(display_Services()); // methode qui affiche la table dans le panel
 	
 			}
-			
 			if (i == 2) {
 				split = new JSplitPane(JSplitPane.VERTICAL_SPLIT, panboutons1, pan);
-				onglet.add(split);
-				onglet.setIconAt(i, new ImageIcon((new ImageIcon(Constants.RESOURCE_PATH_CHAMBRELOGO).getImage()
+				tabs.add(split);
+				tabs.setIconAt(i, new ImageIcon((new ImageIcon(Constants.RESOURCE_PATH_CHAMBRELOGO).getImage()
 						.getScaledInstance(Constants.WIDTH_FRAME / 7, Constants.HEIGHT_FRAME / 11, Image.SCALE_DEFAULT))));
-				onglet.setBackgroundAt(i, Color.decode("#70F96C"));
-
+				tabs.setBackgroundAt(i, Color.decode("#70F96C"));
 			}
-			
 			if (i == 3) {
 				split = new JSplitPane(JSplitPane.VERTICAL_SPLIT, panboutons2, pan);
-				onglet.add(split);
-				onglet.setIconAt(i, new ImageIcon((new ImageIcon(Constants.RESOURCE_PATH_EMPLOYELOGO).getImage()
+				tabs.add(split);
+				tabs.setIconAt(i, new ImageIcon((new ImageIcon(Constants.RESOURCE_PATH_EMPLOYELOGO).getImage()
 						.getScaledInstance(Constants.WIDTH_FRAME / 7, Constants.HEIGHT_FRAME / 11, Image.SCALE_DEFAULT))));
-				onglet.setBackgroundAt(i, Color.decode("#FEF154"));
+				tabs.setBackgroundAt(i, Color.decode("#FEF154"));
 				pan.add(display_Employes()); // methode qui affiche la table dans le panel
-
 			}
-			
 			if (i == 4) {
 				split = new JSplitPane(JSplitPane.VERTICAL_SPLIT, panboutons3, pan);
-				onglet.add(split);
-				onglet.setIconAt(i, new ImageIcon((new ImageIcon(Constants.RESOURCE_PATH_PATIENTLOGO).getImage()
+				tabs.add(split);
+				tabs.setIconAt(i, new ImageIcon((new ImageIcon(Constants.RESOURCE_PATH_PATIENTLOGO).getImage()
 						.getScaledInstance(Constants.WIDTH_FRAME / 7,Constants.HEIGHT_FRAME / 11, Image.SCALE_DEFAULT))));
-				onglet.setBackgroundAt(i, Color.decode("#A55DFF"));
-
+				tabs.setBackgroundAt(i, Color.decode("#A55DFF"));
 			}
-			
 			if (i == 5) {
 				split = new JSplitPane(JSplitPane.VERTICAL_SPLIT, panboutons4, pan);
-				onglet.add(split);
-				onglet.setIconAt(i, new ImageIcon((new ImageIcon(Constants.RESOURCE_PATH_HOSPITALISATIONLOGO).getImage()
+				tabs.add(split);
+				tabs.setIconAt(i, new ImageIcon((new ImageIcon(Constants.RESOURCE_PATH_HOSPITALISATIONLOGO).getImage()
 						.getScaledInstance(Constants.WIDTH_FRAME / 7,Constants.HEIGHT_FRAME / 11, Image.SCALE_DEFAULT))));
-				onglet.setBackgroundAt(i, Color.decode("#FE3D1B"));
+				tabs.setBackgroundAt(i, Color.decode("#FE3D1B"));
 			}
 
 			if (i == 6) {
 				// split = new JSplitPane(JSplitPane.VERTICAL_SPLIT, panboutons4, pan);
-				onglet.add(pan);
-				onglet.setIconAt(i, new ImageIcon((new ImageIcon(Constants.RESOURCE_PATH_CONFIGLOGO).getImage()
+				tabs.add(pan);
+				tabs.setIconAt(i, new ImageIcon((new ImageIcon(Constants.RESOURCE_PATH_CONFIGLOGO).getImage()
 						.getScaledInstance(Constants.WIDTH_FRAME / 7, Constants.HEIGHT_FRAME / 6, Image.SCALE_DEFAULT))));
-				onglet.setBackgroundAt(i, Color.WHITE);
+				tabs.setBackgroundAt(i, Color.WHITE);
 			}
 
-			// onglet.add("Onglet n° "+(++i), pan);
+			// tabs.add("Onglet n° "+(++i), pan);
 
 			i++;
 		}
@@ -289,7 +260,7 @@ public class Application extends JFrame implements ActionListener {
 		// ongletandhaut.add(logoandboutons);
 		// ongletandhaut.add(onglet);
 
-		this.getContentPane().add(onglet);
+		this.getContentPane().add(tabs);
 		this.setVisible(true);
 
 		boutonstat.addActionListener(this);
@@ -308,22 +279,39 @@ public class Application extends JFrame implements ActionListener {
 		boutonMA.addActionListener(this);
 		boutonAjouter.addActionListener(this);
 		boutonSup.addActionListener(this);
+		*/
+
+		setLayout( new BorderLayout() );
+
+		TabPanel.prepare();
+		tabs = new TabPanel();
+		TabPanel.finish();
+
+		for( ModelControllers modelController : ModelControllers.values() ) {
+			tabs.addTab( modelController.getPrettyName(), modelController.getPanelController().getPanel() );
+		}
+
+		new ApplicationController( this );
+
+		add( tabs, BorderLayout.CENTER );
+
+		this.setVisible( true );
 	}
 
 	@Override
-	public void actionPerformed(ActionEvent e) {
-		if ((e.getSource() == boutonstat) || (e.getSource() == boutonstat1) || (e.getSource() == boutonstat2)
-				|| (e.getSource() == boutonstat3) || (e.getSource() == boutonstat4)) {
+	public void actionPerformed( ActionEvent e ) {
+		/*if( ( e.getSource() == boutonstat ) || ( e.getSource() == boutonstat1 ) || ( e.getSource() == boutonstat2 )
+				|| ( e.getSource() == boutonstat3 ) || ( e.getSource() == boutonstat4 ) ) {
 			Statistiques mesStats = new Statistiques();
 			mesStats.creer_Statistiques();
-		}
+		}*/
 		/*
 		 * ///TOUT LES BOUTONS RECHERCHER FONT LA MEME ACTION if ( (e.getSource() ==
 		 * boutonrechercher) || (e.getSource() == boutonrechercher1) ||(e.getSource() ==
 		 * boutonrechercher2) || (e.getSource() == boutonrechercher3) || (e.getSource()
 		 * == boutonrechercher4) ) {
 		 */
-
+/*
 		/// ACTION DU BOUTON RECHERCHER 1 : POUR LE MOMENT AFFICHE UNIQUEMENT LA LISTE
 		/// AU MILIEU DU JPANEL CORRESPONDANT
 		if ((e.getSource() == boutonrechercher)) {
@@ -340,8 +328,6 @@ public class Application extends JFrame implements ActionListener {
 		//	ModelSearchDialog marecherche = new ModelSearchDialog(maliste);
 
 			this.repaint();
-
-
 		}
 
 		/// MEME ACTION QUE POUR BOUTON RECHERCHER 1 MAIS AFFICHE DANS UN AUTRE ONGLET
@@ -447,6 +433,14 @@ public class Application extends JFrame implements ActionListener {
 					"Supprimer un élement de la BDD", /// titre
 					JOptionPane.INFORMATION_MESSAGE /// message"
 			);
+
+		}*/
+
+	}
+
+	public JTabbedPane getTabs() {
+		return tabs;
+	}
 
 		}
 
@@ -565,7 +559,4 @@ public class Application extends JFrame implements ActionListener {
 		//on retourne le scrollpane.
 		return monscrollPane;
 	 }
-	
-	
-
 }
