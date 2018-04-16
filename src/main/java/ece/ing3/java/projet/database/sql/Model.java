@@ -10,10 +10,7 @@ import ece.ing3.java.projet.exceptions.DatabaseException;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Abstract database model helper.
@@ -54,6 +51,7 @@ import java.util.Map;
  */
 public abstract class Model {
 	private static Map<Class<? extends Model>, Map<String, String>> columnFieldNames = new HashMap<>();
+	private static Map<Class<? extends Model>, String[]> fieldNames = new HashMap<>();
 
 	private interface FieldProcessor {
 		void process( Field field ) throws IllegalAccessException, NullPointerException;
@@ -113,6 +111,18 @@ public abstract class Model {
 		return columnFieldNames.get( modelClass );
 	}
 
+	/**
+	 * Get all the field names for a defined model class.
+	 *
+	 * @param modelClass Model class
+	 * @return Column/field name pairs
+	 */
+	public static String[] getFieldNames( Class<? extends Model> modelClass ) {
+		if( !fieldNames.containsKey( modelClass ) )
+			buildColumnNames( modelClass );
+		return fieldNames.get( modelClass );
+	}
+
 	private static void processFields( Class<? extends Model> modelClass, FieldProcessor fieldProcessor, boolean silenceIllegalAccess ) throws IllegalAccessException {
 		Class currentClass = modelClass;
 		while( currentClass != Model.class ) {
@@ -133,6 +143,7 @@ public abstract class Model {
 
 	private static void buildColumnNames( Class<? extends Model> modelClass ) {
 		Map<String, String> map = new HashMap<>();
+		List<String> fieldNameList = new ArrayList<>();
 
 		try {
 			processFields( modelClass, field -> {
@@ -142,6 +153,7 @@ public abstract class Model {
 					}
 
 					map.put( getColumnName( field ), field.getName() );
+					fieldNameList.add( field.getName() );
 				}
 			}, true );
 		} catch( IllegalAccessException e ) {
@@ -149,6 +161,7 @@ public abstract class Model {
 		}
 
 		columnFieldNames.put( modelClass, map );
+		fieldNames.put( modelClass, fieldNameList.toArray( new String[ 0 ] ) );
 	}
 
 	private void selectByIds( SQLSelect selectHelper ) {
