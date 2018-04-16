@@ -104,7 +104,7 @@ abstract class SQLWhereQuery<T> implements SQLRequest {
 	 * @param sb StringBuilder to append to
 	 */
 	void appendWhereClause( StringBuilder sb ) {
-		if( where != null ) {
+		if( where != null && where.toString().length() > 0 ) {
 			sb.append( " WHERE " );
 			sb.append( where.toString() );
 		}

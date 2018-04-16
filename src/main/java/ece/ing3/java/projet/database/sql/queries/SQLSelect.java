@@ -398,7 +398,7 @@ public class SQLSelect<M extends Model> extends SQLWhereQuery<SQLSelect> {
 
 		appendWhereClause( sb );
 
-		if( orderBy != null ) {
+		if( orderBy != null && orderBy.toString().length() > 0 ) {
 			sb.append( " ORDER BY " );
 			sb.append( orderBy.toString() );
 		}
