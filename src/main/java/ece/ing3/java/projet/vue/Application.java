@@ -10,14 +10,19 @@ package ece.ing3.java.projet.vue;
 
 import javax.swing.*;
 
+import java.util.List;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.util.ArrayList;
 
 import ece.ing3.java.projet.controleur.ApplicationController;
 import ece.ing3.java.projet.enums.ModelControllers;
+import ece.ing3.java.projet.exceptions.DatabaseException;
+import ece.ing3.java.projet.modele.administration.Service;
+import ece.ing3.java.projet.modele.employe.Employe;
 import ece.ing3.java.projet.vue.panels.TabPanel;
 
 /**
@@ -212,7 +217,7 @@ public class Application extends JFrame implements ActionListener {
 						.getScaledInstance(Constants.WIDTH_FRAME / 7, Constants.HEIGHT_FRAME / 11, Image.SCALE_DEFAULT))));
 				tabs.setBackgroundAt(i, Color.decode("#5DBFF4"));
 				pan.add(display_Services()); // methode qui affiche la table dans le panel
-	
+
 			}
 			if (i == 2) {
 				split = new JSplitPane(JSplitPane.VERTICAL_SPLIT, panboutons1, pan);
@@ -316,13 +321,11 @@ public class Application extends JFrame implements ActionListener {
 		/// AU MILIEU DU JPANEL CORRESPONDANT
 		if ((e.getSource() == boutonrechercher)) {
 
-			/**
-			 * ///Fenetre d affichage du contenu de la liste (ne marche pas si on affiche
-			 * deja dans nos JPanel; JFrame frame = new JFrame(); frame.add(new
-			 * JScrollPane(maliste)); frame.setSize(300, 200); frame.setVisible(true);
-			 */
+			///Fenetre d affichage du contenu de la liste (ne marche pas si on affiche
+			 deja dans nos JPanel; JFrame frame = new JFrame(); frame.add(new
+			 JScrollPane(maliste)); frame.setSize(300, 200); frame.setVisible(true);
 
-			
+
 
 
 		//	ModelSearchDialog marecherche = new ModelSearchDialog(maliste);
@@ -442,10 +445,6 @@ public class Application extends JFrame implements ActionListener {
 		return tabs;
 	}
 
-		}
-
-	}
-	
 	/**
 	 * Methode pour recupérer la liste des services de la bdd et afficher la table des employes
 	 * @return un jscrollbar contenant la table des services
@@ -454,11 +453,11 @@ public class Application extends JFrame implements ActionListener {
 	{	//On crée un liste vide
 		List<Service> maliste = new ArrayList<Service>();
 		try {
-			maliste = Service.findList(); // récuperation des données de la bdd concernant les employes 
+			maliste = Service.findList(); // récuperation des données de la bdd concernant les employes
 		} catch (DatabaseException e1) {
 			e1.printStackTrace();
 		}
-		
+
 		//création d'un tableau d'objet et tranfert des info de la liste vers le tableau Object.
 		Object[][] donnees = new Object[ maliste.size()][5];
 		 int i = 0;
@@ -467,43 +466,43 @@ public class Application extends JFrame implements ActionListener {
 	        	donnees[i][1] = maliste.get(i).getNom();
 	        	donnees[i][2] = maliste.get(i).getBatiment();
 	        	donnees[i][3] = maliste.get(i).getNumeroDirecteur();
-	            i++; 
+	            i++;
 	        }
 		//test affichage console
 		for(Service elem : maliste)
-		{		
-			System.out.println( 	
-					elem.getCode() + "|" + 
-					elem.getNom() + "|" + 
-					elem.getBatiment() + "|" + 
+		{
+			System.out.println(
+					elem.getCode() + "|" +
+					elem.getNom() + "|" +
+					elem.getBatiment() + "|" +
 					elem.getNumeroDirecteur() + "\n");
 		}
-		
+
 	    // Nom des colonnes.
 		String[] colonnes = { "Code" , "Nom" , "Batiment" , "Numéro du directeur" };
 		// Création de la table.
 		JTable data_employes =  new JTable( donnees , colonnes );
-		
+
 		//Gestion de la taille des cellules de la table.
 		data_employes.getColumnModel().getColumn(0).setPreferredWidth(100);
 		data_employes.getColumnModel().getColumn(1).setPreferredWidth(100);
 		data_employes.getColumnModel().getColumn(2).setPreferredWidth(100);
 		data_employes.getColumnModel().getColumn(3).setPreferredWidth(300);
 		data_employes.setRowHeight(20);
-		 
+
 		data_employes.setRowHeight(20);
-		
+
 		//Création du scrollpane et insertion de la table dedans.
 		JScrollPane monscrollPane = new JScrollPane();
 		monscrollPane.getViewport().add(data_employes);
 		monscrollPane.setPreferredSize( new Dimension(1100,570));
-		
+
 		//on retourne le scrollpane.
 		return monscrollPane;
 	 }
-	
-	
-	
+
+
+
 	/**
 	 * Methode pour recupérer la liste des employés de la bdd et afficher la table des employes
 	 * @return un jscrollbar contenant la table des employes
@@ -512,11 +511,11 @@ public class Application extends JFrame implements ActionListener {
 	{	//On crée un liste vide
 		List<Employe> maliste = new ArrayList<Employe>();
 		try {
-			maliste = Employe.findBaseList(); // récuperation des données de la bdd concernant les employes 
+			maliste = Employe.findBaseList(); // récuperation des données de la bdd concernant les employes
 		} catch (DatabaseException e1) {
 			e1.printStackTrace();
 		}
-		
+
 		//création d'un tableau d'objet et tranfert des info de la liste vers le tableau Object.
 		Object[][] donnees = new Object[ maliste.size()][5];
 		 int i = 0;
@@ -526,36 +525,36 @@ public class Application extends JFrame implements ActionListener {
 	        	donnees[i][2] = maliste.get(i).getPrenom();
 	        	donnees[i][3] = maliste.get(i).getAdresse();
 	        	donnees[i][4] = maliste.get(i).getNumeroTelephone();
-	            i++; 
+	            i++;
 	        }
 		//test affichage console
 		/*for(Employe elem : maliste)
-		{		
-			System.out.println( 	elem.getNumero() + "|" + 
-					elem.getNom() + "|" + 
-					elem.getPrenom() + "|" + 
-					elem.getAdresse() + "|" + 
+		{
+			System.out.println( 	elem.getNumero() + "|" +
+					elem.getNom() + "|" +
+					elem.getPrenom() + "|" +
+					elem.getAdresse() + "|" +
 					elem.getNumeroTelephone() + "\n");
 		}*/
-		
+
 	    // Nom des colonnes.
 		String[] colonnes = { "Numéro" , "Nom" , "Prénom" , "Adresse" , "Numéro de Téléphone" };
 		// Création de la table.
 		JTable data_employes =  new JTable( donnees , colonnes );
-		
+
 		//Gestion de la taille des cellules de la table.
 		data_employes.getColumnModel().getColumn(0).setPreferredWidth(100);
 		data_employes.getColumnModel().getColumn(1).setPreferredWidth(100);
 		data_employes.getColumnModel().getColumn(2).setPreferredWidth(100);
 		data_employes.getColumnModel().getColumn(3).setPreferredWidth(300);
-		data_employes.getColumnModel().getColumn(4).setPreferredWidth(200); 
+		data_employes.getColumnModel().getColumn(4).setPreferredWidth(200);
 		data_employes.setRowHeight(20);
-		
+
 		//Création du scrollpane et insertion de la table dedans.
 		JScrollPane monscrollPane = new JScrollPane();
 		monscrollPane.getViewport().add(data_employes);
 		monscrollPane.setPreferredSize( new Dimension(1100,570));
-		
+
 		//on retourne le scrollpane.
 		return monscrollPane;
 	 }
