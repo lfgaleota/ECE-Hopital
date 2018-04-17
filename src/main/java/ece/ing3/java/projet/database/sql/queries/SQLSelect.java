@@ -2,9 +2,9 @@ package ece.ing3.java.projet.database.sql.queries;
 
 import ece.ing3.java.projet.database.Database;
 import ece.ing3.java.projet.database.sql.Model;
+import ece.ing3.java.projet.database.sql.clauses.OrderBy;
 import ece.ing3.java.projet.database.sql.clauses.Where;
 import ece.ing3.java.projet.database.sql.enumerations.Order;
-import ece.ing3.java.projet.database.sql.clauses.OrderBy;
 import ece.ing3.java.projet.exceptions.DatabaseException;
 import org.apache.commons.dbutils.QueryRunner;
 import org.apache.commons.dbutils.ResultSetHandler;
@@ -136,6 +136,9 @@ import java.util.Map;
  * {@code SQLSelect<InheritedExampleModel> s = new SQLSelect<>( new Class[]{ InheritedExampleModel.class, ExampleModel.class }, "number" );}<br>
  * will generate : {@code SELECT num as number FROM inheritedexamplemodel NATURAL JOIN examplemodel;}
  * </p>
+ * <p>
+ * It is also possible to tell the class not to process the passed selected fields and insert them as-is.
+ * </p>
  *
  * @param <M> Model class
  */
@@ -146,6 +149,7 @@ public class SQLSelect<M extends Model> extends SQLWhereQuery<SQLSelect> {
 	private OrderBy orderBy;
 	private String[] joinClause;
 	private String[] joinCondition;
+	private boolean rawSelectedFields;
 
 	/**
 	 * Creates a new helper for a model class
@@ -159,12 +163,23 @@ public class SQLSelect<M extends Model> extends SQLWhereQuery<SQLSelect> {
 	/**
 	 * Creates a new helper for a model class, retrieving only the provided columns.
 	 *
-	 * @param modelClass      Model class
+	 * @param modelClass     Model class
 	 * @param selectedFields Fields to retrieve
 	 */
-	@SuppressWarnings( "unchecked" )
 	public SQLSelect( Class<? extends Model> modelClass, String... selectedFields ) {
-		this( new Class[]{ modelClass }, selectedFields );
+		this( modelClass, false, selectedFields );
+	}
+
+	/**
+	 * Creates a new helper for a model class, retrieving only the provided columns.
+	 *
+	 * @param modelClass        Model class
+	 * @param rawSelectedFields {@code true} do not attempt to automatically process selected fields
+	 * @param selectedFields    Fields to retrieve
+	 */
+	@SuppressWarnings( "unchecked" )
+	public SQLSelect( Class<? extends Model> modelClass, boolean rawSelectedFields, String... selectedFields ) {
+		this( new Class[]{ modelClass }, rawSelectedFields, selectedFields );
 	}
 
 	/**
@@ -179,14 +194,26 @@ public class SQLSelect<M extends Model> extends SQLWhereQuery<SQLSelect> {
 	/**
 	 * Creates a new helper for multiple model classes, assuming they are joined by NATURAL JOIN, retrieving only the provided columns.
 	 *
-	 * @param modelClasses    Model classes
+	 * @param modelClasses   Model classes
 	 * @param selectedFields Fields to retrieve
 	 */
 	public SQLSelect( Class<? extends Model>[] modelClasses, String... selectedFields ) {
+		this( modelClasses, false, selectedFields );
+	}
+
+	/**
+	 * Creates a new helper for multiple model classes, assuming they are joined by NATURAL JOIN, retrieving only the provided columns.
+	 *
+	 * @param modelClasses      Model classes
+	 * @param rawSelectedFields {@code true} do not attempt to automatically process selected fields
+	 * @param selectedFields    Fields to retrieve
+	 */
+	public SQLSelect( Class<? extends Model>[] modelClasses, boolean rawSelectedFields, String... selectedFields ) {
 		this(
 				modelClasses,
 				modelClasses.length > 1 ? Collections.nCopies( modelClasses.length - 1, "NATURAL JOIN" ).toArray( new String[ modelClasses.length - 1 ] ) : null,
 				modelClasses.length > 1 ? Collections.nCopies( modelClasses.length - 1, "" ).toArray( new String[ modelClasses.length - 1 ] ) : null,
+				rawSelectedFields,
 				selectedFields
 		);
 	}
@@ -212,12 +239,27 @@ public class SQLSelect<M extends Model> extends SQLWhereQuery<SQLSelect> {
 	 * @throws IllegalArgumentException Join clause or condition is malformed
 	 */
 	public SQLSelect( Class<? extends Model>[] modelClasses, String[] joinClause, String[] joinCondition, String... selectedFields ) throws IllegalArgumentException {
+		this( modelClasses, joinClause, joinCondition, false, selectedFields );
+	}
+
+	/**
+	 * Creates a new helper for multiple model classes, joining them with the provided join clause and using the provided join condition, retrieving only the provided columns.
+	 *
+	 * @param modelClasses      Model classes
+	 * @param joinClause        Join clause
+	 * @param joinCondition     Join condition
+	 * @param rawSelectedFields {@code true} do not attempt to automatically process selected fields
+	 * @param selectedFields    Fields to retrieve
+	 * @throws IllegalArgumentException Join clause or condition is malformed
+	 */
+	public SQLSelect( Class<? extends Model>[] modelClasses, String[] joinClause, String[] joinCondition, boolean rawSelectedFields, String... selectedFields ) throws IllegalArgumentException {
 		this.modelClass = modelClasses[ 0 ];
-		tableNames = Arrays.stream( modelClasses ).map( Model::getTableName ).toArray( String[]::new );
+		this.tableNames = Arrays.stream( modelClasses ).map( Model::getTableName ).toArray( String[]::new );
 		this.orderBy = null;
 		this.joinClause = joinClause;
 		this.joinCondition = joinCondition;
 		this.selectedFields = selectedFields;
+		this.rawSelectedFields = rawSelectedFields;
 
 		if( joinClause != null && joinClause.length != ( tableNames.length - 1 ) ) {
 			throw new IllegalArgumentException( "Malformed join clause, expected " + ( tableNames.length - 1 ) + " clauses, got " + joinClause.length );
@@ -308,8 +350,8 @@ public class SQLSelect<M extends Model> extends SQLWhereQuery<SQLSelect> {
 		try {
 			if( where != null && where.toString().length() > 0 ) {
 				System.out.println( "Executing find unique with : " + toString() );
-				System.out.println( "Parameters : " + where.getParameters() );
-				return run.query( Database.get(), toString(), h, where.getParametersArray() );
+				System.out.println( "Parameters : " + getParameters() );
+				return run.query( Database.get(), toString(), h, getParameters().toArray() );
 			}
 
 			System.out.println( "Executing find unique with : " + toString() );
@@ -333,8 +375,8 @@ public class SQLSelect<M extends Model> extends SQLWhereQuery<SQLSelect> {
 		try {
 			if( where != null && where.toString().length() > 0 ) {
 				System.out.println( "Executing find list with : " + toString() );
-				System.out.println( "Parameters : " + where.getParameters() );
-				return run.query( Database.get(), toString(), h, where.getParametersArray() );
+				System.out.println( "Parameters : " + getParameters() );
+				return run.query( Database.get(), toString(), h, getParameters().toArray() );
 			}
 
 			System.out.println( "Executing find list with : " + toString() );
@@ -354,13 +396,23 @@ public class SQLSelect<M extends Model> extends SQLWhereQuery<SQLSelect> {
 		return findUnique() != null;
 	}
 
-	private void appendSelectors( StringBuilder sb ) {
+	private void appendSelectors( StringBuilder sb ) throws IllegalArgumentException {
+		String columnName;
 		if( selectedFields != null && selectedFields.length > 0 ) {
-			for( String selectedColumn : selectedFields ) {
-				sb.append( Model.getFieldNameFromColumnName( modelClass, selectedColumn ) );
-				sb.append( " AS " );
-				sb.append( selectedColumn );
-				sb.append( "," );
+			for( String selectedField : selectedFields ) {
+				if( !rawSelectedFields ) {
+					columnName = Model.getColumnNameFromFieldName( modelClass, selectedField );
+					if( columnName == null ) {
+						throw new IllegalArgumentException( selectedField + " is not a valid field name for model " + getModelClass().getName() );
+					}
+					sb.append( columnName );
+					sb.append( " AS " );
+					sb.append( selectedField );
+					sb.append( "," );
+				} else {
+					sb.append( selectedField );
+					sb.append( "," );
+				}
 			}
 			sb.deleteCharAt( sb.length() - 1 );
 		} else {

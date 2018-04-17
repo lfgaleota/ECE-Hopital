@@ -6,8 +6,7 @@ import ece.ing3.java.projet.exceptions.DatabaseException;
 import org.apache.commons.dbutils.QueryRunner;
 
 import java.sql.SQLException;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 /**
  * SQL insert helper.
@@ -61,7 +60,7 @@ public class SQLInsert implements SQLRequest {
 		QueryRunner run = new QueryRunner();
 
 		try {
-			return run.update( Database.get(), toString(), values );
+			return run.update( Database.get(), toString(), getParameters().toArray() );
 		} catch( SQLException e ) {
 			throw new DatabaseException( e );
 		}
@@ -96,5 +95,10 @@ public class SQLInsert implements SQLRequest {
 		sb.append( "?);" );
 
 		return sb.toString();
+	}
+
+	@Override
+	public List<Object> getParameters() {
+		return new ArrayList<>( values.values() );
 	}
 }

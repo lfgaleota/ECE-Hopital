@@ -6,10 +6,7 @@ import ece.ing3.java.projet.exceptions.DatabaseException;
 import org.apache.commons.dbutils.QueryRunner;
 
 import java.sql.SQLException;
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * SQL update helper.
@@ -66,11 +63,8 @@ public class SQLUpdate extends SQLWhereQuery<SQLUpdate> {
 	public int update() throws IllegalArgumentException, DatabaseException {
 		QueryRunner run = new QueryRunner();
 
-		List<Object> parameters = new LinkedList<>( values.values() );
-		parameters.addAll( where.getParameters() );
-
 		try {
-			return run.update( Database.get(), toString(), parameters );
+			return run.update( Database.get(), toString(), getParameters().toArray() );
 		} catch( SQLException e ) {
 			throw new DatabaseException( e );
 		}
@@ -104,5 +98,12 @@ public class SQLUpdate extends SQLWhereQuery<SQLUpdate> {
 		sb.append( ";" );
 
 		return sb.toString();
+	}
+
+	@Override
+	public List<Object> getParameters() {
+		List<Object> parameters = new ArrayList<>( values.values() );
+		parameters.addAll( where.getParameters() );
+		return parameters;
 	}
 }

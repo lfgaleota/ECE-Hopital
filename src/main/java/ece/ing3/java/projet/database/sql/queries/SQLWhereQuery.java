@@ -1,11 +1,8 @@
 package ece.ing3.java.projet.database.sql.queries;
 
-import ece.ing3.java.projet.database.Database;
 import ece.ing3.java.projet.database.sql.clauses.Where;
-import ece.ing3.java.projet.exceptions.DatabaseException;
-import org.apache.commons.dbutils.QueryRunner;
 
-import java.sql.SQLException;
+import java.util.List;
 
 /**
  * SQL helper for queries supporting Where clause.
@@ -13,7 +10,7 @@ import java.sql.SQLException;
  *
  * @param <T> SQL helper class
  */
-abstract class SQLWhereQuery<T> implements SQLRequest {
+public abstract class SQLWhereQuery<T> implements SQLRequest {
 	Where where = null;
 
 	/**
@@ -99,6 +96,42 @@ abstract class SQLWhereQuery<T> implements SQLRequest {
 	}
 
 	/**
+	 * Init a new Where clause using the provided values and subquery.
+	 *
+	 * @param column     Column to target
+	 * @param comparator Comparator to use
+	 * @param subquery   Comparison value
+	 * @return This SQL select helper
+	 */
+	public T where( String column, String comparator, SQLRequest subquery ) {
+		return this.where( new Where( column, comparator, subquery ) );
+	}
+
+	/**
+	 * Chain a Where clause using the boolean AND, using the provided values and subquery.
+	 *
+	 * @param column     Column to target
+	 * @param comparator Comparator to use
+	 * @param subquery   Comparison value
+	 * @return This SQL select helper
+	 */
+	public T andWhere( String column, String comparator, SQLRequest subquery ) {
+		return this.andWhere( new Where( column, comparator, subquery ) );
+	}
+
+	/**
+	 * Chain a Where clause using the boolean OR, using the provided values and subquery.
+	 *
+	 * @param column     Column to target
+	 * @param comparator Comparator to use
+	 * @param subquery   Comparison value
+	 * @return This SQL select helper
+	 */
+	public T orWhere( String column, String comparator, SQLRequest subquery ) {
+		return this.orWhere( new Where( column, comparator, subquery ) );
+	}
+
+	/**
 	 * Append the builded Where clause to a StringBuilder
 	 *
 	 * @param sb StringBuilder to append to
@@ -108,5 +141,10 @@ abstract class SQLWhereQuery<T> implements SQLRequest {
 			sb.append( " WHERE " );
 			sb.append( where.toString() );
 		}
+	}
+
+	@Override
+	public List<Object> getParameters() {
+		return where.getParameters();
 	}
 }
