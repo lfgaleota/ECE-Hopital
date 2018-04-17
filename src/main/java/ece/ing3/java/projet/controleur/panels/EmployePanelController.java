@@ -2,7 +2,11 @@ package ece.ing3.java.projet.controleur.panels;
 
 import ece.ing3.java.projet.controleur.dialogs.EmployeSearchDialogController;
 import ece.ing3.java.projet.database.sql.Model;
+import ece.ing3.java.projet.database.sql.clauses.Where;
+import ece.ing3.java.projet.database.sql.queries.SQLSelect;
+import ece.ing3.java.projet.modele.employe.Docteur;
 import ece.ing3.java.projet.modele.employe.Employe;
+import ece.ing3.java.projet.modele.employe.Infirmier;
 import ece.ing3.java.projet.modele.tables.EmployeTableModel;
 import ece.ing3.java.projet.modele.tables.TableModel;
 import ece.ing3.java.projet.utils.DialogListener;
@@ -29,6 +33,15 @@ public class EmployePanelController  extends ModelPanelController<Employe> {
 	@Override
 	public ModelSearchDialog createSearchDialog() {
 		return EmployeSearchDialogController.createDialog( this );
+	}
+
+	protected Where modifyWhereClause( Where whereClause ) {
+		if( whereClause == null ) {
+			whereClause = new Where();
+		}
+		whereClause.and( "numero", "NOT IN", new SQLSelect<Infirmier>( Infirmier.class, "numero" ) );
+		whereClause.and( "numero", "NOT IN", new SQLSelect<Docteur>( Docteur.class, "numero" ) );
+		return whereClause;
 	}
 }
 

@@ -14,8 +14,6 @@ import ece.ing3.java.projet.vue.panels.ModelPanel;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.WindowEvent;
-import java.awt.event.WindowListener;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 
@@ -40,6 +38,10 @@ public abstract class ModelPanelController<M extends Model> implements ActionLis
 	protected abstract TableModel<M> buildTableModel();
 	protected abstract ModelPanel<M> buildModelPanel( TableModel<M> tableModel );
 
+	protected Where modifyWhereClause( Where whereClause ) {
+		return whereClause;
+	}
+
 	protected SQLSelect<M> createSelector() {
 		return new SQLSelect<>( getModelClass() );
 	}
@@ -51,6 +53,7 @@ public abstract class ModelPanelController<M extends Model> implements ActionLis
 				System.out.println( "Update started" );
 				try {
 					SQLSelect<M> sql = createSelector();
+					whereClause = modifyWhereClause( whereClause );
 					if( whereClause != null ) {
 						sql.where( whereClause );
 					}
