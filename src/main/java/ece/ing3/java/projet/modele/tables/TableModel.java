@@ -9,7 +9,7 @@ import java.util.List;
 
 public abstract class TableModel<M extends Model> extends AbstractTableModel {
 	List<M> instances;
-	protected static String[] fieldNames;
+	protected String[] fieldNames;
 
 	public TableModel() {
 		fieldNames = Model.getFieldNames( getModelClass() );
