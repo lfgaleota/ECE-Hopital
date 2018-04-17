@@ -26,14 +26,15 @@ public class Chambre extends Model {
 	/**
 	 * Créer une nouvelle chambre vide
 	 */
-	public Chambre() {}
+	public Chambre() {
+	}
 
 	/**
 	 * Créer une nouvelle chambre
 	 *
-	 * @param numeroChambre Numéro de la chambre
-	 * @param nombreLits Nombre de lits dans la chambre
-	 * @param numeroSurveillant  Numéro de l'infirmier surveillant la chambre
+	 * @param numeroChambre       Numéro de la chambre
+	 * @param nombreLits          Nombre de lits dans la chambre
+	 * @param numeroSurveillant   Numéro de l'infirmier surveillant la chambre
 	 * @param codeServiceRattache Code du service auquel est rattaché la chambre
 	 */
 	public Chambre( Long numeroChambre, Integer nombreLits, Long numeroSurveillant, String codeServiceRattache ) {
@@ -45,6 +46,7 @@ public class Chambre extends Model {
 
 	/**
 	 * Récupère le numéro de la chambre
+	 *
 	 * @return Numéro de la chambre
 	 */
 	public Long getNumeroChambre() {
@@ -53,14 +55,16 @@ public class Chambre extends Model {
 
 	/**
 	 * Modifie le numéro de la chambre
+	 *
 	 * @param numeroChambre Nouveau numéro de la chambre
 	 */
-	public void getNumeroChambre( Long numeroChambre ) {
+	public void setNumeroChambre( Long numeroChambre ) {
 		this.numeroChambre = numeroChambre;
 	}
 
 	/**
 	 * Récupère le nombre de lits dans la chambre
+	 *
 	 * @return Nombre de lits dans la chambre
 	 */
 	public Integer getNombreLits() {
@@ -69,6 +73,7 @@ public class Chambre extends Model {
 
 	/**
 	 * Modifie le nombre de lits dans la chambre
+	 *
 	 * @param nombreLits Nombre de lits dans la chambre
 	 */
 	public void setNombreLits( Integer nombreLits ) {
@@ -77,6 +82,7 @@ public class Chambre extends Model {
 
 	/**
 	 * Récupère le numéro du infirmier surveillant la chambre
+	 *
 	 * @return Numéro d'infirmier surveillant la chambre
 	 */
 	public Long getNumeroSurveillant() {
@@ -84,7 +90,17 @@ public class Chambre extends Model {
 	}
 
 	/**
+	 * Modifie le numéro du infirmier surveillant la chambre
+	 *
+	 * @param numeroSurveillant Nouveau numéro d'infirmier surveillant la chambre
+	 */
+	public void setNumeroSurveillant( Long numeroSurveillant ) {
+		this.numeroSurveillant = numeroSurveillant;
+	}
+
+	/**
 	 * Récupère l'infirmier surveillant la chambre
+	 *
 	 * @return Infirmier surveillant la chambre
 	 * @throws DatabaseException Erreur lors de la recherche en base de donnée
 	 */
@@ -94,6 +110,7 @@ public class Chambre extends Model {
 
 	/**
 	 * Modifie l'infirmier surveillant la chambre
+	 *
 	 * @param surveillant Infirmier surveillant la chambre
 	 */
 	public void setSurveillant( Infirmier surveillant ) {
@@ -102,6 +119,7 @@ public class Chambre extends Model {
 
 	/**
 	 * Récupère le code du service auquel est rattaché la chambre
+	 *
 	 * @return Code du service auquel est rattaché la chambre
 	 */
 	public String getCodeServiceRattache() {
@@ -109,7 +127,17 @@ public class Chambre extends Model {
 	}
 
 	/**
+	 * Modifie le code du service auquel est rattaché la chambre
+	 *
+	 * @param codeServiceRattache Nouveau code du service auquel est rattaché la chambre
+	 */
+	public void setCodeServiceRattache( String codeServiceRattache ) {
+		this.codeServiceRattache = codeServiceRattache;
+	}
+
+	/**
 	 * Récupère le service auquel est rattaché la chambre
+	 *
 	 * @return Service auquel est rattaché la chambre
 	 * @throws DatabaseException Erreur lors de la recherche en base de donnée
 	 */
@@ -119,6 +147,7 @@ public class Chambre extends Model {
 
 	/**
 	 * Modifie le service auquel est rattaché la chambre
+	 *
 	 * @param service Nouveau service auquel est rattaché la chambre
 	 */
 	public void setServiceRattache( Service service ) {
@@ -127,6 +156,7 @@ public class Chambre extends Model {
 
 	/**
 	 * Récupère les hospitalisations liées à cette chambre
+	 *
 	 * @return Liste des hospitalisations liées à la chambre
 	 * @throws DatabaseException Erreur lors de la recherche en base de donnée
 	 */
@@ -137,7 +167,7 @@ public class Chambre extends Model {
 	/**
 	 * Recherche une chambre de numéro et code service spécifique
 	 *
-	 * @param numeroChambre Numéro de chambre à rechercher
+	 * @param numeroChambre       Numéro de chambre à rechercher
 	 * @param codeServiceRattache Code du service de rattachement à rechercher
 	 * @return Chambre donnée ou {@code null}
 	 * @throws DatabaseException Erreur lors de la recherche en base de donnée
@@ -158,6 +188,7 @@ public class Chambre extends Model {
 
 	/**
 	 * Génère une représentation textuelle de la chambre
+	 *
 	 * @return Représentation textuelle de la chambre
 	 */
 	@Override
