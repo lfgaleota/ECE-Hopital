@@ -1,5 +1,7 @@
 package ece.ing3.java.projet.database.sql.clauses;
 
+import ece.ing3.java.projet.database.sql.queries.SQLRequest;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -64,6 +66,18 @@ public class Where {
 	}
 
 	/**
+	 * Creates a new chainable Where clause with a subquery.
+	 *
+	 * @param column     Column to target
+	 * @param comparator Comparator to use
+	 * @param subquery   Sub query
+	 */
+	public Where( String column, String comparator, SQLRequest subquery ) {
+		query = "(" + column + " " + comparator + " " + subquery + ")";
+		parameters.addAll( subquery.getParameters() );
+	}
+
+	/**
 	 * Chain a new where clause using the boolean AND.
 	 *
 	 * @param condition Where clause to chain
@@ -115,6 +129,30 @@ public class Where {
 	 */
 	public Where or( String column, String comparator, Object value ) {
 		return this.or( new Where( column, comparator, value ) );
+	}
+
+	/**
+	 * Chain a new where clause using the boolean AND, using the provided values and subquery.
+	 *
+	 * @param column     Column to target
+	 * @param comparator Comparator to use
+	 * @param subquery   Sub query
+	 * @return This Where clause helper
+	 */
+	public Where and( String column, String comparator, SQLRequest subquery ) {
+		return this.and( new Where( column, comparator, subquery ) );
+	}
+
+	/**
+	 * Chain a new where clause using the boolean OR, using the provided values and subquery.
+	 *
+	 * @param column     Column to target
+	 * @param comparator Comparator to use
+	 * @param subquery   Sub query
+	 * @return This Where clause helper
+	 */
+	public Where or( String column, String comparator, SQLRequest subquery ) {
+		return this.or( new Where( column, comparator, subquery ) );
 	}
 
 	/**
