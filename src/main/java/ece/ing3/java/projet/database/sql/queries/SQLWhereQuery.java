@@ -2,6 +2,7 @@ package ece.ing3.java.projet.database.sql.queries;
 
 import ece.ing3.java.projet.database.sql.clauses.Where;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -145,6 +146,6 @@ public abstract class SQLWhereQuery<T> implements SQLRequest {
 
 	@Override
 	public List<Object> getParameters() {
-		return where.getParameters();
+		return ( where != null ? where.getParameters() : null );
 	}
 }
