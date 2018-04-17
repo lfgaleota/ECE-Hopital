@@ -39,13 +39,17 @@ public abstract class ModelPanelController<M extends Model> implements ActionLis
 	protected abstract TableModel<M> buildTableModel();
 	protected abstract ModelPanel<M> buildModelPanel( TableModel<M> tableModel );
 
+	protected SQLSelect<M> createSelector() {
+		return new SQLSelect<>( getModelClass() );
+	}
+
 	private SwingWorker<List<M>, Object> createUpdateWorker() {
 		return new SwingWorker<List<M>, Object>() {
 			@Override
 			protected List<M> doInBackground() {
 				System.out.println( "Update started" );
 				try {
-					SQLSelect<M> sql = ( new SQLSelect<>( getModelClass() ) );
+					SQLSelect<M> sql = createSelector();
 					if( whereClause != null ) {
 						sql.where( whereClause );
 					}
