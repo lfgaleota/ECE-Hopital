@@ -8,11 +8,11 @@ public class ModelToolbar extends JToolBar {
 	private JButton buttonRemove, buttonAdd, buttonModify, buttonSearch, buttonStats;
 
 	public ModelToolbar( String modelName ) {
-		buttonRemove = new JButton( "X" );
-		buttonAdd = new JButton( "+" );
-		buttonModify = new JButton( "M" );
-		buttonSearch = new JButton( "S" );
-		buttonStats = new JButton( "St" );
+		buttonRemove = new JButton( "Supprimer" );
+		buttonAdd = new JButton( "Ajouter" );
+		buttonModify = new JButton( "Modifier" );
+		buttonSearch = new JButton( "Rechercher" );
+		buttonStats = new JButton( "Statistiques" );
 
 		JLabel label = new JLabel( modelName );
 		label.setFont( new Font( label.getName(), Font.BOLD, 18 ) );
