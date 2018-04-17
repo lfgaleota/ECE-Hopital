@@ -6,6 +6,7 @@ import ece.ing3.java.projet.database.sql.clauses.Where;
 import ece.ing3.java.projet.database.sql.queries.SQLSelect;
 import ece.ing3.java.projet.exceptions.DatabaseException;
 import ece.ing3.java.projet.modele.tables.TableModel;
+import ece.ing3.java.projet.utils.DialogListener;
 import ece.ing3.java.projet.utils.Utils;
 import ece.ing3.java.projet.vue.dialogs.ModelSearchDialog;
 import ece.ing3.java.projet.vue.panels.ModelPanel;
@@ -18,7 +19,7 @@ import java.awt.event.WindowListener;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 
-public abstract class ModelPanelController<M extends Model> implements ActionListener {
+public abstract class ModelPanelController<M extends Model> implements ActionListener, DialogListener {
 	protected ModelPanel<M> panel;
 	protected TableModel<M> tableModel;
 	protected Where whereClause;
@@ -108,6 +109,23 @@ public abstract class ModelPanelController<M extends Model> implements ActionLis
 			} else {
 				dialogSearch.toFront();
 			}
+		}
+	}
+
+	@Override
+	public void onDialogSubmitted( ModelSearchDialog dialog ) {
+		if( dialog == dialogSearch ) {
+			whereClause = dialogSearch.getWhereClause();
+			System.out.println( "Where clause : " + whereClause );
+			dialogSearch = null;
+			update();
+		}
+	}
+
+	@Override
+	public void onDialogCancelled( ModelSearchDialog dialog ) {
+		if( dialog == dialogSearch ) {
+			dialogSearch = null;
 		}
 	}
 }

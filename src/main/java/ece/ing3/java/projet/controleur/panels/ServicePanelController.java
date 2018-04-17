@@ -10,17 +10,7 @@ import ece.ing3.java.projet.vue.dialogs.ModelSearchDialog;
 import ece.ing3.java.projet.vue.panels.ModelPanel;
 import ece.ing3.java.projet.vue.panels.ServicePanel;
 
-public class ServicePanelController extends ModelPanelController<Service> implements DialogListener {
-	private static ServicePanelController instance;
-
-	public static ServicePanelController get() {
-		if( instance == null ) {
-			instance = new ServicePanelController();
-		}
-
-		return instance;
-	}
-
+public class ServicePanelController extends ModelPanelController<Service> {
 	@Override
 	protected Class<? extends Model> getModelClass() {
 		return Service.class;
@@ -40,22 +30,4 @@ public class ServicePanelController extends ModelPanelController<Service> implem
 	public ModelSearchDialog createSearchDialog() {
 		return ServiceSearchDialogController.createDialog(this);
 	}
-
-	@Override
-	public void onDialogSubmitted( ModelSearchDialog dialog ) {
-		if( dialog == dialogSearch ) {
-			whereClause = dialogSearch.getWhereClause();
-			System.out.println( "Where clause : " + whereClause );
-			dialogSearch = null;
-			update();
-		}
-	}
-
-	@Override
-	public void onDialogCancelled( ModelSearchDialog dialog ) {
-		if( dialog == dialogSearch ) {
-			dialogSearch = null;
-		}
-	}
-
 }

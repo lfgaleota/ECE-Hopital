@@ -10,16 +10,8 @@ import ece.ing3.java.projet.vue.dialogs.ModelSearchDialog;
 import ece.ing3.java.projet.vue.panels.ChambrePanel;
 import ece.ing3.java.projet.vue.panels.ModelPanel;
 
-public class ChambrePanelController extends ModelPanelController<Chambre> implements DialogListener {
+public class ChambrePanelController extends ModelPanelController<Chambre> {
 	private static ChambrePanelController instance;
-
-	public static ChambrePanelController get() {
-		if( instance == null ) {
-			instance = new ChambrePanelController();
-		}
-
-		return instance;
-	}
 
 	@Override
 	protected Class<? extends Model> getModelClass() {
@@ -40,22 +32,4 @@ public class ChambrePanelController extends ModelPanelController<Chambre> implem
 	public ModelSearchDialog createSearchDialog() {
 		return ChambreSearchDialogController.createDialog( this );
 	}
-
-	@Override
-	public void onDialogSubmitted( ModelSearchDialog dialog ) {
-		if( dialog == dialogSearch ) {
-			whereClause = dialogSearch.getWhereClause();
-			System.out.println( "Where clause : " + whereClause );
-			dialogSearch = null;
-			update();
-		}
-	}
-
-	@Override
-	public void onDialogCancelled( ModelSearchDialog dialog ) {
-		if( dialog == dialogSearch ) {
-			dialogSearch = null;
-		}
-	}
-
 }

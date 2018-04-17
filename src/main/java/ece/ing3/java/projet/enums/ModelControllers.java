@@ -1,14 +1,6 @@
 package ece.ing3.java.projet.enums;
 
-import ece.ing3.java.projet.controleur.panels.MaladePanelController;
-import ece.ing3.java.projet.controleur.panels.ServicePanelController;
-import ece.ing3.java.projet.controleur.panels.EmployePanelController;
-import ece.ing3.java.projet.controleur.panels.DocteurPanelController;
-import ece.ing3.java.projet.controleur.panels.InfirmierPanelController;
-import ece.ing3.java.projet.controleur.panels.ChambrePanelController;
-import ece.ing3.java.projet.controleur.panels.HospitalisationPanelController;
-import ece.ing3.java.projet.controleur.panels.SoignePanelController;
-import ece.ing3.java.projet.controleur.panels.ModelPanelController;
+import ece.ing3.java.projet.controleur.panels.*;
 import ece.ing3.java.projet.utils.Constants;
 import ece.ing3.java.projet.utils.Strings;
 import ece.ing3.java.projet.vue.panels.ModelPanel;
@@ -17,15 +9,14 @@ import java.util.HashMap;
 import java.util.Map;
 
 public enum ModelControllers {
-	MALADE( MaladePanelController.get() ),
-	SERVICE( ServicePanelController.get()  ),
-	EMPLOYE(EmployePanelController.get( )),
-	DOCTEUR(DocteurPanelController.get()),
-	INFIRMIER(InfirmierPanelController.get() ),
-	CHAMBRE(ChambrePanelController.get()),
-	HOSPITALISATION(HospitalisationPanelController.get()),
-	SOIGNE(SoignePanelController.get());
-	
+	MALADE( new MaladePanelController() ),
+	SERVICE( new ServicePanelController() ),
+	EMPLOYE( new EmployePanelController() ),
+	DOCTEUR( new DocteurPanelController() ),
+	INFIRMIER( new InfirmierPanelController() ),
+	CHAMBRE( new ChambrePanelController() ),
+	HOSPITALISATION( new HospitalisationPanelController() ),
+	SOIGNE( new SoignePanelController() );
 
 	private String prettyName;
 	private ModelPanelController panelController;
