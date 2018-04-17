@@ -73,8 +73,12 @@ public class Where {
 	 * @param subquery   Sub query
 	 */
 	public Where( String column, String comparator, SQLRequest subquery ) {
-		query = "(" + column + " " + comparator + " " + subquery + ")";
-		parameters.addAll( subquery.getParameters() );
+		String subqueryStr = subquery.toString();
+		query = "(" + column + " " + comparator + " (" + subqueryStr.substring( 0, subqueryStr.length() - 1 ) + "))";
+		List<Object> params = subquery.getParameters();
+		if( params != null ) {
+			parameters.addAll( params );
+		}
 	}
 
 	/**
