@@ -3,6 +3,7 @@ package ece.ing3.java.projet.modele.hopital;
 import ece.ing3.java.projet.database.sql.Model;
 import ece.ing3.java.projet.database.sql.annotations.Column;
 import ece.ing3.java.projet.exceptions.DatabaseException;
+import ece.ing3.java.projet.modele.employe.Employe;
 import ece.ing3.java.projet.modele.finders.MaladeFinder;
 
 import java.util.List;
@@ -11,6 +12,10 @@ import java.util.List;
  * Modèle de Malade stocké en base de donnée
  */
 public class Malade extends Model {
+
+    public static List<Employe> findBaseList() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 	private Long numero;
 	private String nom;
 	private String prenom;

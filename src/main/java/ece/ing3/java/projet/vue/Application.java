@@ -41,6 +41,9 @@ public class Application extends JFrame implements ActionListener {
 	// JSplitPane ongletandhaut = new JSplitPane(JSplitPane.VERTICAL_SPLIT); // ou
 	/// VERTICAL_SPLIT ///METHODE AVEC ONGLET/BOUTONS INDEPENDANT
 	private JSplitPane split;
+        
+        	private Statistiques mesStats = new Statistiques();
+	
 
 	/// LES 5 BOUTONS DE CHAQUE ONGLET ICI ONGLET0
 	/*private JButton boutonstat = new JButton(new ImageIcon((new ImageIcon(Constants.RESOURCE_PATH_STATLOGO).getImage()
@@ -285,7 +288,13 @@ public class Application extends JFrame implements ActionListener {
 		boutonAjouter.addActionListener(this);
 		boutonSup.addActionListener(this);
 		*/
-
+                
+                /*
+                
+                ///CREEER LES PIECHART
+                mesStats.creer_Statistiques();
+                
+                */
 		setLayout( new BorderLayout() );
 
 		TabPanel.prepare();
