@@ -10,17 +10,7 @@ import ece.ing3.java.projet.vue.dialogs.ModelSearchDialog;
 import ece.ing3.java.projet.vue.panels.EmployePanel;
 import ece.ing3.java.projet.vue.panels.ModelPanel;
 
-public class EmployePanelController  extends ModelPanelController<Employe> implements DialogListener {
-	private static MaladePanelController instance;
-
-	public static MaladePanelController get() {
-		if( instance == null ) {
-			instance = new MaladePanelController();
-		}
-
-		return instance;
-	}
-
+public class EmployePanelController  extends ModelPanelController<Employe> {
 	@Override
 	protected Class<? extends Model> getModelClass() {
 		return Employe.class;
@@ -39,23 +29,6 @@ public class EmployePanelController  extends ModelPanelController<Employe> imple
 	@Override
 	public ModelSearchDialog createSearchDialog() {
 		return EmployeSearchDialogController.createDialog( this );
-	}
-
-	@Override
-	public void onDialogSubmitted( ModelSearchDialog dialog ) {
-		if( dialog == dialogSearch ) {
-			whereClause = dialogSearch.getWhereClause();
-			System.out.println( "Where clause : " + whereClause );
-			dialogSearch = null;
-			update();
-		}
-	}
-
-	@Override
-	public void onDialogCancelled( ModelSearchDialog dialog ) {
-		if( dialog == dialogSearch ) {
-			dialogSearch = null;
-		}
 	}
 }
 

@@ -12,17 +12,7 @@ import ece.ing3.java.projet.vue.dialogs.ModelSearchDialog;
 import ece.ing3.java.projet.vue.panels.InfirmierPanel;
 import ece.ing3.java.projet.vue.panels.ModelPanel;
 
-public class InfirmierPanelController extends ModelPanelController<Infirmier> implements DialogListener {
-	private static InfirmierPanelController instance;
-
-	public static InfirmierPanelController get() {
-		if( instance == null ) {
-			instance = new InfirmierPanelController();
-		}
-
-		return instance;
-	}
-
+public class InfirmierPanelController extends ModelPanelController<Infirmier> {
 	@Override
 	protected Class<? extends Model> getModelClass() {
 		return Infirmier.class;
@@ -47,22 +37,5 @@ public class InfirmierPanelController extends ModelPanelController<Infirmier> im
 	@Override
 	public ModelSearchDialog createSearchDialog() {
 		return InfirmierSearchDialogController.createDialog( this );
-	}
-
-	@Override
-	public void onDialogSubmitted( ModelSearchDialog dialog ) {
-		if( dialog == dialogSearch ) {
-			whereClause = dialogSearch.getWhereClause();
-			System.out.println( "Where clause : " + whereClause );
-			dialogSearch = null;
-			update();
-		}
-	}
-
-	@Override
-	public void onDialogCancelled( ModelSearchDialog dialog ) {
-		if( dialog == dialogSearch ) {
-			dialogSearch = null;
-		}
 	}
 }

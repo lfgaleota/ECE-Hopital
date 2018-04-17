@@ -12,17 +12,7 @@ import ece.ing3.java.projet.vue.dialogs.ModelSearchDialog;
 import ece.ing3.java.projet.vue.panels.DocteurPanel;
 import ece.ing3.java.projet.vue.panels.ModelPanel;
 
-public class DocteurPanelController  extends ModelPanelController<Docteur> implements DialogListener {
-	private static DocteurPanelController instance;
-
-	public static DocteurPanelController get() {
-		if( instance == null ) {
-			instance = new DocteurPanelController();
-		}
-
-		return instance;
-	}
-
+public class DocteurPanelController  extends ModelPanelController<Docteur> {
 	@Override
 	protected Class<? extends Model> getModelClass() {
 		return Docteur.class;
@@ -47,23 +37,6 @@ public class DocteurPanelController  extends ModelPanelController<Docteur> imple
 	@Override
 	public ModelSearchDialog createSearchDialog() {
 		return DocteurSearchDialogController.createDialog( this );
-	}
-
-	@Override
-	public void onDialogSubmitted( ModelSearchDialog dialog ) {
-		if( dialog == dialogSearch ) {
-			whereClause = dialogSearch.getWhereClause();
-			System.out.println( "Where clause : " + whereClause );
-			dialogSearch = null;
-			update();
-		}
-	}
-
-	@Override
-	public void onDialogCancelled( ModelSearchDialog dialog ) {
-		if( dialog == dialogSearch ) {
-			dialogSearch = null;
-		}
 	}
 }
 
