@@ -2,7 +2,9 @@ package ece.ing3.java.projet.controleur.panels;
 
 import ece.ing3.java.projet.controleur.dialogs.DocteurSearchDialogController;
 import ece.ing3.java.projet.database.sql.Model;
+import ece.ing3.java.projet.database.sql.queries.SQLSelect;
 import ece.ing3.java.projet.modele.employe.Docteur;
+import ece.ing3.java.projet.modele.employe.Employe;
 import ece.ing3.java.projet.modele.tables.DocteurTableModel;
 import ece.ing3.java.projet.modele.tables.TableModel;
 import ece.ing3.java.projet.utils.DialogListener;
@@ -34,6 +36,12 @@ public class DocteurPanelController  extends ModelPanelController<Docteur> imple
 	@Override
 	protected ModelPanel<Docteur> buildModelPanel( TableModel<Docteur> tableModel ) {
 		return new DocteurPanel( tableModel );
+	}
+
+	@Override
+	@SuppressWarnings( "unchecked" )
+	protected SQLSelect<Docteur> createSelector() {
+		return new SQLSelect<Docteur>( new Class[]{ Docteur.class, Employe.class } );
 	}
 
 	@Override

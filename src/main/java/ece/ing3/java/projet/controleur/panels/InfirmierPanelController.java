@@ -2,6 +2,8 @@ package ece.ing3.java.projet.controleur.panels;
 
 import ece.ing3.java.projet.controleur.dialogs.InfirmierSearchDialogController;
 import ece.ing3.java.projet.database.sql.Model;
+import ece.ing3.java.projet.database.sql.queries.SQLSelect;
+import ece.ing3.java.projet.modele.employe.Employe;
 import ece.ing3.java.projet.modele.employe.Infirmier;
 import ece.ing3.java.projet.modele.tables.InfirmierTableModel;
 import ece.ing3.java.projet.modele.tables.TableModel;
@@ -34,6 +36,12 @@ public class InfirmierPanelController extends ModelPanelController<Infirmier> im
 	@Override
 	protected ModelPanel<Infirmier> buildModelPanel( TableModel<Infirmier> tableModel ) {
 		return new InfirmierPanel( tableModel );
+	}
+
+	@Override
+	@SuppressWarnings( "unchecked" )
+	protected SQLSelect<Infirmier> createSelector() {
+		return new SQLSelect<Infirmier>( new Class[]{ Infirmier.class, Employe.class } );
 	}
 
 	@Override
