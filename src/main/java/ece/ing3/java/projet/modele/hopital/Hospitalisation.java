@@ -14,9 +14,9 @@ import java.util.List;
 public class Hospitalisation extends Model {
 	@Column( name = "no_malade" )
 	private Long numeroMalade;
-	@Column( name = "codeS_service" )
+	@Column( name = "code_service" )
 	private String codeService;
-	@Column( name = "no_hambre" )
+	@Column( name = "no_chambre" )
 	private Long numeroChambre;
 	@Column( name = "lit" )
 	private Integer numeroLit;
