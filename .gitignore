@@ -99,3 +99,5 @@ buildNumber.properties
 src/main/private-resources/*
 !src/main/private-resources/.empty
 /bin/
+src/main/java/ece/ing3/java/projet/vue/dialogs/ModelModifyDialog.java
+src/main/java/ece/ing3/java/projet/vue/dialogs/ChambreModifyDialog.java
