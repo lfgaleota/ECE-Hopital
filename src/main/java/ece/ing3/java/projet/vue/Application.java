@@ -289,12 +289,12 @@ public class Application extends JFrame implements ActionListener {
 		boutonSup.addActionListener(this);
 		*/
                 
-                /*
+                
                 
                 ///CREEER LES PIECHART
                 mesStats.creer_Statistiques();
                 
-                */
+                
 		setLayout( new BorderLayout() );
 
 		TabPanel.prepare();

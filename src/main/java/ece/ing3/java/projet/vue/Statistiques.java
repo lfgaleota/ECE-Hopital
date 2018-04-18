@@ -2,7 +2,11 @@ package ece.ing3.java.projet.vue;
 
 import ece.ing3.java.projet.exceptions.DatabaseException;
 import ece.ing3.java.projet.modele.administration.Service;
+import ece.ing3.java.projet.modele.employe.Docteur;
 import ece.ing3.java.projet.modele.employe.Employe;
+import ece.ing3.java.projet.modele.employe.Infirmier;
+import ece.ing3.java.projet.modele.hopital.Chambre;
+import ece.ing3.java.projet.modele.hopital.Hospitalisation;
 import ece.ing3.java.projet.modele.hopital.Malade;
 import java.awt.GridLayout;
 import java.util.ArrayList;
@@ -49,7 +53,7 @@ public class Statistiques  extends JFrame {
             //On crée un liste de malade
 		List<Malade> malistemalade = new ArrayList<Malade>();
 		try {
-			malistemalade = Malade.findList(); // récuperation des données de la bdd concernant les employes
+			malistemalade = Malade.findList(); // récuperation des données de la bdd concernant les malade
 		} catch (DatabaseException e1) {
 			e1.printStackTrace();
 		}
@@ -57,27 +61,64 @@ public class Statistiques  extends JFrame {
                 
                 List<Service> malisteservice = new ArrayList<Service>();
 		try {
-			malisteservice = Service.findList(); // récuperation des données de la bdd concernant les employes
+			malisteservice = Service.findList(); // récuperation des données de la bdd concernant les service
+		} catch (DatabaseException e1) {
+			e1.printStackTrace();
+		}
+                
+                List<Hospitalisation> malistehospitalisation = new ArrayList<Hospitalisation>();
+		try {
+			malistehospitalisation = Hospitalisation.findList(); // récuperation des données de la bdd concernant les hospitalisations
 		} catch (DatabaseException e1) {
 			e1.printStackTrace();
 		}
                 
 
+                List<Chambre> malistechambre = new ArrayList<Chambre>();
+		try {
+			malistechambre = Chambre.findList(); // récuperation des données de la bdd concernant les chambre
+		} catch (DatabaseException e1) {
+			e1.printStackTrace();
+		}
                 
+                List<Docteur> malistedocteur = new ArrayList<Docteur>();
+		try {
+			malistedocteur = Docteur.findList(); // récuperation des données de la bdd concernant les chambre
+		} catch (DatabaseException e1) {
+			e1.printStackTrace();
+		}
+                
+                List<Infirmier> malisteinfirmier = new ArrayList<Infirmier>();
+		try {
+			malisteinfirmier = Infirmier.findList(); // récuperation des données de la bdd concernant les chambre
+		} catch (DatabaseException e1) {
+			e1.printStackTrace();
+		}
             
 		GridLayout mygridLayout = new GridLayout(3,2); 
 		this.setLayout(mygridLayout);
 		mygridLayout.setHgap(10);
 		mygridLayout.setVgap(10);
-		  
+		 
+               
+		PieChart2D P= new PieChart2D(1,malisteemploye,malistemalade,malistechambre,malistedocteur,malisteinfirmier);
+                this.getContentPane().add(P.getPieChart2D());         
+                PieChart2D D= new PieChart2D(2,malisteemploye,malistemalade,malistechambre,malistedocteur,malisteinfirmier);
+                this.getContentPane().add(D.getPieChart2D());      
+                PieChart2D F= new PieChart2D(3,malisteemploye,malistemalade,malistechambre,malistedocteur,malisteinfirmier);
+                this.getContentPane().add(F.getPieChart2D());   
+                PieChart2D G= new PieChart2D(4,malisteemploye,malistemalade,malistechambre,malistedocteur,malisteinfirmier);
+                this.getContentPane().add(G.getPieChart2D());   
+                //PieChart2D D= new PieChart2D(malisteemploye,malistemalade);
+		//PieChart3D P3= new PieChart3D();
+		//BarChart B = new BarChart();
 		
-		PieChart2D P= new PieChart2D(malisteemploye);
-		PieChart3D P3= new PieChart3D();
-		BarChart B = new BarChart();
 		
-		this.getContentPane().add(P.getPieChart2D());
-		this.getContentPane().add(P3.getPieChart3D());
-		this.getContentPane().add(B.getBarChart());
+            
+                
+		//this.getContentPane().add(P3.getPieChart3D());
+		//this.getContentPane().add(B.getBarChart());
+                //this.getContentPane().add(D.getPieChart2D());
 		
 		this.pack();
 	}
