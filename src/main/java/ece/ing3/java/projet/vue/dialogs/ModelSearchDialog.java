@@ -15,7 +15,8 @@ public abstract class ModelSearchDialog extends JFrame {
 	protected ModelInputList inputList;
 	private JButton submit;
 	private JButton cancel;
-
+	private JButton reset;
+	
 	private boolean validated;
 
 	public ModelSearchDialog() {
@@ -30,12 +31,15 @@ public abstract class ModelSearchDialog extends JFrame {
 
 		this.add( this.inputList, BorderLayout.CENTER );
 
-		JPanel bottom = new JPanel( new BorderLayout() );
+		JPanel bottom = new JPanel( new FlowLayout() );
 		this.cancel = new JButton( "Annuler" );
-		bottom.add( cancel, BorderLayout.LINE_START );
+		bottom.add( cancel );
 		this.submit = new JButton( "Valider" );
-		bottom.add( submit, BorderLayout.LINE_END );
-		this.add( bottom, BorderLayout.PAGE_END );
+		bottom.add( submit );
+		this.reset = new JButton( "Annuler La recherche" );
+		bottom.add( reset );		
+		
+		this.add( bottom, BorderLayout.SOUTH );
 	}
 
 	public abstract ModelInputList build();
@@ -51,6 +55,7 @@ public abstract class ModelSearchDialog extends JFrame {
 	public void addActionListener( ActionListener actionListener ) {
 		submit.addActionListener( actionListener );
 		cancel.addActionListener( actionListener );
+		reset.addActionListener( actionListener );
 	}
 
 	public boolean isValidated() {
