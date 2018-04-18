@@ -3,7 +3,9 @@ package ece.ing3.java.projet.vue.components;
 import ece.ing3.java.projet.database.sql.Model;
 import ece.ing3.java.projet.modele.employe.Infirmier;
 import ece.ing3.java.projet.vue.components.inputs.BaseInput;
+import ece.ing3.java.projet.vue.components.inputs.FloatInput;
 import ece.ing3.java.projet.vue.components.inputs.LongInput;
+import ece.ing3.java.projet.vue.components.inputs.RotationInput;
 import ece.ing3.java.projet.vue.components.inputs.StringInput;
 
 public class InfirmierInputList extends ModelInputList {
@@ -26,9 +28,9 @@ public class InfirmierInputList extends ModelInputList {
 			case "numeroTelephone":
 				return new StringInput( columnName, true );
 			case "rotation":
-				return new StringInput( columnName, true ); //de type rotation normalement
+				return new RotationInput( columnName, true );
 			case "salaire":
-				return new StringInput( columnName, true ); // de type Float normalement
+				return new FloatInput( columnName, true );
 			case "codeService":
 				return new StringInput( columnName, true );
 
