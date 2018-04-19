@@ -9,9 +9,11 @@ import ece.ing3.java.projet.database.sql.queries.SQLInsert;
 import ece.ing3.java.projet.database.sql.queries.SQLSelect;
 import ece.ing3.java.projet.database.sql.queries.SQLUpdate;
 import ece.ing3.java.projet.exceptions.DatabaseException;
+import org.apache.commons.beanutils.BeanUtils;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
 import java.util.*;
 
 /**
@@ -139,7 +141,7 @@ public abstract class Model {
 		return fieldNames.get( modelClass );
 	}
 
-	private static void processFields( Class<? extends Model> modelClass, FieldProcessor fieldProcessor, boolean silenceIllegalAccess ) throws IllegalAccessException {
+	private static void processFields( Class<? extends Model> modelClass, FieldProcessor fieldProcessor, boolean silenceIllegalAccess, boolean onlyClassField ) throws IllegalAccessException {
 		Class currentClass = modelClass;
 		while( currentClass != Model.class ) {
 			for( Field field : currentClass.getDeclaredFields() ) {
@@ -152,6 +154,9 @@ public abstract class Model {
 						e.printStackTrace();
 					}
 				}
+			}
+			if( onlyClassField ) {
+				break;
 			}
 			currentClass = currentClass.getSuperclass();
 		}
@@ -173,7 +178,7 @@ public abstract class Model {
 					fieldMap.put( field.getName(), getColumnName( field ) );
 					fieldNameList.add( field.getName() );
 				}
-			}, true );
+			}, true, false );
 		} catch( IllegalAccessException e ) {
 			e.printStackTrace();
 		}
@@ -202,9 +207,9 @@ public abstract class Model {
 						field.setAccessible( true );
 					}
 
-					whereClause.and( field.getName(), "=", field.get( this ) );
+					whereClause.and( getColumnNameFromFieldName( getClass(), field.getName() ), "=", field.get( this ) );
 				}
-			}, false );
+			}, false, false );
 
 			return true;
 		} catch( IllegalAccessException e ) {
@@ -212,6 +217,17 @@ public abstract class Model {
 		}
 
 		return false;
+	}
+
+	private Model createSuperInstance() {
+		try {
+			Model model = (Model) getClass().getSuperclass().newInstance();
+			BeanUtils.copyProperties( model, this );
+			return model;
+		} catch( InstantiationException | IllegalAccessException | InvocationTargetException e ) {
+			e.printStackTrace();
+		}
+		return null;
 	}
 
 	private int insert() throws DatabaseException {
@@ -231,7 +247,7 @@ public abstract class Model {
 
 					req.add( getColumnName( field ), val );
 				}
-			}, false );
+			}, false, true );
 		} catch( IllegalAccessException e ) {
 			throw new DatabaseException( "Unable to access model field.", e );
 		} catch( NullPointerException e ) {
@@ -257,7 +273,7 @@ public abstract class Model {
 						req.set( getColumnName( field ), value );
 					}
 				}
-			}, false );
+			}, false, true );
 		} catch( IllegalAccessException e ) {
 			throw new DatabaseException( "Unable to access model field.", e );
 		}
@@ -272,6 +288,13 @@ public abstract class Model {
 	 * @throws DatabaseException Error occurred while saving to database
 	 */
 	public int save() throws DatabaseException {
+		if( getClass().getSuperclass() != Model.class ) {
+			Model model = createSuperInstance();
+			if( model != null ) {
+				model.save();
+			}
+		}
+
 		SQLSelect selectHelper = new SQLSelect( getClass() );
 
 		Where whereClause = new Where();
