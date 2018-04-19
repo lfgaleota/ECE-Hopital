@@ -35,15 +35,16 @@ import ece.ing3.java.projet.vue.panels.TabPanel;
  * @author Nicolas
  */
 public class Application extends JFrame implements ActionListener {
+	private static Application instance;
+
 	private JTabbedPane tabs;
 	/// LE JSPLIT QUIVA PERMETTRE D AVOIR DEUX PANNEAUX PAR ONGLET , UN POUR LES
 	/// BOUTONS DU HAUT L AUTRE POUR L AFFICHAGE
 	// JSplitPane ongletandhaut = new JSplitPane(JSplitPane.VERTICAL_SPLIT); // ou
 	/// VERTICAL_SPLIT ///METHODE AVEC ONGLET/BOUTONS INDEPENDANT
 	private JSplitPane split;
-        
-        	private Statistiques mesStats = new Statistiques();
-	
+	private Statistiques mesStats = new Statistiques();
+
 
 	/// LES 5 BOUTONS DE CHAQUE ONGLET ICI ONGLET0
 	/*private JButton boutonstat = new JButton(new ImageIcon((new ImageIcon(Constants.RESOURCE_PATH_STATLOGO).getImage()
@@ -117,7 +118,7 @@ public class Application extends JFrame implements ActionListener {
 			new BasePanel(Color.GRAY) };*/
 
 	/// LA FENETRE CONTIENT LES PANNEAUX (CONTENU DES ONGLETS)
-	public Application() {
+	private Application() {
 		// this.setLocationRelativeTo(null);
 		this.setTitle( "Projet Hopital" );
 		this.setSize( ( int ) getToolkit().getScreenSize().getWidth(), ( ( int ) getToolkit().getScreenSize().getHeight() ) );
@@ -288,13 +289,13 @@ public class Application extends JFrame implements ActionListener {
 		boutonAjouter.addActionListener(this);
 		boutonSup.addActionListener(this);
 		*/
-                
-                
-                
+
+
+
                 ///CREEER LES PIECHART
                 mesStats.creer_Statistiques();
-                
-                
+
+
 		setLayout( new BorderLayout() );
 
 		TabPanel.prepare();
@@ -310,6 +311,14 @@ public class Application extends JFrame implements ActionListener {
 		add( tabs, BorderLayout.CENTER );
 
 		this.setVisible( true );
+	}
+
+	public static Application get() {
+		if( instance == null ) {
+			instance = new Application();
+		}
+
+		return instance;
 	}
 
 	@Override

@@ -9,7 +9,7 @@ public class Main {
 	public static void main( String[] args ) throws Exception {
 		Configuration.init();
 		Database.init();
-		new Application();
+		Application.get();
 	}
 
 	public static void quit() {
