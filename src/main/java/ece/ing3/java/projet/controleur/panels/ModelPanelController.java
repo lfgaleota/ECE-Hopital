@@ -118,7 +118,11 @@ public abstract class ModelPanelController<M extends Model> implements ActionLis
 	@Override
 	public void onDialogSubmitted( JDialog dialog ) {
 		if( dialog == dialogSearch ) {
-			whereClause = dialogSearch.getWhereClause();
+			if( !dialogSearch.isResetFilters() ) {
+				whereClause = dialogSearch.getWhereClause();
+			} else {
+				whereClause = null;
+			}
 			dialogSearch = null;
 			update();
 		} else if( dialog == dialogDelete ) {

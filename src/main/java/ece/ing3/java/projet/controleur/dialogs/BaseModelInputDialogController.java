@@ -12,8 +12,8 @@ import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 
 public abstract class BaseModelInputDialogController implements ActionListener, WindowListener {
-	private BaseModelInputDialog dialog;
-	private DialogListener listener;
+	protected BaseModelInputDialog dialog;
+	protected DialogListener listener;
 
 	protected BaseModelInputDialogController( BaseModelInputDialog dialog, DialogListener listener ) {
 		this.dialog = dialog;
