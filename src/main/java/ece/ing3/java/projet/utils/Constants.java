@@ -27,6 +27,8 @@ public class Constants {
 
 	public static final String MODEL_STRINGS_PREFIX = "model.";
 
+	public static final String STRINGS_SUFFIX_PLURAL = ".plural";
+
 	public static final Integer WIDTH_FRAME = 1100;
 	public static final Integer HEIGHT_FRAME = 800;
 }

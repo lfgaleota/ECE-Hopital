@@ -3,23 +3,24 @@ package ece.ing3.java.projet.vue.dialogs;
 import java.awt.*;
 import java.awt.event.ActionListener;
 
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JPanel;
+import javax.swing.*;
 
 import ece.ing3.java.projet.database.sql.clauses.Where;
+import ece.ing3.java.projet.vue.Application;
 import ece.ing3.java.projet.vue.components.ModelInputList;
 import ece.ing3.java.projet.vue.components.inputs.BaseInput;
 
-public abstract class ModelSearchDialog extends JFrame {
+public abstract class ModelSearchDialog extends JDialog {
 	protected ModelInputList inputList;
 	private JButton submit;
 	private JButton cancel;
 	private JButton reset;
-	
+
 	private boolean validated;
 
 	public ModelSearchDialog() {
+		super( Application.get() );
+
 		this.setTitle( "Recherche" );
 		this.setLayout( new BorderLayout() );
 		this.setSize( 500, 300 );
@@ -37,8 +38,8 @@ public abstract class ModelSearchDialog extends JFrame {
 		this.submit = new JButton( "Valider" );
 		bottom.add( submit );
 		this.reset = new JButton( "Annuler La recherche" );
-		bottom.add( reset );		
-		
+		bottom.add( reset );
+
 		this.add( bottom, BorderLayout.SOUTH );
 	}
 
