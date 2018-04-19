@@ -257,7 +257,7 @@ public abstract class Model {
 		return req.insert();
 	}
 
-	private int update() throws DatabaseException {
+	private int update( Where whereClause ) throws DatabaseException {
 		SQLUpdate req = new SQLUpdate( getClass() );
 
 		try {
@@ -278,7 +278,7 @@ public abstract class Model {
 			throw new DatabaseException( "Unable to access model field.", e );
 		}
 
-		return req.update();
+		return req.where( whereClause ).update();
 	}
 
 	/**
@@ -304,7 +304,7 @@ public abstract class Model {
 		selectHelper.where( whereClause );
 
 		if( selectHelper.hasAtLeastOne() ) {
-			return update();
+			return update( whereClause );
 		}
 
 		return insert();
