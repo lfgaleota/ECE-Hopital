@@ -1,13 +1,17 @@
 package ece.ing3.java.projet.vue.components.inputs;
+
 import ece.ing3.java.projet.enums.Specialite;
 
-import javax.swing.JTextField;
+import javax.swing.*;
 
-public class SpecialiteInput extends JTextField implements BaseInput {
+public class SpecialiteInput extends JPanel implements BaseInput {
+	private JComboBox<Specialite> comboBox;
 	private String columnName;
 
 	public SpecialiteInput( String columnName, boolean isSearch ) {
 		this.columnName = columnName;
+		this.comboBox = new JComboBox<>( Specialite.values() );
+		add( this.comboBox );
 	}
 
 	@Override
@@ -17,13 +21,13 @@ public class SpecialiteInput extends JTextField implements BaseInput {
 
 	@Override
 	public boolean isFilled() {
-		return getText().length() > 0;
+		return comboBox.getSelectedItem() != null;
 	}
 
 	@Override
 	public Object getValue() {
 		try {
-			return Specialite.valueOf( getText() );
+			return ( isFilled() ? comboBox.getSelectedItem().toString() : null );
 		} catch( NumberFormatException e ) {
 			throw new IllegalArgumentException( "Valeur numérique invalide.", e );
 		}
@@ -31,6 +35,6 @@ public class SpecialiteInput extends JTextField implements BaseInput {
 
 	@Override
 	public void setValue( Object value ) throws IllegalArgumentException {
-		setText( String.valueOf( value ) );
+		comboBox.setSelectedItem( Specialite.valueOf( String.valueOf( value ) ) );
 	}
 }

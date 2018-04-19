@@ -24,7 +24,7 @@ public class DocteurInputList extends ModelInputList {
 			case "numeroTelephone":
 				return new StringInput( columnName, true );
 			case "specialite":
-				return new StringInput( columnName, true );
+				return new SpecialiteInput( columnName, true );
 
 		}
 
