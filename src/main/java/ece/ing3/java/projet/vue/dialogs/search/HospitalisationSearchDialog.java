@@ -1,7 +1,7 @@
 package ece.ing3.java.projet.vue.dialogs.search;
 
-import ece.ing3.java.projet.vue.components.ModelInputList;
-import ece.ing3.java.projet.vue.components.HospitalisationInputList;
+import ece.ing3.java.projet.vue.components.inputlists.ModelInputList;
+import ece.ing3.java.projet.vue.components.inputlists.HospitalisationInputList;
 
 public class HospitalisationSearchDialog extends ModelSearchDialog{
 	@Override
