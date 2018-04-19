@@ -21,4 +21,15 @@ public class ModelSearchDialogController extends BaseModelInputDialogController 
 		new ModelSearchDialogController( dialog, listener );
 		return dialog;
 	}
+
+	@Override
+	public void actionPerformed( ActionEvent actionEvent ) {
+		if( actionEvent.getSource() == ( (ModelSearchDialog) dialog ).getReset() ) {
+			this.dialog.setValidated( true );
+			( (ModelSearchDialog) this.dialog ).setResetFilters( true );
+			dialog.dispose();
+		}
+
+		super.actionPerformed( actionEvent );
+	}
 }
