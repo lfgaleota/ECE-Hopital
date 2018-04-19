@@ -11,6 +11,8 @@ import org.apache.commons.dbutils.ResultSetHandler;
 import org.apache.commons.dbutils.handlers.BeanHandler;
 import org.apache.commons.dbutils.handlers.BeanListHandler;
 
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Arrays;
 import java.util.Collections;
@@ -394,6 +396,27 @@ public class SQLSelect<M extends Model> extends SQLWhereQuery<SQLSelect> {
 	 */
 	public boolean hasAtLeastOne() throws DatabaseException {
 		return findUnique() != null;
+	}
+
+	/**
+	 * Execute the built query and return a raw ResultSet
+	 *
+	 * @return ResultSet
+	 * @throws DatabaseException Database error
+	 */
+	public ResultSet findRaw() throws DatabaseException {
+		try {
+			PreparedStatement stmt = Database.preparedStatement( toString() );
+			if( getParameters() != null ) {
+				List<Object> parameters = getParameters();
+				for( int i = 0; i < parameters.size(); i++ ) {
+					stmt.setObject( i + 1, parameters.get( i ) );
+				}
+			}
+			return stmt.executeQuery();
+		} catch( SQLException e ) {
+			throw new DatabaseException( e );
+		}
 	}
 
 	private void appendSelectors( StringBuilder sb ) throws IllegalArgumentException {
