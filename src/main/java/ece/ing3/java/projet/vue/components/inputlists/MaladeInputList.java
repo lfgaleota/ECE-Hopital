@@ -1,13 +1,15 @@
-package ece.ing3.java.projet.vue.components;
+package ece.ing3.java.projet.vue.components.inputlists;
 
 import ece.ing3.java.projet.database.sql.Model;
-import ece.ing3.java.projet.modele.employe.Infirmier;
-import ece.ing3.java.projet.vue.components.inputs.*;
+import ece.ing3.java.projet.modele.hopital.Malade;
+import ece.ing3.java.projet.vue.components.inputs.BaseInput;
+import ece.ing3.java.projet.vue.components.inputs.LongIdInput;
+import ece.ing3.java.projet.vue.components.inputs.StringInput;
 
-public class InfirmierInputList extends ModelInputList {
+public class MaladeInputList extends ModelInputList {
 	@Override
 	protected Class<? extends Model> getModelClass() {
-		return Infirmier.class;
+		return Malade.class;
 	}
 
 	@Override
@@ -23,16 +25,10 @@ public class InfirmierInputList extends ModelInputList {
 				return new StringInput( columnName, true );
 			case "numeroTelephone":
 				return new StringInput( columnName, true );
-			case "rotation":
-				return new RotationInput( columnName, true );
-			case "salaire":
-				return new FloatInput( columnName, true );
-			case "codeService":
+			case "mutuelle":
 				return new StringInput( columnName, true );
-
 		}
 
 		return null;
 	}
-
 }

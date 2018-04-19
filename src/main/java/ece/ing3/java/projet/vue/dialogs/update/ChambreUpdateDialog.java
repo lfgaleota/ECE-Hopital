@@ -2,13 +2,8 @@ package ece.ing3.java.projet.vue.dialogs.update;
 
 import ece.ing3.java.projet.database.sql.Model;
 import ece.ing3.java.projet.modele.hopital.Chambre;
-import ece.ing3.java.projet.vue.components.ChambreInputList;
-import ece.ing3.java.projet.vue.components.ModelInputList;
-import ece.ing3.java.projet.vue.components.inputs.BaseInput;
-import ece.ing3.java.projet.vue.dialogs.search.ModelSearchDialog;
-import org.apache.commons.beanutils.BeanUtils;
-
-import java.util.Map;
+import ece.ing3.java.projet.vue.components.inputlists.ChambreInputList;
+import ece.ing3.java.projet.vue.components.inputlists.ModelInputList;
 
 public class ChambreUpdateDialog extends ModelUpdateDialog<Chambre> {
 	public ChambreUpdateDialog( Chambre model ) {

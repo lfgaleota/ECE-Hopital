@@ -1,4 +1,4 @@
-package ece.ing3.java.projet.vue.components;
+package ece.ing3.java.projet.vue.components.inputlists;
 
 import ece.ing3.java.projet.database.sql.Model;
 import ece.ing3.java.projet.modele.employe.Docteur;
