@@ -4,6 +4,7 @@ import ece.ing3.java.projet.database.sql.annotations.Column;
 import ece.ing3.java.projet.database.sql.annotations.ExcludedField;
 import ece.ing3.java.projet.database.sql.annotations.Id;
 import ece.ing3.java.projet.database.sql.clauses.Where;
+import ece.ing3.java.projet.database.sql.queries.SQLDelete;
 import ece.ing3.java.projet.database.sql.queries.SQLInsert;
 import ece.ing3.java.projet.database.sql.queries.SQLSelect;
 import ece.ing3.java.projet.database.sql.queries.SQLUpdate;
@@ -284,5 +285,21 @@ public abstract class Model {
 		}
 
 		return insert();
+	}
+
+	/**
+	 * Removes the model's instance from database.
+	 *
+	 * @return Either (1) the row count for SQL Data Manipulation Language (DML) statements or (2) 0 for SQL statements that return nothing
+	 * @throws DatabaseException Error occurred while deleting from database
+	 */
+	public int delete() throws DatabaseException {
+		Where whereClause = new Where();
+
+		if( !whereByIds( whereClause ) ) {
+			throw new DatabaseException( "Cannot select model by its IDs." );
+		}
+
+		return ( new SQLDelete( getClass() ) ).where( whereClause ).delete();
 	}
 }
