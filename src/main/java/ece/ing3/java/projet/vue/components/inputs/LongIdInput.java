@@ -8,6 +8,9 @@ public class LongIdInput extends LongInput implements BaseInput {
 	@Override
 	public void setValue( Object value ) throws IllegalArgumentException {
 		super.setValue( value );
-		setEnabled( false );
+		textField.setEnabled( false );
+		if( selector != null ) {
+			selector.setEnabled( false );
+		}
 	}
 }

@@ -5,27 +5,20 @@ import ece.ing3.java.projet.database.sql.clauses.Where;
 import javax.swing.*;
 import java.awt.*;
 
-public class StringInput extends JPanel implements BaseInput {
-	private String columnName;
+public abstract class NumericInput extends JPanel implements BaseInput {
 	protected JTextField textField;
 	protected JComboBox<String> selector;
 
-	public StringInput( String columnName, boolean isSearch ) {
-		this.columnName = columnName;
+	public NumericInput( boolean isSearch ) {
 		this.textField = new JTextField();
 		if( !isSearch ) {
 			add( this.textField );
 		} else {
 			setLayout( new BorderLayout() );
 			add( this.textField, BorderLayout.CENTER );
-			this.selector = new JComboBox<>( new String[]{ "=", "~=" } );
+			this.selector = new JComboBox<>( new String[]{ "=", "<", ">", "<=", ">=" } );
 			add( this.selector, BorderLayout.EAST );
 		}
-	}
-
-	@Override
-	public String getColumnName() {
-		return columnName;
 	}
 
 	@Override
@@ -33,8 +26,7 @@ public class StringInput extends JPanel implements BaseInput {
 		return textField.getText().length() > 0;
 	}
 
-	@Override
-	public Object getValue() {
+	public String getTextValue() {
 		return textField.getText();
 	}
 
@@ -46,9 +38,6 @@ public class StringInput extends JPanel implements BaseInput {
 	@Override
 	public Where getWhere() throws IllegalArgumentException {
 		String selector = ( this.selector.getSelectedItem() != null ? (String) this.selector.getSelectedItem() : "=" );
-		if( selector.equals( "~=" ) ) {
-			return new Where( getColumnName(), "LIKE", "%" + getValue() + "%" );
-		}
-		return new Where( getColumnName(), "=", getValue() );
+		return new Where( getColumnName(), selector, getValue() );
 	}
 }
