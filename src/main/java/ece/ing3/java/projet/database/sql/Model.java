@@ -274,7 +274,9 @@ public abstract class Model {
 		SQLSelect selectHelper = new SQLSelect( getClass() );
 
 		Where whereClause = new Where();
-		whereByIds( whereClause );
+		if( !whereByIds( whereClause ) ) {
+			throw new DatabaseException( "Cannot select model by its IDs." );
+		}
 		selectHelper.where( whereClause );
 
 		if( selectHelper.hasAtLeastOne() ) {
