@@ -27,4 +27,9 @@ public class IntegerInput extends JTextField implements BaseInput {
 			throw new IllegalArgumentException( "Valeur numérique invalide.", e );
 		}
 	}
+
+	@Override
+	public void setValue( Object value ) throws IllegalArgumentException {
+		setText( String.valueOf( value ) );
+	}
 }

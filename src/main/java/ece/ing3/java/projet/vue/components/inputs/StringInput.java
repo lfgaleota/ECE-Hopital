@@ -23,4 +23,9 @@ public class StringInput extends JTextField implements BaseInput {
 	public Object getValue() {
 		return getText();
 	}
+
+	@Override
+	public void setValue( Object value ) throws IllegalArgumentException {
+		setText( String.valueOf( value ) );
+	}
 }
