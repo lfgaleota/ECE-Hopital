@@ -1,6 +1,8 @@
 package ece.ing3.java.projet.controleur.panels;
 
 import ece.ing3.java.projet.controleur.dialogs.delete.ModelDeleteDialogController;
+import ece.ing3.java.projet.interfaces.ModelWorkerProvider;
+import ece.ing3.java.projet.vue.dialogs.update.ModelUpdateDialog;
 import ece.ing3.java.projet.workers.ModelDeleteWorker;
 import ece.ing3.java.projet.workers.ModelQueryWorker;
 import ece.ing3.java.projet.database.sql.Model;
@@ -13,12 +15,13 @@ import ece.ing3.java.projet.interfaces.DialogListener;
 import ece.ing3.java.projet.vue.dialogs.search.ModelSearchDialog;
 import ece.ing3.java.projet.vue.dialogs.delete.ModelDeleteDialog;
 import ece.ing3.java.projet.vue.panels.ModelPanel;
+import ece.ing3.java.projet.workers.ModelUpdateWorker;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public abstract class ModelPanelController<M extends Model> implements ActionListener, DialogListener, ModelQueryWorkerProvider<M> {
+public abstract class ModelPanelController<M extends Model> implements ActionListener, DialogListener, ModelQueryWorkerProvider<M>, ModelWorkerProvider {
 	protected ModelPanel<M> panel;
 	protected TableModel<M> tableModel;
 
@@ -27,6 +30,7 @@ public abstract class ModelPanelController<M extends Model> implements ActionLis
 
 	protected ModelSearchDialog dialogSearch;
 	protected ModelDeleteDialog dialogDelete;
+	protected ModelUpdateDialog<M> dialogUpdate;
 
 	protected ModelPanelController() {
 		this.whereClause = null;
@@ -71,6 +75,7 @@ public abstract class ModelPanelController<M extends Model> implements ActionLis
 	}
 
 	public abstract ModelSearchDialog createSearchDialog();
+	public abstract ModelUpdateDialog<M> createUpdateDialog( M existingModel );
 
 	public ModelDeleteDialog createDeleteDialog() {
 		return ModelDeleteDialogController.createDialog( panel.getList().getSelecteds(), this );
@@ -95,6 +100,12 @@ public abstract class ModelPanelController<M extends Model> implements ActionLis
 			} else {
 				dialogDelete.toFront();
 			}
+		} else if( actionEvent.getSource() == panel.getToolbar().getButtonAdd() ) {
+			if( dialogUpdate == null ) {
+				dialogUpdate = createUpdateDialog( null );
+			} else {
+				dialogUpdate.toFront();
+			}
 		}
 	}
 
@@ -106,9 +117,12 @@ public abstract class ModelPanelController<M extends Model> implements ActionLis
 			update();
 		} else if( dialog == dialogDelete ) {
 			panel.inUpdate();
-			( new ModelDeleteWorker( dialogDelete.getSelectedModels() ) ).execute();
+			( new ModelDeleteWorker( dialogDelete.getSelectedModels(), this ) ).execute();
 			dialogDelete = null;
-			update();
+		} else if( dialog == dialogUpdate ) {
+			panel.inUpdate();
+			( new ModelUpdateWorker( dialogUpdate.buildModel(), this ) ).execute();
+			dialogUpdate = null;
 		}
 	}
 
@@ -120,10 +134,19 @@ public abstract class ModelPanelController<M extends Model> implements ActionLis
 		if( dialog == dialogDelete ) {
 			dialogDelete = null;
 		}
+		if( dialog == dialogUpdate ) {
+			dialogUpdate = null;
+		}
 	}
 
 	@Override
 	public void queryOnFinish() {
 		panel.outOfUpdate();
+	}
+
+	@Override
+	public void workerOnFinish() {
+		queryOnFinish();
+		update();
 	}
 }

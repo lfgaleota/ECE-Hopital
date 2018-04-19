@@ -8,6 +8,7 @@ import ece.ing3.java.projet.modele.employe.Infirmier;
 import ece.ing3.java.projet.modele.tables.InfirmierTableModel;
 import ece.ing3.java.projet.modele.tables.TableModel;
 import ece.ing3.java.projet.vue.dialogs.search.ModelSearchDialog;
+import ece.ing3.java.projet.vue.dialogs.update.ModelUpdateDialog;
 import ece.ing3.java.projet.vue.panels.InfirmierPanel;
 import ece.ing3.java.projet.vue.panels.ModelPanel;
 
@@ -36,5 +37,10 @@ public class InfirmierPanelController extends ModelPanelController<Infirmier> {
 	@Override
 	public ModelSearchDialog createSearchDialog() {
 		return InfirmierSearchDialogController.createDialog( this );
+	}
+
+	@Override
+	public ModelUpdateDialog<Infirmier> createUpdateDialog( Infirmier existingModel ) {
+		return null;
 	}
 }
