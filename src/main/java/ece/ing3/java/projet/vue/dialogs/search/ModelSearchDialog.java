@@ -10,8 +10,10 @@ public abstract class ModelSearchDialog extends BaseModelInputDialog {
 	private JButton reset;
 
 	public ModelSearchDialog() {
+		super();
 		this.reset = new JButton( "Annuler La recherche" );
 		bottom.add( reset );
+		pack();
 	}
 
 	@Override

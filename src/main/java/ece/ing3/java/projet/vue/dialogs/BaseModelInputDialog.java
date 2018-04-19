@@ -20,7 +20,6 @@ public abstract class BaseModelInputDialog extends JDialog {
 
 		this.setTitle( getTitle() );
 		this.setLayout( new BorderLayout() );
-		this.setSize( 500, 300 );
 		this.setResizable( true );
 		this.setVisible( true );
 		this.toFront(); // place la fenêtre devant les autres.
@@ -36,6 +35,8 @@ public abstract class BaseModelInputDialog extends JDialog {
 		bottom.add( submit );
 
 		this.add( bottom, BorderLayout.SOUTH );
+
+		pack();
 	}
 
 	protected String getCancelLabel() {
