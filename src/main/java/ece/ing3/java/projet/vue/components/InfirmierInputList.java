@@ -2,11 +2,7 @@ package ece.ing3.java.projet.vue.components;
 
 import ece.ing3.java.projet.database.sql.Model;
 import ece.ing3.java.projet.modele.employe.Infirmier;
-import ece.ing3.java.projet.vue.components.inputs.BaseInput;
-import ece.ing3.java.projet.vue.components.inputs.FloatInput;
-import ece.ing3.java.projet.vue.components.inputs.LongInput;
-import ece.ing3.java.projet.vue.components.inputs.RotationInput;
-import ece.ing3.java.projet.vue.components.inputs.StringInput;
+import ece.ing3.java.projet.vue.components.inputs.*;
 
 public class InfirmierInputList extends ModelInputList {
 	@Override
@@ -18,7 +14,7 @@ public class InfirmierInputList extends ModelInputList {
 	protected BaseInput getInputForField( String fieldName, String columnName ) {
 		switch( fieldName ) {
 			case "numero":
-				return new LongInput( columnName, true );
+				return new LongIdInput( columnName, true );
 			case "nom":
 				return new StringInput( columnName, true );
 			case "prenom":
