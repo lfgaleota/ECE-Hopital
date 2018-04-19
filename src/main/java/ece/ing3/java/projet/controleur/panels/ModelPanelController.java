@@ -106,6 +106,12 @@ public abstract class ModelPanelController<M extends Model> implements ActionLis
 			} else {
 				dialogUpdate.toFront();
 			}
+		} else if( actionEvent.getSource() == panel.getToolbar().getButtonModify() ) {
+			if( dialogUpdate == null ) {
+				dialogUpdate = createUpdateDialog( getPanel().getList().getSelected() );
+			} else {
+				dialogUpdate.toFront();
+			}
 		}
 	}
 

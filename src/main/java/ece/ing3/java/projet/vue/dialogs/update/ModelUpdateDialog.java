@@ -2,10 +2,15 @@ package ece.ing3.java.projet.vue.dialogs.update;
 
 import ece.ing3.java.projet.database.sql.Model;
 import ece.ing3.java.projet.database.sql.clauses.Where;
+import ece.ing3.java.projet.modele.hopital.Chambre;
+import ece.ing3.java.projet.utils.Utils;
 import ece.ing3.java.projet.vue.components.inputs.BaseInput;
 import ece.ing3.java.projet.vue.dialogs.BaseModelInputDialog;
+import org.apache.commons.beanutils.BeanUtils;
+import org.apache.commons.beanutils.PropertyUtils;
 
 import javax.swing.*;
+import java.lang.reflect.InvocationTargetException;
 import java.util.Map;
 
 public abstract class ModelUpdateDialog<M extends Model> extends BaseModelInputDialog {
@@ -15,6 +20,15 @@ public abstract class ModelUpdateDialog<M extends Model> extends BaseModelInputD
 		this.model = model;
 		setTitle( getTitle() );
 		getSubmit().setText( getSubmitLabel() );
+		try {
+			if( model != null ) {
+				fillFromModel( model );
+			}
+		} catch( IllegalArgumentException e ) {
+			dispose();
+			e.printStackTrace();
+			Utils.error( "Impossible de modifier cette entrée." );
+		}
 	}
 
 	@Override
@@ -27,10 +41,8 @@ public abstract class ModelUpdateDialog<M extends Model> extends BaseModelInputD
 		return ( model != null ? "Mettre à jour" : "Ajouter" );
 	}
 
-	public abstract void fillFromModel( M model );
 	protected abstract M buildNewModel();
 	protected abstract Class<? extends Model> getModelClass();
-	protected abstract void fillModel( M model, String fieldName, BaseInput input );
 
 	public M buildModel() throws IllegalArgumentException {
 		M model = buildNewModel();
@@ -51,5 +63,23 @@ public abstract class ModelUpdateDialog<M extends Model> extends BaseModelInputD
 	@Override
 	public void validateInput() throws IllegalArgumentException {
 		buildModel();
+	}
+
+	public void fillFromModel( M model ) throws IllegalArgumentException {
+		for( Map.Entry<String, BaseInput> entry : inputList.getInputs().entrySet() ) {
+			try {
+				entry.getValue().setValue( PropertyUtils.getSimpleProperty( model, entry.getKey() ) );
+			} catch( IllegalAccessException | InvocationTargetException | NoSuchMethodException e ) {
+				throw new IllegalArgumentException( e );
+			}
+		}
+	}
+
+	protected void fillModel( M model, String fieldName, BaseInput input ) throws IllegalArgumentException {
+		try {
+			PropertyUtils.setSimpleProperty( model, fieldName, input.getValue() );
+		} catch( IllegalAccessException | InvocationTargetException | NoSuchMethodException e ) {
+			throw new IllegalArgumentException( e );
+		}
 	}
 }
