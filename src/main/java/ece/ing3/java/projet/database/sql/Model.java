@@ -3,6 +3,7 @@ package ece.ing3.java.projet.database.sql;
 import ece.ing3.java.projet.database.sql.annotations.Column;
 import ece.ing3.java.projet.database.sql.annotations.ExcludedField;
 import ece.ing3.java.projet.database.sql.annotations.Id;
+import ece.ing3.java.projet.database.sql.clauses.Where;
 import ece.ing3.java.projet.database.sql.queries.SQLInsert;
 import ece.ing3.java.projet.database.sql.queries.SQLSelect;
 import ece.ing3.java.projet.database.sql.queries.SQLUpdate;
@@ -181,8 +182,17 @@ public abstract class Model {
 		fieldNames.put( modelClass, fieldNameList.toArray( new String[ 0 ] ) );
 	}
 
-	private void selectByIds( SQLSelect selectHelper ) {
-		List<String> idColumnNames = new LinkedList<>();
+	/**
+	 * Updates a Where clause to select the current model.
+	 *
+	 * @param whereClause Where clause to update
+	 * @return {@code true} Where clause updated with success
+	 * @throws NullPointerException Where clause is null
+	 */
+	public boolean whereByIds( Where whereClause ) throws NullPointerException {
+		if( whereClause == null ) {
+			throw new NullPointerException( "Where clause is null." );
+		}
 
 		try {
 			processFields( getClass(), field -> {
@@ -191,14 +201,16 @@ public abstract class Model {
 						field.setAccessible( true );
 					}
 
-					idColumnNames.add( field.getName() );
+					whereClause.and( field.getName(), "=", field.get( this ) );
 				}
-			}, true );
+			}, false );
+
+			return true;
 		} catch( IllegalAccessException e ) {
 			e.printStackTrace();
 		}
 
-		selectHelper.setSelectedFields( idColumnNames.toArray( new String[ idColumnNames.size() ] ) );
+		return false;
 	}
 
 	private int insert() throws DatabaseException {
@@ -261,12 +273,14 @@ public abstract class Model {
 	public int save() throws DatabaseException {
 		SQLSelect selectHelper = new SQLSelect( getClass() );
 
-		selectByIds( selectHelper );
+		Where whereClause = new Where();
+		whereByIds( whereClause );
+		selectHelper.where( whereClause );
 
 		if( selectHelper.hasAtLeastOne() ) {
-			return insert();
+			return update();
 		}
 
-		return update();
+		return insert();
 	}
 }
