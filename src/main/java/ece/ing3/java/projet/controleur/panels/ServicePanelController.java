@@ -6,6 +6,7 @@ import ece.ing3.java.projet.modele.administration.Service;
 import ece.ing3.java.projet.modele.tables.ServiceTableModel;
 import ece.ing3.java.projet.modele.tables.TableModel;
 import ece.ing3.java.projet.vue.dialogs.search.ModelSearchDialog;
+import ece.ing3.java.projet.vue.dialogs.update.ModelUpdateDialog;
 import ece.ing3.java.projet.vue.panels.ModelPanel;
 import ece.ing3.java.projet.vue.panels.ServicePanel;
 
@@ -28,5 +29,10 @@ public class ServicePanelController extends ModelPanelController<Service> {
 	@Override
 	public ModelSearchDialog createSearchDialog() {
 		return ServiceSearchDialogController.createDialog(this);
+	}
+
+	@Override
+	public ModelUpdateDialog<Service> createUpdateDialog( Service existingModel ) {
+		return null;
 	}
 }

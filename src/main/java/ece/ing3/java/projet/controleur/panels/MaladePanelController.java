@@ -6,6 +6,7 @@ import ece.ing3.java.projet.modele.hopital.Malade;
 import ece.ing3.java.projet.modele.tables.MaladeTableModel;
 import ece.ing3.java.projet.modele.tables.TableModel;
 import ece.ing3.java.projet.vue.dialogs.search.ModelSearchDialog;
+import ece.ing3.java.projet.vue.dialogs.update.ModelUpdateDialog;
 import ece.ing3.java.projet.vue.panels.MaladePanel;
 import ece.ing3.java.projet.vue.panels.ModelPanel;
 
@@ -28,5 +29,10 @@ public class MaladePanelController extends ModelPanelController<Malade> {
 	@Override
 	public ModelSearchDialog createSearchDialog() {
 		return MaladeSearchDialogController.createDialog( this );
+	}
+
+	@Override
+	public ModelUpdateDialog<Malade> createUpdateDialog( Malade existingModel ) {
+		return null;
 	}
 }

@@ -10,6 +10,7 @@ import ece.ing3.java.projet.modele.employe.Infirmier;
 import ece.ing3.java.projet.modele.tables.EmployeTableModel;
 import ece.ing3.java.projet.modele.tables.TableModel;
 import ece.ing3.java.projet.vue.dialogs.search.ModelSearchDialog;
+import ece.ing3.java.projet.vue.dialogs.update.ModelUpdateDialog;
 import ece.ing3.java.projet.vue.panels.EmployePanel;
 import ece.ing3.java.projet.vue.panels.ModelPanel;
 
@@ -32,6 +33,11 @@ public class EmployePanelController  extends ModelPanelController<Employe> {
 	@Override
 	public ModelSearchDialog createSearchDialog() {
 		return EmployeSearchDialogController.createDialog( this );
+	}
+
+	@Override
+	public ModelUpdateDialog<Employe> createUpdateDialog( Employe existingModel ) {
+		return null;
 	}
 
 	public Where queryModifyWhereClause( Where whereClause ) {

@@ -6,6 +6,7 @@ import ece.ing3.java.projet.modele.hopital.Hospitalisation;
 import ece.ing3.java.projet.modele.tables.HospitalisationTableModel;
 import ece.ing3.java.projet.modele.tables.TableModel;
 import ece.ing3.java.projet.vue.dialogs.search.ModelSearchDialog;
+import ece.ing3.java.projet.vue.dialogs.update.ModelUpdateDialog;
 import ece.ing3.java.projet.vue.panels.HospitalisationPanel;
 import ece.ing3.java.projet.vue.panels.ModelPanel;
 
@@ -28,5 +29,10 @@ public class HospitalisationPanelController extends ModelPanelController<Hospita
 	@Override
 	public ModelSearchDialog createSearchDialog() {
 		return HospitalisationSearchDialogController.createDialog( this );
+	}
+
+	@Override
+	public ModelUpdateDialog<Hospitalisation> createUpdateDialog( Hospitalisation existingModel ) {
+		return null;
 	}
 }
