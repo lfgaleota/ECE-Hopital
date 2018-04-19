@@ -2,6 +2,7 @@ package ece.ing3.java.projet.modele.administration;
 
 import ece.ing3.java.projet.database.sql.Model;
 import ece.ing3.java.projet.database.sql.annotations.Column;
+import ece.ing3.java.projet.database.sql.annotations.Id;
 import ece.ing3.java.projet.modele.employe.Docteur;
 import ece.ing3.java.projet.modele.employe.Infirmier;
 import ece.ing3.java.projet.exceptions.DatabaseException;
@@ -16,6 +17,7 @@ import java.util.List;
  * Modèle de Service stocké en base de donnée
  */
 public class Service extends Model {
+	@Id
 	private String code;
 	private String nom;
 	private String batiment;

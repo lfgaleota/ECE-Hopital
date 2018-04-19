@@ -2,6 +2,7 @@ package ece.ing3.java.projet.modele.hopital;
 
 import ece.ing3.java.projet.database.sql.Model;
 import ece.ing3.java.projet.database.sql.annotations.Column;
+import ece.ing3.java.projet.database.sql.annotations.Id;
 import ece.ing3.java.projet.exceptions.DatabaseException;
 import ece.ing3.java.projet.modele.administration.Service;
 import ece.ing3.java.projet.modele.finders.HospitalisationFinder;
@@ -12,6 +13,7 @@ import java.util.List;
  * Modèle d'une Hospitalisation stocké en base de donnée
  */
 public class Hospitalisation extends Model {
+	@Id
 	@Column( name = "no_malade" )
 	private Long numeroMalade;
 	@Column( name = "code_service" )

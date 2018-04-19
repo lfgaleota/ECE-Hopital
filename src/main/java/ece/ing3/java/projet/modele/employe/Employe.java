@@ -2,6 +2,7 @@ package ece.ing3.java.projet.modele.employe;
 
 import ece.ing3.java.projet.database.sql.Model;
 import ece.ing3.java.projet.database.sql.annotations.Column;
+import ece.ing3.java.projet.database.sql.annotations.Id;
 import ece.ing3.java.projet.exceptions.DatabaseException;
 import ece.ing3.java.projet.modele.finders.EmployeFinder;
 
@@ -11,6 +12,7 @@ import java.util.List;
  * Modèle d'Employé stocké en base de donnée
  */
 public class Employe extends Model {
+	@Id
 	private Long numero;
 	private String nom;
 	private String prenom;
