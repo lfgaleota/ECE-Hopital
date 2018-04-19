@@ -103,7 +103,9 @@ public class SQLUpdate extends SQLWhereQuery<SQLUpdate> {
 	@Override
 	public List<Object> getParameters() {
 		List<Object> parameters = new ArrayList<>( values.values() );
-		parameters.addAll( where.getParameters() );
+		if( super.getParameters() != null ) {
+			parameters.addAll( super.getParameters() );
+		}
 		return parameters;
 	}
 }
