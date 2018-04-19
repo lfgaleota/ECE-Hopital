@@ -3,6 +3,7 @@ package ece.ing3.java.projet.controleur.dialogs;
 import ece.ing3.java.projet.database.sql.clauses.Where;
 import ece.ing3.java.projet.utils.DialogListener;
 import ece.ing3.java.projet.utils.Utils;
+import ece.ing3.java.projet.vue.Application;
 import ece.ing3.java.projet.vue.components.inputs.BaseInput;
 import ece.ing3.java.projet.vue.dialogs.ModelSearchDialog;
 
@@ -41,7 +42,7 @@ public class ModelSearchDialogController implements ActionListener, WindowListen
 				this.dialog.setValidated( true );
 				dialog.dispose();
 			} catch( IllegalArgumentException e ) {
-				Utils.error( this.dialog, e.getLocalizedMessage() );
+				Utils.error( Application.get(), e.getLocalizedMessage() );
 			}
 		}
 	}
