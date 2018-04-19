@@ -1,6 +1,6 @@
 package ece.ing3.java.projet.controleur.panels;
 
-import ece.ing3.java.projet.controleur.dialogs.EmployeSearchDialogController;
+import ece.ing3.java.projet.controleur.dialogs.search.EmployeSearchDialogController;
 import ece.ing3.java.projet.database.sql.Model;
 import ece.ing3.java.projet.database.sql.clauses.Where;
 import ece.ing3.java.projet.database.sql.queries.SQLSelect;
@@ -9,8 +9,7 @@ import ece.ing3.java.projet.modele.employe.Employe;
 import ece.ing3.java.projet.modele.employe.Infirmier;
 import ece.ing3.java.projet.modele.tables.EmployeTableModel;
 import ece.ing3.java.projet.modele.tables.TableModel;
-import ece.ing3.java.projet.utils.DialogListener;
-import ece.ing3.java.projet.vue.dialogs.ModelSearchDialog;
+import ece.ing3.java.projet.vue.dialogs.search.ModelSearchDialog;
 import ece.ing3.java.projet.vue.panels.EmployePanel;
 import ece.ing3.java.projet.vue.panels.ModelPanel;
 
@@ -35,7 +34,7 @@ public class EmployePanelController  extends ModelPanelController<Employe> {
 		return EmployeSearchDialogController.createDialog( this );
 	}
 
-	protected Where modifyWhereClause( Where whereClause ) {
+	public Where queryModifyWhereClause( Where whereClause ) {
 		if( whereClause == null ) {
 			whereClause = new Where();
 		}

@@ -1,9 +1,8 @@
-package ece.ing3.java.projet.controleur.dialogs;
+package ece.ing3.java.projet.controleur.dialogs.search;
 
-import ece.ing3.java.projet.controleur.panels.ServicePanelController;
-import ece.ing3.java.projet.utils.DialogListener;
-import ece.ing3.java.projet.vue.dialogs.ModelSearchDialog;
-import ece.ing3.java.projet.vue.dialogs.ServiceSearchDialog;
+import ece.ing3.java.projet.interfaces.DialogListener;
+import ece.ing3.java.projet.vue.dialogs.search.ModelSearchDialog;
+import ece.ing3.java.projet.vue.dialogs.search.ServiceSearchDialog;
 
 public class ServiceSearchDialogController extends ModelSearchDialogController {
 	private ServiceSearchDialogController( ModelSearchDialog dialog, DialogListener listener ) {

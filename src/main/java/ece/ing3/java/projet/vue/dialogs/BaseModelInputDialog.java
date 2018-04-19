@@ -1,27 +1,24 @@
 package ece.ing3.java.projet.vue.dialogs;
 
+import ece.ing3.java.projet.vue.Application;
+import ece.ing3.java.projet.vue.components.ModelInputList;
+
+import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
 
-import javax.swing.*;
-
-import ece.ing3.java.projet.database.sql.clauses.Where;
-import ece.ing3.java.projet.vue.Application;
-import ece.ing3.java.projet.vue.components.ModelInputList;
-import ece.ing3.java.projet.vue.components.inputs.BaseInput;
-
-public abstract class ModelSearchDialog extends JDialog {
+public abstract class BaseModelInputDialog extends JDialog {
 	protected ModelInputList inputList;
+	protected JPanel bottom;
 	private JButton submit;
 	private JButton cancel;
-	private JButton reset;
 
 	private boolean validated;
 
-	public ModelSearchDialog() {
+	public BaseModelInputDialog() {
 		super( Application.get() );
 
-		this.setTitle( "Recherche" );
+		this.setTitle( getTitle() );
 		this.setLayout( new BorderLayout() );
 		this.setSize( 500, 300 );
 		this.setResizable( true );
@@ -32,15 +29,21 @@ public abstract class ModelSearchDialog extends JDialog {
 
 		this.add( this.inputList, BorderLayout.CENTER );
 
-		JPanel bottom = new JPanel( new FlowLayout() );
-		this.cancel = new JButton( "Annuler" );
+		bottom = new JPanel( new FlowLayout() );
+		this.cancel = new JButton( getCancelLabel() );
 		bottom.add( cancel );
-		this.submit = new JButton( "Valider" );
+		this.submit = new JButton( getSubmitLabel() );
 		bottom.add( submit );
-		this.reset = new JButton( "Annuler La recherche" );
-		bottom.add( reset );
 
 		this.add( bottom, BorderLayout.SOUTH );
+	}
+
+	protected String getCancelLabel() {
+		return "Annuler";
+	}
+
+	protected String getSubmitLabel() {
+		return "Envoyer";
 	}
 
 	public abstract ModelInputList build();
@@ -56,7 +59,6 @@ public abstract class ModelSearchDialog extends JDialog {
 	public void addActionListener( ActionListener actionListener ) {
 		submit.addActionListener( actionListener );
 		cancel.addActionListener( actionListener );
-		reset.addActionListener( actionListener );
 	}
 
 	public boolean isValidated() {
@@ -67,13 +69,5 @@ public abstract class ModelSearchDialog extends JDialog {
 		this.validated = validated;
 	}
 
-	public Where getWhereClause() {
-		Where where = new Where();
-		for( BaseInput input : inputList.getInputs().values() ) {
-			if( input.isFilled() ) {
-				where.and( input.getWhere() );
-			}
-		}
-		return where;
-	}
+	public abstract void validateInput() throws IllegalArgumentException;
 }

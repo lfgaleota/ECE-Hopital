@@ -1,14 +1,13 @@
 package ece.ing3.java.projet.controleur.panels;
 
-import ece.ing3.java.projet.controleur.dialogs.DocteurSearchDialogController;
+import ece.ing3.java.projet.controleur.dialogs.search.DocteurSearchDialogController;
 import ece.ing3.java.projet.database.sql.Model;
 import ece.ing3.java.projet.database.sql.queries.SQLSelect;
 import ece.ing3.java.projet.modele.employe.Docteur;
 import ece.ing3.java.projet.modele.employe.Employe;
 import ece.ing3.java.projet.modele.tables.DocteurTableModel;
 import ece.ing3.java.projet.modele.tables.TableModel;
-import ece.ing3.java.projet.utils.DialogListener;
-import ece.ing3.java.projet.vue.dialogs.ModelSearchDialog;
+import ece.ing3.java.projet.vue.dialogs.search.ModelSearchDialog;
 import ece.ing3.java.projet.vue.panels.DocteurPanel;
 import ece.ing3.java.projet.vue.panels.ModelPanel;
 
@@ -30,7 +29,7 @@ public class DocteurPanelController  extends ModelPanelController<Docteur> {
 
 	@Override
 	@SuppressWarnings( "unchecked" )
-	protected SQLSelect<Docteur> createSelector() {
+	public SQLSelect<Docteur> queryCreateSelector() {
 		return new SQLSelect<Docteur>( new Class[]{ Docteur.class, Employe.class } );
 	}
 
