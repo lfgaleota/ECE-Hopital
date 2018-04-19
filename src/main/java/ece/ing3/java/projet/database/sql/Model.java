@@ -300,6 +300,10 @@ public abstract class Model {
 			throw new DatabaseException( "Cannot select model by its IDs." );
 		}
 
+		if( whereClause.toString().length() == 0 ) {
+			throw new DatabaseException( "Cannot select model by its IDs." );
+		}
+
 		return ( new SQLDelete( getClass() ) ).where( whereClause ).delete();
 	}
 }
