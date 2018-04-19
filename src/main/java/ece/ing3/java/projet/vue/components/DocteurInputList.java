@@ -2,10 +2,7 @@ package ece.ing3.java.projet.vue.components;
 
 import ece.ing3.java.projet.database.sql.Model;
 import ece.ing3.java.projet.modele.employe.Docteur;
-import ece.ing3.java.projet.vue.components.inputs.BaseInput;
-import ece.ing3.java.projet.vue.components.inputs.LongIdInput;
-import ece.ing3.java.projet.vue.components.inputs.LongInput;
-import ece.ing3.java.projet.vue.components.inputs.StringInput;
+import ece.ing3.java.projet.vue.components.inputs.*;
 
 public class DocteurInputList extends ModelInputList {
 	@Override
@@ -24,7 +21,7 @@ public class DocteurInputList extends ModelInputList {
 				return new StringInput( columnName, true );
 			case "adresse":
 				return new StringInput( columnName, true );
-			case "tel":
+			case "numeroTelephone":
 				return new StringInput( columnName, true );
 			case "specialite":
 				return new StringInput( columnName, true );

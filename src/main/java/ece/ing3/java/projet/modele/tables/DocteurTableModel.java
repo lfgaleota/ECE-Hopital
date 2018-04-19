@@ -23,7 +23,7 @@ public class DocteurTableModel extends TableModel<Docteur> {
 				return d.getPrenom();
 			case "adresse":
 				return d.getAdresse();
-			case "tel":
+			case "numeroTelephone":
 				return d.getNumeroTelephone();
 			case "specialite":
 				return d.getSpecialite();
