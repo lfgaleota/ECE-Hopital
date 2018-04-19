@@ -29,7 +29,7 @@ public class ModelList<M extends Model> extends JTable {
 		List<M> list = new LinkedList<>();
 
 		for( int row : getSelectedRows() ) {
-			instance = tableModel.getList().get( getSelectedRow() );
+			instance = tableModel.getList().get( row );
 
 			if( instance != null ) {
 				list.add( instance );
