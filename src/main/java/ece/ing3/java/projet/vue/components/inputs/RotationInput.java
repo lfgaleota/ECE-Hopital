@@ -27,7 +27,11 @@ public class RotationInput extends JTextField implements BaseInput {
 			return Rotation.valueOf( getText() );
 		} catch( NumberFormatException e ) {
 			throw new IllegalArgumentException( "Valeur numérique invalide.", e );
-		//return getText();
 		}
+	}
+
+	@Override
+	public void setValue( Object value ) throws IllegalArgumentException {
+		setText( String.valueOf( value ) );
 	}
 }

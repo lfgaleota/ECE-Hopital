@@ -7,6 +7,8 @@ public interface BaseInput {
 
 	Object getValue() throws IllegalArgumentException;
 
+	void setValue( Object value ) throws IllegalArgumentException;
+
 	boolean isFilled();
 
 	default Where getWhere() throws IllegalArgumentException {
