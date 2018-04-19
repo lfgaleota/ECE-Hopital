@@ -1,12 +1,11 @@
 package ece.ing3.java.projet.controleur.panels;
 
-import ece.ing3.java.projet.controleur.dialogs.ServiceSearchDialogController;
+import ece.ing3.java.projet.controleur.dialogs.search.ServiceSearchDialogController;
 import ece.ing3.java.projet.database.sql.Model;
 import ece.ing3.java.projet.modele.administration.Service;
 import ece.ing3.java.projet.modele.tables.ServiceTableModel;
 import ece.ing3.java.projet.modele.tables.TableModel;
-import ece.ing3.java.projet.utils.DialogListener;
-import ece.ing3.java.projet.vue.dialogs.ModelSearchDialog;
+import ece.ing3.java.projet.vue.dialogs.search.ModelSearchDialog;
 import ece.ing3.java.projet.vue.panels.ModelPanel;
 import ece.ing3.java.projet.vue.panels.ServicePanel;
 

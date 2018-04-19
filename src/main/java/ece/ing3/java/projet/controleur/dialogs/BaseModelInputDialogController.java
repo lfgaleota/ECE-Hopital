@@ -1,33 +1,26 @@
 package ece.ing3.java.projet.controleur.dialogs;
 
-import ece.ing3.java.projet.database.sql.clauses.Where;
-import ece.ing3.java.projet.utils.DialogListener;
+import ece.ing3.java.projet.interfaces.DialogListener;
 import ece.ing3.java.projet.utils.Utils;
 import ece.ing3.java.projet.vue.Application;
-import ece.ing3.java.projet.vue.components.inputs.BaseInput;
-import ece.ing3.java.projet.vue.dialogs.ModelSearchDialog;
+import ece.ing3.java.projet.vue.dialogs.BaseModelInputDialog;
+import ece.ing3.java.projet.vue.dialogs.search.ModelSearchDialog;
 
-import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 
-public class ModelSearchDialogController implements ActionListener, WindowListener {
-	private ModelSearchDialog dialog;
+public abstract class BaseModelInputDialogController implements ActionListener, WindowListener {
+	private BaseModelInputDialog dialog;
 	private DialogListener listener;
 
-	protected ModelSearchDialogController( ModelSearchDialog dialog, DialogListener listener ) {
+	protected BaseModelInputDialogController( BaseModelInputDialog dialog, DialogListener listener ) {
 		this.dialog = dialog;
 		this.listener = listener;
 		this.dialog.setValidated( false );
 		this.dialog.addActionListener( this );
 		this.dialog.addWindowListener( this );
-	}
-
-	public static ModelSearchDialog createDialog( ModelSearchDialog dialog, DialogListener listener ) {
-		new ModelSearchDialogController( dialog, listener );
-		return dialog;
 	}
 
 	@Override
@@ -38,7 +31,7 @@ public class ModelSearchDialogController implements ActionListener, WindowListen
 		}
 		if( actionEvent.getSource() == dialog.getSubmit() ) {
 			try {
-				this.dialog.getWhereClause();
+				this.dialog.validateInput();
 				this.dialog.setValidated( true );
 				dialog.dispose();
 			} catch( IllegalArgumentException e ) {

@@ -1,12 +1,11 @@
 package ece.ing3.java.projet.controleur.panels;
 
-import ece.ing3.java.projet.controleur.dialogs.HospitalisationSearchDialogController;
+import ece.ing3.java.projet.controleur.dialogs.search.HospitalisationSearchDialogController;
 import ece.ing3.java.projet.database.sql.Model;
 import ece.ing3.java.projet.modele.hopital.Hospitalisation;
 import ece.ing3.java.projet.modele.tables.HospitalisationTableModel;
 import ece.ing3.java.projet.modele.tables.TableModel;
-import ece.ing3.java.projet.utils.DialogListener;
-import ece.ing3.java.projet.vue.dialogs.ModelSearchDialog;
+import ece.ing3.java.projet.vue.dialogs.search.ModelSearchDialog;
 import ece.ing3.java.projet.vue.panels.HospitalisationPanel;
 import ece.ing3.java.projet.vue.panels.ModelPanel;
 

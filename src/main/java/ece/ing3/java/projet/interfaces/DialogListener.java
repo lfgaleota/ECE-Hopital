@@ -1,6 +1,4 @@
-package ece.ing3.java.projet.utils;
-
-import ece.ing3.java.projet.vue.dialogs.ModelSearchDialog;
+package ece.ing3.java.projet.interfaces;
 
 import javax.swing.*;
 

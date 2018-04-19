@@ -1,28 +1,27 @@
 package ece.ing3.java.projet.controleur.panels;
 
 import ece.ing3.java.projet.controleur.dialogs.delete.ModelDeleteDialogController;
+import ece.ing3.java.projet.workers.ModelDeleteWorker;
+import ece.ing3.java.projet.workers.ModelQueryWorker;
 import ece.ing3.java.projet.database.sql.Model;
 import ece.ing3.java.projet.database.sql.clauses.OrderBy;
 import ece.ing3.java.projet.database.sql.clauses.Where;
 import ece.ing3.java.projet.database.sql.queries.SQLSelect;
-import ece.ing3.java.projet.exceptions.DatabaseException;
+import ece.ing3.java.projet.interfaces.ModelQueryWorkerProvider;
 import ece.ing3.java.projet.modele.tables.TableModel;
-import ece.ing3.java.projet.utils.DialogListener;
-import ece.ing3.java.projet.utils.Utils;
-import ece.ing3.java.projet.vue.Application;
-import ece.ing3.java.projet.vue.dialogs.ModelSearchDialog;
+import ece.ing3.java.projet.interfaces.DialogListener;
+import ece.ing3.java.projet.vue.dialogs.search.ModelSearchDialog;
 import ece.ing3.java.projet.vue.dialogs.delete.ModelDeleteDialog;
 import ece.ing3.java.projet.vue.panels.ModelPanel;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.List;
-import java.util.concurrent.ExecutionException;
 
-public abstract class ModelPanelController<M extends Model> implements ActionListener, DialogListener {
+public abstract class ModelPanelController<M extends Model> implements ActionListener, DialogListener, ModelQueryWorkerProvider<M> {
 	protected ModelPanel<M> panel;
 	protected TableModel<M> tableModel;
+
 	protected Where whereClause;
 	protected OrderBy orderByClause;
 
@@ -42,80 +41,33 @@ public abstract class ModelPanelController<M extends Model> implements ActionLis
 	protected abstract TableModel<M> buildTableModel();
 	protected abstract ModelPanel<M> buildModelPanel( TableModel<M> tableModel );
 
-	protected Where modifyWhereClause( Where whereClause ) {
+	@Override
+	public Where queryModifyWhereClause( Where whereClause ) {
 		return whereClause;
 	}
 
-	protected SQLSelect<M> createSelector() {
+	@Override
+	public SQLSelect<M> queryCreateSelector() {
 		return new SQLSelect<>( getModelClass() );
-	}
-
-	private SwingWorker<List<M>, Object> createUpdateWorker() {
-		return new SwingWorker<List<M>, Object>() {
-			@Override
-			protected List<M> doInBackground() {
-				System.out.println( "Update started" );
-				try {
-					SQLSelect<M> sql = createSelector();
-					whereClause = modifyWhereClause( whereClause );
-					if( whereClause != null ) {
-						sql.where( whereClause );
-					}
-					if( orderByClause != null ) {
-						sql.orderBy( orderByClause );
-					}
-					List<M> list = sql.findList();
-					System.out.println( "Update got : " + list );
-					return list;
-				} catch( DatabaseException e ) {
-					e.printStackTrace();
-				}
-				System.out.println( "Update failed" );
-				return null;
-			}
-
-			@Override
-			protected void done() {
-				try {
-					System.out.println( "Set list in model : " + get() );
-					if( get() != null ) {
-						tableModel.setList( get() );
-					} else {
-						Utils.error( "Erreur de récupération des données." );
-					}
-				} catch( InterruptedException | ExecutionException e ) {
-					e.printStackTrace();
-					Utils.error( "Erreur de récupération des données." );
-				}
-				panel.outOfUpdate();
-			}
-		};
-	}
-
-	private SwingWorker<Boolean, Object> createDeleteWorker( final List<? extends Model> selectedModels ) {
-		return new SwingWorker<Boolean, Object>() {
-			@Override
-			protected Boolean doInBackground() throws Exception {
-				boolean success = true;
-				for( Model model : selectedModels ) {
-					try {
-						model.delete();
-					} catch( DatabaseException e ) {
-						success = false;
-						e.printStackTrace();
-					}
-				}
-				return success;
-			}
-		};
 	}
 
 	public ModelPanel<M> getPanel() {
 		return panel;
 	}
 
+	@Override
 	public TableModel<M> getTableModel() {
 		return tableModel;
+	}
+
+	@Override
+	public Where getWhereClause() {
+		return whereClause;
+	}
+
+	@Override
+	public OrderBy getOrderByClause() {
+		return orderByClause;
 	}
 
 	public abstract ModelSearchDialog createSearchDialog();
@@ -126,8 +78,7 @@ public abstract class ModelPanelController<M extends Model> implements ActionLis
 
 	public void update() {
 		panel.inUpdate();
-		SwingWorker<List<M>, Object> worker = createUpdateWorker();
-		worker.execute();
+		( new ModelQueryWorker<>( this ) ).execute();
 	}
 
 	@Override
@@ -151,12 +102,11 @@ public abstract class ModelPanelController<M extends Model> implements ActionLis
 	public void onDialogSubmitted( JDialog dialog ) {
 		if( dialog == dialogSearch ) {
 			whereClause = dialogSearch.getWhereClause();
-			System.out.println( "Where clause : " + whereClause );
 			dialogSearch = null;
 			update();
 		} else if( dialog == dialogDelete ) {
 			panel.inUpdate();
-			createDeleteWorker( dialogDelete.getSelectedModels() ).execute();
+			( new ModelDeleteWorker( dialogDelete.getSelectedModels() ) ).execute();
 			dialogDelete = null;
 			update();
 		}
@@ -170,5 +120,10 @@ public abstract class ModelPanelController<M extends Model> implements ActionLis
 		if( dialog == dialogDelete ) {
 			dialogDelete = null;
 		}
+	}
+
+	@Override
+	public void queryOnFinish() {
+		panel.outOfUpdate();
 	}
 }

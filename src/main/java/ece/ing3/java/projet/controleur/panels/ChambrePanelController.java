@@ -1,12 +1,11 @@
 package ece.ing3.java.projet.controleur.panels;
 
-import ece.ing3.java.projet.controleur.dialogs.ChambreSearchDialogController;
+import ece.ing3.java.projet.controleur.dialogs.search.ChambreSearchDialogController;
 import ece.ing3.java.projet.database.sql.Model;
 import ece.ing3.java.projet.modele.hopital.Chambre;
 import ece.ing3.java.projet.modele.tables.ChambreTableModel;
 import ece.ing3.java.projet.modele.tables.TableModel;
-import ece.ing3.java.projet.utils.DialogListener;
-import ece.ing3.java.projet.vue.dialogs.ModelSearchDialog;
+import ece.ing3.java.projet.vue.dialogs.search.ModelSearchDialog;
 import ece.ing3.java.projet.vue.panels.ChambrePanel;
 import ece.ing3.java.projet.vue.panels.ModelPanel;
 

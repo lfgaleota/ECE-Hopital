@@ -1,7 +1,7 @@
 package ece.ing3.java.projet.controleur.dialogs.delete;
 
 import ece.ing3.java.projet.database.sql.Model;
-import ece.ing3.java.projet.utils.DialogListener;
+import ece.ing3.java.projet.interfaces.DialogListener;
 import ece.ing3.java.projet.vue.dialogs.delete.ModelDeleteDialog;
 
 import javax.swing.*;
