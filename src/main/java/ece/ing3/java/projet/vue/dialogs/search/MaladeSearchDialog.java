@@ -6,6 +6,6 @@ import ece.ing3.java.projet.vue.components.inputlists.ModelInputList;
 public class MaladeSearchDialog extends ModelSearchDialog {
 	@Override
 	public ModelInputList build() {
-		return new MaladeInputList( true );
+		return new MaladeInputList( true, this );
 	}
 }

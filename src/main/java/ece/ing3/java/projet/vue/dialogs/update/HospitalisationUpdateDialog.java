@@ -12,7 +12,7 @@ public class HospitalisationUpdateDialog extends ModelUpdateDialog<Hospitalisati
 
 	@Override
 	public ModelInputList build() {
-		return new HospitalisationInputList( false );
+		return new HospitalisationInputList( false, this );
 	}
 
 	@Override

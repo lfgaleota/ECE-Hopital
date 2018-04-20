@@ -4,9 +4,11 @@ import ece.ing3.java.projet.database.sql.Model;
 import ece.ing3.java.projet.modele.employe.Docteur;
 import ece.ing3.java.projet.vue.components.inputs.*;
 
+import java.awt.*;
+
 public class DocteurInputList extends ModelInputList {
-	public DocteurInputList( boolean isSearch ) {
-		super( isSearch );
+	public DocteurInputList( boolean isSearch, Window parent ) {
+		super( isSearch, parent );
 	}
 
 	@Override
@@ -15,7 +17,7 @@ public class DocteurInputList extends ModelInputList {
 	}
 
 	@Override
-	protected BaseInput getInputForField( String fieldName, String columnName, boolean isSearch ) {
+	protected BaseInput getInputForField( String fieldName, String columnName, boolean isSearch, Window parent ) {
 		switch( fieldName ) {
 			case "numero":
 				return new LongIdInput( columnName, isSearch );

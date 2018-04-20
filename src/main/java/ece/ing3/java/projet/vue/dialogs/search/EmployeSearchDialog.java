@@ -6,7 +6,7 @@ import ece.ing3.java.projet.vue.components.inputlists.EmployeInputList;
 public class EmployeSearchDialog extends ModelSearchDialog{
 	@Override
 	public ModelInputList build() {
-		return new EmployeInputList( true );
+		return new EmployeInputList( true, this );
 	}
 
 }

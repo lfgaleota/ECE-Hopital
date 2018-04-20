@@ -12,7 +12,7 @@ public class EmployeUpdateDialog  extends ModelUpdateDialog<Employe> {
 
 	@Override
 	public ModelInputList build() {
-		return new EmployeInputList( false );
+		return new EmployeInputList( false, this );
 	}
 
 	@Override

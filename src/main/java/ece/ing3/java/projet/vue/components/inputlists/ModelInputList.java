@@ -13,14 +13,15 @@ import java.util.Map;
 public abstract class ModelInputList extends JPanel {
 	protected Map<String, BaseInput> inputMap = new HashMap<>();
 
-	public ModelInputList( boolean isSearch ) {
+	public ModelInputList( boolean isSearch, Window parent ) {
 		String[] fieldNames = Model.getFieldNames( getModelClass() );
 		setLayout( new FlexibleGridLayout( fieldNames.length, 2 ) );
 		for( String fieldName : fieldNames ) {
 			BaseInput input = getInputForField(
 					fieldName,
 					Model.getColumnNameFromFieldName( getModelClass(), fieldName ),
-					isSearch
+					isSearch,
+					parent
 			);
 			inputMap.put( fieldName, input );
 			createInput( fieldName, input );
@@ -34,7 +35,7 @@ public abstract class ModelInputList extends JPanel {
 		add( (Component) input );
 	}
 
-	protected abstract BaseInput getInputForField( String fieldName, String columnName, boolean isSearch );
+	protected abstract BaseInput getInputForField( String fieldName, String columnName, boolean isSearch, Window parent );
 
 	public Map<String, BaseInput> getInputs() {
 		return inputMap;

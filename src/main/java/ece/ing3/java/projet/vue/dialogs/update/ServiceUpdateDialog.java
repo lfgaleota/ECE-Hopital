@@ -12,7 +12,7 @@ public class ServiceUpdateDialog extends ModelUpdateDialog<Service> {
 
 	@Override
 	public ModelInputList build() {
-		return new ServiceInputList( false );
+		return new ServiceInputList( false, this );
 	}
 
 	@Override

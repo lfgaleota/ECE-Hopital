@@ -12,7 +12,7 @@ public class MaladeUpdateDialog extends ModelUpdateDialog<Malade> {
 
 	@Override
 	public ModelInputList build() {
-		return new MaladeInputList( false );
+		return new MaladeInputList( false, this );
 	}
 
 	@Override

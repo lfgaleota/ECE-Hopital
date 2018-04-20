@@ -6,9 +6,11 @@ import ece.ing3.java.projet.vue.components.inputs.BaseInput;
 import ece.ing3.java.projet.vue.components.inputs.LongIdInput;
 import ece.ing3.java.projet.vue.components.inputs.StringInput;
 
+import java.awt.*;
+
 public class MaladeInputList extends ModelInputList {
-	public MaladeInputList( boolean isSearch ) {
-		super( isSearch );
+	public MaladeInputList( boolean isSearch, Window parent ) {
+		super( isSearch, parent );
 	}
 
 	@Override
@@ -17,7 +19,7 @@ public class MaladeInputList extends ModelInputList {
 	}
 
 	@Override
-	protected BaseInput getInputForField( String fieldName, String columnName, boolean isSearch ) {
+	protected BaseInput getInputForField( String fieldName, String columnName, boolean isSearch, Window parent ) {
 		switch( fieldName ) {
 			case "numero":
 				return new LongIdInput( columnName, isSearch );

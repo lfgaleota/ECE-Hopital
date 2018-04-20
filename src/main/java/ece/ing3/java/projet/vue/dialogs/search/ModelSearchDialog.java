@@ -52,7 +52,7 @@ public abstract class ModelSearchDialog extends BaseModelInputDialog {
 	}
 
 	@Override
-	public void validateInput() throws IllegalArgumentException {
+	public void validateContent() throws IllegalArgumentException {
 		getWhereClause();
 	}
 
