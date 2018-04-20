@@ -1,6 +1,7 @@
 package ece.ing3.java.projet.controleur.panels;
 
 import ece.ing3.java.projet.controleur.dialogs.search.ServiceSearchDialogController;
+import ece.ing3.java.projet.controleur.dialogs.update.ServiceUpdateDialogController;
 import ece.ing3.java.projet.database.sql.Model;
 import ece.ing3.java.projet.modele.administration.Service;
 import ece.ing3.java.projet.modele.tables.ServiceTableModel;
@@ -33,6 +34,6 @@ public class ServicePanelController extends ModelPanelController<Service> {
 
 	@Override
 	public ModelUpdateDialog<Service> createUpdateDialog( Service existingModel ) {
-		return null;
+		return ServiceUpdateDialogController.createDialog( existingModel, this );
 	}
 }
