@@ -1,13 +1,9 @@
 package ece.ing3.java.projet.configuration;
 
-import ece.ing3.java.projet.utils.Constants;
-import ece.ing3.java.projet.utils.Utils;
-import org.apache.commons.configuration2.PropertiesConfiguration;
-import org.apache.commons.configuration2.builder.FileBasedConfigurationBuilder;
-import org.apache.commons.configuration2.builder.fluent.Configurations;
-import org.apache.commons.configuration2.ex.ConfigurationException;
+import ece.ing3.java.projet.Main;
 
-import java.io.FileNotFoundException;
+import java.util.prefs.BackingStoreException;
+import java.util.prefs.Preferences;
 
 /**
  * Configuration helper.
@@ -15,40 +11,31 @@ import java.io.FileNotFoundException;
  * Offers a convenient way to get and set configuration parameters.
  */
 public class Configuration {
-	private static FileBasedConfigurationBuilder<PropertiesConfiguration> builder;
-	private static PropertiesConfiguration config;
+	private static Preferences config;
 
 	/**
-	 * Loads the configuration from standard configuration file.
-	 *
-	 * @throws ConfigurationException Configuration file not found or malformed.
+	 * Loads the configuration.
 	 */
-	public static void init() throws ConfigurationException {
-		Configurations configs = new Configurations();
-		try {
-			builder = configs.propertiesBuilder( Utils.getResourcePath( Constants.RESOURCE_PATH_CONFIGURATION ) );
-			config = builder.getConfiguration();
-		} catch( FileNotFoundException e ) {
-			throw new ConfigurationException( "Configuration file not found.", e );
-		}
+	public static void init() {
+		config = Preferences.userNodeForPackage( Main.class );
 	}
 
 	/**
-	 * Returns the underlying Apache Commons Configuration2 instance.
+	 * Returns the underlying Preferences instance.
 	 *
-	 * @return Configuration instance
+	 * @return Preferences instance
 	 */
-	public static org.apache.commons.configuration2.Configuration get() {
+	public static Preferences get() {
 		return config;
 	}
 
 	/**
-	 * Save the configuration to file.
+	 * Saves the configuration.
 	 *
-	 * @throws ConfigurationException Error while saving to file.
+	 * @throws BackingStoreException Error while saving.
 	 */
-	public static void save() throws ConfigurationException {
-		builder.save();
+	public static void save() throws BackingStoreException {
+		config.sync();
 	}
 
 	/**
@@ -58,16 +45,27 @@ public class Configuration {
 	 * @return Value
 	 */
 	public static String getString( String key ) {
-		return config.getString( key );
+		return getString( key, null );
+	}
+
+	/**
+	 * Get a configuration String value by key.
+	 *
+	 * @param key          Configuration key
+	 * @param defaultValue Default value
+	 * @return Value
+	 */
+	public static String getString( String key, String defaultValue ) {
+		return config.get( key, defaultValue );
 	}
 
 	/**
 	 * Sets a configuration value.
 	 *
-	 * @param key Configuration key
+	 * @param key   Configuration key
 	 * @param value Value
 	 */
-	public static void set( String key, Object value ) {
-		config.setProperty( key, value  );
+	public static void set( String key, String value ) {
+		config.put( key, value );
 	}
 }

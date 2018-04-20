@@ -1,11 +1,12 @@
 package ece.ing3.java.projet.database;
 
 import ece.ing3.java.projet.configuration.Configuration;
+import ece.ing3.java.projet.exceptions.ConfigurationException;
 import ece.ing3.java.projet.exceptions.DatabaseException;
-import org.apache.commons.dbutils.DbUtils;
-import javax.sql.DataSource;
 import org.apache.commons.dbcp2.BasicDataSource;
+import org.apache.commons.dbutils.DbUtils;
 
+import javax.sql.DataSource;
 import java.sql.*;
 
 /**
@@ -21,10 +22,20 @@ public class Database {
 	/**
 	 * Init the database and connect to it.
 	 *
-	 * @throws DatabaseException Database error
+	 * @throws DatabaseException      Database error
+	 * @throws ConfigurationException Invalid configuration
 	 */
-	public static void init() throws DatabaseException {
+	public static void init() throws ConfigurationException, DatabaseException {
 		try {
+			if(
+				Configuration.getString( "database.driver" ) == null ||
+				Configuration.getString( "database.username" ) == null ||
+				Configuration.getString( "database.password" ) == null ||
+				Configuration.getString( "database.url" ) == null
+			) {
+				throw new ConfigurationException( "Missing configuration value" );
+			}
+
 			dataSource = new BasicDataSource();
 			dataSource.setDriverClassName( Configuration.getString( "database.driver" ) );
 			dataSource.setUsername( Configuration.getString( "database.username" ) );
