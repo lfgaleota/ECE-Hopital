@@ -15,3 +15,10 @@ Projet d'informatique du second semestre pour la première année du cycle ingé
 ## Documentation
 Une documentation est disponible ici:
 https://louisfelix90.github.io/ECE-Hopital/
+
+## Références
+Les articles et snippets suivants ont été utilisé pour la conception de ce projet :
+ - **Flex your grid layout**, Bogdan Dorohonceanu (https://www.javaworld.com/article/2077486/core-java/java-tip-121--flex-your-grid-layout.html)
+ - **Change Java JTabbedPane Inset Color**, Demo Source and Support Ltd. (http://www.java2s.com/Tutorials/Java/Swing_How_to/JTabbedPane/Change_Java_JTabbedPane_Inset_Color.htm)
+ - Réponse à **Java: remove margin / padding on a JTabbedPane**, Tim Boudreau (https://stackoverflow.com/a/5184026)
+ - **Customizing a JTabbedPane Look and Feel : JTabbedPane**, Demo Source and Support Ltd. (http://www.java2s.com/Tutorial/Java/0240__Swing/CustomizingaJTabbedPaneLookandFeel.htm)
