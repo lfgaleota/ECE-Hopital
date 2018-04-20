@@ -2,26 +2,42 @@ package ece.ing3.java.projet.controleur.dialogs.search;
 
 import ece.ing3.java.projet.controleur.dialogs.BaseModelInputDialogController;
 import ece.ing3.java.projet.interfaces.DialogListener;
-import ece.ing3.java.projet.utils.Utils;
-import ece.ing3.java.projet.vue.Application;
 import ece.ing3.java.projet.vue.dialogs.BaseModelInputDialog;
 import ece.ing3.java.projet.vue.dialogs.search.ModelSearchDialog;
 
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.WindowEvent;
-import java.awt.event.WindowListener;
 
+/**
+ * Contrôleur de boîte de dialogue de recherche de modèle générique
+ */
 public class ModelSearchDialogController extends BaseModelInputDialogController {
+	/**
+	 * Créer un nouveau contrôleur pour une boîte de dialogue de recherche et initialise cette boite de dialogue.
+	 *
+	 * @param dialog Boîte de dialogue associée
+	 * @param listener Objet qui écoute l'issue de la décision
+	 */
 	protected ModelSearchDialogController( BaseModelInputDialog dialog, DialogListener listener ) {
 		super( dialog, listener );
 	}
 
+	/**
+	 * Initialise une nouvelle boîte de dialogue de recherche auprès du contrôleur.
+	 *
+	 * @param dialog Boîte de dialogue à initialiser
+	 * @param listener Objet qui écoute l'issue de la décision
+	 * @return Boîte de dialogue de recherche initialisée
+	 */
 	public static ModelSearchDialog createDialog( ModelSearchDialog dialog, DialogListener listener ) {
 		new ModelSearchDialogController( dialog, listener );
 		return dialog;
 	}
 
+	/**
+	 * Méthode réagissant au choix de l'utilisateur.
+	 *
+	 * @param actionEvent Événement d'action
+	 */
 	@Override
 	public void actionPerformed( ActionEvent actionEvent ) {
 		if( actionEvent.getSource() == ( (ModelSearchDialog) dialog ).getReset() ) {

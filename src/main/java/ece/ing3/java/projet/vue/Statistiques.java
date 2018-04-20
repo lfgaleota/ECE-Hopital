@@ -13,7 +13,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.JFrame;
-import javax.swing.JTable;
 
 /**
  * Classe d'affichage de la fenetre de statistiques.
@@ -34,92 +33,93 @@ public class Statistiques  extends JFrame {
 		this.setResizable(true);
 		this.setVisible(true);
 		this.toFront(); // place la fenêtre devant les autres.
+		this.creer_Statistiques();
 	}
-	
+
 	/**
 	 * Méthode qui créée des objets de JFreeChart et les ajoute dans une fenêtre
 	 */
 	public void creer_Statistiques()
 	{
             //On crée un liste d'employe
-		List<Employe> malisteemploye = new ArrayList<Employe>();
+		List<Employe> malisteemploye = new ArrayList<>();
 		try {
 			malisteemploye = Employe.findBaseList(); // récuperation des données de la bdd concernant les employes
 		} catch (DatabaseException e1) {
 			e1.printStackTrace();
 		}
-                
-                
+
+
             //On crée un liste de malade
-		List<Malade> malistemalade = new ArrayList<Malade>();
+		List<Malade> malistemalade = new ArrayList<>();
 		try {
 			malistemalade = Malade.findList(); // récuperation des données de la bdd concernant les malade
 		} catch (DatabaseException e1) {
 			e1.printStackTrace();
 		}
-                
-                
-                List<Service> malisteservice = new ArrayList<Service>();
+
+
+                List<Service> malisteservice = new ArrayList<>();
 		try {
 			malisteservice = Service.findList(); // récuperation des données de la bdd concernant les service
 		} catch (DatabaseException e1) {
 			e1.printStackTrace();
 		}
-                
-                List<Hospitalisation> malistehospitalisation = new ArrayList<Hospitalisation>();
+
+                List<Hospitalisation> malistehospitalisation = new ArrayList<>();
 		try {
 			malistehospitalisation = Hospitalisation.findList(); // récuperation des données de la bdd concernant les hospitalisations
 		} catch (DatabaseException e1) {
 			e1.printStackTrace();
 		}
-                
 
-                List<Chambre> malistechambre = new ArrayList<Chambre>();
+
+                List<Chambre> malistechambre = new ArrayList<>();
 		try {
 			malistechambre = Chambre.findList(); // récuperation des données de la bdd concernant les chambre
 		} catch (DatabaseException e1) {
 			e1.printStackTrace();
 		}
-                
-                List<Docteur> malistedocteur = new ArrayList<Docteur>();
+
+                List<Docteur> malistedocteur = new ArrayList<>();
 		try {
 			malistedocteur = Docteur.findList(); // récuperation des données de la bdd concernant les chambre
 		} catch (DatabaseException e1) {
 			e1.printStackTrace();
 		}
-                
-                List<Infirmier> malisteinfirmier = new ArrayList<Infirmier>();
+
+                List<Infirmier> malisteinfirmier = new ArrayList<>();
 		try {
 			malisteinfirmier = Infirmier.findList(); // récuperation des données de la bdd concernant les chambre
 		} catch (DatabaseException e1) {
 			e1.printStackTrace();
 		}
-            
-		GridLayout mygridLayout = new GridLayout(3,2); 
+
+		GridLayout mygridLayout = new GridLayout(3,2);
 		this.setLayout(mygridLayout);
 		mygridLayout.setHgap(10);
 		mygridLayout.setVgap(10);
-		 
-               
+
+
 		PieChart2D P= new PieChart2D(1,malisteemploye,malistemalade,malistechambre,malistedocteur,malisteinfirmier);
-                this.getContentPane().add(P.getPieChart2D());         
+                this.getContentPane().add(P.getPieChart2D());
                 PieChart2D D= new PieChart2D(2,malisteemploye,malistemalade,malistechambre,malistedocteur,malisteinfirmier);
-                this.getContentPane().add(D.getPieChart2D());      
+                this.getContentPane().add(D.getPieChart2D());
                 PieChart2D F= new PieChart2D(3,malisteemploye,malistemalade,malistechambre,malistedocteur,malisteinfirmier);
-                this.getContentPane().add(F.getPieChart2D());   
+                this.getContentPane().add(F.getPieChart2D());
                 PieChart2D G= new PieChart2D(4,malisteemploye,malistemalade,malistechambre,malistedocteur,malisteinfirmier);
-                this.getContentPane().add(G.getPieChart2D());   
+                this.getContentPane().add(G.getPieChart2D());
                 //PieChart2D D= new PieChart2D(malisteemploye,malistemalade);
 		//PieChart3D P3= new PieChart3D();
 		//BarChart B = new BarChart();
-		
-		
-            
-                
+
+
+
+
 		//this.getContentPane().add(P3.getPieChart3D());
 		//this.getContentPane().add(B.getBarChart());
                 //this.getContentPane().add(D.getPieChart2D());
-		
+
 		this.pack();
 	}
 }

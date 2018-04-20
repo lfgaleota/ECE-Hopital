@@ -5,9 +5,9 @@
  */
 package ece.ing3.java.projet.vue.panels;
 
-/**
- *
- * @author Virgile
+/*
+
+  @author Virgile
  */
 import static ece.ing3.java.projet.utils.Constants.RESOURCE_PATH_HOMELOGO;
 import java.awt.Color;
@@ -38,7 +38,7 @@ public class BasePanel extends JPanel {
             this.color = Color.white;
             this.message ="ACCUEIL";
             this.type=type;
-            
+
 	}
 	/// CONSTRUCTEUR VIA COLOR
 	public BasePanel(Color color) {
@@ -55,7 +55,7 @@ public class BasePanel extends JPanel {
 		g.setColor(Color.white);
 		g.setFont(new Font("Arial", Font.BOLD, 15));
 		g.drawString(this.message, 10, 20);
-                
+
                 if(this.type==1)
                 {
                         try {
@@ -65,8 +65,8 @@ public class BasePanel extends JPanel {
                         //g.drawImage(img, 0, 0, this.getWidth(), this.getHeight(), this);
                         } catch (IOException e) {
                          e.printStackTrace();
-                        }  
+                        }
                 }
-                
+
 	}
 }
