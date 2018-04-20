@@ -2,6 +2,7 @@ package ece.ing3.java.projet.vue.components.inputlists;
 
 import ece.ing3.java.projet.database.sql.Model;
 import ece.ing3.java.projet.utils.Strings;
+import ece.ing3.java.projet.vue.components.FlexibleGridLayout;
 import ece.ing3.java.projet.vue.components.inputs.BaseInput;
 
 import javax.swing.*;
@@ -14,7 +15,7 @@ public abstract class ModelInputList extends JPanel {
 
 	public ModelInputList( boolean isSearch ) {
 		String[] fieldNames = Model.getFieldNames( getModelClass() );
-		setLayout( new GridLayout( fieldNames.length, 2 ) );
+		setLayout( new FlexibleGridLayout( fieldNames.length, 2 ) );
 		for( String fieldName : fieldNames ) {
 			BaseInput input = getInputForField(
 					fieldName,
