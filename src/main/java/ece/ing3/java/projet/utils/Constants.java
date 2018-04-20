@@ -1,5 +1,7 @@
 package ece.ing3.java.projet.utils;
 
+import java.awt.*;
+
 /**
  * Project constants
  */
@@ -31,4 +33,5 @@ public class Constants {
 
 	public static final Integer WIDTH_FRAME = 1100;
 	public static final Integer HEIGHT_FRAME = 800;
+	public static final Dimension UI_DIALOGCOMPONENT_PREFERREDSIZE = new Dimension( 200, 16 );
 }
