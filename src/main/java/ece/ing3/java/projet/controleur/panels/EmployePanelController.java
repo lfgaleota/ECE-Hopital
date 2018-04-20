@@ -1,6 +1,7 @@
 package ece.ing3.java.projet.controleur.panels;
 
 import ece.ing3.java.projet.controleur.dialogs.search.EmployeSearchDialogController;
+import ece.ing3.java.projet.controleur.dialogs.update.EmployeUpdateDialogController;
 import ece.ing3.java.projet.database.sql.Model;
 import ece.ing3.java.projet.database.sql.clauses.Where;
 import ece.ing3.java.projet.database.sql.queries.SQLSelect;
@@ -37,7 +38,7 @@ public class EmployePanelController  extends ModelPanelController<Employe> {
 
 	@Override
 	public ModelUpdateDialog<Employe> createUpdateDialog( Employe existingModel ) {
-		return null;
+		return EmployeUpdateDialogController.createDialog( existingModel, this );
 	}
 
 	public Where queryModifyWhereClause( Where whereClause ) {

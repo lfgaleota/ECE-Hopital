@@ -1,6 +1,7 @@
 package ece.ing3.java.projet.controleur.panels;
 
 import ece.ing3.java.projet.controleur.dialogs.search.InfirmierSearchDialogController;
+import ece.ing3.java.projet.controleur.dialogs.update.InfirmierUpdateDialogController;
 import ece.ing3.java.projet.database.sql.Model;
 import ece.ing3.java.projet.database.sql.queries.SQLSelect;
 import ece.ing3.java.projet.modele.employe.Employe;
@@ -41,6 +42,6 @@ public class InfirmierPanelController extends ModelPanelController<Infirmier> {
 
 	@Override
 	public ModelUpdateDialog<Infirmier> createUpdateDialog( Infirmier existingModel ) {
-		return null;
+		return InfirmierUpdateDialogController.createDialog( existingModel, this );
 	}
 }
