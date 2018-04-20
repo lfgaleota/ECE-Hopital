@@ -111,6 +111,7 @@ public class Statistiques  extends JFrame {
                 this.getContentPane().add(G.getPieChart2D());
                 PieChart2D H = new PieChart2D(5,malisteemploye,malistemalade,malistechambre,malistedocteur,malisteinfirmier,malistehospitalisation);
                 this.getContentPane().add(H.getPieChart2D());
+                this.getContentPane().add( ( new PieChart2D( 6, null, null, null, null, null, null ) ).getPieChart2D() );
                 //PieChart2D D= new PieChart2D(malisteemploye,malistemalade);
 		//PieChart3D P3= new PieChart3D();
 		//BarChart B = new BarChart();
