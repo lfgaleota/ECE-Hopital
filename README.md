@@ -5,7 +5,6 @@ Projet d'informatique du second semestre pour la première année du cycle ingé
 ## Dépendances
  - MySQL Connector/J (https://dev.mysql.com/doc/connector-j/5.1/en/)
  - Apache Commons BeanUtils (http://commons.apache.org/proper/commons-beanutils/)
- - Apache Commons Configuration 2 (https://commons.apache.org/proper/commons-configuration/)
  - Apache Commons DBCP (https://commons.apache.org/proper/commons-dbcp/)
  - Apache Commons DbUtils (https://commons.apache.org/proper/commons-dbutils/)
  - Simple Logging Facade for Java (https://www.slf4j.org/)
