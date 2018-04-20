@@ -13,7 +13,9 @@ import javax.swing.*;
 import java.awt.*;
 
 import ece.ing3.java.projet.controleur.ApplicationController;
+import ece.ing3.java.projet.controleur.panels.ConfigurationPanelController;
 import ece.ing3.java.projet.enums.ModelControllers;
+import ece.ing3.java.projet.utils.Strings;
 import ece.ing3.java.projet.vue.panels.TabPanel;
 
 /**
@@ -43,6 +45,8 @@ public class Application extends JFrame {
 		for( ModelControllers modelController : ModelControllers.values() ) {
 			tabs.addTab( modelController.getPrettyName(), modelController.getPanelController().getPanel() );
 		}
+
+		tabs.addTab( Strings.get( "configuration.title" ), ConfigurationPanelController.createPanel() );
 
 		new ApplicationController( this );
 

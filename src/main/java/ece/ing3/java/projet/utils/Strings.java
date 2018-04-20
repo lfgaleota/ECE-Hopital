@@ -41,7 +41,15 @@ public class Strings {
 	public static final String MODEL_NUMEROMALADE = "N° malade";
 	public static final String MODEL_NUMEROLIT = "N° lit";
 	public static final String MODEL_NUMERODOCTEUR = "N° docteur";
+	public static final String DIALOG_SUBMIT_SAVE = "Sauvegarder";
 	public static final String DIALOG_MODEL_REMOVE = "Vous allez supprimer <nb> <modelName>, voulez-vous vraiment procéder ?";
+	public static final String DIALOG_CONNECTING_TITLE = "Connexion en cours...";
+	public static final String DIALOG_CONNECTING_TEXT = "Connexion en cours...";
+	public static final String CONFIGURATION_DATABASE_URL = "URL de connexion";
+	public static final String CONFIGURATION_DATABASE_USERNAME = "Nom d'utilisateur";
+	public static final String CONFIGURATION_DATABASE_PASSWORD = "Mot de passe";
+	public static final String CONFIGURATION_DATABASE_DRIVER = "Type de BDD";
+	public static final String CONFIGURATION_TITLE = "Configuration";
 
 	private static final Map<String, String> map = new HashMap<>();
 
