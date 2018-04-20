@@ -7,9 +7,11 @@ import ece.ing3.java.projet.vue.components.inputs.LongInput;
 import ece.ing3.java.projet.vue.components.inputs.StringIdInput;
 import ece.ing3.java.projet.vue.components.inputs.StringInput;
 
+import java.awt.*;
+
 public class ServiceInputList extends ModelInputList {
-	public ServiceInputList( boolean isSearch ) {
-		super( isSearch );
+	public ServiceInputList( boolean isSearch, Window parent ) {
+		super( isSearch, parent );
 	}
 
 	@Override
@@ -18,7 +20,7 @@ public class ServiceInputList extends ModelInputList {
 	}
 
 	@Override
-	protected BaseInput getInputForField( String fieldName, String columnName, boolean isSearch ) {
+	protected BaseInput getInputForField( String fieldName, String columnName, boolean isSearch, Window parent ) {
 		switch( fieldName ) {
 			case "code":
 				return new StringIdInput( columnName, isSearch );

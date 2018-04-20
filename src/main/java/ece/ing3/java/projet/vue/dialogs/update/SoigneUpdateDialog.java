@@ -12,7 +12,7 @@ public class SoigneUpdateDialog extends ModelUpdateDialog<Soigne> {
 
 	@Override
 	public ModelInputList build() {
-		return new SoigneInputList( false );
+		return new SoigneInputList( false, this );
 	}
 
 	@Override

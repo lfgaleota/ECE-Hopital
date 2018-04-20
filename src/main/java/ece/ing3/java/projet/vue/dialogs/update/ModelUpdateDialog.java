@@ -61,7 +61,7 @@ public abstract class ModelUpdateDialog<M extends Model> extends BaseModelInputD
 	}
 
 	@Override
-	public void validateInput() throws IllegalArgumentException {
+	public void validateContent() throws IllegalArgumentException {
 		buildModel();
 	}
 

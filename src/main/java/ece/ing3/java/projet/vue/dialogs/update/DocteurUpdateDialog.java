@@ -12,7 +12,7 @@ public class DocteurUpdateDialog extends ModelUpdateDialog<Docteur> {
 
 	@Override
 	public ModelInputList build() {
-		return new DocteurInputList( false );
+		return new DocteurInputList( false, this );
 	}
 
 	@Override

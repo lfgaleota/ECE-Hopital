@@ -6,6 +6,6 @@ import ece.ing3.java.projet.vue.components.inputlists.DocteurInputList;
 public class DocteurSearchDialog extends ModelSearchDialog{
 	@Override
 	public ModelInputList build() {
-		return new DocteurInputList( true );
+		return new DocteurInputList( true, this );
 	}
 }

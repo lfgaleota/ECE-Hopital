@@ -1,79 +1,23 @@
 package ece.ing3.java.projet.vue.dialogs;
 
-import ece.ing3.java.projet.utils.Constants;
 import ece.ing3.java.projet.vue.Application;
 import ece.ing3.java.projet.vue.components.inputlists.ModelInputList;
 
 import javax.swing.*;
-import javax.swing.border.EmptyBorder;
-import java.awt.*;
-import java.awt.event.ActionListener;
 
-public abstract class BaseModelInputDialog extends JDialog {
+public abstract class BaseModelInputDialog extends BaseValidatedDialog {
 	protected ModelInputList inputList;
-	protected JPanel bottom;
-	private JButton submit;
-	private JButton cancel;
-
-	private boolean validated;
 
 	public BaseModelInputDialog() {
 		super( Application.get() );
-
-		this.setTitle( getTitle() );
-		this.setLayout( new BorderLayout() );
-		this.setResizable( true );
-
-		( (JPanel) getContentPane() ).setBorder( new EmptyBorder( Constants.UI_DIALOG_MARGIN ) );
-
 		this.inputList = this.build();
-
-		this.add( this.inputList, BorderLayout.CENTER );
-
-		bottom = new JPanel( new FlowLayout() );
-		this.cancel = new JButton( getCancelLabel() );
-		bottom.add( cancel );
-		this.submit = new JButton( getSubmitLabel() );
-		bottom.add( submit );
-
-		this.add( bottom, BorderLayout.SOUTH );
-
-		this.pack();
-
-		this.setVisible( true );
-		this.toFront(); // place la fenêtre devant les autres.
+		init();
 	}
 
-	protected String getCancelLabel() {
-		return "Annuler";
-	}
-
-	protected String getSubmitLabel() {
-		return "Envoyer";
+	@Override
+	protected JComponent getContent() {
+		return this.inputList;
 	}
 
 	public abstract ModelInputList build();
-
-	public JButton getSubmit() {
-		return submit;
-	}
-
-	public JButton getCancel() {
-		return cancel;
-	}
-
-	public void addActionListener( ActionListener actionListener ) {
-		submit.addActionListener( actionListener );
-		cancel.addActionListener( actionListener );
-	}
-
-	public boolean isValidated() {
-		return validated;
-	}
-
-	public void setValidated( boolean validated ) {
-		this.validated = validated;
-	}
-
-	public abstract void validateInput() throws IllegalArgumentException;
 }

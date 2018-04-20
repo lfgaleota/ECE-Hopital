@@ -4,9 +4,11 @@ import ece.ing3.java.projet.database.sql.Model;
 import ece.ing3.java.projet.modele.hopital.Chambre;
 import ece.ing3.java.projet.vue.components.inputs.*;
 
+import java.awt.*;
+
 public class ChambreInputList extends ModelInputList {
-	public ChambreInputList( boolean isSearch ) {
-		super( isSearch );
+	public ChambreInputList( boolean isSearch, Window parent ) {
+		super( isSearch, parent );
 	}
 
 	@Override
@@ -15,7 +17,7 @@ public class ChambreInputList extends ModelInputList {
 	}
 
 	@Override
-	protected BaseInput getInputForField( String fieldName, String columnName, boolean isSearch ) {
+	protected BaseInput getInputForField( String fieldName, String columnName, boolean isSearch, Window parent ) {
 		switch( fieldName ) {
 			case "numeroChambre":
 				return new LongIdInput( columnName, isSearch );
@@ -24,7 +26,7 @@ public class ChambreInputList extends ModelInputList {
 			case "numeroSurveillant":
 				return new LongInput( columnName, isSearch );
 			case "codeServiceRattache":
-				return new StringIdInput( columnName, isSearch );
+				return new ServiceIdInput( columnName, isSearch, parent );
 
 		}
 

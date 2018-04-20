@@ -4,9 +4,11 @@ import ece.ing3.java.projet.database.sql.Model;
 import ece.ing3.java.projet.modele.employe.Infirmier;
 import ece.ing3.java.projet.vue.components.inputs.*;
 
+import java.awt.*;
+
 public class InfirmierInputList extends ModelInputList {
-	public InfirmierInputList( boolean isSearch ) {
-		super( isSearch );
+	public InfirmierInputList( boolean isSearch, Window parent ) {
+		super( isSearch, parent );
 	}
 
 	@Override
@@ -15,7 +17,7 @@ public class InfirmierInputList extends ModelInputList {
 	}
 
 	@Override
-	protected BaseInput getInputForField( String fieldName, String columnName, boolean isSearch ) {
+	protected BaseInput getInputForField( String fieldName, String columnName, boolean isSearch, Window parent ) {
 		switch( fieldName ) {
 			case "numero":
 				return new LongIdInput( columnName, isSearch );
@@ -32,7 +34,7 @@ public class InfirmierInputList extends ModelInputList {
 			case "salaire":
 				return new FloatInput( columnName, isSearch );
 			case "codeService":
-				return new StringInput( columnName, isSearch );
+				return new ServiceInput( columnName, isSearch, parent );
 
 		}
 

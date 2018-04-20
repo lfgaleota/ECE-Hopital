@@ -41,6 +41,7 @@ public class Constants {
 	public static final Dimension UI_DIALOGCOMPONENT_PREFERREDSIZE = new Dimension( 200, 16 );
 
 	public static final Insets UI_DIALOG_MARGIN = new Insets( 5, 5, 5, 5 );
+	public static final Insets UI_DIALOGSELECT_MARGIN = new Insets( 0, 0, 5, 0 );
 	public static final Dimension UI_LOADINGTHROBBER_PREFERREDSIZE = new Dimension( 50, 50 );
 	public static final int UI_LOADINGTHROBBER_DELAY = 10;
 
