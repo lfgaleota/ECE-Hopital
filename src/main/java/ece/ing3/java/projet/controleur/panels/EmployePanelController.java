@@ -5,7 +5,7 @@ import ece.ing3.java.projet.controleur.dialogs.update.EmployeUpdateDialogControl
 import ece.ing3.java.projet.database.sql.Model;
 import ece.ing3.java.projet.database.sql.clauses.Where;
 import ece.ing3.java.projet.database.sql.queries.SQLSelect;
-import ece.ing3.java.projet.modele.employe.Employe;
+import ece.ing3.java.projet.modele.employe.Docteur;
 import ece.ing3.java.projet.modele.employe.Employe;
 import ece.ing3.java.projet.modele.employe.Infirmier;
 import ece.ing3.java.projet.modele.tables.TableModel;
@@ -72,7 +72,7 @@ public class EmployePanelController  extends ModelPanelController<Employe> {
 			whereClause = new Where();
 		}
 		whereClause.and( "numero", "NOT IN", new SQLSelect<Infirmier>( Infirmier.class, "numero" ) );
-		whereClause.and( "numero", "NOT IN", new SQLSelect<Employe>( Employe.class, "numero" ) );
+		whereClause.and( "numero", "NOT IN", new SQLSelect<Employe>( Docteur.class, "numero" ) );
 		return whereClause;
 	}
 }
