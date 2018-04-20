@@ -27,14 +27,18 @@ public abstract class ModelUpdateDialog<M extends Model> extends BaseModelInputD
 		}
 	}
 
+	public boolean isAdd() {
+		return model == null;
+	}
+
 	@Override
 	public String getTitle() {
-		return ( model != null ? "Modification" : "Ajout" );
+		return ( isAdd() ? "Ajout" : "Modification" );
 	}
 
 	@Override
 	protected String getSubmitLabel() {
-		return ( model != null ? "Mettre à jour" : "Ajouter" );
+		return ( isAdd() ? "Ajouter" : "Mettre à jour" );
 	}
 
 	protected abstract M buildNewModel();
