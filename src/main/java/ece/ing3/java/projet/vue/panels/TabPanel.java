@@ -17,13 +17,10 @@ public class TabPanel extends JTabbedPane {
 		super( JTabbedPane.LEFT );
 
 		try {
-			logo = ImageIO.read( Utils.getResourcePath( Constants.RESOURCE_PATH_APPLOGO ) );
-		} catch( FileNotFoundException e ) {
-			logo = null;
-			Utils.getUILogger().error( "Logo not found.", e );
+			logo = Utils.getImageResource( Constants.RESOURCE_PATH_APPLOGO );
 		} catch( IOException e ) {
 			logo = null;
-			Utils.getUILogger().error( "Logo not loaded.", e );
+			Utils.getUILogger().error( "Logo not found.", e );
 		}
 	}
 
