@@ -101,14 +101,16 @@ public class Statistiques  extends JFrame {
 		mygridLayout.setVgap(10);
 
 
-		PieChart2D P= new PieChart2D(1,malisteemploye,malistemalade,malistechambre,malistedocteur,malisteinfirmier);
+		PieChart2D P= new PieChart2D(1,malisteemploye,malistemalade,malistechambre,malistedocteur,malisteinfirmier,malistehospitalisation);
                 this.getContentPane().add(P.getPieChart2D());
-                PieChart2D D= new PieChart2D(2,malisteemploye,malistemalade,malistechambre,malistedocteur,malisteinfirmier);
+                PieChart2D D= new PieChart2D(2,malisteemploye,malistemalade,malistechambre,malistedocteur,malisteinfirmier,malistehospitalisation);
                 this.getContentPane().add(D.getPieChart2D());
-                PieChart2D F= new PieChart2D(3,malisteemploye,malistemalade,malistechambre,malistedocteur,malisteinfirmier);
+                PieChart2D F= new PieChart2D(3,malisteemploye,malistemalade,malistechambre,malistedocteur,malisteinfirmier,malistehospitalisation);
                 this.getContentPane().add(F.getPieChart2D());
-                PieChart2D G= new PieChart2D(4,malisteemploye,malistemalade,malistechambre,malistedocteur,malisteinfirmier);
+                PieChart2D G= new PieChart2D(4,malisteemploye,malistemalade,malistechambre,malistedocteur,malisteinfirmier,malistehospitalisation);
                 this.getContentPane().add(G.getPieChart2D());
+                PieChart2D H = new PieChart2D(5,malisteemploye,malistemalade,malistechambre,malistedocteur,malisteinfirmier,malistehospitalisation);
+                this.getContentPane().add(H.getPieChart2D());
                 //PieChart2D D= new PieChart2D(malisteemploye,malistemalade);
 		//PieChart3D P3= new PieChart3D();
 		//BarChart B = new BarChart();

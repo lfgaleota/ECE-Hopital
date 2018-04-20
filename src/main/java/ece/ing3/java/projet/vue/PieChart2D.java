@@ -1,5 +1,6 @@
 package ece.ing3.java.projet.vue;
 
+import ece.ing3.java.projet.database.sql.queries.SQLSelect;
 import ece.ing3.java.projet.modele.employe.Docteur;
 import ece.ing3.java.projet.modele.employe.Employe;
 import ece.ing3.java.projet.modele.employe.Infirmier;
@@ -17,6 +18,7 @@ import java.util.Map;
 import static ece.ing3.java.projet.enums.Rotation.JOUR;
 import static ece.ing3.java.projet.enums.Rotation.NUIT;
 import static ece.ing3.java.projet.enums.Specialite.*;
+import ece.ing3.java.projet.modele.hopital.Hospitalisation;
 
 /**
  * Classe modèle pour les diagrammes circulaires 2D
@@ -35,7 +37,7 @@ public class PieChart2D {
 	 * Constructeur par défaut -> Complete les informations du diagramme
 	 * -> Rempli et affiche le diagramme circulaire dans un panel
 	 */
-	public PieChart2D( int type, List<Employe> malisteemploye, List<Malade> malistemalade, List<Chambre> malistechambre, List<Docteur> malistedocteur, List<Infirmier> malisteinfirmier ) {
+	public PieChart2D( int type, List<Employe> malisteemploye, List<Malade> malistemalade, List<Chambre> malistechambre, List<Docteur> malistedocteur, List<Infirmier> malisteinfirmier,List<Hospitalisation>malistehospitalisation ) {
 		dataset = new DefaultPieDataset();
 		this.type = type;
                 /*
@@ -224,9 +226,114 @@ public class PieChart2D {
 
 			chartpanel = new ChartPanel( chart );
 		}
+                
+                if( type == 5 )
+                {
+                    int CAR=0;
+                    int CHG=0;
+                    int REA=0;
+                    
+                    
+                    	int populationglobale = malistehospitalisation.size();
+                        
+                        for(Hospitalisation aMalisteHospitalisation : malistehospitalisation )
+                        {
+                            
+                            if("REA".equals(aMalisteHospitalisation.getCodeService()))
+                            {
+                                REA++;
+                            }
+                               
+                            if("CHG".equals(aMalisteHospitalisation.getCodeService()))
+                            {
+                                CHG++;
+                            }
+                               
+                            if("CAR".equals(aMalisteHospitalisation.getCodeService()))
+                            {
+                                CAR++;
+                            }
+                            
+                            
+                        }
+                        
+                        dataset.setValue( "Ranimation ", ( REA * 100 / populationglobale ) );
+			dataset.setValue( "Chirurugie générale ", ( CHG * 100 / populationglobale ) );
+                        dataset.setValue( "Cardiologue ", ( CAR * 100 / populationglobale ) );
+
+
+			chart = ChartFactory.createPieChart( "Patient par service", dataset, true, // legend?
+					true, // tooltips?
+					false // URLs?
+			);
+
+			chartpanel = new ChartPanel( chart );
+                }
+                 ///BLOC JOINTURE SOIGNE DOCTEUR MALADE
+             if( type == 6 )
+                {
+                   ///CREER LA LISTE JOINTE QUI PERMET DE SAVOIR LE NUMERO DE MALADE PAR SPECIALITE VIA
+                    /*
+                    SELECT docteur.specialite, malade.numero
+                    FROM malade, docteur,soigne
+                    WHERE malade.numero = soigne.no_malade AND docteur.numero=soigne.no_docteur
+                    */
+                    
+                   /*
+                    
+                    	int radio = 0;
+			int cardio = 0;
+			int pneumo = 0;
+			int anes = 0;
+			int ortho = 0;
+			int traumato = 0;
+
+                        ///REMPLACER PAR LA TAILLE DE LA LISTE JOINTE
+			int populationglobale = malistejpointe.size();
+                        ///FAIRE LE FOR POUR JOINTE
+			for( Docteur aMalistejointe : malistejointe ) {
+				if( aMalistejointe.getSpecialite() == Radiologue ) {
+					radio++;
+				}
+				if( aMalistejointe.getSpecialite() == Cardiologue ) {
+					cardio++;
+				}
+				if( aMalistejointe.getSpecialite() == Pneumologue ) {
+					pneumo++;
+				}
+				if( aMalistejointe.getSpecialite() == Anesthesiste ) {
+					anes++;
+				}
+				if( aMalistejointe.getSpecialite() == Orthopediste ) {
+					ortho++;
+				}
+				if( aMalistejointe.getSpecialite() == Traumatologue ) {
+					traumato++;
+				}
+			}
+                        
+                        dataset.setValue( "Radiologue ", ( radio * 100 / populationglobale ) );
+			dataset.setValue( "Cardiologue ", ( cardio * 100 / populationglobale ) );
+			dataset.setValue( "Pneumologue ", ( pneumo * 100 / populationglobale ) );
+			dataset.setValue( "Anestesiste ", ( anes * 100 / populationglobale ) );
+			dataset.setValue( "Orthopediste", ( ortho * 100 / populationglobale ) );
+			dataset.setValue( "Traumatologiste ", ( traumato * 100 / populationglobale ) );
+
+			chart = ChartFactory.createPieChart( "Mamade par specialite", dataset, true, // legend?
+					true, // tooltips?
+					false // URLs?
+			);
+
+			chartpanel = new ChartPanel( chart );
+		}
+                    */
+                }
+                    
 
 	}
 
+       
+        
 
 	/**
 	 * Getter
