@@ -255,7 +255,7 @@ public abstract class ModelPanelController<M extends Model> implements ActionLis
 			dialogDelete = null;
 		} else if( dialog == dialogUpdate ) {
 			panel.inUpdate();
-			( new ModelUpdateWorker( dialogUpdate.buildModel(), this ) ).execute();
+			( new ModelUpdateWorker( dialogUpdate.buildModel(), this, dialogUpdate.isAdd() ) ).execute();
 			dialogUpdate = null;
 		}
 	}

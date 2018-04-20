@@ -6,15 +6,19 @@ import ece.ing3.java.projet.interfaces.ModelWorkerProvider;
 
 public class ModelUpdateWorker extends AbstractSimpleModelWorker {
 	private Model model;
+	private boolean isAdd;
+	private boolean alreadyExist;
 
-	public ModelUpdateWorker( Model model, ModelWorkerProvider provider ) {
+	public ModelUpdateWorker( Model model, ModelWorkerProvider provider, boolean isAdd ) {
 		super( provider );
 		this.model = model;
+		this.isAdd = isAdd;
+		this.alreadyExist = false;
 	}
 
 	@Override
 	protected String getErrorMessage() {
-		return "Erreur de mise à jour des données. Vérifiez que les valeurs sont correctes.";
+		return ( alreadyExist ? "Une entrée de même identifiant existe déjà." : "Erreur de mise à jour des données. Vérifiez que les valeurs sont correctes." );
 	}
 
 	@Override
@@ -25,6 +29,11 @@ public class ModelUpdateWorker extends AbstractSimpleModelWorker {
 	@Override
 	protected Boolean doInBackground() throws Exception {
 		try {
+			if( model.exists() && isAdd ) {
+				this.alreadyExist = true;
+				return false;
+			}
+
 			model.save();
 			return true;
 		} catch( DatabaseException e ) {
