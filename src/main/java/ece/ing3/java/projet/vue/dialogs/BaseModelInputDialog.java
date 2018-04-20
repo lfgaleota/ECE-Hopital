@@ -1,9 +1,11 @@
 package ece.ing3.java.projet.vue.dialogs;
 
+import ece.ing3.java.projet.utils.Constants;
 import ece.ing3.java.projet.vue.Application;
 import ece.ing3.java.projet.vue.components.inputlists.ModelInputList;
 
 import javax.swing.*;
+import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.ActionListener;
 
@@ -21,8 +23,8 @@ public abstract class BaseModelInputDialog extends JDialog {
 		this.setTitle( getTitle() );
 		this.setLayout( new BorderLayout() );
 		this.setResizable( true );
-		this.setVisible( true );
-		this.toFront(); // place la fenêtre devant les autres.
+
+		( (JPanel) getContentPane() ).setBorder( new EmptyBorder( Constants.UI_DIALOG_MARGIN ) );
 
 		this.inputList = this.build();
 
@@ -36,7 +38,10 @@ public abstract class BaseModelInputDialog extends JDialog {
 
 		this.add( bottom, BorderLayout.SOUTH );
 
-		pack();
+		this.pack();
+
+		this.setVisible( true );
+		this.toFront(); // place la fenêtre devant les autres.
 	}
 
 	protected String getCancelLabel() {

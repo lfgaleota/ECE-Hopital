@@ -1,8 +1,11 @@
 package ece.ing3.java.projet.vue.dialogs;
 
+import ece.ing3.java.projet.utils.Constants;
 import ece.ing3.java.projet.utils.Strings;
+import ece.ing3.java.projet.vue.components.LoadingThrobber;
 
 import javax.swing.*;
+import javax.swing.border.EmptyBorder;
 import java.awt.*;
 
 /**
@@ -16,7 +19,9 @@ public class ConnectingDialog extends JDialog {
 		this.setDefaultCloseOperation( JFrame.DO_NOTHING_ON_CLOSE );
 		this.setAlwaysOnTop( true );
 
-		this.add( new JLabel( UIManager.getIcon( "OptionPane.informationIcon" ) ), BorderLayout.LINE_START );
+		( (JPanel) getContentPane() ).setBorder( new EmptyBorder( Constants.UI_DIALOG_MARGIN ) );
+
+		this.add( new LoadingThrobber(), BorderLayout.LINE_START );
 		this.add( new JLabel( Strings.get( "dialog.connecting.text" ) ), BorderLayout.CENTER );
 
 		this.pack();

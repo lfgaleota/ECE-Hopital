@@ -24,8 +24,7 @@ public class Constants {
 
 	public static final String LOGGER_NAME_UI = "UI";
 	public static final Integer UI_TEXTFIELD_MAXLENGTH = 255;
-	public static final Integer UI_TAB_MARGIN_TOP = 110;
-	public static final Integer UI_TAB_MARGIN_LEFT = 5;
+	public static final Insets UI_TABCONTAINER_MARGIN  = new Insets( 5, 120, 0, 0 );
 
 	public static final String MODEL_STRINGS_PREFIX = "model.";
 
@@ -34,4 +33,11 @@ public class Constants {
 	public static final Integer WIDTH_FRAME = 1100;
 	public static final Integer HEIGHT_FRAME = 800;
 	public static final Dimension UI_DIALOGCOMPONENT_PREFERREDSIZE = new Dimension( 200, 16 );
+
+	public static final Insets UI_DIALOG_MARGIN = new Insets( 5, 5, 5, 5 );
+	public static final Dimension UI_LOADINGTHROBBER_PREFERREDSIZE = new Dimension( 50, 50 );
+	public static final int UI_LOADINGTHROBBER_DELAY = 10;
+
+	public static final Dimension UI_MODEL_LOADING_THROBBER_SIZE = new Dimension( 200, 200 );
+	public static final Color UI_MODEL_LOADING_BACKGROUNDCOLOR = Color.WHITE;
 }

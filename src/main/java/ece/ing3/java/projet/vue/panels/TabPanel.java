@@ -34,7 +34,7 @@ public class TabPanel extends JTabbedPane {
 	 */
 	private static void prepare() {
 		oldInsets = UIManager.getDefaults().getInsets( "TabbedPane.tabAreaInsets" );
-		UIManager.getDefaults().put( "TabbedPane.tabAreaInsets", new Insets( Constants.UI_TAB_MARGIN_LEFT, Constants.UI_TAB_MARGIN_TOP, 0, 0 ) );
+		UIManager.getDefaults().put( "TabbedPane.tabAreaInsets", Constants.UI_TABCONTAINER_MARGIN );
 	}
 
 	private static void finish() {
@@ -73,9 +73,9 @@ public class TabPanel extends JTabbedPane {
 					maxTabWidth = tabWidth;
 				}
 			}
-			int size = ( maxTabWidth - Constants.UI_TAB_MARGIN_LEFT );
+			int size = ( maxTabWidth - Constants.UI_TABCONTAINER_MARGIN.top );
 			Image scaledLogo = logo.getScaledInstance( size, size, Image.SCALE_DEFAULT );
-			g2d.drawImage( scaledLogo, Constants.UI_TAB_MARGIN_LEFT, Constants.UI_TAB_MARGIN_LEFT, null );
+			g2d.drawImage( scaledLogo, Constants.UI_TABCONTAINER_MARGIN.top, Constants.UI_TABCONTAINER_MARGIN.top, null );
 		}
 	}
 }
