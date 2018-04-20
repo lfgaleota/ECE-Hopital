@@ -11,8 +11,17 @@ import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.util.List;
 
+/**
+ * Contrôleur de boîte de dialogue demandant à l'utilisateur s'il veut supprimer certaines instances de modèles BDD
+ */
 public class ModelDeleteDialogController implements PropertyChangeListener, WindowListener {
+	/**
+	 * Boîte de dialogue associée
+	 */
 	private ModelDeleteDialog dialog;
+	/**
+	 * Objet qui écoute l'issue de la décision
+	 */
 	private DialogListener listener;
 
 	private ModelDeleteDialogController( List<? extends Model> selectedModels, DialogListener listener ) {
@@ -22,6 +31,13 @@ public class ModelDeleteDialogController implements PropertyChangeListener, Wind
 		this.dialog.getOptionPane().addPropertyChangeListener( this );
 	}
 
+	/**
+	 * Créer une nouvelle boîte de dialogue de suppression d'un ensemble de modèles donnée.
+	 *
+	 * @param selectedModels Modèles sélectionnés
+	 * @param listener Objet qui écoute l'issue de la décision
+	 * @return Boîte de dialogue
+	 */
 	public static ModelDeleteDialog createDialog( List<? extends Model> selectedModels, DialogListener listener ) {
 		ModelDeleteDialogController controller = new ModelDeleteDialogController( selectedModels, listener );
 		return controller.dialog;
@@ -35,6 +51,11 @@ public class ModelDeleteDialogController implements PropertyChangeListener, Wind
 	public void windowClosing( WindowEvent windowEvent ) {
 	}
 
+	/**
+	 * Méthode réagissant à la fermeture de la boîte de dialogue, appelant l'objet écoutant l'issue selon la décision prise
+	 *
+	 * @param windowEvent Événement de fermeture
+	 */
 	@Override
 	public void windowClosed( WindowEvent windowEvent ) {
 		if( ( (Integer) this.dialog.getOptionPane().getValue() ) == JOptionPane.YES_OPTION ) {
@@ -60,6 +81,11 @@ public class ModelDeleteDialogController implements PropertyChangeListener, Wind
 	public void windowDeactivated( WindowEvent windowEvent ) {
 	}
 
+	/**
+	 * Méthode d'écoute réagissant au choix de l'utilisateur
+	 *
+	 * @param propertyChangeEvent Événement de changement
+	 */
 	@Override
 	public void propertyChange( PropertyChangeEvent propertyChangeEvent ) {
 		String prop = propertyChangeEvent.getPropertyName();

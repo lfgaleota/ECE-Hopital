@@ -6,10 +6,6 @@ import ece.ing3.java.projet.exceptions.DatabaseException;
 import org.apache.commons.dbutils.QueryRunner;
 
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 /**
  * SQL delete helper.

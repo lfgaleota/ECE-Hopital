@@ -4,7 +4,6 @@ import ece.ing3.java.projet.database.sql.Model;
 import ece.ing3.java.projet.database.sql.annotations.Column;
 import ece.ing3.java.projet.database.sql.annotations.Id;
 import ece.ing3.java.projet.exceptions.DatabaseException;
-import ece.ing3.java.projet.modele.employe.Employe;
 import ece.ing3.java.projet.modele.finders.MaladeFinder;
 
 import java.util.List;
