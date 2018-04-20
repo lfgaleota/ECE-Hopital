@@ -320,7 +320,7 @@ public abstract class Model {
 		return req.insert();
 	}
 
-	private int update( Where whereClause ) throws DatabaseException {
+	private int update() throws DatabaseException {
 		SQLUpdate req = new SQLUpdate( getClass() );
 
 		try {
@@ -341,6 +341,11 @@ public abstract class Model {
 			throw new DatabaseException( "Unable to access model field.", e );
 		}
 
+		Where whereClause = new Where();
+		if( !whereByIds( whereClause ) ) {
+			throw new DatabaseException( "Cannot select model by its IDs." );
+		}
+
 		return req.where( whereClause ).update();
 	}
 
@@ -358,16 +363,8 @@ public abstract class Model {
 			}
 		}
 
-		SQLSelect selectHelper = new SQLSelect( getClass() );
-
-		Where whereClause = new Where();
-		if( !whereByIds( whereClause ) ) {
-			throw new DatabaseException( "Cannot select model by its IDs." );
-		}
-		selectHelper.where( whereClause );
-
-		if( selectHelper.hasAtLeastOne() ) {
-			return update( whereClause );
+		if( exists() ) {
+			return update();
 		}
 
 		return insert();
@@ -391,5 +388,22 @@ public abstract class Model {
 		}
 
 		return ( new SQLDelete( getClass() ) ).where( whereClause ).delete();
+	}
+
+	/**
+	 * Tells if the model instance already exists in the database.
+	 *
+	 * @return {@code true} Model instance exist in database.
+	 */
+	public boolean exists() throws DatabaseException {
+		SQLSelect selectHelper = new SQLSelect( getClass() );
+
+		Where whereClause = new Where();
+		if( !whereByIds( whereClause ) ) {
+			throw new DatabaseException( "Cannot select model by its IDs." );
+		}
+		selectHelper.where( whereClause );
+
+		return selectHelper.hasAtLeastOne();
 	}
 }
