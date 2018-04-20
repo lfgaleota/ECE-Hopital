@@ -3,7 +3,6 @@ package ece.ing3.java.projet.controleur.panels;
 import ece.ing3.java.projet.controleur.dialogs.search.SoigneSearchDialogController;
 import ece.ing3.java.projet.database.sql.Model;
 import ece.ing3.java.projet.modele.hopital.Soigne;
-import ece.ing3.java.projet.modele.tables.SoigneTableModel;
 import ece.ing3.java.projet.modele.tables.TableModel;
 import ece.ing3.java.projet.vue.dialogs.search.ModelSearchDialog;
 import ece.ing3.java.projet.vue.dialogs.update.ModelUpdateDialog;
@@ -14,11 +13,6 @@ public class SoignePanelController extends ModelPanelController<Soigne> {
 	@Override
 	protected Class<? extends Model> getModelClass() {
 		return Soigne.class;
-	}
-
-	@Override
-	protected TableModel<Soigne> buildTableModel() {
-		return new SoigneTableModel();
 	}
 
 	@Override

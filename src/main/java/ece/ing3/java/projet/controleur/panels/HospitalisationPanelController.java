@@ -3,7 +3,6 @@ package ece.ing3.java.projet.controleur.panels;
 import ece.ing3.java.projet.controleur.dialogs.search.HospitalisationSearchDialogController;
 import ece.ing3.java.projet.database.sql.Model;
 import ece.ing3.java.projet.modele.hopital.Hospitalisation;
-import ece.ing3.java.projet.modele.tables.HospitalisationTableModel;
 import ece.ing3.java.projet.modele.tables.TableModel;
 import ece.ing3.java.projet.vue.dialogs.search.ModelSearchDialog;
 import ece.ing3.java.projet.vue.dialogs.update.ModelUpdateDialog;
@@ -14,11 +13,6 @@ public class HospitalisationPanelController extends ModelPanelController<Hospita
 	@Override
 	protected Class<? extends Model> getModelClass() {
 		return Hospitalisation.class;
-	}
-
-	@Override
-	protected TableModel<Hospitalisation> buildTableModel() {
-		return new HospitalisationTableModel();
 	}
 
 	@Override
