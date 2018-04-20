@@ -12,7 +12,7 @@ import ece.ing3.java.projet.vue.dialogs.ConnectingDialog;
 import javax.swing.*;
 
 public class Main {
-	public static void main( String[] args ) throws Exception {
+	public static void main( String[] args ) {
 		try {
 			Configuration.init();
 			while( true ) {
@@ -30,13 +30,14 @@ public class Main {
 				}
 				if( ConfigurationDialogController.createDialog().get() != JOptionPane.YES_OPTION ) {
 					Utils.error( "L'application ne peut continuer sans connexion à la base de donnée.\nElle va donc se fermer." );
-					System.exit( 1 );
+					System.exit( 20 );
 				}
 			}
 			Application.get();
 		} catch( Exception e ) {
 			e.printStackTrace();
-			Utils.error( "L'application s'est arrêtée suite à une erreur inattendue.\n" + e.getLocalizedMessage() );
+			Utils.error( "L'application s'est arrêtée suite à une erreur inattendue." + ( e.getLocalizedMessage() != null ? "\n" + e.getLocalizedMessage() : "" ) );
+			System.exit( 1 );
 		}
 	}
 

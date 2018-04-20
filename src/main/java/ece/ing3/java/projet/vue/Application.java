@@ -42,8 +42,14 @@ public class Application extends JFrame {
 
 		tabs = TabPanel.create();
 
-		for( ModelControllers modelController : ModelControllers.values() ) {
-			tabs.addTab( modelController.getPrettyName(), modelController.getPanelController().getPanel() );
+		try {
+			for( ModelControllers modelController : ModelControllers.values() ) {
+				tabs.addTab( modelController.getPrettyName(), modelController.getPanelController().getPanel() );
+			}
+		} catch( ExceptionInInitializerError e ) {
+			this.dispose();
+			mesStats.dispose();
+			throw new RuntimeException( ( e.getCause() != null ? e.getCause().getLocalizedMessage() : e.getLocalizedMessage() ), e );
 		}
 
 		tabs.addTab( Strings.get( "configuration.title" ), ConfigurationPanelController.createPanel() );
