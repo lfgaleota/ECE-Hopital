@@ -13,7 +13,7 @@ public class TabPanel extends JTabbedPane {
 	private static Insets oldInsets;
 	private Image logo;
 
-	public TabPanel() {
+	private TabPanel() {
 		super( JTabbedPane.LEFT );
 
 		try {
@@ -32,13 +32,25 @@ public class TabPanel extends JTabbedPane {
 	 * - https://stackoverflow.com/a/5184026
 	 * - http://www.java2s.com/Tutorial/Java/0240__Swing/CustomizingaJTabbedPaneLookandFeel.htm
 	 */
-	public static void prepare() {
+	private static void prepare() {
 		oldInsets = UIManager.getDefaults().getInsets( "TabbedPane.tabAreaInsets" );
 		UIManager.getDefaults().put( "TabbedPane.tabAreaInsets", new Insets( Constants.UI_TAB_MARGIN_LEFT, Constants.UI_TAB_MARGIN_TOP, 0, 0 ) );
 	}
 
-	public static void finish() {
+	private static void finish() {
 		UIManager.getDefaults().put( "TabbedPane.tabAreaInsets", oldInsets );
+	}
+
+	/**
+	 * Créer un nouveau panneau à onglets
+	 *
+	 * @return Panneau à onglets
+	 */
+	public static TabPanel create() {
+		prepare();
+		TabPanel pan = new TabPanel();
+		finish();
+		return pan;
 	}
 
 	/**
