@@ -20,6 +20,12 @@ public class Constants {
 	public static final String RESOURCE_PATH_CHAMBRELOGO = "imgs/chambres.png";
 	public static final String RESOURCE_PATH_EMPLOYELOGO = "imgs/employes.png";
 	public static final String RESOURCE_PATH_HOSPITALISATIONLOGO = "imgs/hospitalisations.png";
+	public static final String RESOURCE_PATH_ICON_ADD = "imgs/ic_add_black_24dp_1x.png";
+	public static final String RESOURCE_PATH_ICON_REMOVE = "imgs/ic_delete_forever_black_24dp_1x.png";
+	public static final String RESOURCE_PATH_ICON_MODIFY = "imgs/ic_mode_edit_black_24dp_1x.png";
+	public static final String RESOURCE_PATH_ICON_STATS = "imgs/ic_pie_chart_black_24dp_1x.png";
+	public static final String RESOURCE_PATH_ICON_REFRESH = "imgs/ic_refresh_black_24dp_1x.png";
+	public static final String RESOURCE_PATH_ICON_SEARCH = "imgs/ic_search_black_24dp_1x.png";
 	public static final String RESOURCE_PATH_HOMELOGO = "imgs/accueil.png";
 
 	public static final String LOGGER_NAME_UI = "UI";
