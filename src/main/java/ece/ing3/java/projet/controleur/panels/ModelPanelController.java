@@ -9,6 +9,7 @@ import ece.ing3.java.projet.interfaces.DialogListener;
 import ece.ing3.java.projet.interfaces.ModelQueryWorkerProvider;
 import ece.ing3.java.projet.interfaces.ModelWorkerProvider;
 import ece.ing3.java.projet.modele.tables.TableModel;
+import ece.ing3.java.projet.utils.Utils;
 import ece.ing3.java.projet.vue.dialogs.delete.ModelDeleteDialog;
 import ece.ing3.java.projet.vue.dialogs.search.ModelSearchDialog;
 import ece.ing3.java.projet.vue.dialogs.update.ModelUpdateDialog;
@@ -212,11 +213,14 @@ public abstract class ModelPanelController<M extends Model> implements ActionLis
 				dialogSearch.toFront();
 			}
 		} else if( actionEvent.getSource() == panel.getToolbar().getButtonRemove() ) {
-			if( dialogDelete == null ) {
-				dialogDelete = createDeleteDialog();
-			} else {
-				dialogDelete.toFront();
+			if( dialogDelete != null ) {
+				dialogDelete.dispose();
 			}
+			if( getPanel().getList().getSelected() == null ) {
+				Utils.error( "Aucune sélection." );
+				return;
+			}
+			dialogDelete = createDeleteDialog();
 		} else if( actionEvent.getSource() == panel.getToolbar().getButtonAdd() ) {
 			if( dialogUpdate == null ) {
 				dialogUpdate = createUpdateDialog( null );
@@ -225,6 +229,10 @@ public abstract class ModelPanelController<M extends Model> implements ActionLis
 			}
 		} else if( actionEvent.getSource() == panel.getToolbar().getButtonModify() ) {
 			if( dialogUpdate == null ) {
+				if( getPanel().getList().getSelected() == null ) {
+					Utils.error( "Aucune sélection." );
+					return;
+				}
 				dialogUpdate = createUpdateDialog( getPanel().getList().getSelected() );
 			} else {
 				dialogUpdate.toFront();
