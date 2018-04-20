@@ -36,9 +36,7 @@ public class Constants {
 
 	public static final String STRINGS_SUFFIX_PLURAL = ".plural";
 
-	public static final Integer WIDTH_FRAME = 1100;
-	public static final Integer HEIGHT_FRAME = 800;
-	public static final Dimension UI_DIALOGCOMPONENT_PREFERREDSIZE = new Dimension( 200, 16 );
+	public static final Dimension UI_DIALOGCOMPONENT_PREFERREDSIZE = new Dimension( 200, 24 );
 
 	public static final Insets UI_DIALOG_MARGIN = new Insets( 5, 5, 5, 5 );
 	public static final Insets UI_DIALOGSELECT_MARGIN = new Insets( 0, 0, 5, 0 );
@@ -47,4 +45,8 @@ public class Constants {
 
 	public static final Dimension UI_MODEL_LOADING_THROBBER_SIZE = new Dimension( 200, 200 );
 	public static final Color UI_MODEL_LOADING_BACKGROUNDCOLOR = Color.WHITE;
+	public static final Dimension UI_DIALOGSELECT_SIZE = new Dimension( 500, 300 );
+	public static final int UI_INPUTLIST_HGAP = 5;
+	public static final int UI_INPUTLIST_VGAP = 5;
+	public static final int UI_INPUTLIST_MAXVISIBLEENUMITEMS = 5;
 }

@@ -28,6 +28,8 @@ public class ModelDeleteDialog extends JDialog {
 
 		setContentPane( optionPane );
 
+		setLocationRelativeTo( null );
+
 		pack();
 		setVisible( true );
 	}

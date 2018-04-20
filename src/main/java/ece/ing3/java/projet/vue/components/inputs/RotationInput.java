@@ -4,6 +4,9 @@ import javax.swing.*;
 
 import ece.ing3.java.projet.database.sql.clauses.Where;
 import ece.ing3.java.projet.enums.Rotation;
+import ece.ing3.java.projet.utils.Constants;
+
+import java.awt.*;
 
 public class RotationInput extends JPanel implements BaseInput {
 	private JComboBox<Rotation> comboBox;
@@ -16,9 +19,20 @@ public class RotationInput extends JPanel implements BaseInput {
 			this.comboBox = new JComboBox<>( Rotation.values() );
 			add( this.comboBox );
 		} else {
-			this.list = new JList<>( Rotation.values() );
-			add( this.list );
+			DefaultListModel<Rotation> listModel = new DefaultListModel<>();
+			for( Rotation Rotation : Rotation.values() ) {
+				listModel.addElement( Rotation );
+			}
+			this.list = new JList<>( listModel );
+			this.list.setVisibleRowCount( Math.min( Constants.UI_INPUTLIST_MAXVISIBLEENUMITEMS, listModel.size() ) );
+			JScrollPane scrollPane = new JScrollPane( this.list );
+			add( scrollPane );
 		}
+	}
+
+	@Override
+	public void setPreferredSize( Dimension size ) {
+		super.setPreferredSize( new Dimension( size.width, getPreferredSize().height ) );
 	}
 
 	@Override

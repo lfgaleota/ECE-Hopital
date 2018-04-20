@@ -23,6 +23,7 @@ public class ModelSelectDialog<M extends Model> extends BaseValidatedDialog {
 		init();
 
 		( (JPanel) getContentPane() ).setBorder( new EmptyBorder( Constants.UI_DIALOGSELECT_MARGIN ) );
+		this.setPreferredSize( Constants.UI_DIALOGSELECT_SIZE );
 		this.pack();
 	}
 
@@ -32,13 +33,18 @@ public class ModelSelectDialog<M extends Model> extends BaseValidatedDialog {
 	}
 
 	@Override
+	public String getTitle() {
+		return "Sélection";
+	}
+
+	@Override
 	protected String getSubmitLabel() {
 		return "Sélectionner";
 	}
 
 	public void validateContent() throws IllegalArgumentException {
 		if( panel.getList().getSelectedRowCount() == 0 ) {
-			throw new IllegalArgumentException( "No slection." );
+			throw new IllegalArgumentException( "No selection." );
 		}
 	}
 

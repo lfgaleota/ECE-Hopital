@@ -2,8 +2,10 @@ package ece.ing3.java.projet.vue.components.inputs;
 
 import ece.ing3.java.projet.database.sql.clauses.Where;
 import ece.ing3.java.projet.enums.Specialite;
+import ece.ing3.java.projet.utils.Constants;
 
 import javax.swing.*;
+import java.awt.*;
 
 public class SpecialiteInput extends JPanel implements BaseInput {
 	private JComboBox<Specialite> comboBox;
@@ -16,9 +18,20 @@ public class SpecialiteInput extends JPanel implements BaseInput {
 			this.comboBox = new JComboBox<>( Specialite.values() );
 			add( this.comboBox );
 		} else {
-			this.list = new JList<>( Specialite.values() );
-			add( this.list );
+			DefaultListModel<Specialite> listModel = new DefaultListModel<>();
+			for( Specialite specialite : Specialite.values() ) {
+				listModel.addElement( specialite );
+			}
+			this.list = new JList<>( listModel );
+			this.list.setVisibleRowCount( Math.min( Constants.UI_INPUTLIST_MAXVISIBLEENUMITEMS, listModel.size() ) );
+			JScrollPane scrollPane = new JScrollPane( this.list );
+			add( scrollPane );
 		}
+	}
+
+	@Override
+	public void setPreferredSize( Dimension size ) {
+		super.setPreferredSize( new Dimension( size.width, getPreferredSize().height ) );
 	}
 
 	@Override

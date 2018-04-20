@@ -27,6 +27,8 @@ public class ConfigurationDialog extends JDialog {
 		this.setModal( true );
 		this.setAlwaysOnTop( true );
 
+		this.setLocationRelativeTo( null );
+
 		( (JPanel) getContentPane() ).setBorder( new EmptyBorder( Constants.UI_DIALOG_MARGIN ) );
 
 		this.add( this.panel, BorderLayout.CENTER );
