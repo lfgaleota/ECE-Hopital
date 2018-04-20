@@ -3,7 +3,9 @@ package ece.ing3.java.projet.database.sql;
 import ece.ing3.java.projet.database.sql.annotations.Column;
 import ece.ing3.java.projet.database.sql.annotations.ExcludedField;
 import ece.ing3.java.projet.database.sql.annotations.Id;
+import ece.ing3.java.projet.database.sql.clauses.OrderBy;
 import ece.ing3.java.projet.database.sql.clauses.Where;
+import ece.ing3.java.projet.database.sql.enumerations.Order;
 import ece.ing3.java.projet.database.sql.queries.SQLDelete;
 import ece.ing3.java.projet.database.sql.queries.SQLInsert;
 import ece.ing3.java.projet.database.sql.queries.SQLSelect;
@@ -57,6 +59,7 @@ public abstract class Model {
 	private static Map<Class<? extends Model>, Map<String, String>> columnFieldNames = new HashMap<>();
 	private static Map<Class<? extends Model>, Map<String, String>> fieldColumnNames = new HashMap<>();
 	private static Map<Class<? extends Model>, String[]> fieldNames = new HashMap<>();
+	private static Map<Class<? extends Model>, OrderBy> orderByIDsMap = new HashMap<>();
 
 	private interface FieldProcessor {
 		void process( Field field ) throws IllegalAccessException, NullPointerException;
@@ -180,12 +183,46 @@ public abstract class Model {
 				}
 			}, true, false );
 		} catch( IllegalAccessException e ) {
-			e.printStackTrace();
+			throw new RuntimeException( "Unable to process model " + modelClass.getName() + " fields to build field names.", e );
 		}
 
 		columnFieldNames.put( modelClass, columnMap );
 		fieldColumnNames.put( modelClass, fieldMap );
 		fieldNames.put( modelClass, fieldNameList.toArray( new String[ 0 ] ) );
+	}
+
+	private static void buildOrderByIDs( Class<? extends Model> modelClass ) throws NullPointerException {
+		OrderBy orderByClause = new OrderBy();
+
+		try {
+			processFields( modelClass, field -> {
+				if( !field.isAnnotationPresent( ExcludedField.class ) && field.isAnnotationPresent( Id.class ) ) {
+					if( !field.isAccessible() ) {
+						field.setAccessible( true );
+					}
+
+					orderByClause.and( getColumnNameFromFieldName( modelClass, field.getName() ), Order.ASC );
+				}
+			}, false, false );
+
+			orderByIDsMap.put( modelClass, orderByClause );
+		} catch( IllegalAccessException e ) {
+			throw new RuntimeException( "Unable to process model " + modelClass.getName() + " fields to get order by clause.", e );
+		}
+	}
+
+	/**
+	 * Get an Order By clause to order by a model's IDs in ascending order.
+	 *
+	 * @param modelClass Model class
+	 * @return Order By clause
+	 */
+	public static OrderBy orderByIDs( Class<? extends Model> modelClass ) {
+		if( !orderByIDsMap.containsKey( modelClass ) ) {
+			buildOrderByIDs( modelClass );
+		}
+
+		return orderByIDsMap.get( modelClass );
 	}
 
 	/**

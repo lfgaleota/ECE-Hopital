@@ -16,15 +16,15 @@ import java.util.List;
  */
 public class Chambre extends Model {
 	@Id
+	@Column( name = "code_service" )
+	private String codeServiceRattache;
+	@Id
 	@Column( name = "no_chambre" )
 	private Long numeroChambre;
 	@Column( name = "nb_lits" )
 	private Integer nombreLits;
 	@Column( name = "surveillant" )
 	private Long numeroSurveillant;
-	@Id
-	@Column( name = "code_service" )
-	private String codeServiceRattache;
 
 	/**
 	 * Créer une nouvelle chambre vide

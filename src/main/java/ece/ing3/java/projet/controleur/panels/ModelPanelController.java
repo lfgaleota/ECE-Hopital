@@ -51,6 +51,11 @@ public abstract class ModelPanelController<M extends Model> implements ActionLis
 	}
 
 	@Override
+	public OrderBy queryModifyOrderByClause( OrderBy orderByClause ) {
+		return ( orderByClause != null ? orderByClause : Model.orderByIDs( getModelClass() ) );
+	}
+
+	@Override
 	public SQLSelect<M> queryCreateSelector() {
 		return new SQLSelect<>( getModelClass() );
 	}
