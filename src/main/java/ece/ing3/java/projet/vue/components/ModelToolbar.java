@@ -5,7 +5,7 @@ import java.awt.*;
 import java.awt.event.ActionListener;
 
 public class ModelToolbar extends JToolBar {
-	private JButton buttonRemove, buttonAdd, buttonModify, buttonSearch, buttonStats;
+	private JButton buttonRemove, buttonAdd, buttonModify, buttonSearch, buttonStats, buttonRefresh;
 
 	public ModelToolbar( String modelName ) {
 		buttonRemove = new JButton( "Supprimer" );
@@ -13,11 +13,15 @@ public class ModelToolbar extends JToolBar {
 		buttonModify = new JButton( "Modifier" );
 		buttonSearch = new JButton( "Rechercher" );
 		buttonStats = new JButton( "Statistiques" );
+		buttonRefresh = new JButton( "Rafraichir" );
 
 		JLabel label = new JLabel( modelName );
 		label.setFont( new Font( label.getName(), Font.BOLD, 18 ) );
 		add( label );
+
 		add( Box.createHorizontalGlue() );
+
+		add( buttonRefresh );
 		add( buttonStats );
 		add( buttonSearch );
 		add( buttonAdd );
@@ -45,11 +49,16 @@ public class ModelToolbar extends JToolBar {
 		return buttonStats;
 	}
 
+	public JButton getButtonRefresh() {
+		return buttonRefresh;
+	}
+
 	public void addActionListener( ActionListener actionListener ) {
 		buttonRemove.addActionListener( actionListener );
 		buttonAdd.addActionListener( actionListener );
 		buttonModify.addActionListener( actionListener );
 		buttonSearch.addActionListener( actionListener );
 		buttonStats.addActionListener( actionListener );
+		buttonRefresh.addActionListener( actionListener );
 	}
 }
