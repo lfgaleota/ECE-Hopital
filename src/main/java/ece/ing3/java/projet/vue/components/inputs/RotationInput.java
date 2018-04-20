@@ -34,7 +34,7 @@ public class RotationInput extends JPanel implements BaseInput {
 	@Override
 	public Object getValue() {
 		try {
-			return ( comboBox != null && comboBox.getSelectedItem() != null ? comboBox.getSelectedItem().toString() : null );
+			return ( comboBox != null && comboBox.getSelectedItem() != null ? comboBox.getSelectedItem() : null );
 		} catch( NumberFormatException e ) {
 			throw new IllegalArgumentException( "Valeur numérique invalide.", e );
 		}

@@ -44,8 +44,21 @@ public class SQLInsert implements SQLRequest {
 	 * @return This SQL insert helper
 	 */
 	public SQLInsert add( String column, Object value ) {
-		columns.put( columns.size(), column );
-		values.put( values.size(), value );
+		int index = columns.size();
+		if( columns.containsValue( column ) ) {
+			for( Map.Entry<Integer, String> columnEntry : columns.entrySet() ) {
+				if( columnEntry.getValue().equals( column ) ) {
+					index = columnEntry.getKey();
+				}
+			}
+		} else {
+			columns.put( index, column );
+		}
+		if( value.getClass().isEnum() ) {
+			values.put( index, value.toString() );
+			return this;
+		}
+		values.put( index, value );
 		return this;
 	}
 
