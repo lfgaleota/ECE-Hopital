@@ -27,9 +27,12 @@ public class TabPanel extends JTabbedPane {
 		}
 	}
 
+	/**
+	 * Les ressources suivantes ont été utilisées pour la conception de cette méthode :
+	 * - https://stackoverflow.com/a/5184026
+	 * - http://www.java2s.com/Tutorial/Java/0240__Swing/CustomizingaJTabbedPaneLookandFeel.htm
+	 */
 	public static void prepare() {
-		//https://stackoverflow.com/a/5184026
-		//http://www.java2s.com/Tutorial/Java/0240__Swing/CustomizingaJTabbedPaneLookandFeel.htm
 		oldInsets = UIManager.getDefaults().getInsets( "TabbedPane.tabAreaInsets" );
 		UIManager.getDefaults().put( "TabbedPane.tabAreaInsets", new Insets( Constants.UI_TAB_MARGIN_LEFT, Constants.UI_TAB_MARGIN_TOP, 0, 0 ) );
 	}
@@ -38,7 +41,14 @@ public class TabPanel extends JTabbedPane {
 		UIManager.getDefaults().put( "TabbedPane.tabAreaInsets", oldInsets );
 	}
 
-	//http://www.java2s.com/Tutorials/Java/Swing_How_to/JTabbedPane/Change_Java_JTabbedPane_Inset_Color.htm
+	/**
+	 * Dessine le fond du panneau
+	 *
+	 * Les ressources suivantes ont été utilisées pour la conception de cette méthode :
+	 * - http://www.java2s.com/Tutorials/Java/Swing_How_to/JTabbedPane/Change_Java_JTabbedPane_Inset_Color.htm
+	 *
+	 * @param g Ensemble graphique sur lequel dessiner
+	 */
 	@Override
 	protected void paintComponent( Graphics g ) {
 		super.paintComponent( g );
