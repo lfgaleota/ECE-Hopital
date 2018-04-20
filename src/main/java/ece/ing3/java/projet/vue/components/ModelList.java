@@ -13,6 +13,7 @@ public class ModelList<M extends Model> extends JTable {
 	public ModelList( TableModel<M> tableModel ) {
 		super( tableModel );
 		this.tableModel = tableModel;
+		setAutoCreateRowSorter( true );
 	}
 
 	@SuppressWarnings( "unchecked" )
