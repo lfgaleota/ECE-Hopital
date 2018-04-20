@@ -1,9 +1,11 @@
 package ece.ing3.java.projet.vue.dialogs;
 
+import ece.ing3.java.projet.utils.Constants;
 import ece.ing3.java.projet.utils.Strings;
 import ece.ing3.java.projet.vue.panels.ConfigurationPanel;
 
 import javax.swing.*;
+import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.ActionListener;
 
@@ -24,6 +26,8 @@ public class ConfigurationDialog extends JDialog {
 		this.setResizable( true );
 		this.setModal( true );
 		this.setAlwaysOnTop( true );
+
+		( (JPanel) getContentPane() ).setBorder( new EmptyBorder( Constants.UI_DIALOG_MARGIN ) );
 
 		this.add( this.panel, BorderLayout.CENTER );
 

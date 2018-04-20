@@ -36,11 +36,17 @@ public class ModelPanel<M extends Model> extends JPanel {
 
 	public void inUpdate() {
 		remove( listContainer );
-		add( loading );
+		add( loading, BorderLayout.CENTER );
+		revalidate();
+		repaint();
+		loading.start();
 	}
 
 	public void outOfUpdate() {
+		loading.stop();
 		remove( loading );
-		add( listContainer );
+		add( listContainer, BorderLayout.CENTER );
+		revalidate();
+		repaint();
 	}
 }
