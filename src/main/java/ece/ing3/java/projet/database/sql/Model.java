@@ -61,6 +61,7 @@ public abstract class Model {
 	private static Map<Class<? extends Model>, Map<String, String>> columnFieldNames = new HashMap<>();
 	private static Map<Class<? extends Model>, Map<String, String>> fieldColumnNames = new HashMap<>();
 	private static Map<Class<? extends Model>, String[]> fieldNames = new HashMap<>();
+	private static Map<Class<? extends Model>, String[]> idFieldNames = new HashMap<>();
 	private static Map<Class<? extends Model>, Map<String, PropertyDescriptor>> propertyDescriptors = new HashMap<>();
 	private static Map<Class<? extends Model>, OrderBy> orderByIDsMap = new HashMap<>();
 
@@ -195,6 +196,7 @@ public abstract class Model {
 		Map<String, String> columnMap = new HashMap<>();
 		Map<String, String> fieldMap = new HashMap<>();
 		List<String> fieldNameList = new ArrayList<>();
+		List<String> idNameList = new ArrayList<>();
 
 		try {
 			processFields( modelClass, field -> {
@@ -206,6 +208,9 @@ public abstract class Model {
 					columnMap.put( getColumnName( field ), field.getName() );
 					fieldMap.put( field.getName(), getColumnName( field ) );
 					fieldNameList.add( field.getName() );
+					if( field.isAnnotationPresent( Id.class ) ) {
+						idNameList.add( field.getName() );
+					}
 				}
 			}, true, false );
 		} catch( IllegalAccessException e ) {
@@ -215,6 +220,7 @@ public abstract class Model {
 		columnFieldNames.put( modelClass, columnMap );
 		fieldColumnNames.put( modelClass, fieldMap );
 		fieldNames.put( modelClass, fieldNameList.toArray( new String[ 0 ] ) );
+		idFieldNames.put( modelClass, idNameList.toArray( new String[ 0 ] ) );
 	}
 
 	private static void buildOrderByIDs( Class<? extends Model> modelClass ) throws NullPointerException {
@@ -249,6 +255,20 @@ public abstract class Model {
 		}
 
 		return orderByIDsMap.get( modelClass );
+	}
+
+	/**
+	 * Returns a list of all the ID fields's names for a defined model class.
+	 *
+	 * @param modelClass Model class
+	 * @return List of ID fields's names
+	 */
+	public String[] getIdFieldNames( Class<? extends Model> modelClass ) {
+		if( !idFieldNames.containsKey( modelClass ) ) {
+			buildNames( modelClass );
+		}
+
+		return idFieldNames.get( modelClass );
 	}
 
 	/**
@@ -293,6 +313,11 @@ public abstract class Model {
 		return null;
 	}
 
+	@SuppressWarnings( "unchecked" )
+	private SQLSelect createGenericIdSelector() {
+		return ( new SQLSelect( getClass() ) ).setSelectedFields( getIdFieldNames( getClass() ) );
+	}
+
 	private int insert() throws DatabaseException {
 		SQLInsert req = new SQLInsert( getClass() );
 
@@ -315,6 +340,14 @@ public abstract class Model {
 			throw new DatabaseException( "Unable to access model field.", e );
 		} catch( NullPointerException e ) {
 			throw new DatabaseException( e );
+		}
+
+		for( String idFieldName : getIdFieldNames( getClass() ) ) {
+			try {
+				req.add( getColumnNameFromFieldName( getClass(), idFieldName ), PropertyUtils.getSimpleProperty( this, idFieldName ) );
+			} catch( IllegalAccessException | InvocationTargetException | NoSuchMethodException e ) {
+				throw new DatabaseException( "Cannot get ID field " + idFieldName + " value in model " + getClass().getName(), e );
+			}
 		}
 
 		return req.insert();
@@ -363,7 +396,7 @@ public abstract class Model {
 			}
 		}
 
-		if( exists() ) {
+		if( exists( false ) ) {
 			return update();
 		}
 
@@ -392,11 +425,32 @@ public abstract class Model {
 
 	/**
 	 * Tells if the model instance already exists in the database.
+	 * Returns {@code true} if a superclass instance exists.
 	 *
 	 * @return {@code true} Model instance exist in database.
 	 */
 	public boolean exists() throws DatabaseException {
-		SQLSelect selectHelper = new SQLSelect( getClass() );
+		return exists( true );
+	}
+
+	/**
+	 * Tells if the model instance already exists in the database.
+	 *
+	 * @param recursive if {@code true}, check existence for superclasses
+	 * @return {@code true} Model instance exist in database. If recursive is {@code true}, returns {@code true} if existence is asserted for at least one superclass or the class itself.
+	 */
+	private boolean exists( boolean recursive ) throws DatabaseException {
+		if( recursive && getClass().getSuperclass() != Model.class ) {
+			Model model = createSuperInstance();
+			if( model == null ) {
+				throw new DatabaseException( "Cannot create super instance of " + getClass().getName() );
+			}
+			if( model.exists() ) {
+				return true;
+			}
+		}
+
+		SQLSelect selectHelper = createGenericIdSelector();
 
 		Where whereClause = new Where();
 		if( !whereByIds( whereClause ) ) {
