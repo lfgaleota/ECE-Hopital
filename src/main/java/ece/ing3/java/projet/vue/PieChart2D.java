@@ -218,8 +218,8 @@ public class PieChart2D {
 					nuit++;
 				}
 			}
-			dataset.setValue( "Radiologue ", ( jour * 100 / populationglobale ) );
-			dataset.setValue( "Cardiologue ", ( nuit * 100 / populationglobale ) );
+			dataset.setValue( "Jour ", ( jour * 100 / populationglobale ) );
+			dataset.setValue( "Nuit ", ( nuit * 100 / populationglobale ) );
 
 
 			chart = ChartFactory.createPieChart( "Rotation infirmier", dataset, true, // legend?
