@@ -1,7 +1,7 @@
 package ece.ing3.java.projet.vue.panels;
 
 import ece.ing3.java.projet.configuration.Configuration;
-import ece.ing3.java.projet.enums.JDBCDrivers;
+import ece.ing3.java.projet.enums.JDBCDriver;
 import ece.ing3.java.projet.utils.Constants;
 import ece.ing3.java.projet.utils.Strings;
 import ece.ing3.java.projet.vue.components.FlexibleGridLayout;
@@ -15,7 +15,7 @@ import java.util.Map;
 public class ConfigurationPanel extends JPanel {
 	private JButton save;
 	private JTextField databaseUrl, databaseUsername;
-	private JComboBox<JDBCDrivers> databaseDriver;
+	private JComboBox<JDBCDriver> databaseDriver;
 	private JPasswordField databasePassword;
 
 	public ConfigurationPanel() {
@@ -25,7 +25,7 @@ public class ConfigurationPanel extends JPanel {
 		databaseUrl = new JTextField();
 		databaseUsername = new JTextField();
 		databasePassword = new JPasswordField();
-		databaseDriver = new JComboBox<>( JDBCDrivers.values() );
+		databaseDriver = new JComboBox<>( JDBCDriver.values() );
 
 		databaseUrl.setPreferredSize( Constants.UI_DIALOGCOMPONENT_PREFERREDSIZE );
 		databaseUsername.setPreferredSize( Constants.UI_DIALOGCOMPONENT_PREFERREDSIZE );
@@ -59,7 +59,7 @@ public class ConfigurationPanel extends JPanel {
 		databaseUsername.setText( Configuration.getString( "database.username", "" ) );
 		databasePassword.setText( Configuration.getString( "database.password", "" ) );
 		try {
-			databaseDriver.setSelectedItem( JDBCDrivers.valueOf( Configuration.getString( "database.driver", "" ) ) );
+			databaseDriver.setSelectedItem( JDBCDriver.parseClassName( Configuration.getString( "database.driver", "" ) ) );
 		} catch( IllegalArgumentException e ) {
 			databaseDriver.setSelectedIndex( 0 );
 		}
@@ -70,7 +70,7 @@ public class ConfigurationPanel extends JPanel {
 		map.put( "database.url", databaseUrl.getText() );
 		map.put( "database.username", databaseUsername.getText() );
 		map.put( "database.password", String.valueOf( databasePassword.getPassword() ) );
-		map.put( "database.driver", ( databaseDriver.getSelectedItem() != null ? ( (JDBCDrivers) databaseDriver.getSelectedItem() ).getClassName() : null ) );
+		map.put( "database.driver", ( databaseDriver.getSelectedItem() != null ? ( (JDBCDriver) databaseDriver.getSelectedItem() ).getClassName() : null ) );
 		return map;
 	}
 
