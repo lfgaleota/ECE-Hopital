@@ -4,7 +4,6 @@ import ece.ing3.java.projet.interfaces.DialogListener;
 import ece.ing3.java.projet.utils.Utils;
 import ece.ing3.java.projet.vue.Application;
 import ece.ing3.java.projet.vue.dialogs.BaseModelInputDialog;
-import ece.ing3.java.projet.vue.dialogs.search.ModelSearchDialog;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;

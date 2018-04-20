@@ -1,7 +1,6 @@
 package ece.ing3.java.projet.modele.tables;
 
 import ece.ing3.java.projet.database.sql.Model;
-import ece.ing3.java.projet.modele.hopital.Soigne;
 import ece.ing3.java.projet.utils.Constants;
 import ece.ing3.java.projet.utils.Strings;
 import org.apache.commons.beanutils.PropertyUtils;

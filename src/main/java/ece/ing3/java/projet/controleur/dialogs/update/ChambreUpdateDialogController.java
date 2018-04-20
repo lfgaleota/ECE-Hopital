@@ -1,11 +1,7 @@
 package ece.ing3.java.projet.controleur.dialogs.update;
 
-import ece.ing3.java.projet.controleur.dialogs.search.ModelSearchDialogController;
-import ece.ing3.java.projet.database.sql.Model;
 import ece.ing3.java.projet.interfaces.DialogListener;
 import ece.ing3.java.projet.modele.hopital.Chambre;
-import ece.ing3.java.projet.vue.dialogs.search.ChambreSearchDialog;
-import ece.ing3.java.projet.vue.dialogs.search.ModelSearchDialog;
 import ece.ing3.java.projet.vue.dialogs.update.ChambreUpdateDialog;
 import ece.ing3.java.projet.vue.dialogs.update.ModelUpdateDialog;
 
