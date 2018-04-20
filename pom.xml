@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+		 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>ece.ing3.java</groupId>
@@ -127,6 +127,7 @@
 					<header>${project.name}, ${project.version}</header>
 					<footer>${project.name}, ${project.version}</footer>
 					<doctitle>${project.name}, ${project.version}</doctitle>
+					<additionalJOption>-Xdoclint:none</additionalJOption>
 				</configuration>
 			</plugin>
 		</plugins>
