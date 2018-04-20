@@ -1,39 +1,41 @@
 package ece.ing3.java.projet.utils;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.net.URI;
-import java.net.URISyntaxException;
-import java.net.URL;
-import java.nio.file.Paths;
-
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
+import java.awt.*;
+import java.io.*;
 
 /**
  * Utility functions
  */
 public class Utils {
 	/**
-	 * Get a resource's full path from a path relative to either the execution directory or the JAR
+	 * Get a resource's stream from a path relative to either the execution directory, JAR, or other paths supported by the JVM.
 	 *
 	 * @param path Relative resource path
-	 * @return Resource's full path
-	 * @throws FileNotFoundException Resource not found at the provided path
+	 * @return Resource's stream
+	 * @throws IOException Resource not found at the provided path
 	 */
-	public static File getResourcePath( String path ) throws FileNotFoundException {
-		try {
-			URL fileUrl = Utils.class.getClassLoader().getResource( path );
-			if( fileUrl == null )
-				throw new FileNotFoundException( "Resource '" + path + "' not found." );
+	public static InputStream getResource( String path ) throws IOException {
+		InputStream stream = Utils.class.getClassLoader().getResourceAsStream( path );
+		if( stream == null )
+			throw new FileNotFoundException( "Resource '" + path + "' not found." );
 
-			URI fileUri = fileUrl.toURI();
-			return Paths.get( fileUri ).toFile();
-		} catch( URISyntaxException e ) {
-			throw new FileNotFoundException( "Resource '" + path + "' not found." + e.getLocalizedMessage() );
-		}
+		return stream;
+	}
+
+	/**
+	 * Get a resource's stream from a path relative to either the execution directory, JAR, or other paths supported by the JVM.
+	 *
+	 * @param path Relative resource path
+	 * @return Resource's stream
+	 * @throws IOException Loading error
+	 */
+	public static Image getImageResource( String path ) throws IOException {
+		return ImageIO.read( new BufferedInputStream( getResource( path ) ) );
 	}
 
 	/**
@@ -57,7 +59,7 @@ public class Utils {
 	/**
 	 * Affiche un message général à l'utilisateur
 	 *
-	 * @param parent Fenêtre parente
+	 * @param parent  Fenêtre parente
 	 * @param message Message à afficher
 	 */
 	public static void message( JFrame parent, String message ) {
@@ -76,7 +78,7 @@ public class Utils {
 	/**
 	 * Affiche un message d'erreur à l'utilisateur
 	 *
-	 * @param parent Fenêtre parente
+	 * @param parent  Fenêtre parente
 	 * @param message Message d'erreur à afficher
 	 */
 	public static void error( JFrame parent, String message ) {
