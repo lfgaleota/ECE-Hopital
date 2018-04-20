@@ -6,18 +6,22 @@ import ece.ing3.java.projet.vue.components.inputs.BaseInput;
 import ece.ing3.java.projet.vue.components.inputs.LongIdInput;
 
 public class SoigneInputList extends ModelInputList {
+	public SoigneInputList( boolean isSearch ) {
+		super( isSearch );
+	}
+
 	@Override
 	protected Class<? extends Model> getModelClass() {
 		return Soigne.class;
 	}
 
 	@Override
-	protected BaseInput getInputForField( String fieldName, String columnName ) {
+	protected BaseInput getInputForField( String fieldName, String columnName, boolean isSearch ) {
 		switch( fieldName ) {
 			case "numeroDocteur":
-				return new LongIdInput( columnName, true );
+				return new LongIdInput( columnName, isSearch );
 			case "numeroMalade":
-				return new LongIdInput( columnName, true );
+				return new LongIdInput( columnName, isSearch );
 		}
 
 		return null;

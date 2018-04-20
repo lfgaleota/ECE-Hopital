@@ -8,22 +8,26 @@ import ece.ing3.java.projet.vue.components.inputs.StringIdInput;
 import ece.ing3.java.projet.vue.components.inputs.StringInput;
 
 public class ServiceInputList extends ModelInputList {
+	public ServiceInputList( boolean isSearch ) {
+		super( isSearch );
+	}
+
 	@Override
 	protected Class<? extends Model> getModelClass() {
 		return Service.class;
 	}
 
 	@Override
-	protected BaseInput getInputForField( String fieldName, String columnName ) {
+	protected BaseInput getInputForField( String fieldName, String columnName, boolean isSearch ) {
 		switch( fieldName ) {
 			case "code":
-				return new StringIdInput( columnName, true );
+				return new StringIdInput( columnName, isSearch );
 			case "nom":
-				return new StringInput( columnName, true );
+				return new StringInput( columnName, isSearch );
 			case "batiment":
-				return new StringInput( columnName, true );
+				return new StringInput( columnName, isSearch );
 			case "numeroDirecteur":
-				return new LongInput( columnName, true );
+				return new LongInput( columnName, isSearch );
 
 		}
 

@@ -6,6 +6,6 @@ import ece.ing3.java.projet.vue.components.inputlists.ServiceInputList;
 public class ServiceSearchDialog extends ModelSearchDialog{
 	@Override
 	public ModelInputList build() {
-		return new ServiceInputList();
+		return new ServiceInputList( true );
 	}
 }

@@ -6,7 +6,7 @@ import ece.ing3.java.projet.vue.components.inputlists.InfirmierInputList;
 public class InfirmierSearchDialog extends ModelSearchDialog{
 	@Override
 	public ModelInputList build() {
-		return new InfirmierInputList();
+		return new InfirmierInputList( true );
 	}
 
 }
