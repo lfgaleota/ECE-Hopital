@@ -5,7 +5,6 @@ import ece.ing3.java.projet.database.sql.Model;
 import ece.ing3.java.projet.database.sql.queries.SQLSelect;
 import ece.ing3.java.projet.modele.employe.Employe;
 import ece.ing3.java.projet.modele.employe.Infirmier;
-import ece.ing3.java.projet.modele.tables.InfirmierTableModel;
 import ece.ing3.java.projet.modele.tables.TableModel;
 import ece.ing3.java.projet.vue.dialogs.search.ModelSearchDialog;
 import ece.ing3.java.projet.vue.dialogs.update.ModelUpdateDialog;
@@ -16,11 +15,6 @@ public class InfirmierPanelController extends ModelPanelController<Infirmier> {
 	@Override
 	protected Class<? extends Model> getModelClass() {
 		return Infirmier.class;
-	}
-
-	@Override
-	protected TableModel<Infirmier> buildTableModel() {
-		return new InfirmierTableModel();
 	}
 
 	@Override

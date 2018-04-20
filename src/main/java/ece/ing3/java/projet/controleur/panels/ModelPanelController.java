@@ -42,7 +42,11 @@ public abstract class ModelPanelController<M extends Model> implements ActionLis
 	}
 
 	protected abstract Class<? extends Model> getModelClass();
-	protected abstract TableModel<M> buildTableModel();
+
+	protected TableModel<M> buildTableModel() {
+		return new TableModel<M>( getModelClass() );
+	}
+
 	protected abstract ModelPanel<M> buildModelPanel( TableModel<M> tableModel );
 
 	@Override

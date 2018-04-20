@@ -3,7 +3,6 @@ package ece.ing3.java.projet.controleur.panels;
 import ece.ing3.java.projet.controleur.dialogs.search.ServiceSearchDialogController;
 import ece.ing3.java.projet.database.sql.Model;
 import ece.ing3.java.projet.modele.administration.Service;
-import ece.ing3.java.projet.modele.tables.ServiceTableModel;
 import ece.ing3.java.projet.modele.tables.TableModel;
 import ece.ing3.java.projet.vue.dialogs.search.ModelSearchDialog;
 import ece.ing3.java.projet.vue.dialogs.update.ModelUpdateDialog;
@@ -14,11 +13,6 @@ public class ServicePanelController extends ModelPanelController<Service> {
 	@Override
 	protected Class<? extends Model> getModelClass() {
 		return Service.class;
-	}
-
-	@Override
-	protected TableModel<Service> buildTableModel() {
-		return new ServiceTableModel();
 	}
 
 	@Override

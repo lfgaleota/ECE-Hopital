@@ -4,7 +4,6 @@ import ece.ing3.java.projet.controleur.dialogs.search.ChambreSearchDialogControl
 import ece.ing3.java.projet.controleur.dialogs.update.ChambreUpdateDialogController;
 import ece.ing3.java.projet.database.sql.Model;
 import ece.ing3.java.projet.modele.hopital.Chambre;
-import ece.ing3.java.projet.modele.tables.ChambreTableModel;
 import ece.ing3.java.projet.modele.tables.TableModel;
 import ece.ing3.java.projet.vue.dialogs.search.ModelSearchDialog;
 import ece.ing3.java.projet.vue.dialogs.update.ModelUpdateDialog;
@@ -17,11 +16,6 @@ public class ChambrePanelController extends ModelPanelController<Chambre> {
 	@Override
 	protected Class<? extends Model> getModelClass() {
 		return Chambre.class;
-	}
-
-	@Override
-	protected TableModel<Chambre> buildTableModel() {
-		return new ChambreTableModel();
 	}
 
 	@Override
