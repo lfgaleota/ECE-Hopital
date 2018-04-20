@@ -8,17 +8,23 @@ import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 
-public class ApplicationController implements ActionListener, WindowListener {
+/**
+ * Contrôleur de fenêtre d'Application
+ */
+public class ApplicationController implements WindowListener {
+	/**
+	 * Fenêtre d'Application associée
+	 */
 	private Application win;
 
+	/**
+	 * Créer un nouveau contrôleur d'application pour une fenêtre donnée, et l'initialise.
+	 *
+	 * @param win Fenêtre associée
+	 */
 	public ApplicationController( Application win ) {
 		this.win = win;
 		this.win.addWindowListener( this );
-	}
-
-	@Override
-	public void actionPerformed( ActionEvent actionEvent ) {
-
 	}
 
 	@Override
@@ -27,6 +33,11 @@ public class ApplicationController implements ActionListener, WindowListener {
 	@Override
 	public void windowClosing( WindowEvent windowEvent ) {}
 
+	/**
+	 * Méthode réagissant à la fermeture de la fenêtre. Demande au programme de quitter.
+	 *
+	 * @param windowEvent Événement de fermeture
+	 */
 	@Override
 	public void windowClosed( WindowEvent windowEvent ) {
 		Main.quit();

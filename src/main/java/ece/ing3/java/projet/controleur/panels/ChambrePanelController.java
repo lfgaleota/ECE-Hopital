@@ -10,24 +10,47 @@ import ece.ing3.java.projet.vue.dialogs.update.ModelUpdateDialog;
 import ece.ing3.java.projet.vue.panels.ChambrePanel;
 import ece.ing3.java.projet.vue.panels.ModelPanel;
 
+/**
+ * Base de contrôleur de panneau principal de Chambre
+ */
 public class ChambrePanelController extends ModelPanelController<Chambre> {
-	private static ChambrePanelController instance;
-
+	/**
+	 * Récupère la classe de Chambre
+	 *
+	 * @return Classe du modèle
+	 */
 	@Override
 	protected Class<? extends Model> getModelClass() {
 		return Chambre.class;
 	}
 
+	/**
+	 * Construit un nouveau panneau principal de Chambre, utilisant le modèle de table fourni
+	 *
+	 * @param tableModel Modèle de table à utiliser
+	 * @return Panneau principal associé
+	 */
 	@Override
 	protected ModelPanel<Chambre> buildModelPanel( TableModel<Chambre> tableModel ) {
 		return new ChambrePanel( tableModel );
 	}
 
+	/**
+	 * Créer une nouvelle boîte de dialogue de recherche de Chambre.
+	 *
+	 * @return Boîte de dialogue de recherche
+	 */
 	@Override
 	public ModelSearchDialog createSearchDialog() {
 		return ChambreSearchDialogController.createDialog( this );
 	}
 
+	/**
+	 * Créer une nouvelle boîte de dialogue de mise à jour de Chambre.
+	 *
+	 * @param existingModel Instance de modèle BDD existant ou {@code null}
+	 * @return Boîte de dialogue de mise à jour
+	 */
 	@Override
 	public ModelUpdateDialog<Chambre> createUpdateDialog( Chambre existingModel ) {
 		return ChambreUpdateDialogController.createDialog( existingModel, this );

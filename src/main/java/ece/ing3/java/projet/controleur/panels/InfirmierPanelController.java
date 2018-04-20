@@ -11,28 +11,58 @@ import ece.ing3.java.projet.vue.dialogs.update.ModelUpdateDialog;
 import ece.ing3.java.projet.vue.panels.InfirmierPanel;
 import ece.ing3.java.projet.vue.panels.ModelPanel;
 
-public class InfirmierPanelController extends ModelPanelController<Infirmier> {
+/**
+ * Base de contrôleur de panneau principal d'Infirmier
+ */
+public class InfirmierPanelController  extends ModelPanelController<Infirmier> {
+	/**
+	 * Récupère la classe d'Infirmier
+	 *
+	 * @return Classe du modèle
+	 */
 	@Override
 	protected Class<? extends Model> getModelClass() {
 		return Infirmier.class;
 	}
 
+	/**
+	 * Construit un nouveau panneau principal d'Infirmier, utilisant le modèle de table fourni
+	 *
+	 * @param tableModel Modèle de table à utiliser
+	 * @return Panneau principal associé
+	 */
 	@Override
 	protected ModelPanel<Infirmier> buildModelPanel( TableModel<Infirmier> tableModel ) {
 		return new InfirmierPanel( tableModel );
 	}
 
+	/**
+	 * Créer un nouveau sélecteur SQL d'Infirmier.
+	 *
+	 * @return Sélecteur SQL
+	 */
 	@Override
 	@SuppressWarnings( "unchecked" )
 	public SQLSelect<Infirmier> queryCreateSelector() {
 		return new SQLSelect<Infirmier>( new Class[]{ Infirmier.class, Employe.class } );
 	}
 
+	/**
+	 * Créer une nouvelle boîte de dialogue de recherche d'Infirmier.
+	 *
+	 * @return Boîte de dialogue de recherche
+	 */
 	@Override
 	public ModelSearchDialog createSearchDialog() {
 		return InfirmierSearchDialogController.createDialog( this );
 	}
 
+	/**
+	 * Créer une nouvelle boîte de dialogue de mise à jour d'Infirmier.
+	 *
+	 * @param existingModel Instance de modèle BDD existant ou {@code null}
+	 * @return Boîte de dialogue de mise à jour
+	 */
 	@Override
 	public ModelUpdateDialog<Infirmier> createUpdateDialog( Infirmier existingModel ) {
 		return null;
