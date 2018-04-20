@@ -12,7 +12,7 @@ public class ChambreUpdateDialog extends ModelUpdateDialog<Chambre> {
 
 	@Override
 	public ModelInputList build() {
-		return new ChambreInputList();
+		return new ChambreInputList( false );
 	}
 
 	@Override

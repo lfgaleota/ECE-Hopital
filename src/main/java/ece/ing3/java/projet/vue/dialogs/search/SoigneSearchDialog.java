@@ -6,6 +6,6 @@ import ece.ing3.java.projet.vue.components.inputlists.SoigneInputList;
 public class SoigneSearchDialog extends ModelSearchDialog{
 	@Override
 	public ModelInputList build() {
-		return new SoigneInputList();
+		return new SoigneInputList( true );
 	}
 }
