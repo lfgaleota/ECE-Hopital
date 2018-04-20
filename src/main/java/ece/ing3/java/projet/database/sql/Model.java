@@ -12,7 +12,9 @@ import ece.ing3.java.projet.database.sql.queries.SQLSelect;
 import ece.ing3.java.projet.database.sql.queries.SQLUpdate;
 import ece.ing3.java.projet.exceptions.DatabaseException;
 import org.apache.commons.beanutils.BeanUtils;
+import org.apache.commons.beanutils.PropertyUtils;
 
+import java.beans.PropertyDescriptor;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
@@ -59,6 +61,7 @@ public abstract class Model {
 	private static Map<Class<? extends Model>, Map<String, String>> columnFieldNames = new HashMap<>();
 	private static Map<Class<? extends Model>, Map<String, String>> fieldColumnNames = new HashMap<>();
 	private static Map<Class<? extends Model>, String[]> fieldNames = new HashMap<>();
+	private static Map<Class<? extends Model>, Map<String, PropertyDescriptor>> propertyDescriptors = new HashMap<>();
 	private static Map<Class<? extends Model>, OrderBy> orderByIDsMap = new HashMap<>();
 
 	private interface FieldProcessor {
@@ -144,6 +147,19 @@ public abstract class Model {
 		return fieldNames.get( modelClass );
 	}
 
+	/**
+	 * Get a field's property descriptor for a defined model class.
+	 *
+	 * @param modelClass Model class
+	 * @param fieldName Field to use
+	 * @return Field's property descriptor
+	 */
+	public static PropertyDescriptor getPropertyDescriptor( Class<? extends Model> modelClass, String fieldName ) {
+		if( !propertyDescriptors.containsKey( modelClass ) )
+			buildPropertyDescriptors( modelClass );
+		return propertyDescriptors.get( modelClass ).get( fieldName );
+	}
+
 	private static void processFields( Class<? extends Model> modelClass, FieldProcessor fieldProcessor, boolean silenceIllegalAccess, boolean onlyClassField ) throws IllegalAccessException {
 		Class currentClass = modelClass;
 		while( currentClass != Model.class ) {
@@ -163,6 +179,16 @@ public abstract class Model {
 			}
 			currentClass = currentClass.getSuperclass();
 		}
+	}
+
+	private static void buildPropertyDescriptors( Class<? extends Model> modelClass ) {
+		Map<String, PropertyDescriptor> descriptors = new HashMap<>();
+
+		for( PropertyDescriptor descriptor : PropertyUtils.getPropertyDescriptors( modelClass ) ) {
+			descriptors.put( descriptor.getName(), descriptor );
+		}
+
+		propertyDescriptors.put( modelClass, descriptors );
 	}
 
 	private static void buildNames( Class<? extends Model> modelClass ) {
