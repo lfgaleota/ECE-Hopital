@@ -72,7 +72,7 @@ public class TabPanel extends JTabbedPane {
 			}
 			int size = ( maxTabWidth - Constants.UI_TABCONTAINER_MARGIN.top );
 			Image scaledLogo = logo.getScaledInstance( size, size, Image.SCALE_DEFAULT );
-			g2d.drawImage( scaledLogo, Constants.UI_TABCONTAINER_MARGIN.top, Constants.UI_TABCONTAINER_MARGIN.top, null );
+			g2d.drawImage( scaledLogo, Constants.UI_TABCONTAINER_MARGIN.top, getHeight() - size - Constants.UI_TABCONTAINER_MARGIN.top, null );
 		}
 	}
 }

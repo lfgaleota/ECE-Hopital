@@ -33,6 +33,8 @@ public class Main {
 					System.exit( 20 );
 				}
 			}
+
+			UIManager.setLookAndFeel( UIManager.getSystemLookAndFeelClassName() );
 			Application.get();
 		} catch( Exception e ) {
 			e.printStackTrace();
