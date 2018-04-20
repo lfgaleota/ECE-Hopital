@@ -1,6 +1,7 @@
 package ece.ing3.java.projet.workers;
 
 import ece.ing3.java.projet.database.sql.Model;
+import ece.ing3.java.projet.database.sql.clauses.OrderBy;
 import ece.ing3.java.projet.database.sql.clauses.Where;
 import ece.ing3.java.projet.database.sql.queries.SQLSelect;
 import ece.ing3.java.projet.exceptions.DatabaseException;
@@ -28,8 +29,9 @@ public class ModelQueryWorker<M extends Model> extends SwingWorker<List<M>, Obje
 			if( whereClause != null ) {
 				sql.where( whereClause );
 			}
-			if( provider.getOrderByClause() != null ) {
-				sql.orderBy( provider.getOrderByClause() );
+			OrderBy orderByClause = provider.queryModifyOrderByClause( provider.getOrderByClause() );
+			if( orderByClause != null ) {
+				sql.orderBy( orderByClause );
 			}
 			List<M> list = sql.findList();
 			System.out.println( "Update got : " + list );
