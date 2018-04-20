@@ -22,6 +22,11 @@ public class StringInput extends JPanel implements BaseInput {
 	}
 
 	@Override
+	public void setPreferredSize( Dimension size ) {
+		super.setPreferredSize( new Dimension( size.width, getPreferredSize().height ) );
+	}
+
+	@Override
 	public String getColumnName() {
 		return columnName;
 	}

@@ -38,4 +38,9 @@ public abstract class NumericInput extends JPanel implements BaseInput {
 		String selector = ( this.selector.getSelectedItem() != null ? (String) this.selector.getSelectedItem() : "=" );
 		return new Where( getColumnName(), selector, getValue() );
 	}
+
+	@Override
+	public void setPreferredSize( Dimension size ) {
+		super.setPreferredSize( new Dimension( size.width, getPreferredSize().height ) );
+	}
 }

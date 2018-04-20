@@ -40,6 +40,11 @@ public class ServiceInput extends JPanel implements BaseInput, DialogListener {
 	}
 
 	@Override
+	public void setPreferredSize( Dimension size ) {
+		super.setPreferredSize( new Dimension( size.width, getPreferredSize().height ) );
+	}
+
+	@Override
 	public String getColumnName() {
 		return columnName;
 	}

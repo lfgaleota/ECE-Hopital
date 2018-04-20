@@ -1,6 +1,7 @@
 package ece.ing3.java.projet.vue.components.inputlists;
 
 import ece.ing3.java.projet.database.sql.Model;
+import ece.ing3.java.projet.utils.Constants;
 import ece.ing3.java.projet.utils.Strings;
 import ece.ing3.java.projet.vue.components.FlexibleGridLayout;
 import ece.ing3.java.projet.vue.components.inputs.BaseInput;
@@ -15,7 +16,7 @@ public abstract class ModelInputList extends JPanel {
 
 	public ModelInputList( boolean isSearch, Window parent ) {
 		String[] fieldNames = Model.getFieldNames( getModelClass() );
-		setLayout( new FlexibleGridLayout( fieldNames.length, 2 ) );
+		setLayout( new FlexibleGridLayout( fieldNames.length, 2, Constants.UI_INPUTLIST_HGAP, Constants.UI_INPUTLIST_VGAP ) );
 		for( String fieldName : fieldNames ) {
 			BaseInput input = getInputForField(
 					fieldName,
@@ -32,6 +33,7 @@ public abstract class ModelInputList extends JPanel {
 
 	private void createInput( String fieldName, BaseInput input ) {
 		add( new JLabel( Strings.getModel( fieldName ) ) );
+		( (Component) input ).setPreferredSize( Constants.UI_DIALOGCOMPONENT_PREFERREDSIZE );
 		add( (Component) input );
 	}
 
