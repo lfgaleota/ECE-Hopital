@@ -410,6 +410,14 @@ public abstract class Model {
 	 * @throws DatabaseException Error occurred while deleting from database
 	 */
 	public int delete() throws DatabaseException {
+		Model superModel = null;
+		if( getClass().getSuperclass() != Model.class ) {
+			superModel = createSuperInstance();
+			if( superModel == null ) {
+				throw new DatabaseException( "Cannot create super instance of " + getClass().getName() );
+			}
+		}
+
 		Where whereClause = new Where();
 
 		if( !whereByIds( whereClause ) ) {
@@ -420,7 +428,13 @@ public abstract class Model {
 			throw new DatabaseException( "Cannot select model by its IDs." );
 		}
 
-		return ( new SQLDelete( getClass() ) ).where( whereClause ).delete();
+		int total = ( new SQLDelete( getClass() ) ).where( whereClause ).delete();
+
+		if( superModel != null ) {
+			return total + superModel.delete();
+		}
+
+		return total;
 	}
 
 	/**
