@@ -11,11 +11,9 @@ public abstract class NumericInput extends JPanel implements BaseInput {
 
 	public NumericInput( boolean isSearch ) {
 		this.textField = new JTextField();
-		if( !isSearch ) {
-			add( this.textField );
-		} else {
-			setLayout( new BorderLayout() );
-			add( this.textField, BorderLayout.CENTER );
+		setLayout( new BorderLayout() );
+		add( this.textField, BorderLayout.CENTER );
+		if( isSearch ) {
 			this.selector = new JComboBox<>( new String[]{ "=", "<", ">", "<=", ">=" } );
 			add( this.selector, BorderLayout.EAST );
 		}
