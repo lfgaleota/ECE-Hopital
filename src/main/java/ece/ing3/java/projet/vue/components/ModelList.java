@@ -22,7 +22,11 @@ public class ModelList<M extends Model> extends JTable {
 	}
 
 	public M getSelected() {
-		return tableModel.getList().get( getSelectedRow() );
+		if( getSelectedRow() > -1 ) {
+			return tableModel.getList().get( getSelectedRow() );
+		}
+
+		return null;
 	}
 
 	public List<M> getSelecteds() {
