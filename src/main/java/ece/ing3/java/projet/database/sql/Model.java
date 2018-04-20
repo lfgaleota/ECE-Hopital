@@ -18,7 +18,10 @@ import java.beans.PropertyDescriptor;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Abstract database model helper.
@@ -115,7 +118,7 @@ public abstract class Model {
 	 * Get the corresponding field name of a column for a defined model class.
 	 *
 	 * @param modelClass Model class
-	 * @param fieldName Field name
+	 * @param fieldName  Field name
 	 * @return Field's column name or {@code null} if field should be excluded
 	 */
 	public static String getColumnNameFromFieldName( Class<? extends Model> modelClass, String fieldName ) {
@@ -152,7 +155,7 @@ public abstract class Model {
 	 * Get a field's property descriptor for a defined model class.
 	 *
 	 * @param modelClass Model class
-	 * @param fieldName Field to use
+	 * @param fieldName  Field to use
 	 * @return Field's property descriptor
 	 */
 	public static PropertyDescriptor getPropertyDescriptor( Class<? extends Model> modelClass, String fieldName ) {
@@ -390,10 +393,11 @@ public abstract class Model {
 	 */
 	public int save() throws DatabaseException {
 		if( getClass().getSuperclass() != Model.class ) {
-			Model model = createSuperInstance();
-			if( model != null ) {
-				model.save();
+			Model superModel = createSuperInstance();
+			if( superModel == null ) {
+				throw new DatabaseException( "Cannot create super instance of " + getClass().getName() );
 			}
+			superModel.save();
 		}
 
 		if( exists( false ) ) {
@@ -455,11 +459,11 @@ public abstract class Model {
 	 */
 	private boolean exists( boolean recursive ) throws DatabaseException {
 		if( recursive && getClass().getSuperclass() != Model.class ) {
-			Model model = createSuperInstance();
-			if( model == null ) {
+			Model superModel = createSuperInstance();
+			if( superModel == null ) {
 				throw new DatabaseException( "Cannot create super instance of " + getClass().getName() );
 			}
-			if( model.exists() ) {
+			if( superModel.exists() ) {
 				return true;
 			}
 		}
