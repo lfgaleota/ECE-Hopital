@@ -1,15 +1,11 @@
 package ece.ing3.java.projet.vue.dialogs.update;
 
 import ece.ing3.java.projet.database.sql.Model;
-import ece.ing3.java.projet.database.sql.clauses.Where;
-import ece.ing3.java.projet.modele.hopital.Chambre;
 import ece.ing3.java.projet.utils.Utils;
 import ece.ing3.java.projet.vue.components.inputs.BaseInput;
 import ece.ing3.java.projet.vue.dialogs.BaseModelInputDialog;
-import org.apache.commons.beanutils.BeanUtils;
 import org.apache.commons.beanutils.PropertyUtils;
 
-import javax.swing.*;
 import java.lang.reflect.InvocationTargetException;
 import java.util.Map;
 

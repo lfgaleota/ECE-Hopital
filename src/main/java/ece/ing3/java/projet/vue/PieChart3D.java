@@ -9,7 +9,7 @@ import org.jfree.data.general.DefaultPieDataset;
 
 /**
  * Classe modèle pour les diagrammes circulaires 3D
- * 
+ *
  * @author Nicolas
  *
  */
@@ -21,7 +21,7 @@ public class PieChart3D extends JPanel {
 	private ChartPanel chartpanel;
 
 	/**
-	 * Constructeur par défaut -> Complete les informations du diagramme 
+	 * Constructeur par défaut -> Complete les informations du diagramme
 	 * -> Rempli et affiche le diagramme circulaire dans un panel
 	 */
 	public PieChart3D() {
@@ -41,7 +41,7 @@ public class PieChart3D extends JPanel {
 		plot.setForegroundAlpha(0.60f);
 		// plot.setInteriorGap( 0.02 );
 
-		/** Sauvegarde comme une image (.jpeg) **/
+		/* Sauvegarde comme une image (.jpeg) **/
 		/*
 		 * int width = 640; /* Width of the image int height = 480; /* Height of the
 		 * image File pieChart3D = new File( "pie_Chart3D.jpeg" );
@@ -54,7 +54,7 @@ public class PieChart3D extends JPanel {
 
 	/**
 	 * Getter
-	 * 
+	 *
 	 * @return un panel contenant le diagramme 3D
 	 */
 	public ChartPanel getPieChart3D() {
