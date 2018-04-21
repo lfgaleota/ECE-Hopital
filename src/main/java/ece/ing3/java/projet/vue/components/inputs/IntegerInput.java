@@ -26,4 +26,13 @@ public class IntegerInput extends NumericInput<Integer> {
 	public Integer[] getValues() throws IllegalArgumentException {
 		return new Integer[]{ getValue() };
 	}
+
+	@Override
+	public void setRawValue( Object value ) throws IllegalArgumentException {
+		try {
+			setValue( Integer.valueOf( String.valueOf( value ) ) );
+		} catch( NumberFormatException e ) {
+			throw new IllegalArgumentException( "Valeur numérique invalide.", e );
+		}
+	}
 }

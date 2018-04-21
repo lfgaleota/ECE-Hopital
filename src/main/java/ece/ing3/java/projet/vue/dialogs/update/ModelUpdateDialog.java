@@ -49,12 +49,14 @@ public abstract class ModelUpdateDialog<M extends Model> extends BaseModelInputD
 		int fieldsTotal = Model.getFieldNames( getModelClass() ).length, fieldsValid = 0;
 
 		for( Map.Entry<String, BaseInput> input : inputList.getInputs().entrySet() ) {
-			fillModel( model, input.getKey(), input.getValue() );
-			fieldsValid++;
+			if( input.getValue().isFilled() ) {
+				fillModel( model, input.getKey(), input.getValue() );
+				fieldsValid++;
+			}
 		}
 
 		if( fieldsTotal != fieldsValid ) {
-			throw new IllegalArgumentException( fieldsTotal + " fields filled expected for model " + getModelClass() + ", got " + fieldsValid );
+			throw new IllegalArgumentException( "Il y a uniquement " + fieldsValid + " champ(s) de remplis sur " + fieldsTotal );
 		}
 
 		return model;
@@ -68,7 +70,7 @@ public abstract class ModelUpdateDialog<M extends Model> extends BaseModelInputD
 	public void fillFromModel( M model ) throws IllegalArgumentException {
 		for( Map.Entry<String, BaseInput> entry : inputList.getInputs().entrySet() ) {
 			try {
-				entry.getValue().setValue( PropertyUtils.getSimpleProperty( model, entry.getKey() ) );
+				entry.getValue().setRawValue( PropertyUtils.getSimpleProperty( model, entry.getKey() ) );
 			} catch( IllegalAccessException | InvocationTargetException | NoSuchMethodException e ) {
 				throw new IllegalArgumentException( e );
 			}

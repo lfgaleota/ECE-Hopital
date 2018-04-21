@@ -26,4 +26,13 @@ public class FloatInput extends NumericInput<Float> {
 	public Float[] getValues() throws IllegalArgumentException {
 		return new Float[]{ getValue() };
 	}
+
+	@Override
+	public void setRawValue( Object value ) throws IllegalArgumentException {
+		try {
+			setValue( Float.valueOf( String.valueOf( value ) ) );
+		} catch( NumberFormatException e ) {
+			throw new IllegalArgumentException( "Valeur numérique invalide.", e );
+		}
+	}
 }

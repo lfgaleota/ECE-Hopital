@@ -12,6 +12,8 @@ public interface BaseInput<T> {
 
 	void setValue( T value ) throws IllegalArgumentException;
 
+	void setRawValue( Object value ) throws IllegalArgumentException;
+
 	boolean isFilled();
 
 	default Where getWhere() throws IllegalArgumentException {
