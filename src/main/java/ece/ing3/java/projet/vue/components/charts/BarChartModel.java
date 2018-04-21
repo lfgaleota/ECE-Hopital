@@ -24,14 +24,14 @@ import ece.ing3.java.projet.modele.hopital.Soigne;
  * @author Nicolas
  *
  */
-public class BarChartModel
+public class BarChartModel implements Chart
 {
-	protected static DefaultCategoryDataset dataset;
-	protected static ChartPanel chartPanel;
-	protected static JFreeChart chart;
-	protected static String titre;
-	protected static String axe_x;
-	protected static String axe_y;
+	protected DefaultCategoryDataset dataset;
+	protected ChartPanel chartPanel;
+	protected JFreeChart chart;
+	protected String titre;
+	protected String axe_x;
+	protected String axe_y;
 
 	/**
 	 * Constructeur -> Complete les informations de base d'un diagramme en baton
@@ -53,7 +53,7 @@ public class BarChartModel
 	 *
 	 * @return un panel contenant le diagramme en baton
 	 */
-	public ChartPanel getBarChart()
+	public ChartPanel getChart()
 	{
 		return chartPanel;
 	}

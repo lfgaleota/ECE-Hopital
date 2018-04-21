@@ -28,13 +28,13 @@ import static ece.ing3.java.projet.enums.Specialite.*;
  *
  * @author Nicolas
  */
-public class PieChart2DModel {
+public class PieChart2DModel implements Chart {
 
-	protected static DefaultPieDataset dataset;
-	protected static JFreeChart chart;
-	protected static ChartPanel chartpanel;
-	protected static int type = 0;
-	protected static String titre;
+	protected DefaultPieDataset dataset;
+	protected JFreeChart chart;
+	protected ChartPanel chartpanel;
+	protected int type = 0;
+	protected String titre;
 
 	/**
 	 * Constructeur par défaut: sert de modèle aux autres PieChart
@@ -53,7 +53,7 @@ public class PieChart2DModel {
 	 *
 	 * @return un panel contenant le diagramme 2D
 	 */
-	public ChartPanel getPieChart2D() {
+	public ChartPanel getChart() {
 		return chartpanel;
 	}
 }

@@ -64,7 +64,7 @@ public class BarChartSalaires extends BarChartModel {
 				);
 
 		chartPanel = new ChartPanel(chart, false);
-		chartPanel.setPreferredSize(new Dimension(400, 200));
+		//chartPanel.setPreferredSize(new Dimension(400, 200));
 	}
 
 
