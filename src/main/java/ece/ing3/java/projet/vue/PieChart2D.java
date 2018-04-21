@@ -288,6 +288,41 @@ public class PieChart2D {
 
 			chartpanel = new ChartPanel( chart );
 		}
+                
+                if( type == 7) {
+                    
+                  	int CAR = 0;
+			int CHG = 0;
+			int REA = 0;
+
+			int populationglobale = malisteinfirmier.size();
+
+			for( Infirmier aMalisteinfirmier : malisteinfirmier ) {
+				if( "REA".equals(aMalisteinfirmier.getCodeService()) ) {
+					REA++;
+				}
+
+				if( "CHG".equals(aMalisteinfirmier.getCodeService())) {
+					CHG++;
+				}
+                                if( "CAR".equals(aMalisteinfirmier.getCodeService())) {
+					CAR++;
+				}
+			}
+                        
+                        dataset.setValue( "Ranimation ", ( REA * 100 / populationglobale ) );
+			dataset.setValue( "Chirurugie générale ", ( CHG * 100 / populationglobale ) );
+			dataset.setValue( "Cardiologue ", ( CAR * 100 / populationglobale ) );
+
+
+			chart = ChartFactory.createPieChart( "Infirmier par service", dataset, true, // legend?
+					true, // tooltips?
+					false // URLs?
+			);
+
+			chartpanel = new ChartPanel( chart );
+                    
+                }
 	}
 
 	/**
