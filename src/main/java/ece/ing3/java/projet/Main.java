@@ -14,6 +14,8 @@ import javax.swing.*;
 public class Main {
 	public static void main( String[] args ) {
 		try {
+			UIManager.setLookAndFeel( UIManager.getSystemLookAndFeelClassName() );
+
 			Configuration.init();
 			while( true ) {
 				ConnectingDialog connectingDialog = new ConnectingDialog();
@@ -34,7 +36,6 @@ public class Main {
 				}
 			}
 
-			UIManager.setLookAndFeel( UIManager.getSystemLookAndFeelClassName() );
 			Application.get();
 		} catch( Exception e ) {
 			e.printStackTrace();
