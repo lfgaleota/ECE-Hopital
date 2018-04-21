@@ -1,6 +1,6 @@
 package ece.ing3.java.projet.vue.components.inputs;
 
-public class LongInput extends NumericInput {
+public class LongInput extends NumericInput<Long> {
 	private String columnName;
 
 	public LongInput( String columnName, boolean isSearch ) {
@@ -14,11 +14,16 @@ public class LongInput extends NumericInput {
 	}
 
 	@Override
-	public Object getValue() throws IllegalArgumentException {
+	public Long getValue() throws IllegalArgumentException {
 		try {
 			return Long.valueOf( getTextValue() );
 		} catch( NumberFormatException e ) {
 			throw new IllegalArgumentException( "Valeur numérique invalide.", e );
 		}
+	}
+
+	@Override
+	public Long[] getValues() throws IllegalArgumentException {
+		return new Long[]{ getValue() };
 	}
 }

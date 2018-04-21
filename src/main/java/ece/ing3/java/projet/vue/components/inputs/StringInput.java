@@ -1,14 +1,18 @@
 package ece.ing3.java.projet.vue.components.inputs;
 
 import ece.ing3.java.projet.database.sql.clauses.Where;
+import ece.ing3.java.projet.interfaces.ValueChangeListener;
 
 import javax.swing.*;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 import java.awt.*;
 
-public class StringInput extends JPanel implements BaseInput {
+public class StringInput extends JPanel implements BaseInput<String>, DocumentListener {
 	private String columnName;
 	protected JTextField textField;
 	protected JComboBox<String> selector;
+	private ValueChangeListener valueChangeListener;
 
 	public StringInput( String columnName, boolean isSearch ) {
 		this.columnName = columnName;
@@ -19,6 +23,8 @@ public class StringInput extends JPanel implements BaseInput {
 			this.selector = new JComboBox<>( new String[]{ "=", "~=" } );
 			add( this.selector, BorderLayout.EAST );
 		}
+		this.valueChangeListener = null;
+		this.textField.getDocument().addDocumentListener( this );
 	}
 
 	@Override
@@ -37,13 +43,19 @@ public class StringInput extends JPanel implements BaseInput {
 	}
 
 	@Override
-	public Object getValue() {
+	public String getValue() {
 		return textField.getText();
 	}
 
 	@Override
-	public void setValue( Object value ) throws IllegalArgumentException {
-		textField.setText( String.valueOf( value ) );
+	public String[] getValues() throws IllegalArgumentException {
+		return new String[]{ getValue() };
+	}
+
+	@Override
+	public void setValue( String value ) throws IllegalArgumentException {
+		textField.setText( value );
+		triggerValueListener();
 	}
 
 	@Override
@@ -53,5 +65,31 @@ public class StringInput extends JPanel implements BaseInput {
 			return new Where( getColumnName(), "LIKE", "%" + getValue() + "%" );
 		}
 		return new Where( getColumnName(), "=", getValue() );
+	}
+
+	@Override
+	public void addValueChangeListener( ValueChangeListener valueChangeListener ) {
+		this.valueChangeListener = valueChangeListener;
+	}
+
+	@Override
+	public void insertUpdate( DocumentEvent documentEvent ) {
+		triggerValueListener();
+	}
+
+	@Override
+	public void removeUpdate( DocumentEvent documentEvent ) {
+		triggerValueListener();
+	}
+
+	@Override
+	public void changedUpdate( DocumentEvent documentEvent ) {
+		triggerValueListener();
+	}
+
+	private void triggerValueListener() {
+		if( this.valueChangeListener != null ) {
+			this.valueChangeListener.onValueChanged( getValues() );
+		}
 	}
 }
