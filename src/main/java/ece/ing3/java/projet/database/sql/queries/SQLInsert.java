@@ -44,6 +44,9 @@ public class SQLInsert implements SQLRequest {
 	 * @return This SQL insert helper
 	 */
 	public SQLInsert add( String column, Object value ) {
+		if( column == null || value == null ) {
+			throw new NullPointerException( "Column or value is null" );
+		}
 		int index = columns.size();
 		if( columns.containsValue( column ) ) {
 			for( Map.Entry<Integer, String> columnEntry : columns.entrySet() ) {

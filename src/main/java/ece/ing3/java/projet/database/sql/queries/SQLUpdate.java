@@ -48,8 +48,21 @@ public class SQLUpdate extends SQLWhereQuery<SQLUpdate> {
 		if( column == null || value == null ) {
 			throw new NullPointerException( "Column or value is null" );
 		}
-		columns.put( columns.size(), column );
-		values.put( values.size(), value );
+		int index = columns.size();
+		if( columns.containsValue( column ) ) {
+			for( Map.Entry<Integer, String> columnEntry : columns.entrySet() ) {
+				if( columnEntry.getValue().equals( column ) ) {
+					index = columnEntry.getKey();
+				}
+			}
+		} else {
+			columns.put( index, column );
+		}
+		if( value.getClass().isEnum() ) {
+			values.put( index, value.toString() );
+			return this;
+		}
+		values.put( index, value );
 		return this;
 	}
 
