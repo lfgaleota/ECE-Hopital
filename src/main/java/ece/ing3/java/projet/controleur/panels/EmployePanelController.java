@@ -24,7 +24,7 @@ public class EmployePanelController  extends ModelPanelController<Employe> {
 	 * @return Classe du modèle
 	 */
 	@Override
-	protected Class<? extends Model> getModelClass() {
+	public Class<Employe> getModelClass() {
 		return Employe.class;
 	}
 

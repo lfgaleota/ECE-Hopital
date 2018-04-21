@@ -3,7 +3,12 @@ package ece.ing3.java.projet.controleur.panels;
 import ece.ing3.java.projet.controleur.dialogs.search.SoigneSearchDialogController;
 import ece.ing3.java.projet.controleur.dialogs.update.SoigneUpdateDialogController;
 import ece.ing3.java.projet.database.sql.Model;
+import ece.ing3.java.projet.database.sql.queries.SQLSelect;
+import ece.ing3.java.projet.modele.employe.Docteur;
+import ece.ing3.java.projet.modele.employe.Employe;
+import ece.ing3.java.projet.modele.hopital.Malade;
 import ece.ing3.java.projet.modele.hopital.Soigne;
+import ece.ing3.java.projet.modele.tables.SoigneTableModel;
 import ece.ing3.java.projet.modele.tables.TableModel;
 import ece.ing3.java.projet.vue.dialogs.search.ModelSearchDialog;
 import ece.ing3.java.projet.vue.dialogs.update.ModelUpdateDialog;
@@ -20,8 +25,13 @@ public class SoignePanelController extends ModelPanelController<Soigne> {
 	 * @return Classe du modèle
 	 */
 	@Override
-	protected Class<? extends Model> getModelClass() {
+	public Class<Soigne> getModelClass() {
 		return Soigne.class;
+	}
+
+	@Override
+	protected TableModel<Soigne> buildTableModel() {
+		return new SoigneTableModel();
 	}
 
 	/**
@@ -33,6 +43,18 @@ public class SoignePanelController extends ModelPanelController<Soigne> {
 	@Override
 	protected ModelPanel<Soigne> buildModelPanel( TableModel<Soigne> tableModel ) {
 		return new SoignePanel( tableModel );
+	}
+
+	@Override
+	@SuppressWarnings( "unchecked" )
+	public SQLSelect<Soigne> queryCreateSelector() {
+		return new SQLSelect<Soigne>(
+				new Class[]{ Soigne.class, Malade.class, Docteur.class, Employe.class },
+				new String[]{ "JOIN", "JOIN", "JOIN" },
+				new String[]{ "ON soigne.no_malade = malade.numero", "ON soigne.no_docteur = docteur.numero", "ON docteur.numero = employe.numero" },
+				true,
+				"no_malade AS numeroMalade", "no_docteur AS numeroDocteur", "malade.nom AS maladeNom", "malade.prenom AS maladePrenom", "employe.nom AS docteurNom", "employe.prenom AS docteurPrenom", "docteur.specialite AS docteurSpecialite"
+		);
 	}
 
 	/**

@@ -9,10 +9,13 @@ import javax.swing.table.AbstractTableModel;
 import java.beans.PropertyDescriptor;
 import java.lang.reflect.InvocationTargetException;
 import java.util.List;
+import java.util.Map;
 
 public class TableModel<M extends Model> extends AbstractTableModel {
 	private Class<? extends Model> modelClass;
 	private List<M> instances;
+	private List<Map<String, Object>> rows;
+
 	private String[] fieldNames;
 
 	public TableModel( Class<? extends Model> modelClass ) {
@@ -24,10 +27,19 @@ public class TableModel<M extends Model> extends AbstractTableModel {
 		return instances;
 	}
 
-	public void setList( List<M> instances ) {
-		this.instances = instances;
+	public void setList( Map.Entry<List<M>, List<Map<String, Object>>> instances ) {
+		this.instances = instances.getKey();
+		this.rows = instances.getValue();
 		fireTableStructureChanged();
 		fireTableDataChanged();
+	}
+
+	String[] getFieldNames() {
+		return fieldNames;
+	}
+
+	List<Map<String, Object>> getRows() {
+		return rows;
 	}
 
 	@Override

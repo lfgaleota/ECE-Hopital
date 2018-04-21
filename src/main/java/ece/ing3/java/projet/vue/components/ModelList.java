@@ -16,11 +16,6 @@ public class ModelList<M extends Model> extends JTable {
 		setAutoCreateRowSorter( true );
 	}
 
-	@SuppressWarnings( "unchecked" )
-	public void updateList( List<M> list ) {
-		tableModel.setList( list );
-	}
-
 	public M getSelected() {
 		if( getSelectedRow() > -1 ) {
 			return tableModel.getList().get( getSelectedRow() );

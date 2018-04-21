@@ -1,5 +1,6 @@
 package ece.ing3.java.projet.workers;
 
+import ece.ing3.java.projet.controleur.panels.SoignePanelController;
 import ece.ing3.java.projet.database.sql.Model;
 import ece.ing3.java.projet.database.sql.clauses.OrderBy;
 import ece.ing3.java.projet.database.sql.clauses.Where;
@@ -8,12 +9,17 @@ import ece.ing3.java.projet.exceptions.DatabaseException;
 import ece.ing3.java.projet.interfaces.ModelQueryWorkerProvider;
 import ece.ing3.java.projet.utils.Utils;
 import ece.ing3.java.projet.vue.Application;
+import org.apache.commons.dbutils.ResultSetHandler;
+import org.apache.commons.dbutils.handlers.BeanHandler;
 
 import javax.swing.*;
-import java.util.List;
+import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
+import java.sql.SQLException;
+import java.util.*;
 import java.util.concurrent.ExecutionException;
 
-public class ModelQueryWorker<M extends Model> extends SwingWorker<List<M>, Object> {
+public class ModelQueryWorker<M extends Model> extends SwingWorker<Map.Entry<List<M>, List<Map<String, Object>>>, Object> {
 	private ModelQueryWorkerProvider<M> provider;
 
 	public ModelQueryWorker( ModelQueryWorkerProvider<M> provider ) {
@@ -21,7 +27,7 @@ public class ModelQueryWorker<M extends Model> extends SwingWorker<List<M>, Obje
 	}
 
 	@Override
-	protected List<M> doInBackground() {
+	protected Map.Entry<List<M>, List<Map<String, Object>>> doInBackground() {
 		System.out.println( "Update started" );
 		try {
 			SQLSelect<M> sql = provider.queryCreateSelector();
@@ -33,10 +39,27 @@ public class ModelQueryWorker<M extends Model> extends SwingWorker<List<M>, Obje
 			if( orderByClause != null ) {
 				sql.orderBy( orderByClause );
 			}
-			List<M> list = sql.findList();
+			ResultSet rs = sql.findRaw();
+			ResultSetHandler<M> h = new BeanHandler<>( provider.getModelClass() );
+			List<M> list = new ArrayList<>();
+			List<Map<String, Object>> rows = new ArrayList<>();
+			while( !rs.isAfterLast() ) {
+				M s = h.handle( rs );
+				if( s != null ) {
+					list.add( s );
+					if( !rs.isAfterLast() ) {
+						Map<String, Object> rowValues = new HashMap<>();
+						ResultSetMetaData rsmd = rs.getMetaData();
+						for( int i = 1; i <= rsmd.getColumnCount(); i++ ) {
+							rowValues.put( rsmd.getColumnLabel( i ), rs.getObject( i ) );
+						}
+						rows.add( rowValues );
+					}
+				}
+			}
 			System.out.println( "Update got : " + list );
-			return list;
-		} catch( DatabaseException e ) {
+			return new AbstractMap.SimpleEntry<>( list, rows );
+		} catch( DatabaseException | SQLException e ) {
 			e.printStackTrace();
 		}
 		System.out.println( "Update failed" );

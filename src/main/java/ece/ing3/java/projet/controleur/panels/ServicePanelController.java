@@ -20,7 +20,7 @@ public class ServicePanelController extends ModelPanelController<Service> {
 	 * @return Classe du modèle
 	 */
 	@Override
-	protected Class<? extends Model> getModelClass() {
+	public Class<Service> getModelClass() {
 		return Service.class;
 	}
 
