@@ -23,10 +23,12 @@ public abstract class BaseValidatedDialogController implements ActionListener, W
 	 */
 	protected DialogListener listener;
 
+	private boolean alreadyHandled;
+
 	/**
 	 * Créer un nouveau contrôleur pour une boîte de dialogue d'entrée générique et initialise cette boite de dialogue.
 	 *
-	 * @param dialog Boîte de dialogue associée
+	 * @param dialog   Boîte de dialogue associée
 	 * @param listener Objet qui écoute l'issue de la décision
 	 */
 	protected BaseValidatedDialogController( BaseValidatedDialog dialog, DialogListener listener ) {
@@ -35,6 +37,7 @@ public abstract class BaseValidatedDialogController implements ActionListener, W
 		this.dialog.setValidated( false );
 		this.dialog.addActionListener( this );
 		this.dialog.addWindowListener( this );
+		this.alreadyHandled = false;
 	}
 
 
@@ -61,7 +64,25 @@ public abstract class BaseValidatedDialogController implements ActionListener, W
 	}
 
 	@Override
-	public void windowOpened( WindowEvent windowEvent ) {}
+	public void windowOpened( WindowEvent windowEvent ) {
+	}
+
+	/**
+	 * Méthode réagissant au début de la fermeture de la boîte de dialogue, appelant l'objet écoutant l'issue selon la décision prise
+	 *
+	 * @param windowEvent Événement de fermeture
+	 */
+	@Override
+	public void windowClosing( WindowEvent windowEvent ) {
+		if( !alreadyHandled ) {
+			if( this.dialog.isValidated() ) {
+				listener.onDialogSubmitted( dialog );
+			} else {
+				listener.onDialogCancelled( dialog );
+			}
+		}
+		alreadyHandled = true;
+	}
 
 	/**
 	 * Méthode réagissant à la fermeture de la boîte de dialogue, appelant l'objet écoutant l'issue selon la décision prise
@@ -69,27 +90,26 @@ public abstract class BaseValidatedDialogController implements ActionListener, W
 	 * @param windowEvent Événement de fermeture
 	 */
 	@Override
-	public void windowClosing( WindowEvent windowEvent ) {
-		if( this.dialog.isValidated() ) {
-			listener.onDialogSubmitted( dialog );
-		} else {
-			listener.onDialogCancelled( dialog );
-		}
-	}
-
-	@Override
 	public void windowClosed( WindowEvent windowEvent ) {
+		// Pas très propre...
+		// windowClosed est lancé quand on ferme par dispose(), et windowClosing() par la croix.
+		// On fait donc en sorte de lancer l'action de windowClosing() quand on a windowClosed() tout en s'assurant de ne pas traiter deux fois la chose
+		windowClosing( windowEvent );
 	}
 
 	@Override
-	public void windowIconified( WindowEvent windowEvent ) {}
+	public void windowIconified( WindowEvent windowEvent ) {
+	}
 
 	@Override
-	public void windowDeiconified( WindowEvent windowEvent ) {}
+	public void windowDeiconified( WindowEvent windowEvent ) {
+	}
 
 	@Override
-	public void windowActivated( WindowEvent windowEvent ) {}
+	public void windowActivated( WindowEvent windowEvent ) {
+	}
 
 	@Override
-	public void windowDeactivated( WindowEvent windowEvent ) {}
+	public void windowDeactivated( WindowEvent windowEvent ) {
+	}
 }
