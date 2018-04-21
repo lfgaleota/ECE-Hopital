@@ -16,6 +16,7 @@ import ece.ing3.java.projet.controleur.ApplicationController;
 import ece.ing3.java.projet.controleur.panels.ConfigurationPanelController;
 import ece.ing3.java.projet.enums.ModelControllers;
 import ece.ing3.java.projet.utils.Strings;
+import ece.ing3.java.projet.vue.panels.StatistiquesPanel;
 import ece.ing3.java.projet.vue.panels.TabPanel;
 
 /**
@@ -29,8 +30,6 @@ public class Application extends JFrame {
 	private static Application instance;
 
 	private JTabbedPane tabs;
-	private Statistiques mesStats = new Statistiques(1);
-    private Statistiques mesStats2 = new Statistiques(2);
 
 	private Application() {
 		this.setTitle( "Projet Hopital" );
@@ -49,11 +48,10 @@ public class Application extends JFrame {
 			}
 		} catch( ExceptionInInitializerError e ) {
 			this.dispose();
-			mesStats.dispose();
-			mesStats2.dispose();
 			throw new RuntimeException( ( e.getCause() != null ? e.getCause().getLocalizedMessage() : e.getLocalizedMessage() ), e );
 		}
 
+		tabs.addTab( Strings.get( "reporting.title" ), new StatistiquesPanel() );
 		tabs.addTab( Strings.get( "configuration.title" ), ConfigurationPanelController.createPanel() );
 
 		new ApplicationController( this );

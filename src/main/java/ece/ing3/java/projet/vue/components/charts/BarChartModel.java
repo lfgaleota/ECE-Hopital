@@ -1,4 +1,4 @@
-package ece.ing3.java.projet.vue;
+package ece.ing3.java.projet.vue.components.charts;
 import static ece.ing3.java.projet.enums.Rotation.JOUR;
 import static ece.ing3.java.projet.enums.Rotation.NUIT;
 
@@ -20,7 +20,7 @@ import ece.ing3.java.projet.modele.hopital.Soigne;
 
 /**
  * Classe modèle pour les diagrammes en batons.
- * 
+ *
  * @author Nicolas
  *
  */
@@ -32,30 +32,30 @@ public class BarChartModel
 	protected static String titre;
 	protected static String axe_x;
 	protected static String axe_y;
-	
+
 	/**
 	 * Constructeur -> Complete les informations de base d'un diagramme en baton
-	 * 
+	 *
 	 */
-	
+
 	public BarChartModel(String titre, String titrex, String titrey)
 	{
 		dataset = new DefaultCategoryDataset();
 		this.titre = titre;
 		this.axe_x = titrex;
 		this.axe_y = titrey;
-		
-	} 
-	
+
+	}
+
 
 	/**
 	 * Getter
-	 * 
+	 *
 	 * @return un panel contenant le diagramme en baton
 	 */
 	public ChartPanel getBarChart()
 	{
 		return chartPanel;
 	}
-	
+
 }

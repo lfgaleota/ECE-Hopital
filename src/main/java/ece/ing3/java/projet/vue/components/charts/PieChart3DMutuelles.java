@@ -1,4 +1,4 @@
-package ece.ing3.java.projet.vue;
+package ece.ing3.java.projet.vue.components.charts;
 
 import ece.ing3.java.projet.modele.hopital.Malade;
 import java.util.HashMap;

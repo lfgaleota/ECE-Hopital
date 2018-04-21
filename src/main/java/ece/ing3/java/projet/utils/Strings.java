@@ -59,6 +59,9 @@ public class Strings {
 	public static final String CONFIGURATION_DATABASE_PASSWORD = "Mot de passe";
 	public static final String CONFIGURATION_DATABASE_DRIVER = "Type de BDD";
 	public static final String CONFIGURATION_TITLE = "Configuration";
+	public static final String REPORTING_TITLE = "Statistiques";
+	public static final String REPORTING_MALADES = "Malades";
+	public static final String REPORTING_EMPLOYES = "Employés";
 
 	private static final Map<String, String> map = new HashMap<>();
 

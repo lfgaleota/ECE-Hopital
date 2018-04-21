@@ -9,7 +9,7 @@ import java.awt.event.ActionListener;
 import java.io.IOException;
 
 public class ModelToolbar extends JToolBar {
-	private JButton buttonRemove, buttonAdd, buttonModify, buttonSearch, buttonStats, buttonRefresh;
+	private JButton buttonRemove, buttonAdd, buttonModify, buttonSearch, buttonRefresh;
 
 	public ModelToolbar( String modelName ) {
 		try {
@@ -17,7 +17,6 @@ public class ModelToolbar extends JToolBar {
 			buttonAdd = new JButton( new ImageIcon( Utils.getImageResource( Constants.RESOURCE_PATH_ICON_ADD ) ) );
 			buttonModify = new JButton( new ImageIcon( Utils.getImageResource( Constants.RESOURCE_PATH_ICON_MODIFY ) ) );
 			buttonSearch = new JButton( new ImageIcon( Utils.getImageResource( Constants.RESOURCE_PATH_ICON_SEARCH ) ) );
-			buttonStats = new JButton( new ImageIcon( Utils.getImageResource( Constants.RESOURCE_PATH_ICON_STATS ) ) );
 			buttonRefresh = new JButton( new ImageIcon( Utils.getImageResource( Constants.RESOURCE_PATH_ICON_REFRESH ) ) );
 		} catch( IOException e ) {
 			throw new RuntimeException( "Resource not found.\n" + e.getLocalizedMessage(), e );
@@ -30,7 +29,6 @@ public class ModelToolbar extends JToolBar {
 		add( Box.createHorizontalGlue() );
 
 		add( buttonRefresh );
-		add( buttonStats );
 		add( buttonSearch );
 		add( buttonAdd );
 		add( buttonModify );
@@ -53,10 +51,6 @@ public class ModelToolbar extends JToolBar {
 		return buttonSearch;
 	}
 
-	public JButton getButtonStats() {
-		return buttonStats;
-	}
-
 	public JButton getButtonRefresh() {
 		return buttonRefresh;
 	}
@@ -66,7 +60,6 @@ public class ModelToolbar extends JToolBar {
 		buttonAdd.addActionListener( actionListener );
 		buttonModify.addActionListener( actionListener );
 		buttonSearch.addActionListener( actionListener );
-		buttonStats.addActionListener( actionListener );
 		buttonRefresh.addActionListener( actionListener );
 	}
 }
