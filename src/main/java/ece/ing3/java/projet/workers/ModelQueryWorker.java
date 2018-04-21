@@ -55,6 +55,14 @@ public class ModelQueryWorker<M extends Model> extends SwingWorker<Map.Entry<Lis
 						}
 						rows.add( rowValues );
 					}
+				} else {
+					try {
+						if( !rs.next() ) {
+							break;
+						}
+					} catch( SQLException e ) {
+						break;
+					}
 				}
 			}
 			System.out.println( "Update got : " + list );
