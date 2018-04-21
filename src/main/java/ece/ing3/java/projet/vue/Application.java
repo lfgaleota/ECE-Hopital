@@ -29,7 +29,8 @@ public class Application extends JFrame {
 	private static Application instance;
 
 	private JTabbedPane tabs;
-	private Statistiques mesStats = new Statistiques();
+	private Statistiques mesStats = new Statistiques(1);
+        private Statistiques mesStats2 = new Statistiques(2);
 
 	private Application() {
 		this.setTitle( "Projet Hopital" );
