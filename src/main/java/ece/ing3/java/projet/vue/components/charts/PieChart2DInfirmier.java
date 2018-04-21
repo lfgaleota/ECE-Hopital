@@ -1,4 +1,4 @@
-package ece.ing3.java.projet.vue;
+package ece.ing3.java.projet.vue.components.charts;
 
 import java.util.List;
 
@@ -6,7 +6,6 @@ import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 
 import ece.ing3.java.projet.modele.employe.Infirmier;
-import ece.ing3.java.projet.modele.hopital.Malade;
 
 public class PieChart2DInfirmier extends PieChart2DModel {
 

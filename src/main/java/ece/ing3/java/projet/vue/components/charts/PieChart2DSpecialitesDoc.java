@@ -1,4 +1,4 @@
-package ece.ing3.java.projet.vue;
+package ece.ing3.java.projet.vue.components.charts;
 
 import static ece.ing3.java.projet.enums.Specialite.Anesthesiste;
 import static ece.ing3.java.projet.enums.Specialite.Cardiologue;
@@ -19,7 +19,7 @@ public class PieChart2DSpecialitesDoc extends PieChart2DModel {
 	public PieChart2DSpecialitesDoc(List<Docteur> malistedocteur ) {
 
 		super("Parts des spécialités des docteurs");
-		
+
 		int radio = 0;
 		int cardio = 0;
 		int pneumo = 0;

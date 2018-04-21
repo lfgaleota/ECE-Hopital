@@ -1,4 +1,4 @@
-package ece.ing3.java.projet.vue;
+package ece.ing3.java.projet.vue.components.charts;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;

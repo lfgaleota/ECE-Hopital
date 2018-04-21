@@ -1,4 +1,4 @@
-package ece.ing3.java.projet.vue;
+package ece.ing3.java.projet.vue.panels;
 
 import ece.ing3.java.projet.exceptions.DatabaseException;
 import ece.ing3.java.projet.modele.administration.Service;
@@ -9,49 +9,37 @@ import ece.ing3.java.projet.modele.hopital.Chambre;
 import ece.ing3.java.projet.modele.hopital.Hospitalisation;
 import ece.ing3.java.projet.modele.hopital.Malade;
 import ece.ing3.java.projet.modele.hopital.Soigne;
+import ece.ing3.java.projet.utils.Strings;
+import ece.ing3.java.projet.vue.components.charts.*;
 
-import java.awt.GridLayout;
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.swing.JFrame;
+import javax.swing.*;
 
 /**
  * Classe d'affichage de la fenetre de statistiques.
- * 
+ *
  * @author Nicolas
  *
  */
-public class Statistiques extends JFrame {
+public class StatistiquesPanel extends JTabbedPane {
 	private static final long serialVersionUID = 1L;
-	private int numfen = 0; //numéro de la fenêtre
 
 	/**
-	 * Constructeur par défaut de la classe Donne les principales caractéristiques
-	 * de la fenêtre
+	 * Constructeur par défaut de la classe
+	 * Donne les principales caractéristiques du panneau
 	 */
-	public Statistiques(int numfen) {
-		this.numfen = numfen;
-		if (this.numfen == 1) {
-			this.setTitle("Statistiques de l'Hôpital (1/2)");
-		}
-		if (this.numfen == 2) {
-			this.setTitle("Statistiques de l'Hôpital (2/2)");
-		}
-
-		this.setSize((int) getToolkit().getScreenSize().getWidth(), ((int) getToolkit().getScreenSize().getHeight()));
-		this.setResizable(true);
-		this.setVisible(true);
-		this.toFront(); // place la fenêtre devant les autres.
+	public StatistiquesPanel() {
 		this.creer_Statistiques();
-
 	}
 
 	/**
 	 * Méthode qui créée des objets de JFreeChart et les ajoute dans 2 fenêtres
 	 */
 	public void creer_Statistiques() {
-		
+
 		// On crée un liste d'employe
 		List<Employe> malisteemploye = new ArrayList<>();
 		try {
@@ -109,54 +97,43 @@ public class Statistiques extends JFrame {
 		} catch (DatabaseException e1) {
 			e1.printStackTrace();
 		}
-		
 
-		if (this.numfen == 1) {
-			GridLayout mygridLayout = new GridLayout(3, 2);
-			this.setLayout(mygridLayout);
-			mygridLayout.setHgap(10);
-			mygridLayout.setVgap(10);
+		JPanel panMalades = new JPanel();
+		JPanel panEmployes = new JPanel();
 
-			PieChart3DMutuelles A = new PieChart3DMutuelles( malistemalade );
-			this.getContentPane().add(A.getPieChart3D());
-			
-			PieChart2DNbreLits B = new PieChart2DNbreLits( malistechambre );
-			this.getContentPane().add(B.getPieChart2D());
-			
-			PieChart2DSpecialitesDoc C = new PieChart2DSpecialitesDoc (malistedocteur);
-			this.getContentPane().add(C.getPieChart2D());
-			
-			PieChart2DRotations D = new PieChart2DRotations(malisteinfirmier);
-			this.getContentPane().add(D.getPieChart2D());
+		PieChart3DMutuelles A = new PieChart3DMutuelles( malistemalade );
+		panMalades.add(A.getPieChart3D());
 
-			PieChart2DPatients E = new PieChart2DPatients(malistehospitalisation);
-			this.getContentPane().add(E.getPieChart2D());
-			
-			PieChart2DMalades F = new PieChart2DMalades();
-			this.getContentPane().add(F.getPieChart2D());
-	
-			//this.getContentPane().add((new PieChart2DModel(6, null, null, null, null, null, null)).getPieChart2D());
+		PieChart2DNbreLits B = new PieChart2DNbreLits( malistechambre );
+		panMalades.add(B.getPieChart2D());
 
-			this.pack();
-		}
-		
+		PieChart2DSpecialitesDoc C = new PieChart2DSpecialitesDoc (malistedocteur);
+		panEmployes.add(C.getPieChart2D());
 
-		if (this.numfen == 2) {
-			
-			GridLayout mygridLayout = new GridLayout(2, 2);
-			this.setLayout(mygridLayout);
-			mygridLayout.setHgap(10);
-			mygridLayout.setVgap(10);
-			
-			PieChart2DInfirmier G = new PieChart2DInfirmier(malisteinfirmier);
-			this.getContentPane().add(G.getPieChart2D());
-			
-			BarChartSalaires H = new BarChartSalaires( malisteinfirmier );
-			this.getContentPane().add(H.getBarChart());
-			
-			this.pack();
+		PieChart2DRotations D = new PieChart2DRotations(malisteinfirmier);
+		panEmployes.add(D.getPieChart2D());
 
-		}
+		PieChart2DPatients E = new PieChart2DPatients(malistehospitalisation);
+		panMalades.add(E.getPieChart2D());
 
+		PieChart2DMalades F = new PieChart2DMalades();
+		panMalades.add(F.getPieChart2D());
+
+		//this.getContentPane().add((new PieChart2DModel(6, null, null, null, null, null, null)).getPieChart2D());
+
+		PieChart2DInfirmier G = new PieChart2DInfirmier(malisteinfirmier);
+		panEmployes.add(G.getPieChart2D());
+
+		BarChartSalaires H = new BarChartSalaires( malisteinfirmier );
+		panEmployes.add(H.getBarChart());
+
+		GridLayout mygridLayout = new GridLayout(2, 2);
+		mygridLayout.setHgap(10);
+		mygridLayout.setVgap(10);
+		panMalades.setLayout(mygridLayout);
+		panEmployes.setLayout(mygridLayout);
+
+		addTab( Strings.get( "reporting.malades" ), panMalades );
+		addTab( Strings.get( "reporting.employes" ), panEmployes );
 	}
 }

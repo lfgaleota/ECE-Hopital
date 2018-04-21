@@ -1,4 +1,4 @@
-package ece.ing3.java.projet.vue;
+package ece.ing3.java.projet.vue.components.charts;
 
 import java.util.List;
 
@@ -6,10 +6,9 @@ import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 
 import ece.ing3.java.projet.modele.hopital.Chambre;
-import ece.ing3.java.projet.modele.hopital.Malade;
 
 /**
- * Classe 
+ * Classe
  * @author Nicolas
  *
  */

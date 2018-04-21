@@ -1,4 +1,4 @@
-package ece.ing3.java.projet.vue;
+package ece.ing3.java.projet.vue.components.charts;
 
 import static ece.ing3.java.projet.enums.Rotation.JOUR;
 import static ece.ing3.java.projet.enums.Rotation.NUIT;
@@ -16,7 +16,7 @@ public class PieChart2DRotations  extends PieChart2DModel {
 	public PieChart2DRotations(List<Infirmier> malisteinfirmier ) {
 
 		super("Rotation infirmier");
-		
+
 		int jour = 0;
 		int nuit = 0;
 

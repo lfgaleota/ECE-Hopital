@@ -1,4 +1,4 @@
-package ece.ing3.java.projet.vue;
+package ece.ing3.java.projet.vue.components.charts;
 
 import ece.ing3.java.projet.database.Database;
 import ece.ing3.java.projet.exceptions.DatabaseException;
@@ -39,7 +39,7 @@ public class PieChart2DModel {
 	/**
 	 * Constructeur par défaut: sert de modèle aux autres PieChart
 	 * Initialise le conteneur de données
-	 * 
+	 *
 	 * @param titre : le titre du diagramme.
 	 */
 	public PieChart2DModel(String titre)
