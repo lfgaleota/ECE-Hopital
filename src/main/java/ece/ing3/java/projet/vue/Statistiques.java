@@ -21,19 +21,32 @@ import javax.swing.JFrame;
  */
 public class Statistiques  extends JFrame {
 	private static final long serialVersionUID = 1L;
+        private int  type=0;
 
 	/**
 	 * Constructeur par défaut de la classe
 	 * Donne les principales caractéristiques de la fenêtre
 	 */
-	public Statistiques()
+	public Statistiques(int type)
 	{
-		this.setTitle ("Statistiques de l'Hôpital");
+            this.type=type;
+            if(this.type==1)
+                {
+                  this.setTitle ("Statistiques de l'Hôpital");  
+                }
+            if(this.type==2)
+                {
+                  this.setTitle ("Statistiques de l'Hôpital (suite)");  
+                }
+            
+		
 		this.setSize((int)getToolkit().getScreenSize().getWidth(), ((int)getToolkit().getScreenSize().getHeight()));
 		this.setResizable(true);
 		this.setVisible(true);
 		this.toFront(); // place la fenêtre devant les autres.
 		this.creer_Statistiques();
+                
+                
 	}
 
 	/**
@@ -95,14 +108,19 @@ public class Statistiques  extends JFrame {
 			e1.printStackTrace();
 		}
 
-		GridLayout mygridLayout = new GridLayout(3,2);
+                if(this.type==1)
+                {
+                GridLayout mygridLayout = new GridLayout(3,2);
 		this.setLayout(mygridLayout);
 		mygridLayout.setHgap(10);
 		mygridLayout.setVgap(10);
 
-
+                PieChart3D P3= new PieChart3D(malistemalade);
+                this.getContentPane().add(P3.getPieChart3D());
+                /* MEME QUE CELUI EN 3D MAIS EN 2D
 		PieChart2D P= new PieChart2D(1,malisteemploye,malistemalade,malistechambre,malistedocteur,malisteinfirmier,malistehospitalisation);
                 this.getContentPane().add(P.getPieChart2D());
+                */
                 PieChart2D D= new PieChart2D(2,malisteemploye,malistemalade,malistechambre,malistedocteur,malisteinfirmier,malistehospitalisation);
                 this.getContentPane().add(D.getPieChart2D());
                 PieChart2D F= new PieChart2D(3,malisteemploye,malistemalade,malistechambre,malistedocteur,malisteinfirmier,malistehospitalisation);
@@ -113,16 +131,31 @@ public class Statistiques  extends JFrame {
                 this.getContentPane().add(H.getPieChart2D());
                 this.getContentPane().add( ( new PieChart2D( 6, null, null, null, null, null, null ) ).getPieChart2D() );
                 //PieChart2D D= new PieChart2D(malisteemploye,malistemalade);
-		//PieChart3D P3= new PieChart3D();
+                
 		//BarChart B = new BarChart();
 
-
-
-
-		//this.getContentPane().add(P3.getPieChart3D());
 		//this.getContentPane().add(B.getBarChart());
                 //this.getContentPane().add(D.getPieChart2D());
 
-		this.pack();
+		this.pack();   
+                }
+                
+                if(this.type==2)
+                {
+                    
+                ///CHANGER LE GRID LAYOUT SELON LE NOMBRE DE DIAGRAMME A AFFICHER
+                GridLayout mygridLayout = new GridLayout(3,2);
+		this.setLayout(mygridLayout);
+		mygridLayout.setHgap(10);
+		mygridLayout.setVgap(10); 
+                
+                ///FAIRE EXACTEMENT COMME DANS TYPE=1 POUR RAJOUTER LES DIGRAMMES
+                
+   
+                
+		this.pack();   
+                
+                }
+	
 	}
 }
