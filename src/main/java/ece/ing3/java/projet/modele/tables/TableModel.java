@@ -44,12 +44,12 @@ public class TableModel<M extends Model> extends AbstractTableModel {
 
 	@Override
 	public String getColumnName( int col ) {
-		return Strings.get( Constants.MODEL_STRINGS_PREFIX + fieldNames[ col ] );
+		return Strings.get( Constants.MODEL_STRINGS_PREFIX + getFieldNames()[ col ] );
 	}
 
 	@Override
 	public Class<?> getColumnClass( int columnIndex ) {
-		PropertyDescriptor desc = Model.getPropertyDescriptor( getModelClass(), fieldNames[ columnIndex ] );
+		PropertyDescriptor desc = Model.getPropertyDescriptor( getModelClass(), getFieldNames()[ columnIndex ] );
 		return ( desc != null ? desc.getPropertyType() : Object.class );
 	}
 
@@ -60,7 +60,7 @@ public class TableModel<M extends Model> extends AbstractTableModel {
 
 	@Override
 	public int getColumnCount() {
-		return fieldNames.length;
+		return getFieldNames().length;
 	}
 
 	@Override
@@ -68,7 +68,7 @@ public class TableModel<M extends Model> extends AbstractTableModel {
 		M s = instances.get( row );
 
 		try {
-			return PropertyUtils.getSimpleProperty( s, fieldNames[ col ] );
+			return PropertyUtils.getSimpleProperty( s, getFieldNames()[ col ] );
 		} catch( IllegalAccessException | InvocationTargetException | NoSuchMethodException e ) {
 			e.printStackTrace();
 		}
