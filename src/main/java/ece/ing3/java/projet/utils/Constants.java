@@ -1,5 +1,7 @@
 package ece.ing3.java.projet.utils;
 
+import javax.swing.*;
+import javax.swing.border.Border;
 import java.awt.*;
 
 /**
@@ -49,4 +51,5 @@ public class Constants {
 	public static final int UI_INPUTLIST_HGAP = 5;
 	public static final int UI_INPUTLIST_VGAP = 5;
 	public static final int UI_INPUTLIST_MAXVISIBLEENUMITEMS = 5;
+	public static final Border UI_INPUTLIST_INVALIDVALUE_BORDER = BorderFactory.createMatteBorder( 1, 1, 1, 1, Color.RED );
 }
