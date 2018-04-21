@@ -8,7 +8,7 @@ public class ServiceIdInput extends ServiceInput {
 	}
 
 	@Override
-	public void setValue( Object value ) throws IllegalArgumentException {
+	public void setValue( String value ) throws IllegalArgumentException {
 		super.setValue( value );
 		textField.setEnabled( false );
 		if( search != null ) {

@@ -1,13 +1,17 @@
 package ece.ing3.java.projet.vue.components.inputs;
 
 import ece.ing3.java.projet.database.sql.clauses.Where;
+import ece.ing3.java.projet.interfaces.ValueChangeListener;
 
 import javax.swing.*;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 import java.awt.*;
 
-public abstract class NumericInput extends JPanel implements BaseInput {
+public abstract class NumericInput<T> extends JPanel implements BaseInput<T>, DocumentListener {
 	protected JTextField textField;
 	protected JComboBox<String> selector;
+	private ValueChangeListener valueChangeListener;
 
 	public NumericInput( boolean isSearch ) {
 		this.textField = new JTextField();
@@ -17,6 +21,8 @@ public abstract class NumericInput extends JPanel implements BaseInput {
 			this.selector = new JComboBox<>( new String[]{ "=", "<", ">", "<=", ">=" } );
 			add( this.selector, BorderLayout.EAST );
 		}
+		this.valueChangeListener = null;
+		this.textField.getDocument().addDocumentListener( this );
 	}
 
 	@Override
@@ -29,8 +35,9 @@ public abstract class NumericInput extends JPanel implements BaseInput {
 	}
 
 	@Override
-	public void setValue( Object value ) throws IllegalArgumentException {
+	public void setValue( T value ) throws IllegalArgumentException {
 		textField.setText( String.valueOf( value ) );
+		triggerValueListener();
 	}
 
 	@Override
@@ -42,5 +49,31 @@ public abstract class NumericInput extends JPanel implements BaseInput {
 	@Override
 	public void setPreferredSize( Dimension size ) {
 		super.setPreferredSize( new Dimension( size.width, getPreferredSize().height ) );
+	}
+
+	@Override
+	public void addValueChangeListener( ValueChangeListener valueChangeListener ) {
+		this.valueChangeListener = valueChangeListener;
+	}
+
+	@Override
+	public void insertUpdate( DocumentEvent documentEvent ) {
+		triggerValueListener();
+	}
+
+	@Override
+	public void removeUpdate( DocumentEvent documentEvent ) {
+		triggerValueListener();
+	}
+
+	@Override
+	public void changedUpdate( DocumentEvent documentEvent ) {
+		triggerValueListener();
+	}
+
+	private void triggerValueListener() {
+		if( this.valueChangeListener != null ) {
+			this.valueChangeListener.onValueChanged( getValues() );
+		}
 	}
 }
