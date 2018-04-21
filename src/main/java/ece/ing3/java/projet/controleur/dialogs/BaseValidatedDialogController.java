@@ -63,21 +63,22 @@ public abstract class BaseValidatedDialogController implements ActionListener, W
 	@Override
 	public void windowOpened( WindowEvent windowEvent ) {}
 
-	@Override
-	public void windowClosing( WindowEvent windowEvent ) {}
-
 	/**
 	 * Méthode réagissant à la fermeture de la boîte de dialogue, appelant l'objet écoutant l'issue selon la décision prise
 	 *
 	 * @param windowEvent Événement de fermeture
 	 */
 	@Override
-	public void windowClosed( WindowEvent windowEvent ) {
+	public void windowClosing( WindowEvent windowEvent ) {
 		if( this.dialog.isValidated() ) {
 			listener.onDialogSubmitted( dialog );
 		} else {
 			listener.onDialogCancelled( dialog );
 		}
+	}
+
+	@Override
+	public void windowClosed( WindowEvent windowEvent ) {
 	}
 
 	@Override
