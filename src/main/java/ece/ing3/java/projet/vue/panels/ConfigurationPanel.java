@@ -19,7 +19,8 @@ public class ConfigurationPanel extends JPanel {
 	private JPasswordField databasePassword;
 
 	public ConfigurationPanel() {
-		setLayout( new BorderLayout() );
+		setLayout( new GridBagLayout() );
+		JPanel content = new JPanel( new BorderLayout() );
 
 		save = new JButton( Strings.get( "dialog.submit.save" ) );
 		databaseUrl = new JTextField();
@@ -46,8 +47,10 @@ public class ConfigurationPanel extends JPanel {
 		panel.add( new JLabel( Strings.get( "configuration.database.driver" ) ) );
 		panel.add( databaseDriver );
 
-		add( panel, BorderLayout.CENTER );
-		add( save, BorderLayout.PAGE_END );
+		content.add( panel, BorderLayout.CENTER );
+		content.add( save, BorderLayout.PAGE_END );
+
+		add( content, new GridBagConstraints() );
 	}
 
 	public JButton getSave() {
