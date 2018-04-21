@@ -2,10 +2,7 @@ package ece.ing3.java.projet.vue.components.inputlists;
 
 import ece.ing3.java.projet.database.sql.Model;
 import ece.ing3.java.projet.modele.administration.Service;
-import ece.ing3.java.projet.vue.components.inputs.BaseInput;
-import ece.ing3.java.projet.vue.components.inputs.LongInput;
-import ece.ing3.java.projet.vue.components.inputs.StringIdInput;
-import ece.ing3.java.projet.vue.components.inputs.StringInput;
+import ece.ing3.java.projet.vue.components.inputs.*;
 
 import java.awt.*;
 
@@ -29,8 +26,7 @@ public class ServiceInputList extends ModelInputList {
 			case "batiment":
 				return new StringInput( columnName, isSearch );
 			case "numeroDirecteur":
-				return new LongInput( columnName, isSearch );
-
+				return new DocteurInput( columnName, isSearch, parent );
 		}
 
 		return null;

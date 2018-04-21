@@ -24,10 +24,9 @@ public class ChambreInputList extends ModelInputList {
 			case "nombreLits":
 				return new IntegerInput( columnName, isSearch );
 			case "numeroSurveillant":
-				return new LongInput( columnName, isSearch );
+				return new InfirmierInput( columnName, isSearch, parent );
 			case "codeServiceRattache":
 				return new ServiceIdInput( columnName, isSearch, parent );
-
 		}
 
 		return null;

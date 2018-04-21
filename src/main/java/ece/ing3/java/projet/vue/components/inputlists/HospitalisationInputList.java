@@ -24,7 +24,7 @@ public class HospitalisationInputList extends ModelInputList {
 	protected BaseInput getInputForField( String fieldName, String columnName, boolean isSearch, Window parent ) {
 		switch( fieldName ) {
 			case "numeroMalade":
-				return new LongIdInput( columnName, isSearch );
+				return new MaladeIdInput( columnName, isSearch, parent );
 			case "codeService":
 				return new ServiceInput( columnName, isSearch, parent );
 			case "numeroChambre":

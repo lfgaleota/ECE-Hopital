@@ -3,7 +3,9 @@ package ece.ing3.java.projet.vue.components.inputlists;
 import ece.ing3.java.projet.database.sql.Model;
 import ece.ing3.java.projet.modele.hopital.Soigne;
 import ece.ing3.java.projet.vue.components.inputs.BaseInput;
+import ece.ing3.java.projet.vue.components.inputs.DocteurIdInput;
 import ece.ing3.java.projet.vue.components.inputs.LongIdInput;
+import ece.ing3.java.projet.vue.components.inputs.MaladeIdInput;
 
 import java.awt.*;
 
@@ -21,9 +23,9 @@ public class SoigneInputList extends ModelInputList {
 	protected BaseInput getInputForField( String fieldName, String columnName, boolean isSearch, Window parent ) {
 		switch( fieldName ) {
 			case "numeroDocteur":
-				return new LongIdInput( columnName, isSearch );
+				return new DocteurIdInput( columnName, isSearch, parent );
 			case "numeroMalade":
-				return new LongIdInput( columnName, isSearch );
+				return new MaladeIdInput( columnName, isSearch, parent );
 		}
 
 		return null;
