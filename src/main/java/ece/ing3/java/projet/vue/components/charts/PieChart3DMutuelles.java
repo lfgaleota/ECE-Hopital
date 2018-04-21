@@ -17,7 +17,7 @@ import org.jfree.data.general.DefaultPieDataset;
  * @author Nicolas
  *
  */
-public class PieChart3DMutuelles extends JPanel {
+public class PieChart3DMutuelles extends JPanel implements Chart {
 
 	private static final long serialVersionUID = 5686202670543030890L;
 	private DefaultPieDataset dataset;
@@ -71,7 +71,7 @@ public class PieChart3DMutuelles extends JPanel {
 	 *
 	 * @return un panel contenant le diagramme 3D
 	 */
-	public ChartPanel getPieChart3D() {
+	public ChartPanel getChart() {
 		return chartpanel;
 	}
 
