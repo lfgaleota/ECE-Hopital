@@ -100,9 +100,12 @@ public class Statistiques  extends JFrame {
 		mygridLayout.setHgap(10);
 		mygridLayout.setVgap(10);
 
-
+                PieChart3D P3= new PieChart3D(malistemalade);
+                this.getContentPane().add(P3.getPieChart3D());
+                /* MEME QUE CELUI EN 3D MAIS EN 2D
 		PieChart2D P= new PieChart2D(1,malisteemploye,malistemalade,malistechambre,malistedocteur,malisteinfirmier,malistehospitalisation);
                 this.getContentPane().add(P.getPieChart2D());
+                */
                 PieChart2D D= new PieChart2D(2,malisteemploye,malistemalade,malistechambre,malistedocteur,malisteinfirmier,malistehospitalisation);
                 this.getContentPane().add(D.getPieChart2D());
                 PieChart2D F= new PieChart2D(3,malisteemploye,malistemalade,malistechambre,malistedocteur,malisteinfirmier,malistehospitalisation);
@@ -113,13 +116,13 @@ public class Statistiques  extends JFrame {
                 this.getContentPane().add(H.getPieChart2D());
                 this.getContentPane().add( ( new PieChart2D( 6, null, null, null, null, null, null ) ).getPieChart2D() );
                 //PieChart2D D= new PieChart2D(malisteemploye,malistemalade);
-		//PieChart3D P3= new PieChart3D();
+                
 		//BarChart B = new BarChart();
 
 
 
 
-		//this.getContentPane().add(P3.getPieChart3D());
+		
 		//this.getContentPane().add(B.getBarChart());
                 //this.getContentPane().add(D.getPieChart2D());
 

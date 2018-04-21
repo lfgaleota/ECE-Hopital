@@ -1,5 +1,9 @@
 package ece.ing3.java.projet.vue;
 
+import ece.ing3.java.projet.modele.hopital.Malade;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import javax.swing.JPanel;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
@@ -24,14 +28,31 @@ public class PieChart3D extends JPanel {
 	 * Constructeur par défaut -> Complete les informations du diagramme
 	 * -> Rempli et affiche le diagramme circulaire dans un panel
 	 */
-	public PieChart3D() {
+	public PieChart3D(List<Malade> malistemalade) {
 
-		dataset.setValue("IPhone 5s", new Double(20));
-		dataset.setValue("SamSung Grand", new Double(20));
-		dataset.setValue("MotoG", new Double(40));
-		dataset.setValue("Nokia Lumia", new Double(10));
+            
+            int populationglobale = malistemalade.size();
+	
+			Map<String, Integer> mutuelles = new HashMap<>();
 
-		chart = ChartFactory.createPieChart3D("Mobile Sales", // chart title
+			// On parcours l'ensemble des mutuelles
+			for( Malade aMalistemalade : malistemalade ) {
+				String mutuelle = aMalistemalade.getMutuelle();
+				// Si c'est une mutuelle qu'on a pas vu, on l'ajoute à notre map de mutuelles et on l'initialise
+				if( !mutuelles.containsKey( mutuelle ) ) {
+					mutuelles.put( mutuelle, 0 );
+				}
+				// On incrémente de 1 l'entrée de cette mutuelle
+				mutuelles.put( mutuelle, mutuelles.get( mutuelle ) + 1 );
+			}
+
+			// On parcours l'ensemble des mutuelles créées
+			for( Map.Entry<String, Integer> mutuelle : mutuelles.entrySet() ) {
+				// Pour chaque mutuelle, on l'ajoute au graphique
+				dataset.setValue( mutuelle.getKey(), mutuelle.getValue() * 100 / populationglobale );
+			}
+
+		chart = ChartFactory.createPieChart3D("Mutuelle des patients", // chart title
 				dataset, // data
 				true, // include legend
 				true, false);
