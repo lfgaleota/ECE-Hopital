@@ -23,6 +23,7 @@ ece.ing3.java.projet.modele.tables
 ece.ing3.java.projet.utils
 ece.ing3.java.projet.vue
 ece.ing3.java.projet.vue.components
+ece.ing3.java.projet.vue.components.charts
 ece.ing3.java.projet.vue.components.inputlists
 ece.ing3.java.projet.vue.components.inputs
 ece.ing3.java.projet.vue.dialogs
