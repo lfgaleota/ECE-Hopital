@@ -29,14 +29,14 @@ public class Strings {
 	public static final String MODEL_MUTUELLE = "Mutuelle";
 	public static final String MODEL_CODE = "Code";
 	public static final String MODEL_BATIMENT = "Bâtiment";
-	public static final String MODEL_NUMERODIRECTEUR = "N° directeur";
+	public static final String MODEL_NUMERODIRECTEUR = "N° docteur directeur";
 	public static final String MODEL_SPECIALITE = "Spécialité";
 	public static final String MODEL_ROTATION = "Rotation";
 	public static final String MODEL_SALAIRE = "Salaire";
 	public static final String MODEL_CODESERVICE = "Code du service";
 	public static final String MODEL_NUMEROCHAMBRE = "N° chambre";
 	public static final String MODEL_NOMBRELITS = "Nombre de lits";
-	public static final String MODEL_NUMEROSURVEILLANT = "N° surveillant";
+	public static final String MODEL_NUMEROSURVEILLANT = "N° infirmier surveillant";
 	public static final String MODEL_CODESERVICERATTACHE = "Code du service rattaché";
 	public static final String MODEL_NUMEROMALADE = "N° malade";
 	public static final String MODEL_NUMEROLIT = "N° lit";
@@ -46,6 +46,10 @@ public class Strings {
 	public static final String MODEL_DOCTEURPRENOM = "Prénom du docteur";
 	public static final String MODEL_DOCTEURNOM = "Nom du docteur";
 	public static final String MODEL_DOCTEURSPECIALITE = "Spécialité du docteur";
+	public static final String MODEL_SURVEILLANTPRENOM = "Prénom du surveillant";
+	public static final String MODEL_SURVEILLANTNOM = "Nom du surveillant";
+	public static final String MODEL_DIRECTEURPRENOM = "Prénom du directeur";
+	public static final String MODEL_DIRECTEURNOM = "Nom du directeur";
 	public static final String DIALOG_SUBMIT_SAVE = "Sauvegarder";
 	public static final String DIALOG_MODEL_REMOVE = "Vous allez supprimer <nb> <modelName>, voulez-vous vraiment procéder ?";
 	public static final String DIALOG_CONNECTING_TITLE = "Connexion en cours...";

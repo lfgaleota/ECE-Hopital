@@ -2,8 +2,10 @@ package ece.ing3.java.projet.controleur.panels;
 
 import ece.ing3.java.projet.controleur.dialogs.search.ChambreSearchDialogController;
 import ece.ing3.java.projet.controleur.dialogs.update.ChambreUpdateDialogController;
-import ece.ing3.java.projet.database.sql.Model;
+import ece.ing3.java.projet.database.sql.queries.SQLSelect;
+import ece.ing3.java.projet.modele.employe.Employe;
 import ece.ing3.java.projet.modele.hopital.Chambre;
+import ece.ing3.java.projet.modele.tables.ChambreTableModel;
 import ece.ing3.java.projet.modele.tables.TableModel;
 import ece.ing3.java.projet.vue.dialogs.search.ModelSearchDialog;
 import ece.ing3.java.projet.vue.dialogs.update.ModelUpdateDialog;
@@ -24,6 +26,11 @@ public class ChambrePanelController extends ModelPanelController<Chambre> {
 		return Chambre.class;
 	}
 
+	@Override
+	protected TableModel<Chambre> buildTableModel() {
+		return new ChambreTableModel();
+	}
+
 	/**
 	 * Construit un nouveau panneau principal de Chambre, utilisant le modèle de table fourni
 	 *
@@ -33,6 +40,18 @@ public class ChambrePanelController extends ModelPanelController<Chambre> {
 	@Override
 	protected ModelPanel<Chambre> buildModelPanel( TableModel<Chambre> tableModel ) {
 		return new ChambrePanel( tableModel );
+	}
+
+	@Override
+	@SuppressWarnings( "unchecked" )
+	public SQLSelect<Chambre> queryCreateSelector() {
+		return new SQLSelect<Chambre> (
+				new Class[]{ Chambre.class, Employe.class },
+				new String[]{ "JOIN" },
+				new String[]{ "ON chambre.surveillant = employe.numero" },
+				true,
+				"code_service AS codeServiceRattache", "no_chambre AS numeroChambre", "surveillant AS numeroSurveillant", "nb_lits AS nombreLits", "employe.nom AS surveillantNom", "employe.prenom AS surveillantPrenom"
+		);
 	}
 
 	/**
