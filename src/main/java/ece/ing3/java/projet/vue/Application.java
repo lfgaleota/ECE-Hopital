@@ -30,7 +30,7 @@ public class Application extends JFrame {
 
 	private JTabbedPane tabs;
 	private Statistiques mesStats = new Statistiques(1);
-        private Statistiques mesStats2 = new Statistiques(2);
+    private Statistiques mesStats2 = new Statistiques(2);
 
 	private Application() {
 		this.setTitle( "Projet Hopital" );
@@ -50,6 +50,7 @@ public class Application extends JFrame {
 		} catch( ExceptionInInitializerError e ) {
 			this.dispose();
 			mesStats.dispose();
+			mesStats2.dispose();
 			throw new RuntimeException( ( e.getCause() != null ? e.getCause().getLocalizedMessage() : e.getLocalizedMessage() ), e );
 		}
 
