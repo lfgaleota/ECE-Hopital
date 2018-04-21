@@ -76,7 +76,7 @@ public abstract class ModelPanelController<M extends Model> implements ActionLis
 	 *
 	 * @return Classe du modèle
 	 */
-	protected abstract Class<? extends Model> getModelClass();
+	public abstract Class<M> getModelClass();
 
 	/**
 	 * Construit un nouveau modèle de table pour le modèle utilisé

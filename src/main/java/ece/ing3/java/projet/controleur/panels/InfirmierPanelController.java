@@ -22,7 +22,7 @@ public class InfirmierPanelController  extends ModelPanelController<Infirmier> {
 	 * @return Classe du modèle
 	 */
 	@Override
-	protected Class<? extends Model> getModelClass() {
+	public Class<Infirmier> getModelClass() {
 		return Infirmier.class;
 	}
 

@@ -14,4 +14,6 @@ public interface ModelQueryWorkerProvider<M extends Model> {
 	OrderBy getOrderByClause();
 	OrderBy queryModifyOrderByClause( OrderBy orderByClause );
 	TableModel<M> getTableModel();
+
+	Class<M> getModelClass();
 }

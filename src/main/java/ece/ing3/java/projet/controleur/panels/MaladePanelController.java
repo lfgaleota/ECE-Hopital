@@ -20,7 +20,7 @@ public class MaladePanelController extends ModelPanelController<Malade> {
 	 * @return Classe du modèle
 	 */
 	@Override
-	protected Class<? extends Model> getModelClass() {
+	public Class<Malade> getModelClass() {
 		return Malade.class;
 	}
 

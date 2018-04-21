@@ -20,7 +20,7 @@ public class ChambrePanelController extends ModelPanelController<Chambre> {
 	 * @return Classe du modèle
 	 */
 	@Override
-	protected Class<? extends Model> getModelClass() {
+	public Class<Chambre> getModelClass() {
 		return Chambre.class;
 	}
 
