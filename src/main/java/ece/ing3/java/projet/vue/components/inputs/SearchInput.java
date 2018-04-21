@@ -137,4 +137,15 @@ public abstract class SearchInput<M extends Model, T> extends JPanel implements 
 		this.textField.setText( "" );
 		this.selectedModels = null;
 	}
+
+	@Override
+	@SuppressWarnings( "unchecked" )
+	public void setRawValue( Object value ) throws IllegalArgumentException {
+		try{
+			setValue( (T) value );
+		} catch( ClassCastException e ) {
+			e.printStackTrace();
+			throw new IllegalArgumentException( "Valeur invalide.", e );
+		}
+	}
 }

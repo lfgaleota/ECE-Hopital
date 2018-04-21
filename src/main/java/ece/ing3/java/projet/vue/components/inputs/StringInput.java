@@ -59,6 +59,11 @@ public class StringInput extends JPanel implements BaseInput<String>, DocumentLi
 	}
 
 	@Override
+	public void setRawValue( Object value ) throws IllegalArgumentException {
+		setValue( String.valueOf( value ) );
+	}
+
+	@Override
 	public Where getWhere() throws IllegalArgumentException {
 		String selector = ( this.selector.getSelectedItem() != null ? (String) this.selector.getSelectedItem() : "=" );
 		if( selector.equals( "~=" ) ) {

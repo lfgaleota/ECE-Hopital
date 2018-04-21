@@ -72,11 +72,16 @@ public abstract class EnumInput<T> extends JPanel implements BaseInput<T>, Actio
 	@Override
 	public void setValue( T value ) throws IllegalArgumentException {
 		if( comboBox != null ) {
-			comboBox.setSelectedItem( getEnumValueOf( String.valueOf( value ) ) );
+			comboBox.setSelectedItem( value );
 		} else {
 			list.setSelectedValue( value, true );
 		}
 		triggerValueListener();
+	}
+
+	@Override
+	public void setRawValue( Object value ) throws IllegalArgumentException {
+		setValue( getEnumValueOf( String.valueOf( value ) ) );
 	}
 
 	@Override

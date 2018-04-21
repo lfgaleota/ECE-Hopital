@@ -26,4 +26,13 @@ public class LongInput extends NumericInput<Long> {
 	public Long[] getValues() throws IllegalArgumentException {
 		return new Long[]{ getValue() };
 	}
+
+	@Override
+	public void setRawValue( Object value ) throws IllegalArgumentException {
+		try {
+			setValue( Long.valueOf( String.valueOf( value ) ) );
+		} catch( NumberFormatException e ) {
+			throw new IllegalArgumentException( "Valeur numérique invalide.", e );
+		}
+	}
 }
