@@ -7,8 +7,12 @@ import ece.ing3.java.projet.vue.components.inputs.*;
 import java.awt.*;
 
 public class HospitalisationInputList extends ModelInputList {
+	private final ChambreInput chambreInput;
+
 	public HospitalisationInputList( boolean isSearch, Window parent ) {
 		super( isSearch, parent );
+		chambreInput = (ChambreInput) getInputs().get( "numeroChambre" );
+		getInputs().get( "codeService" ).addValueChangeListener( newList -> chambreInput.setCodesService( (String[]) newList ) );
 	}
 
 	@Override
@@ -24,10 +28,9 @@ public class HospitalisationInputList extends ModelInputList {
 			case "codeService":
 				return new ServiceInput( columnName, isSearch, parent );
 			case "numeroChambre":
-				return new LongInput( columnName, isSearch );
+				return new ChambreInput( columnName, isSearch, parent );
 			case "numeroLit":
 				return new IntegerInput( columnName, isSearch );
-
 		}
 
 		return null;
