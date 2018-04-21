@@ -6,11 +6,16 @@ import ece.ing3.java.projet.modele.employe.Infirmier;
 import ece.ing3.java.projet.modele.hopital.Chambre;
 import ece.ing3.java.projet.modele.hopital.Hospitalisation;
 import ece.ing3.java.projet.modele.hopital.Malade;
+import ece.ing3.java.projet.utils.Constants;
 import ece.ing3.java.projet.utils.Strings;
+import ece.ing3.java.projet.utils.Utils;
 import ece.ing3.java.projet.vue.components.charts.*;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,11 +24,12 @@ import java.util.List;
  *
  * @author Nicolas
  */
-public class StatistiquesPanel extends JTabbedPane {
+public class StatistiquesPanel extends JTabbedPane implements ActionListener {
 	private static final long serialVersionUID = 1L;
 	private JPanel panMalades;
 	private JPanel panEmployes;
 	private LoadingPanel panChargement;
+	private JButton boutonRafraichir;
 	private PieChart3DMutuelles chart3DMutuelles;
 	private PieChart2DNbreLits chart2DNbreLits;
 	private PieChart2DSpecialitesDoc chart2DSpecialitesDoc;
@@ -39,6 +45,13 @@ public class StatistiquesPanel extends JTabbedPane {
 	 */
 	public StatistiquesPanel() {
 		panChargement = new LoadingPanel();
+		try {
+			boutonRafraichir = new JButton(new ImageIcon( Utils.getImageResource(Constants.RESOURCE_PATH_ICON_REFRESH)));
+			boutonRafraichir.setBorder(BorderFactory.createEmptyBorder());
+			boutonRafraichir.addActionListener(this);
+		} catch(IOException e) {
+			throw new RuntimeException("Fichier non trouvé.\n" + e.getLocalizedMessage());
+		}
 
 		mettreAJour_statistiques();
 	}
@@ -52,16 +65,20 @@ public class StatistiquesPanel extends JTabbedPane {
 		mygridLayout.setHgap(10);
 		mygridLayout.setVgap(10);
 		panEmployes = new JPanel(mygridLayout);
+		addTab(Strings.get("reporting.malades"), panMalades);
+		addTab(Strings.get("reporting.employes"), panEmployes);
+		addTab("",null);
+		setTabComponentAt(2, boutonRafraichir);
+		setEnabledAt(2,false);
 	}
 
 	public void mettreAJour_statistiques() {
-		if(getTabCount() > 1) {
-			removeTabAt(0);
+		while(getTabCount() > 0) {
 			removeTabAt(0);
 		}
 		addTab("...", panChargement);
 		panChargement.start();
-		( new SwingWorker<List<Chart>, Object>() {
+		(new SwingWorker<List<Chart>, Object>() {
 			@Override
 			protected List<Chart> doInBackground() throws Exception {
 				// On crée un liste de malade
@@ -126,9 +143,6 @@ public class StatistiquesPanel extends JTabbedPane {
 				removeTabAt(0);
 				creerPanneaux();
 
-				addTab(Strings.get("reporting.malades"), panMalades);
-				addTab(Strings.get("reporting.employes"), panEmployes);
-
 				panEmployes.add(chart2DSpecialitesDoc.getChart());
 				panEmployes.add(chart2DRotations.getChart());
 				panEmployes.add(chart2DInfirmier.getChart());
@@ -142,5 +156,12 @@ public class StatistiquesPanel extends JTabbedPane {
 				repaint();
 			}
 		}).execute();
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent actionEvent) {
+		if(actionEvent.getSource() == boutonRafraichir ) {
+			mettreAJour_statistiques();
+		}
 	}
 }
