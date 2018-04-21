@@ -41,6 +41,11 @@ public class Strings {
 	public static final String MODEL_NUMEROMALADE = "N° malade";
 	public static final String MODEL_NUMEROLIT = "N° lit";
 	public static final String MODEL_NUMERODOCTEUR = "N° docteur";
+	public static final String MODEL_MALADENOM = "Nom du malade";
+	public static final String MODEL_MALADEPRENOM = "Prénom du malade";
+	public static final String MODEL_DOCTEURPRENOM = "Prénom du docteur";
+	public static final String MODEL_DOCTEURNOM = "Nom du docteur";
+	public static final String MODEL_DOCTEURSPECIALITE = "Spécialité du docteur";
 	public static final String DIALOG_SUBMIT_SAVE = "Sauvegarder";
 	public static final String DIALOG_MODEL_REMOVE = "Vous allez supprimer <nb> <modelName>, voulez-vous vraiment procéder ?";
 	public static final String DIALOG_CONNECTING_TITLE = "Connexion en cours...";

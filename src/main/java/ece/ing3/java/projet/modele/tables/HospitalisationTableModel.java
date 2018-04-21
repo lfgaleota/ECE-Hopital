@@ -1,24 +1,21 @@
 package ece.ing3.java.projet.modele.tables;
 
 import ece.ing3.java.projet.database.sql.Model;
-import ece.ing3.java.projet.modele.hopital.Soigne;
+import ece.ing3.java.projet.modele.hopital.Hospitalisation;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
-public class SoigneTableModel extends TableModel<Soigne> {
+public class HospitalisationTableModel extends TableModel<Hospitalisation> {
 	private String[] extFieldNames;
 
-	public SoigneTableModel() {
-		super( Soigne.class );
-		List<String> lst = new ArrayList<>( Arrays.asList( Model.getFieldNames( Soigne.class ) ) );
-		lst.add( 1, "docteurPrenom" );
-		lst.add( 2, "docteurNom" );
-		lst.add( 3, "docteurSpecialite" );
-		lst.add( 5, "maladePrenom" );
-		lst.add( 6, "maladeNom" );
+	public HospitalisationTableModel() {
+		super( Hospitalisation.class );
+		List<String> lst = new ArrayList<>( Arrays.asList( Model.getFieldNames( Hospitalisation.class ) ) );
+		lst.add( 1, "maladePrenom" );
+		lst.add( 2, "maladeNom" );
 		extFieldNames = lst.toArray( new String[ 0 ] );
 	}
 
@@ -36,9 +33,6 @@ public class SoigneTableModel extends TableModel<Soigne> {
 			switch( field ) {
 				case "maladePrenom":
 				case "maladeNom":
-				case "docteurPrenom":
-				case "docteurNom":
-				case "docteurSpecialite":
 					return rowProps.get( field );
 			}
 		}

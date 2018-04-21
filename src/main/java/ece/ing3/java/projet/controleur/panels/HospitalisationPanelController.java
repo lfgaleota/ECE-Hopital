@@ -2,8 +2,10 @@ package ece.ing3.java.projet.controleur.panels;
 
 import ece.ing3.java.projet.controleur.dialogs.search.HospitalisationSearchDialogController;
 import ece.ing3.java.projet.controleur.dialogs.update.HospitalisationUpdateDialogController;
-import ece.ing3.java.projet.database.sql.Model;
+import ece.ing3.java.projet.database.sql.queries.SQLSelect;
 import ece.ing3.java.projet.modele.hopital.Hospitalisation;
+import ece.ing3.java.projet.modele.hopital.Malade;
+import ece.ing3.java.projet.modele.tables.HospitalisationTableModel;
 import ece.ing3.java.projet.modele.tables.TableModel;
 import ece.ing3.java.projet.vue.dialogs.search.ModelSearchDialog;
 import ece.ing3.java.projet.vue.dialogs.update.ModelUpdateDialog;
@@ -24,6 +26,11 @@ public class HospitalisationPanelController extends ModelPanelController<Hospita
 		return Hospitalisation.class;
 	}
 
+	@Override
+	protected TableModel<Hospitalisation> buildTableModel() {
+		return new HospitalisationTableModel();
+	}
+
 	/**
 	 * Construit un nouveau panneau principal d'Hospitalisation, utilisant le modèle de table fourni
 	 *
@@ -33,6 +40,18 @@ public class HospitalisationPanelController extends ModelPanelController<Hospita
 	@Override
 	protected ModelPanel<Hospitalisation> buildModelPanel( TableModel<Hospitalisation> tableModel ) {
 		return new HospitalisationPanel( tableModel );
+	}
+
+	@Override
+	@SuppressWarnings( "unchecked" )
+	public SQLSelect<Hospitalisation> queryCreateSelector() {
+		return new SQLSelect<Hospitalisation> (
+				new Class[]{ Hospitalisation.class, Malade.class },
+				new String[]{ "JOIN" },
+				new String[]{ "ON hospitalisation.no_malade = malade.numero" },
+				true,
+				"no_malade AS numeroMalade", "code_service AS codeService", "no_chambre AS numeroChambre", "lit AS numeroLit", "malade.nom AS maladeNom", "malade.prenom AS maladePrenom"
+		);
 	}
 
 	/**
