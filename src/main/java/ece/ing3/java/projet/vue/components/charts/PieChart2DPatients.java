@@ -7,6 +7,12 @@ import org.jfree.chart.ChartPanel;
 
 import ece.ing3.java.projet.modele.hopital.Hospitalisation;
 
+/**
+ * Diagramme circulaire 2D adapté pour afficher la part de patients par service
+ * @author Virgile
+ * @author Nicolas
+ *
+ */
 public class PieChart2DPatients extends PieChart2DModel {
 
 	public PieChart2DPatients(List<Hospitalisation> malistehospitalisation) {
@@ -18,7 +24,7 @@ public class PieChart2DPatients extends PieChart2DModel {
 		int REA = 0;
 
 		int populationglobale = malistehospitalisation.size();
-
+		//on parcourt la liste Hospitalisation pour incrémenter les compteurs
 		for (Hospitalisation aMalisteHospitalisation : malistehospitalisation) {
 
 			if ("REA".equals(aMalisteHospitalisation.getCodeService())) {
@@ -34,7 +40,7 @@ public class PieChart2DPatients extends PieChart2DModel {
 			}
 
 		}
-
+		//on ajoute ces valeurs au diagramme
 		dataset.setValue("Ranimation ", (REA * 100 / populationglobale));
 		dataset.setValue("Chirurugie générale ", (CHG * 100 / populationglobale));
 		dataset.setValue("Cardiologue ", (CAR * 100 / populationglobale));

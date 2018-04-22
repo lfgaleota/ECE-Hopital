@@ -37,7 +37,6 @@ public class BarChartModel implements Chart
 	 * Constructeur -> Complete les informations de base d'un diagramme en baton
 	 *
 	 */
-
 	public BarChartModel(String titre, String titrex, String titrey)
 	{
 		dataset = new DefaultCategoryDataset();
