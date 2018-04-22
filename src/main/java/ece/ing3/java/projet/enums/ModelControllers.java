@@ -8,6 +8,10 @@ import ece.ing3.java.projet.vue.panels.ModelPanel;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * Ensemble des contrôleurs de panneau principaux de modèles.
+ * Utilisés pour remplir automatiquement les onglets de l'application.
+ */
 public enum ModelControllers {
 	MALADE( new MaladePanelController() ),
 	SERVICE( new ServicePanelController() ),
@@ -21,28 +25,26 @@ public enum ModelControllers {
 	private String prettyName;
 	private ModelPanelController panelController;
 
-	private static Map<ModelPanel, ModelPanelController> panelControllers = new HashMap<>();
-
-	static {
-		for( ModelControllers modelController : values() ) {
-			panelControllers.put( modelController.getPanelController().getPanel(), modelController.getPanelController() );
-		}
-	}
-
 	ModelControllers( ModelPanelController panelController ) {
 		this.prettyName = Strings.get( Constants.MODEL_STRINGS_PREFIX + name() );
 		this.panelController = panelController;
 	}
 
+	/**
+	 * Récupère le nom associé au contrôleur et au panneau
+	 *
+	 * @return Nom associé à afficher
+	 */
 	public String getPrettyName() {
 		return prettyName;
 	}
 
+	/**
+	 * Récupère le contrôleur associé à la valeur
+	 *
+	 * @return Contrôleur associé
+	 */
 	public ModelPanelController getPanelController() {
 		return panelController;
-	}
-
-	public static ModelPanelController getPanelControllerFromModelPanel( ModelPanel panel ) {
-		return panelControllers.get( panel );
 	}
 }

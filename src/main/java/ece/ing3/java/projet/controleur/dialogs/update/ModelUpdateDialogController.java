@@ -21,7 +21,7 @@ public class ModelUpdateDialogController extends BaseModelInputDialogController 
 	}
 
 	/**
-	 * Initialise une nouvelle boîte de dialogue de mise à jour auprès du contrôleur.
+	 * Initialise une boîte de dialogue de mise à jour auprès d'un nouveau contrôleur.
 	 *
 	 * @param dialog Boîte de dialogue à initialiser
 	 * @param listener Objet qui écoute l'issue de la décision

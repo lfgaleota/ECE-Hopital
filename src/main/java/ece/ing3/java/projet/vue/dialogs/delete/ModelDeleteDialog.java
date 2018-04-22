@@ -7,10 +7,19 @@ import ece.ing3.java.projet.vue.Application;
 import javax.swing.*;
 import java.util.List;
 
+/**
+ * Boîte de dialogue demandant à l'utilisateur s'il souhaite supprimer un certain ensemble d'instance de modèle BDD de la base de donnée.
+ */
 public class ModelDeleteDialog extends JDialog {
 	private List<? extends Model> selectedModels;
 	private JOptionPane optionPane;
 
+	/**
+	 * Créer une nouvelle boîte de dialogue de suppression.
+	 *
+	 * @param selectedModels Instances de modèle BDD sélectionnés pour la suppression
+	 * @throws IllegalArgumentException Il n'y a aucune instance de modèle dans la liste
+	 */
 	public ModelDeleteDialog( List<? extends Model> selectedModels ) throws IllegalArgumentException {
 		super( Application.get() );
 
@@ -39,10 +48,20 @@ public class ModelDeleteDialog extends JDialog {
 		return Strings.get( "dialog.model.remove" ).replaceAll( "<nb>", Integer.toString( selectedModels.size() ) ).replaceAll( "<modelName>", modelName );
 	}
 
+	/**
+	 * Récupère l'ensemble des instances de modèle BDD sélectionnés pour la suppression.
+	 *
+	 * @return Ensemble des instances de modèle BDD sélectionnés pour la suppression
+	 */
 	public List<? extends Model> getSelectedModels() {
 		return selectedModels;
 	}
 
+	/**
+	 * Récupère le panneau de demande sous-jacent.
+	 *
+	 * @return Panneau de demande sous-jacent
+	 */
 	public JOptionPane getOptionPane() {
 		return optionPane;
 	}

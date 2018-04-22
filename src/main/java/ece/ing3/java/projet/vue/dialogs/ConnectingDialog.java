@@ -10,8 +10,13 @@ import java.awt.*;
 
 /**
  * Boîte de dialogue de connexion.
+ * <p>
+ * Affichée pour faire patienter pendant que la connexion à la base de donnée est établie.
  */
 public class ConnectingDialog extends JDialog {
+	/**
+	 * Créer une nouvelle boîte de dialogue de connexion.
+	 */
 	public ConnectingDialog() {
 		this.setTitle( Strings.get( "dialog.connecting.title" ) );
 		this.setLayout( new BorderLayout() );

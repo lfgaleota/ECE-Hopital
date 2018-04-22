@@ -3,6 +3,9 @@ package ece.ing3.java.projet.enums;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * Ensemble des drivers JDBC utilisables pour la base de donnée
+ */
 public enum JDBCDriver {
 	MySQL( "com.mysql.cj.jdbc.Driver" );
 

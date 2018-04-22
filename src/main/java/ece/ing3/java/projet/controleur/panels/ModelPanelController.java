@@ -23,7 +23,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 /**
- * Base de contrôleur de panneau principal de modèle générique
+ * Base de contrôleur de panneau d'affichage, sélection, recherche et modification de modèle générique
  *
  * @param <M> Type de modèle à utiliser
  */
@@ -88,10 +88,10 @@ public abstract class ModelPanelController<M extends Model> implements ActionLis
 	}
 
 	/**
-	 * Construit un nouveau panneau principal associé au modèle, utilisant le modèle de table fourni
+	 * Construit un nouveau panneau d'affichage, sélection, recherche et modification associé au modèle, utilisant le modèle de table fourni
 	 *
 	 * @param tableModel Modèle de table à utiliser
-	 * @return Panneau principal associé
+	 * @return Panneau d'affichage, sélection, recherche et modification associé
 	 */
 	protected abstract ModelPanel<M> buildModelPanel( TableModel<M> tableModel );
 
@@ -129,9 +129,9 @@ public abstract class ModelPanelController<M extends Model> implements ActionLis
 	}
 
 	/**
-	 * Récupère le panneau principal associé.
+	 * Récupère le panneau d'affichage, sélection, recherche et modification associé.
 	 *
-	 * @return Panneau principal
+	 * @return Panneau d'affichage, sélection, recherche et modification
 	 */
 	public ModelPanel<M> getPanel() {
 		return panel;

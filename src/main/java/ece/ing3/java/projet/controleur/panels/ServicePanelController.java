@@ -13,7 +13,7 @@ import ece.ing3.java.projet.vue.panels.ModelPanel;
 import ece.ing3.java.projet.vue.panels.ServicePanel;
 
 /**
- * Base de contrôleur de panneau principal de Service
+ * Base de contrôleur de panneau d'affichage, sélection, recherche et modification de Service
  */
 public class ServicePanelController extends ModelPanelController<Service> {
 	/**
@@ -32,10 +32,10 @@ public class ServicePanelController extends ModelPanelController<Service> {
 	}
 
 	/**
-	 * Construit un nouveau panneau principal de Service, utilisant le modèle de table fourni
+	 * Construit un nouveau panneau d'affichage, sélection, recherche et modification de Service, utilisant le modèle de table fourni
 	 *
 	 * @param tableModel Modèle de table à utiliser
-	 * @return Panneau principal associé
+	 * @return Panneau d'affichage, sélection, recherche et modification associé
 	 */
 	@Override
 	protected ModelPanel<Service> buildModelPanel( TableModel<Service> tableModel ) {
