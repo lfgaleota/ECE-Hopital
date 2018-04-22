@@ -1,4 +1,4 @@
-# ECE-Hopital [![Build Status](https://www.travis-ci.com/louisfelix90/ECE-Hopital.svg?token=ELbB1pLDWUVazPTNRLJJ&branch=master)](https://www.travis-ci.com/louisfelix90/ECE-Hopital)
+﻿# ECE-Hopital [![Build Status](https://www.travis-ci.com/louisfelix90/ECE-Hopital.svg?token=ELbB1pLDWUVazPTNRLJJ&branch=master)](https://www.travis-ci.com/louisfelix90/ECE-Hopital)
 
 Projet d'informatique du second semestre pour la première année du cycle ingénieur de l'ECE.
 
@@ -10,6 +10,11 @@ Projet d'informatique du second semestre pour la première année du cycle ingé
  - Simple Logging Facade for Java (https://www.slf4j.org/)
  - JFreeChart (http://www.jfree.org/jfreechart/)
  - BeanShell (http://www.beanshell.org/)
+​ - Documentation Oracle (https://docs.oracle.com/javase/7/docs/api/​)
+ - OpenClassrooms (https://openclassrooms.com/)
+ - Stack Overflow (https://stackoverflow.com/​)​
+ - www.java2s.com​
+ - Developpez.net
 
 ## Documentation
 Une documentation est disponible ici:
