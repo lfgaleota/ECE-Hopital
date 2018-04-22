@@ -8,9 +8,19 @@ import java.awt.*;
 import java.awt.event.ActionListener;
 import java.io.IOException;
 
+/**
+ * Barre d'outil standard pour le panneau d'affichage, sélection, recherche et modification de modèle BDD {@link ece.ing3.java.projet.vue.panels.ModelPanel}
+ * <p>
+ * Comporte l'ensemble des boutons pour la manipulations des modèles BDD
+ */
 public class ModelToolbar extends JToolBar {
 	private JButton buttonRemove, buttonAdd, buttonModify, buttonSearch, buttonRefresh;
 
+	/**
+	 * Créer une nouvelle barre d'outil pour panneau de modèle.
+	 *
+	 * @param modelName Nom du modèle BDD associé, qui sera utilisé pour récupérer le texte à afficher
+	 */
 	public ModelToolbar( String modelName ) {
 		try {
 			buttonRemove = new JButton( new ImageIcon( Utils.getImageResource( Constants.RESOURCE_PATH_ICON_REMOVE ) ) );
@@ -35,31 +45,76 @@ public class ModelToolbar extends JToolBar {
 		add( buttonRemove );
 	}
 
+	/**
+	 * Récupère le bouton de suppression.
+	 *
+	 * @return Bouton de suppression
+	 */
 	public JButton getButtonRemove() {
 		return buttonRemove;
 	}
 
+	/**
+	 * Récupère le bouton d'ajout.
+	 *
+	 * @return Bouton d'ajout
+	 */
 	public JButton getButtonAdd() {
 		return buttonAdd;
 	}
 
+	/**
+	 * Récupère le bouton de modification.
+	 *
+	 * @return Bouton de modification
+	 */
 	public JButton getButtonModify() {
 		return buttonModify;
 	}
 
+	/**
+	 * Récupère le bouton de recherche.
+	 *
+	 * @return Bouton de recherche
+	 */
 	public JButton getButtonSearch() {
 		return buttonSearch;
 	}
 
+	/**
+	 * Récupère le bouton de rafraichissement des données.
+	 *
+	 * @return Bouton de rafraichissement des données
+	 */
 	public JButton getButtonRefresh() {
 		return buttonRefresh;
 	}
 
+	/**
+	 * Ajoute un {@link ActionListener} aux boutons de la barre d'outil.
+	 *
+	 * @param actionListener {@link ActionListener} à ajouter aux boutons
+	 */
 	public void addActionListener( ActionListener actionListener ) {
 		buttonRemove.addActionListener( actionListener );
 		buttonAdd.addActionListener( actionListener );
 		buttonModify.addActionListener( actionListener );
 		buttonSearch.addActionListener( actionListener );
 		buttonRefresh.addActionListener( actionListener );
+	}
+
+	/**
+	 * Active ou désactive les boutons de la barre d'outils.
+	 *
+	 * @param b Activer ou désactiver les boutons
+	 */
+	@Override
+	public void setEnabled( boolean b ) {
+		buttonRemove.setEnabled( b );
+		buttonAdd.setEnabled( b );
+		buttonModify.setEnabled( b );
+		buttonSearch.setEnabled( b );
+		buttonRefresh.setEnabled( b );
+		super.setEnabled( b );
 	}
 }

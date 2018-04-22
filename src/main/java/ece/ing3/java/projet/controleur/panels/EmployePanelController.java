@@ -15,7 +15,7 @@ import ece.ing3.java.projet.vue.panels.EmployePanel;
 import ece.ing3.java.projet.vue.panels.ModelPanel;
 
 /**
- * Base de contrôleur de panneau principal d'Employe
+ * Base de contrôleur de panneau d'affichage, sélection, recherche et modification d'Employe
  */
 public class EmployePanelController  extends ModelPanelController<Employe> {
 	/**
@@ -29,10 +29,10 @@ public class EmployePanelController  extends ModelPanelController<Employe> {
 	}
 
 	/**
-	 * Construit un nouveau panneau principal d'Employe, utilisant le modèle de table fourni
+	 * Construit un nouveau panneau d'affichage, sélection, recherche et modification d'Employe, utilisant le modèle de table fourni
 	 *
 	 * @param tableModel Modèle de table à utiliser
-	 * @return Panneau principal associé
+	 * @return Panneau d'affichage, sélection, recherche et modification associé
 	 */
 	@Override
 	protected ModelPanel<Employe> buildModelPanel( TableModel<Employe> tableModel ) {

@@ -13,7 +13,7 @@ import ece.ing3.java.projet.vue.panels.ChambrePanel;
 import ece.ing3.java.projet.vue.panels.ModelPanel;
 
 /**
- * Base de contrôleur de panneau principal de Chambre
+ * Base de contrôleur de panneau d'affichage, sélection, recherche et modification de Chambre
  */
 public class ChambrePanelController extends ModelPanelController<Chambre> {
 	/**
@@ -32,10 +32,10 @@ public class ChambrePanelController extends ModelPanelController<Chambre> {
 	}
 
 	/**
-	 * Construit un nouveau panneau principal de Chambre, utilisant le modèle de table fourni
+	 * Construit un nouveau panneau d'affichage, sélection, recherche et modification de Chambre, utilisant le modèle de table fourni
 	 *
 	 * @param tableModel Modèle de table à utiliser
-	 * @return Panneau principal associé
+	 * @return Panneau d'affichage, sélection, recherche et modification associé
 	 */
 	@Override
 	protected ModelPanel<Chambre> buildModelPanel( TableModel<Chambre> tableModel ) {

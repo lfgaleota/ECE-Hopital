@@ -16,7 +16,7 @@ import ece.ing3.java.projet.vue.panels.ModelPanel;
 import ece.ing3.java.projet.vue.panels.SoignePanel;
 
 /**
- * Base de contrôleur de panneau principal de Prise en Charge
+ * Base de contrôleur de panneau d'affichage, sélection, recherche et modification de Prise en Charge
  */
 public class SoignePanelController extends ModelPanelController<Soigne> {
 	/**
@@ -35,10 +35,10 @@ public class SoignePanelController extends ModelPanelController<Soigne> {
 	}
 
 	/**
-	 * Construit un nouveau panneau principal de Prise en Charge, utilisant le modèle de table fourni
+	 * Construit un nouveau panneau d'affichage, sélection, recherche et modification de Prise en Charge, utilisant le modèle de table fourni
 	 *
 	 * @param tableModel Modèle de table à utiliser
-	 * @return Panneau principal associé
+	 * @return Panneau d'affichage, sélection, recherche et modification associé
 	 */
 	@Override
 	protected ModelPanel<Soigne> buildModelPanel( TableModel<Soigne> tableModel ) {

@@ -6,18 +6,24 @@ import ece.ing3.java.projet.vue.dialogs.update.ChambreUpdateDialog;
 import ece.ing3.java.projet.vue.dialogs.update.ModelUpdateDialog;
 
 /**
- * Contrôleur de boîte de mise à jour de recherche de Chambre
+ * Contrôleur de boîte de dialogue de mise à jour de modèle Chambre
  */
 public class ChambreUpdateDialogController extends ModelUpdateDialogController {
+	/**
+	 * Créer un nouveau contrôleur pour une boîte de dialogue de mise à jour de modèle Chambre et initialise cette boite de dialogue.
+	 *
+	 * @param dialog Boîte de dialogue associée
+	 * @param listener Objet qui écoute l'issue de la décision
+	 */
 	private ChambreUpdateDialogController( ModelUpdateDialog dialog, DialogListener listener ) {
 		super( dialog, listener );
 	}
 
 	/**
-	 * Créer une nouvelle boîte de dialogue de mise à jour de Chambre
+	 * Instancie une nouvelle boîte de dialogue de mise à jour et l'initialise auprès d'un nouveau contrôleur.
 	 *
 	 * @param listener Objet qui écoute l'issue de la décision
-	 * @return Boîte de dialogue de recherche
+	 * @return Boîte de dialogue de mise à jour initialisée
 	 */
 	public static ChambreUpdateDialog createDialog( Chambre existingModel, DialogListener listener ) {
 		return (ChambreUpdateDialog) createDialog( new ChambreUpdateDialog( existingModel ), listener );

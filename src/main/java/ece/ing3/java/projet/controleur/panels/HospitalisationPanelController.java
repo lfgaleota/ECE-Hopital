@@ -13,7 +13,7 @@ import ece.ing3.java.projet.vue.panels.HospitalisationPanel;
 import ece.ing3.java.projet.vue.panels.ModelPanel;
 
 /**
- * Base de contrôleur de panneau principal d'Hospitalisation
+ * Base de contrôleur de panneau d'affichage, sélection, recherche et modification d'Hospitalisation
  */
 public class HospitalisationPanelController extends ModelPanelController<Hospitalisation> {
 	/**
@@ -32,10 +32,10 @@ public class HospitalisationPanelController extends ModelPanelController<Hospita
 	}
 
 	/**
-	 * Construit un nouveau panneau principal d'Hospitalisation, utilisant le modèle de table fourni
+	 * Construit un nouveau panneau d'affichage, sélection, recherche et modification d'Hospitalisation, utilisant le modèle de table fourni
 	 *
 	 * @param tableModel Modèle de table à utiliser
-	 * @return Panneau principal associé
+	 * @return Panneau d'affichage, sélection, recherche et modification associé
 	 */
 	@Override
 	protected ModelPanel<Hospitalisation> buildModelPanel( TableModel<Hospitalisation> tableModel ) {

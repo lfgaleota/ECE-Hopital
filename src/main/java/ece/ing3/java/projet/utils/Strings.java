@@ -4,6 +4,14 @@ import java.lang.reflect.Field;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * Ensemble de chaînes de caractères utilisées à l'affichage
+ *
+ * Il est possible de récupérer une valeur sans la référencer directement mais en utilisant une chaîne de caractère "clé".
+ * Cette "clé" est générée à partir du nom du champ, en mettant en minuscule et remplaçant les tirets par des points, par exemple model.malade -> MODEL_MALADE.
+ * Il est possible de rediriger la clé selon si on veut une valeur au singulier ou pluriel. Si le pluriel est demandée, un suffixe {@link Constants#STRINGS_SUFFIX_PLURAL} est ajouté pour obtenir le nom d'attribut, par exemple model.malade -> model.malade.plural -> MODEL_MALADE_PLURAL.
+ * Un sous-ensemble de chaîne associées à des modèles BDD est disponible, construit en rajoutant à la clé passée en paramètre de {@link Strings#getModel(String)} un préfixe {@link Constants#MODEL_STRINGS_PREFIX}, par exemple malade -> model.malade -> MODEL_MALADE.
+ */
 public class Strings {
 	public static final String MODEL_MALADE = "Malade";
 	public static final String MODEL_EMPLOYE = "Employé";
@@ -85,10 +93,23 @@ public class Strings {
 		return name.toUpperCase().replaceAll( "\\.", "_" );
 	}
 
+	/**
+	 * Récupère la chaîne associée à la clé fournie, au singulier.
+	 *
+	 * @param name Clé de la chaîne
+	 * @return Chaîne associée
+	 */
 	public static String get( String name ) {
 		return get( name, false );
 	}
 
+	/**
+	 * Récupère la chaîne associée à la clé fournie.
+	 *
+	 * @param name Clé de la chaîne
+	 * @param plural {@code true} sdi on veut la chaîne au pluriel associée
+	 * @return Chaîne associée
+	 */
 	public static String get( String name, boolean plural ) {
 		if( plural ) {
 			name += Constants.STRINGS_SUFFIX_PLURAL;
@@ -98,10 +119,23 @@ public class Strings {
 		return value != null ? value : "##UNTRANS:" + name + "##";
 	}
 
+	/**
+	 * Récupère la chaîne associée à la clé fournie, au singulier, pour le sous-ensemble des chaînes associés à des modèles BDD.
+	 *
+	 * @param name Clé de la chaîne
+	 * @return Chaîne associée
+	 */
 	public static String getModel( String name ) {
 		return getModel( name, false );
 	}
 
+	/**
+	 * Récupère la chaîne associée à la clé fournie, pour le sous-ensemble des chaînes associés à des modèles BDD.
+	 *
+	 * @param name Clé de la chaîne
+	 * @param plural {@code true} sdi on veut la chaîne au pluriel associée
+	 * @return Chaîne associée
+	 */
 	public static String getModel( String name, boolean plural ) {
 		return get( Constants.MODEL_STRINGS_PREFIX + name, plural );
 	}

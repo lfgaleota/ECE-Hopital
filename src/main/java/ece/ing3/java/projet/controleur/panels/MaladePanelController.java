@@ -11,7 +11,7 @@ import ece.ing3.java.projet.vue.panels.MaladePanel;
 import ece.ing3.java.projet.vue.panels.ModelPanel;
 
 /**
- * Base de contrôleur de panneau principal de Malade
+ * Base de contrôleur de panneau d'affichage, sélection, recherche et modification de Malade
  */
 public class MaladePanelController extends ModelPanelController<Malade> {
 	/**
@@ -25,10 +25,10 @@ public class MaladePanelController extends ModelPanelController<Malade> {
 	}
 
 	/**
-	 * Construit un nouveau panneau principal de Malade, utilisant le modèle de table fourni
+	 * Construit un nouveau panneau d'affichage, sélection, recherche et modification de Malade, utilisant le modèle de table fourni
 	 *
 	 * @param tableModel Modèle de table à utiliser
-	 * @return Panneau principal associé
+	 * @return Panneau d'affichage, sélection, recherche et modification associé
 	 */
 	@Override
 	protected ModelPanel<Malade> buildModelPanel( TableModel<Malade> tableModel ) {

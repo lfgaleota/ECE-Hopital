@@ -18,6 +18,10 @@ public class ConfigurationDialog extends JDialog {
 
 	private boolean validated;
 
+	/**
+	 * Créer une nouvelle boîte de dialogue de configuration, encapsulant un panneau de configuration.
+	 * @param panel Panneau de configuration à encapsuler
+	 */
 	public ConfigurationDialog( ConfigurationPanel panel ) {
 		this.panel = panel;
 
@@ -38,18 +42,38 @@ public class ConfigurationDialog extends JDialog {
 		this.setLocationRelativeTo( null );
 	}
 
+	/**
+	 * Ajoute un {@link ActionListener} au panneau de configuration de la boîte de dialogue.
+	 *
+	 * @param actionListener Instance d'{@link ActionListener} à ajouter
+	 */
 	public void addActionListener( ActionListener actionListener ) {
 		this.panel.addActionListener( actionListener );
 	}
 
+	/**
+	 * Récupère le panneau de configuration sous-jacent
+	 *
+	 * @return Panneau de configuration sous-jacent
+	 */
 	public ConfigurationPanel getPanel() {
 		return panel;
 	}
 
+	/**
+	 * Retourne si la boîte de dialogue a été validée par l'utilisateur.
+	 *
+	 * @return {@code true} Boîte de dialogue validée
+	 */
 	public boolean isValidated() {
 		return validated;
 	}
 
+	/**
+	 * Indique si la boîte de dialogue a été validée par l'utilisateur.
+	 *
+	 * @param validated Boîte de dialogue validée ou non
+	 */
 	public void setValidated( boolean validated ) {
 		this.validated = validated;
 	}
