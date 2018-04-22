@@ -20,7 +20,7 @@ public class TabPanel extends JTabbedPane {
 			logo = Utils.getImageResource( Constants.RESOURCE_PATH_APPLOGO );
 		} catch( IOException e ) {
 			logo = null;
-			Utils.getUILogger().error( "Logo not found.", e );
+			throw new RuntimeException( "Logo not found?\n" + e.getLocalizedMessage() );
 		}
 	}
 

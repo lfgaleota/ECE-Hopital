@@ -1,8 +1,5 @@
 package ece.ing3.java.projet.utils;
 
-import org.apache.log4j.LogManager;
-import org.apache.log4j.Logger;
-
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
@@ -36,15 +33,6 @@ public class Utils {
 	 */
 	public static Image getImageResource( String path ) throws IOException {
 		return ImageIO.read( new BufferedInputStream( getResource( path ) ) );
-	}
-
-	/**
-	 * Get the UI logger.
-	 *
-	 * @return UI logger
-	 */
-	public static Logger getUILogger() {
-		return LogManager.getLogger( Constants.LOGGER_NAME_UI );
 	}
 
 	/**
