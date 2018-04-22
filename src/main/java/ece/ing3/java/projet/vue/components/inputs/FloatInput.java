@@ -2,6 +2,10 @@ package ece.ing3.java.projet.vue.components.inputs;
 
 /**
  * Champ de saisie pour les valeurs numériques flottantes, avec possibilité de sélection selon plusieurs types de comparateurs pour la recherche
+ *
+ * @author Virgile
+ * @author Nicolas
+ * @author Louis-Félix
  */
 public class FloatInput extends NumericInput<Float> {
 	private String columnName;

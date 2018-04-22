@@ -8,6 +8,10 @@ import java.util.List;
 
 /**
  * Utilitaire de recherche de modèle Soigne
+ *
+ * @author Virgile
+ * @author Nicolas
+ * @author Louis-Félix
  */
 public class SoigneFinder {
 	private SQLSelect<Soigne> finder;

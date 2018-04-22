@@ -12,6 +12,10 @@ import java.util.List;
 
 /**
  * Modèle d'Infirmier (un Employé) stocké en base de donnée
+ *
+ * @author Virgile
+ * @author Nicolas
+ * @author Louis-Félix
  */
 public class Infirmier extends Employe {
 	private Rotation rotation;

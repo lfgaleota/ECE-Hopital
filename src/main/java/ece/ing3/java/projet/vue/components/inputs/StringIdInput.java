@@ -4,6 +4,10 @@ package ece.ing3.java.projet.vue.components.inputs;
  * Champ de saisie de valeur textuelle, avec possibilité de sélection en exact ou approximatif pour la recherche, en tant que clé primaire
  * <p>
  * Le champ sera bloqué en modification si la valeur est modifiée programmatiquement avec {@link StringIdInput#setValue(String)}
+ *
+ * @author Virgile
+ * @author Nicolas
+ * @author Louis-Félix
  */
 public class StringIdInput extends StringInput {
 	/**

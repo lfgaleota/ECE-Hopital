@@ -26,6 +26,10 @@ import java.awt.event.ActionListener;
  * Base de contrôleur de panneau d'affichage, sélection, recherche et modification de modèle générique
  *
  * @param <M> Type de modèle à utiliser
+ *
+ * @author Virgile
+ * @author Nicolas
+ * @author Louis-Félix
  */
 public abstract class ModelPanelController<M extends Model> implements ActionListener, DialogListener, ModelQueryWorkerProvider<M>, ModelWorkerProvider {
 	/**

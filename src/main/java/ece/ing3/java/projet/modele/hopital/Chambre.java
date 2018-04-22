@@ -13,6 +13,10 @@ import java.util.List;
 
 /**
  * Modèle de Chambre stocké en base de donnée
+ *
+ * @author Virgile
+ * @author Nicolas
+ * @author Louis-Félix
  */
 public class Chambre extends Model {
 	@Id

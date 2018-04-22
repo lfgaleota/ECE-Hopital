@@ -4,6 +4,10 @@ import javax.swing.*;
 
 /**
  * Interface d'objet qui écoute l'issue de sélection d'une fenêtre de dialogue.
+ *
+ * @author Virgile
+ * @author Nicolas
+ * @author Louis-Félix
  */
 public interface DialogListener {
 	/**

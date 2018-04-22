@@ -10,6 +10,10 @@ import java.util.List;
 
 /**
  * Modèle d'Employé stocké en base de donnée
+ *
+ * @author Virgile
+ * @author Nicolas
+ * @author Louis-Félix
  */
 public class Employe extends Model {
 	@Id

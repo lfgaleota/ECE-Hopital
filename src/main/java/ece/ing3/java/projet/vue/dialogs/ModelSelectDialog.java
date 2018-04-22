@@ -12,6 +12,10 @@ import java.awt.*;
  * Boîte de dialogue de sélection d'instance de de modèle BDD
  *
  * @param <M> Type de modèle BDD considéré
+ *
+ * @author Virgile
+ * @author Nicolas
+ * @author Louis-Félix
  */
 public class ModelSelectDialog<M extends Model> extends BaseValidatedDialog {
 	private ModelPanel<M> panel;

@@ -16,6 +16,10 @@ import ece.ing3.java.projet.vue.panels.ModelPanel;
 
 /**
  * Base de contrôleur de panneau d'affichage, sélection, recherche et modification d'Employe
+ *
+ * @author Virgile
+ * @author Nicolas
+ * @author Louis-Félix
  */
 public class EmployePanelController  extends ModelPanelController<Employe> {
 	/**

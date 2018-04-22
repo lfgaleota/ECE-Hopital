@@ -10,6 +10,10 @@ import java.awt.*;
  * Panneau d'attente affichant une îcone de chargement.
  * <p>
  * Déstinée à être affichée à la place d'un panneau qui serait en cours de traitement.
+ *
+ * @author Virgile
+ * @author Nicolas
+ * @author Louis-Félix
  */
 public class LoadingPanel extends JPanel {
 	/**

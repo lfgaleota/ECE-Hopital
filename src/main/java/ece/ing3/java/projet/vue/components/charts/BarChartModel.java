@@ -20,6 +20,10 @@ import ece.ing3.java.projet.modele.hopital.Soigne;
 
 /**
  * Classe modèle pour les diagrammes en batons.
+ *
+ * @author Virgile
+ * @author Nicolas
+ * @author Louis-Félix
  */
 public class BarChartModel implements Chart
 {

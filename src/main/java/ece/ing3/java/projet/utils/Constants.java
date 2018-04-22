@@ -6,6 +6,10 @@ import java.awt.*;
 
 /**
  * Project constants
+ *
+ * @author Virgile
+ * @author Nicolas
+ * @author Louis-Félix
  */
 public class Constants {
 	public static final String RESOURCE_PATH_CONFIGURATION = "config.properties";

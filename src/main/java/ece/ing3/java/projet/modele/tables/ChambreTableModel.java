@@ -12,6 +12,10 @@ import java.util.Map;
  * Classe modèle d'un {@link javax.swing.JTable} pour l'affichage d'un ensemble d'instance de modèle Chambre
  * <p>
  * Affiche des informations supplémentaires par jointure
+ *
+ * @author Virgile
+ * @author Nicolas
+ * @author Louis-Félix
  */
 public class ChambreTableModel extends TableModel<Chambre> {
 	private String[] extFieldNames;

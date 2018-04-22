@@ -12,6 +12,10 @@ import java.util.Map;
  * Classe modèle d'un {@link javax.swing.JTable} pour l'affichage d'un ensemble d'instance de modèle Service
  * <p>
  * Affiche des informations supplémentaires par jointure
+ *
+ * @author Virgile
+ * @author Nicolas
+ * @author Louis-Félix
  */
 public class ServiceTableModel extends TableModel<Service> {
 	private String[] extFieldNames;

@@ -12,6 +12,10 @@ import ece.ing3.java.projet.exceptions.DatabaseException;
 /**
  *  Diagramme circulaire 2D adapté pour afficher le nombre de malade par specialité
  *  Utilisation d'une jointure entre les classes Malade, Docteur et Soigne
+ *
+ * @author Virgile
+ * @author Nicolas
+ * @author Louis-Félix
  */
 public class PieChart2DMalades extends PieChart2DModel {
 

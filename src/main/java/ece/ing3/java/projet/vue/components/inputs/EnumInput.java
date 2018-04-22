@@ -18,6 +18,10 @@ import java.util.LinkedList;
  * Ce champ doit être dérivé par énumération désirée.
  *
  * @param <T> Type de l'énumération
+ *
+ * @author Virgile
+ * @author Nicolas
+ * @author Louis-Félix
  */
 public abstract class EnumInput<T> extends JPanel implements BaseInput<T>, ActionListener, ListSelectionListener {
 	/**

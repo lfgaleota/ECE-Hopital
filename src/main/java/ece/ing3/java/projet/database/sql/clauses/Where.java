@@ -41,6 +41,10 @@ import java.util.List;
  * <p>
  * Nesting is still supported when using reactive-style programming.
  * </p>
+ *
+ * @author Virgile
+ * @author Nicolas
+ * @author Louis-Félix
  */
 public class Where {
 	private String query;

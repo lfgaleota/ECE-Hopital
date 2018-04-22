@@ -11,6 +11,10 @@ import java.util.Map;
  * Cette "clé" est générée à partir du nom du champ, en mettant en minuscule et remplaçant les tirets par des points, par exemple model.malade -> MODEL_MALADE.
  * Il est possible de rediriger la clé selon si on veut une valeur au singulier ou pluriel. Si le pluriel est demandée, un suffixe {@link Constants#STRINGS_SUFFIX_PLURAL} est ajouté pour obtenir le nom d'attribut, par exemple model.malade -> model.malade.plural -> MODEL_MALADE_PLURAL.
  * Un sous-ensemble de chaîne associées à des modèles BDD est disponible, construit en rajoutant à la clé passée en paramètre de {@link Strings#getModel(String)} un préfixe {@link Constants#MODEL_STRINGS_PREFIX}, par exemple malade -> model.malade -> MODEL_MALADE.
+ *
+ * @author Virgile
+ * @author Nicolas
+ * @author Louis-Félix
  */
 public class Strings {
 	public static final String MODEL_MALADE = "Malade";

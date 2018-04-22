@@ -2,6 +2,10 @@ package ece.ing3.java.projet.exceptions;
 
 /**
  * Exception thrown when a database operation failed.
+ *
+ * @author Virgile
+ * @author Nicolas
+ * @author Louis-Félix
  */
 public class DatabaseException extends Exception {
 	/**

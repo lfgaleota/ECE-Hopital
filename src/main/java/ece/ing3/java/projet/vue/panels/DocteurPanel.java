@@ -8,6 +8,10 @@ import ece.ing3.java.projet.utils.Strings;
  * Panneau d'affichage, sélection, recherche et modification de modèle Docteur
  * <p>
  * C'est le panneau principal utilisé dans les onglets de l'application.
+ *
+ * @author Virgile
+ * @author Nicolas
+ * @author Louis-Félix
  */
 public class DocteurPanel extends ModelPanel<Docteur> {
 	/**

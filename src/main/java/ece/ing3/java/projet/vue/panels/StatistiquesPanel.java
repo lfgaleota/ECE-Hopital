@@ -21,6 +21,10 @@ import java.util.List;
 
 /**
  * Classe d'affichage de la fenetre de statistiques.
+ *
+ * @author Virgile
+ * @author Nicolas
+ * @author Louis-Félix
  */
 public class StatistiquesPanel extends JTabbedPane implements ActionListener {
 	private static final long serialVersionUID = 1L;

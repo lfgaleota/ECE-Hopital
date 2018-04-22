@@ -8,6 +8,10 @@ import ece.ing3.java.projet.interfaces.ModelWorkerProvider;
  * Processus en arrière-plan de mise à jour d'instances de modèle BDD de la base de donnée
  * <p>
  * Permet de mettre à jour des instances de modèle BDD en arrière-plan, sans bloquer l'interface.
+ *
+ * @author Virgile
+ * @author Nicolas
+ * @author Louis-Félix
  */
 public class ModelUpdateWorker extends AbstractSimpleModelWorker {
 	private Model model;

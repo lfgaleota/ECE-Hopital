@@ -2,6 +2,10 @@ package ece.ing3.java.projet.vue.components.inputs;
 
 /**
  * Champ de saisie pour les valeurs numériques entières longues, avec possibilité de sélection selon plusieurs types de comparateurs pour la recherche, en tant que clé primaire
+ *
+ * @author Virgile
+ * @author Nicolas
+ * @author Louis-Félix
  */
 public class LongIdInput extends LongInput {
 	/**

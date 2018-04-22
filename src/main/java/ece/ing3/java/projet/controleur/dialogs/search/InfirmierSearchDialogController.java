@@ -6,6 +6,10 @@ import ece.ing3.java.projet.vue.dialogs.search.ModelSearchDialog;
 
 /**
  * Contrôleur de boîte de dialogue de recherche d'Infirmier
+ *
+ * @author Virgile
+ * @author Nicolas
+ * @author Louis-Félix
  */
 public class InfirmierSearchDialogController extends ModelSearchDialogController {
 	private InfirmierSearchDialogController( ModelSearchDialog dialog, DialogListener listener ) {

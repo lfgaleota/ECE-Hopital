@@ -11,6 +11,10 @@ import java.awt.*;
 
 /**
  * Ensemble de champs de saisie pour la saisie des attributs d'un modèle Soigne/de prise en charge
+ *
+ * @author Virgile
+ * @author Nicolas
+ * @author Louis-Félix
  */
 public class SoigneInputList extends ModelInputList {
 	/**

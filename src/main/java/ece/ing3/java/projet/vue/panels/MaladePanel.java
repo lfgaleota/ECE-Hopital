@@ -8,6 +8,10 @@ import ece.ing3.java.projet.utils.Strings;
  * Panneau d'affichage, sélection, recherche et modification de modèle Malade
  * <p>
  * C'est le panneau principal utilisé dans les onglets de l'application.
+ *
+ * @author Virgile
+ * @author Nicolas
+ * @author Louis-Félix
  */
 public class MaladePanel extends ModelPanel<Malade> {
 	/**

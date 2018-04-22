@@ -4,6 +4,10 @@ import ece.ing3.java.projet.enums.Specialite;
 
 /**
  * Champ de saisie pour les valeurs de type {@link Specialite}, avec possibilité de sélection multiple pour la recherche
+ *
+ * @author Virgile
+ * @author Nicolas
+ * @author Louis-Félix
  */
 public class SpecialiteInput extends EnumInput<Specialite> {
 	/**

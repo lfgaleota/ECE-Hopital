@@ -10,6 +10,10 @@ import java.util.List;
 
 /**
  * Modèle de Malade stocké en base de donnée
+ *
+ * @author Virgile
+ * @author Nicolas
+ * @author Louis-Félix
  */
 public class Malade extends Model {
 	@Id

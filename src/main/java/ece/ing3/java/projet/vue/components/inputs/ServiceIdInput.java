@@ -4,6 +4,10 @@ import java.awt.*;
 
 /**
  * Champ de saisie pour sélectionner des instances de modèle {@link ece.ing3.java.projet.modele.administration.Service}, stockés en base de donnée, avec possibilité de sélection multiple pour la recherche, en tant que clé primaire
+ *
+ * @author Virgile
+ * @author Nicolas
+ * @author Louis-Félix
  */
 public class ServiceIdInput extends ServiceInput {
 	/**

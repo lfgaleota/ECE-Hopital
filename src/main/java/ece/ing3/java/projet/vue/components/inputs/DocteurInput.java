@@ -8,6 +8,10 @@ import java.awt.*;
 
 /**
  * Champ de saisie pour sélectionner des instances de modèle {@link Docteur}, stockés en base de donnée, avec possibilité de sélection multiple pour la recherche
+ *
+ * @author Virgile
+ * @author Nicolas
+ * @author Louis-Félix
  */
 public class DocteurInput extends SearchInput<Docteur, Long> {
 	/**

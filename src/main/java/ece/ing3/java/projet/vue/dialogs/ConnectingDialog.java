@@ -12,6 +12,10 @@ import java.awt.*;
  * Boîte de dialogue de connexion.
  * <p>
  * Affichée pour faire patienter pendant que la connexion à la base de donnée est établie.
+ *
+ * @author Virgile
+ * @author Nicolas
+ * @author Louis-Félix
  */
 public class ConnectingDialog extends JDialog {
 	/**

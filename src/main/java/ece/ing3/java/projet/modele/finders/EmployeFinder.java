@@ -8,6 +8,10 @@ import java.util.List;
 
 /**
  * Utilitaire de recherche de modèle Employe
+ *
+ * @author Virgile
+ * @author Nicolas
+ * @author Louis-Félix
  */
 public class EmployeFinder {
 	private SQLSelect<Employe> finder;

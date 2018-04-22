@@ -15,6 +15,10 @@ import java.util.Map;
  * Classe modèle d'un {@link javax.swing.JTable} pour l'affichage d'un ensemble d'instance de modèle BDD générique
  *
  * @param <M>v Modèle BDD considéré
+ *
+ * @author Virgile
+ * @author Nicolas
+ * @author Louis-Félix
  */
 public class TableModel<M extends Model> extends AbstractTableModel {
 	private Class<? extends Model> modelClass;

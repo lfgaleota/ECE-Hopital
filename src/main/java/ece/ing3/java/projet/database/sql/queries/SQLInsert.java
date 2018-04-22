@@ -12,6 +12,10 @@ import java.util.*;
  * SQL insert helper.
  * <p>
  * Provides a convenient way to build insert SQL queries, reactive-style, for a provided model class.
+ *
+ * @author Virgile
+ * @author Nicolas
+ * @author Louis-Félix
  */
 public class SQLInsert implements SQLRequest {
 	final Class<? extends Model> modelClass;

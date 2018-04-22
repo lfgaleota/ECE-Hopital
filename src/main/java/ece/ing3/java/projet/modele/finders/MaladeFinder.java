@@ -8,6 +8,10 @@ import java.util.List;
 
 /**
  * Utilitaire de recherche de modèle Malade
+ *
+ * @author Virgile
+ * @author Nicolas
+ * @author Louis-Félix
  */
 public class MaladeFinder {
 	private SQLSelect<Malade> finder;

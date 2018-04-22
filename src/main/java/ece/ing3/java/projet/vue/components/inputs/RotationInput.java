@@ -4,6 +4,10 @@ import ece.ing3.java.projet.enums.Rotation;
 
 /**
  * Champ de saisie pour les valeurs de type {@link Rotation}, avec possibilité de sélection multiple pour la recherche
+ *
+ * @author Virgile
+ * @author Nicolas
+ * @author Louis-Félix
  */
 public class RotationInput extends EnumInput<Rotation> {
 	/**

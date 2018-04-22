@@ -9,6 +9,10 @@ import java.util.prefs.Preferences;
  * Configuration helper.
  * <p>
  * Offers a convenient way to get and set configuration parameters.
+ *
+ * @author Virgile
+ * @author Nicolas
+ * @author Louis-Félix
  */
 public class Configuration {
 	private static Preferences config;

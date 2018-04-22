@@ -13,6 +13,10 @@ import org.jfree.data.general.DefaultPieDataset;
 
 /**
  * Classe modèle pour les diagrammes circulaires 3D
+ *
+ * @author Virgile
+ * @author Nicolas
+ * @author Louis-Félix
  */
 public class PieChart3DMutuelles extends JPanel implements Chart {
 

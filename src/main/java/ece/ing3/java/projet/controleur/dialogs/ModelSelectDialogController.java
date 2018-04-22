@@ -11,6 +11,10 @@ import java.awt.*;
  * Base de contrôleur de boîte de dialogue de sélection de modèle
  *
  * @param <M> Type de modèle à considérer
+ *
+ * @author Virgile
+ * @author Nicolas
+ * @author Louis-Félix
  */
 public class ModelSelectDialogController<M extends Model> extends BaseValidatedDialogController {
 	/**

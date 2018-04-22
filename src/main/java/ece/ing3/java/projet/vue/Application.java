@@ -4,6 +4,10 @@
  * and open the template in the editor.
 
 
+ *
+ * @author Virgile
+ * @author Nicolas
+ * @author Louis-Félix
  */
 
 package ece.ing3.java.projet.vue;
@@ -21,6 +25,10 @@ import ece.ing3.java.projet.vue.panels.TabPanel;
 
 /**
  * Fenetre principale de l'application
+ *
+ * @author Virgile
+ * @author Nicolas
+ * @author Louis-Félix
  */
 public class Application extends JFrame {
 	private static Application instance;

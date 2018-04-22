@@ -14,6 +14,10 @@ import java.awt.*;
  * Ce champ doit être dérivé par type numérique désiré.
  *
  * @param <T> Type numérique utilisé
+ *
+ * @author Virgile
+ * @author Nicolas
+ * @author Louis-Félix
  */
 public abstract class NumericInput<T> extends JPanel implements BaseInput<T>, DocumentListener {
 	/**

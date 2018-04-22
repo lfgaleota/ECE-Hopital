@@ -14,6 +14,10 @@ import java.awt.*;
  * Champ de saisie pour sélectionner des instances de modèle {@link Chambre}, stockés en base de donnée, avec possibilité de sélection multiple pour la recherche
  * <p>
  * Ce champ peut être conditionné par un ou plusieurs codes de services, afin de limiter la sélection des chambres à ces services.
+ *
+ * @author Virgile
+ * @author Nicolas
+ * @author Louis-Félix
  */
 public class ChambreInput extends SearchInput<Chambre, Long> {
 	private String[] codesService;

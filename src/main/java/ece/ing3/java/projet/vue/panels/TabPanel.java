@@ -13,6 +13,10 @@ import java.io.IOException;
  * Panneau à onglets de l'application
  * <p>
  * Contient tous les panneaux de l'application, comme les {@link ModelPanel} ou {@link StatistiquesPanel}.
+ *
+ * @author Virgile
+ * @author Nicolas
+ * @author Louis-Félix
  */
 public class TabPanel extends JTabbedPane {
 	private static Insets oldInsets;

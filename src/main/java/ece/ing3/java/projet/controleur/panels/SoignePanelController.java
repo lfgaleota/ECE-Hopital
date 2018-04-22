@@ -17,6 +17,10 @@ import ece.ing3.java.projet.vue.panels.SoignePanel;
 
 /**
  * Base de contrôleur de panneau d'affichage, sélection, recherche et modification de Prise en Charge
+ *
+ * @author Virgile
+ * @author Nicolas
+ * @author Louis-Félix
  */
 public class SoignePanelController extends ModelPanelController<Soigne> {
 	/**

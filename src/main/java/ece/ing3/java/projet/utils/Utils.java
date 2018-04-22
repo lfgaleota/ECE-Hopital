@@ -7,6 +7,10 @@ import java.io.*;
 
 /**
  * Utility functions
+ *
+ * @author Virgile
+ * @author Nicolas
+ * @author Louis-Félix
  */
 public class Utils {
 	/**

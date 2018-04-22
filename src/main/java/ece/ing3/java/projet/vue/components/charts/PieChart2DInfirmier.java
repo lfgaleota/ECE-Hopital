@@ -9,6 +9,10 @@ import ece.ing3.java.projet.modele.employe.Infirmier;
 
 /**
  * Diagramme circulaire 2D adapté pour afficher le nombre d'infirmier par service
+ *
+ * @author Virgile
+ * @author Nicolas
+ * @author Louis-Félix
  */
 public class PieChart2DInfirmier extends PieChart2DModel {
 

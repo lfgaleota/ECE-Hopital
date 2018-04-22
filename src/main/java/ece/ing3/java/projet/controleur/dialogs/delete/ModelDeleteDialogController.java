@@ -13,6 +13,10 @@ import java.util.List;
 
 /**
  * Contrôleur de boîte de dialogue demandant à l'utilisateur s'il veut supprimer certaines instances de modèles BDD
+ *
+ * @author Virgile
+ * @author Nicolas
+ * @author Louis-Félix
  */
 public class ModelDeleteDialogController implements PropertyChangeListener, WindowListener {
 	/**

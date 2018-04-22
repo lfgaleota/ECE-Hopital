@@ -15,6 +15,10 @@ import java.util.Map;
  * Ensemble de champs de saisie pour la saisie des attributs d'un modèle BDD
  * <p>
  * Cette classe est une base pour des classes spécialisées dédiées à chaque modèle.
+ *
+ * @author Virgile
+ * @author Nicolas
+ * @author Louis-Félix
  */
 public abstract class ModelInputList extends JPanel {
 	/**

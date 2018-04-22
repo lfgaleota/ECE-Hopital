@@ -6,6 +6,10 @@ import ece.ing3.java.projet.vue.dialogs.search.SoigneSearchDialog;
 
 /**
  * Contrôleur de boîte de dialogue de recherche de Prise en Charge
+ *
+ * @author Virgile
+ * @author Nicolas
+ * @author Louis-Félix
  */
 public class SoigneSearchDialogController extends ModelSearchDialogController {
 	private SoigneSearchDialogController( ModelSearchDialog dialog, DialogListener listener ) {
