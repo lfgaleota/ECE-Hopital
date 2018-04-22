@@ -14,6 +14,12 @@ import org.jfree.chart.ChartPanel;
 
 import ece.ing3.java.projet.modele.employe.Docteur;
 
+/**
+ * Diagramme circulaire 2D adapté pour afficher la part des spécalité des docteurs
+ * @author Virgile
+ * @author Nicolas
+ *
+ */
 public class PieChart2DSpecialitesDoc extends PieChart2DModel {
 
 	public PieChart2DSpecialitesDoc(List<Docteur> malistedocteur ) {

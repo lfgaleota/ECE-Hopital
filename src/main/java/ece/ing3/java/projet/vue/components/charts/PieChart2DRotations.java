@@ -10,7 +10,12 @@ import org.jfree.chart.ChartPanel;
 
 import ece.ing3.java.projet.modele.employe.Infirmier;
 
-
+/**
+ * Diagramme circulaire 2D adapté pour afficher les rotations d'infirmier
+ * @author Virgile
+ * @author Nicolas
+ *
+ */
 public class PieChart2DRotations  extends PieChart2DModel {
 
 	public PieChart2DRotations(List<Infirmier> malisteinfirmier ) {

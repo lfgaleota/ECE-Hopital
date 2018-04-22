@@ -32,6 +32,7 @@ public class Application extends JFrame {
 	private JTabbedPane tabs;
 
 	private Application() {
+		//propriétés de la fenêtre
 		this.setTitle( "Projet Hopital" );
 		this.setSize( ( int ) getToolkit().getScreenSize().getWidth(), ( ( int ) getToolkit().getScreenSize().getHeight() ) );
 		this.setResizable( true );
@@ -39,7 +40,7 @@ public class Application extends JFrame {
 		this.toFront(); // mettre au 1er plan
 
 		setLayout( new BorderLayout() );
-
+		//création du tableau de panels
 		tabs = TabPanel.create();
 
 		try {
@@ -50,7 +51,7 @@ public class Application extends JFrame {
 			this.dispose();
 			throw new RuntimeException( ( e.getCause() != null ? e.getCause().getLocalizedMessage() : e.getLocalizedMessage() ), e );
 		}
-
+			
 		tabs.addTab( Strings.get( "reporting.title" ), new StatistiquesPanel() );
 		tabs.addTab( Strings.get( "configuration.title" ), ConfigurationPanelController.createPanel() );
 
@@ -68,7 +69,10 @@ public class Application extends JFrame {
 
 		return instance;
 	}
-
+	/**
+	 * Getter
+	 * @return l'ensemble des panels
+	 */
 	public JTabbedPane getTabs() {
 		return tabs;
 	}
