@@ -21,10 +21,6 @@ import ece.ing3.java.projet.vue.panels.TabPanel;
 
 /**
  * Fenetre principale de l'application
- *
- * @author Virgile
- * @author Nicolas
- * @author Louis-Félix
  */
 public class Application extends JFrame {
 	private static Application instance;
@@ -51,7 +47,7 @@ public class Application extends JFrame {
 			this.dispose();
 			throw new RuntimeException( ( e.getCause() != null ? e.getCause().getLocalizedMessage() : e.getLocalizedMessage() ), e );
 		}
-			
+
 		tabs.addTab( Strings.get( "reporting.title" ), new StatistiquesPanel() );
 		tabs.addTab( Strings.get( "configuration.title" ), ConfigurationPanelController.createPanel() );
 

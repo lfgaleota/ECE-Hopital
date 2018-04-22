@@ -9,9 +9,6 @@ import ece.ing3.java.projet.modele.hopital.Hospitalisation;
 
 /**
  * Diagramme circulaire 2D adapté pour afficher la part de patients par service
- * @author Virgile
- * @author Nicolas
- *
  */
 public class PieChart2DPatients extends PieChart2DModel {
 

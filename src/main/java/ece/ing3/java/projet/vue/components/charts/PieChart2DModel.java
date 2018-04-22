@@ -25,8 +25,6 @@ import static ece.ing3.java.projet.enums.Specialite.*;
 
 /**
  * Classe modèle pour les diagrammes circulaires 2D
- *
- * @author Nicolas
  */
 public class PieChart2DModel implements Chart {
 

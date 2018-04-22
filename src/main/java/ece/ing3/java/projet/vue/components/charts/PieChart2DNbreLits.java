@@ -9,9 +9,6 @@ import ece.ing3.java.projet.modele.hopital.Chambre;
 
 /**
  * Diagramme circulaire 2D adapté pour afficher le nombre de lits par chambre
- * @author Nicolas
- * @author Virgile
- *
  */
 public class PieChart2DNbreLits extends PieChart2DModel {
 

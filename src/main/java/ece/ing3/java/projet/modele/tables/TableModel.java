@@ -45,9 +45,7 @@ public class TableModel<M extends Model> extends AbstractTableModel {
 	/**
 	 * Modifie la liste d'instances utilisée pour l'affichage, et par conséquent ce qu'affiche la {@link javax.swing.JTable} qui l'utilise.
 	 *
-	 * @param instances Pair constituée:
-	 *                  - d'une liste d'instance de modèle BDD
-	 *                  - d'un ensemble d'associations colonne-valeur de la colonne extrait directement du résultat de la requête de récupération de donnée SQL
+	 * @param instances Pair constituée d'une liste d'instance de modèle BDD et d'un ensemble d'associations colonne-valeur de la colonne extrait directement du résultat de la requête de récupération de donnée SQL
 	 */
 	public void setList( Map.Entry<List<M>, List<Map<String, Object>>> instances ) {
 		this.instances = instances.getKey();

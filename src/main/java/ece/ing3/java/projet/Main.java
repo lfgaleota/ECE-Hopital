@@ -11,7 +11,15 @@ import ece.ing3.java.projet.vue.dialogs.ConnectingDialog;
 
 import javax.swing.*;
 
+/**
+ * Classe princiapale du programme
+ */
 public class Main {
+	/**
+	 * Point d'entrée du programme, initialise les différents composants.
+	 *
+	 * @param args Arguments
+	 */
 	public static void main( String[] args ) {
 		try {
 			UIManager.setLookAndFeel( UIManager.getSystemLookAndFeelClassName() );
@@ -44,6 +52,9 @@ public class Main {
 		}
 	}
 
+	/**
+	 * Méthode fermant les différents composants initialisés.
+	 */
 	public static void quit() {
 		try {
 			Database.close();
