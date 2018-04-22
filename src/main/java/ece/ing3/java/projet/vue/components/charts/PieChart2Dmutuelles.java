@@ -11,9 +11,6 @@ import org.jfree.chart.ChartPanel;
 import ece.ing3.java.projet.modele.hopital.Malade;
 /**
  * Diagramme circulaire 2D adapté pour afficher la part des mutuelles par malades
- * @author Virgile
- * @author Nicolas
- *
  */
 public class PieChart2Dmutuelles extends PieChart2DModel {
 

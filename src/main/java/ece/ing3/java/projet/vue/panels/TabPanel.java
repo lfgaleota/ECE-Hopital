@@ -9,6 +9,11 @@ import java.awt.*;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
+/**
+ * Panneau à onglets de l'application
+ * <p>
+ * Contient tous les panneaux de l'application, comme les {@link ModelPanel} ou {@link StatistiquesPanel}.
+ */
 public class TabPanel extends JTabbedPane {
 	private static Insets oldInsets;
 	private Image logo;
@@ -52,7 +57,7 @@ public class TabPanel extends JTabbedPane {
 
 	/**
 	 * Dessine le fond du panneau
-	 *
+	 * <p>
 	 * Les ressources suivantes ont été utilisées pour la conception de cette méthode :
 	 * - http://www.java2s.com/Tutorials/Java/Swing_How_to/JTabbedPane/Change_Java_JTabbedPane_Inset_Color.htm
 	 *
@@ -61,7 +66,7 @@ public class TabPanel extends JTabbedPane {
 	@Override
 	protected void paintComponent( Graphics g ) {
 		super.paintComponent( g );
-		Graphics2D g2d = ( Graphics2D ) g;
+		Graphics2D g2d = (Graphics2D) g;
 		if( logo != null ) {
 			int maxTabWidth = 0, tabWidth;
 			for( int i = 0; i < getTabCount(); i++ ) {

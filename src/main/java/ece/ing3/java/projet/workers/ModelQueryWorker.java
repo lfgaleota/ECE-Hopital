@@ -1,6 +1,5 @@
 package ece.ing3.java.projet.workers;
 
-import ece.ing3.java.projet.controleur.panels.SoignePanelController;
 import ece.ing3.java.projet.database.sql.Model;
 import ece.ing3.java.projet.database.sql.clauses.OrderBy;
 import ece.ing3.java.projet.database.sql.clauses.Where;
@@ -19,13 +18,28 @@ import java.sql.SQLException;
 import java.util.*;
 import java.util.concurrent.ExecutionException;
 
+/**
+ * Processus en arrière-plan de récupération d'instances de modèle BDD depuis la base de donnée
+ * <p>
+ * Permet de récupérer les instances de modèle BDD à afficher dans un {@link ece.ing3.java.projet.vue.components.ModelList} en arrière-plan, sans bloquer l'interface.
+ */
 public class ModelQueryWorker<M extends Model> extends SwingWorker<Map.Entry<List<M>, List<Map<String, Object>>>, Object> {
 	private ModelQueryWorkerProvider<M> provider;
 
+	/**
+	 * Créer un nouveau processus en arrière-plan de récupération d'instances de modèle BDD depuis la base de donnée
+	 *
+	 * @param provider Objet fournissant les informations de configurations et de retour
+	 */
 	public ModelQueryWorker( ModelQueryWorkerProvider<M> provider ) {
 		this.provider = provider;
 	}
 
+	/**
+	 * Méthode exécutant le processus en arrière-plan.
+	 *
+	 * @return Pair constituée d'une liste d'instance de modèle BDD et d'un ensemble d'associations colonne-valeur de la colonne extrait directement du résultat de la requête de récupération de donnée SQL
+	 */
 	@Override
 	protected Map.Entry<List<M>, List<Map<String, Object>>> doInBackground() {
 		System.out.println( "Update started" );
@@ -74,6 +88,9 @@ public class ModelQueryWorker<M extends Model> extends SwingWorker<Map.Entry<Lis
 		return null;
 	}
 
+	/**
+	 * Méthode appelée à la fin de l'exécution du processus, met à jour la {@link ece.ing3.java.projet.vue.components.ModelList} fournie par le {@link ModelQueryWorkerProvider} avec les informations récupérées.
+	 */
 	@Override
 	protected void done() {
 		try {
