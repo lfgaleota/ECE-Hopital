@@ -89,9 +89,9 @@ public abstract class ModelUpdateDialog<M extends Model> extends BaseModelInputD
 	protected abstract Class<? extends Model> getModelClass();
 
 	/**
-	 * Construit un nouveau modèle BDD à partir
-	 * @return
-	 * @throws IllegalArgumentException
+	 * Construit un nouveau modèle BDD à partir de la saisie
+	 * @return Modèle construit
+	 * @throws IllegalArgumentException Au moins une valeur saisie est invalide
 	 */
 	public M buildModel() throws IllegalArgumentException {
 		M model = buildNewModel();
