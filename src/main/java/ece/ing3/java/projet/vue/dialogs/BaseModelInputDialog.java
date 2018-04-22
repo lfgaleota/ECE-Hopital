@@ -7,6 +7,10 @@ import javax.swing.*;
 
 /**
  * Base de boîte de dialogue de saisie liés aux attributs d'un modèle BDD
+ *
+ * @author Virgile
+ * @author Nicolas
+ * @author Louis-Félix
  */
 public abstract class BaseModelInputDialog extends BaseValidatedDialog {
 	protected ModelInputList inputList;

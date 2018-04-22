@@ -7,6 +7,10 @@ import ece.ing3.java.projet.interfaces.ValueChangeListener;
  * Interface de champ de saisie abstrait, permettant de concevoir des champs de saiesies plus complexes qu'un simple champ de saisie de texte tout en masquant cette complexité aux couches supérieures.
  *
  * @param <T> Type de retour
+ *
+ * @author Virgile
+ * @author Nicolas
+ * @author Louis-Félix
  */
 public interface BaseInput<T> {
 	/**

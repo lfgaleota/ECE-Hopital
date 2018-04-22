@@ -11,6 +11,10 @@ import java.util.Map;
 /**
  * Ensemble des contrôleurs de panneau principaux de modèles.
  * Utilisés pour remplir automatiquement les onglets de l'application.
+ *
+ * @author Virgile
+ * @author Nicolas
+ * @author Louis-Félix
  */
 public enum ModelControllers {
 	MALADE( new MaladePanelController() ),

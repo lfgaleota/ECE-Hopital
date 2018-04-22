@@ -9,6 +9,10 @@ import java.util.List;
  * Must be used as a base class for a feature-complete SQL helper.
  *
  * @param <T> SQL helper class
+ *
+ * @author Virgile
+ * @author Nicolas
+ * @author Louis-Félix
  */
 public abstract class SQLWhereQuery<T> implements SQLRequest {
 	Where where = null;

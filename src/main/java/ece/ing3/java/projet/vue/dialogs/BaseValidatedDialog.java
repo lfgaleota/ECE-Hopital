@@ -9,6 +9,10 @@ import java.awt.event.ActionListener;
 
 /**
  * Base de boîte de dialogue qui peut être validée ou annulée par l'utilisateur
+ *
+ * @author Virgile
+ * @author Nicolas
+ * @author Louis-Félix
  */
 public abstract class BaseValidatedDialog extends JDialog {
 	/**

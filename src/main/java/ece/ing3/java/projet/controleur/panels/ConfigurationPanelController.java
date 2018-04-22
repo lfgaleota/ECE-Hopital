@@ -11,6 +11,10 @@ import java.util.prefs.BackingStoreException;
 
 /**
  * Contrôleur de panneau de configuration
+ *
+ * @author Virgile
+ * @author Nicolas
+ * @author Louis-Félix
  */
 public class ConfigurationPanelController implements ActionListener {
 	private ConfigurationPanel panel;

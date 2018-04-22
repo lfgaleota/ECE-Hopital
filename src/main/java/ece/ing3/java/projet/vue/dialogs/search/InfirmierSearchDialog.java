@@ -7,6 +7,10 @@ import ece.ing3.java.projet.vue.components.inputlists.InfirmierInputList;
  * Boîte de dialogue pour la recherche et filtrage d'instance de modèle {@link ece.ing3.java.projet.modele.employe.Infirmier} de la base de donnée, avec la saisie des attributs à filtrer.
  * <p>
  * Génère une clause {@link ece.ing3.java.projet.database.sql.clauses.Where} pour le filtrage des résultats dans une requête.
+ *
+ * @author Virgile
+ * @author Nicolas
+ * @author Louis-Félix
  */
 public class InfirmierSearchDialog extends ModelSearchDialog {
 	/**

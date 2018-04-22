@@ -12,6 +12,10 @@ import java.awt.event.ActionListener;
  * Boîte de dialogue pour la recherche et filtrage d'instance de modèle BDD de la base de donnée, avec la saisie des attributs à filtrer.
  * <p>
  * Génère une clause {@link Where} pour le filtrage des résultats dans une requête.
+ *
+ * @author Virgile
+ * @author Nicolas
+ * @author Louis-Félix
  */
 public abstract class ModelSearchDialog extends BaseModelInputDialog {
 	private JButton reset;

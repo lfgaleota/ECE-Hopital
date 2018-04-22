@@ -12,6 +12,10 @@ import java.util.*;
  * SQL update helper.
  * <p>
  * Provides a convenient way to build update SQL queries, reactive-style, for a provided model class.
+ *
+ * @author Virgile
+ * @author Nicolas
+ * @author Louis-Félix
  */
 public class SQLUpdate extends SQLWhereQuery<SQLUpdate> {
 	final Class<? extends Model> modelClass;

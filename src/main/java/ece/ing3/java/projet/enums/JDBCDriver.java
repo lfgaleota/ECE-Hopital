@@ -5,6 +5,10 @@ import java.util.Map;
 
 /**
  * Ensemble des drivers JDBC utilisables pour la base de donnée
+ *
+ * @author Virgile
+ * @author Nicolas
+ * @author Louis-Félix
  */
 public enum JDBCDriver {
 	MySQL( "com.mysql.cj.jdbc.Driver" );

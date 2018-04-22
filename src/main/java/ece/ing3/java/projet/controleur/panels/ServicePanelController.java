@@ -14,6 +14,10 @@ import ece.ing3.java.projet.vue.panels.ServicePanel;
 
 /**
  * Base de contrôleur de panneau d'affichage, sélection, recherche et modification de Service
+ *
+ * @author Virgile
+ * @author Nicolas
+ * @author Louis-Félix
  */
 public class ServicePanelController extends ModelPanelController<Service> {
 	/**

@@ -5,6 +5,10 @@ import java.lang.annotation.RetentionPolicy;
 
 /**
  * Indicates that a field is used as a database ID.
+ *
+ * @author Virgile
+ * @author Nicolas
+ * @author Louis-Félix
  */
 @Retention(RetentionPolicy.RUNTIME)
 public @interface Id {

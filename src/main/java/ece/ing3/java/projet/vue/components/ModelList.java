@@ -11,6 +11,10 @@ import java.util.List;
  * Liste d'affichage de modèle BDD, sous forme de table
  *
  * @param <M> Type du modèle BDD considéré
+ *
+ * @author Virgile
+ * @author Nicolas
+ * @author Louis-Félix
  */
 public class ModelList<M extends Model> extends JTable {
 	private TableModel<M> tableModel;

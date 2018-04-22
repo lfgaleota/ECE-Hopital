@@ -5,6 +5,10 @@ import ece.ing3.java.projet.vue.dialogs.BaseModelInputDialog;
 
 /**
  * Base de contrôleur de boîte de dialogue demandant d'entrer des valeurs correspondants à un modèle BDD
+ *
+ * @author Virgile
+ * @author Nicolas
+ * @author Louis-Félix
  */
 public abstract class BaseModelInputDialogController extends BaseValidatedDialogController {
 	/**

@@ -5,6 +5,10 @@ import java.lang.annotation.RetentionPolicy;
 
 /**
  * Configure the field's corresponding database column.
+ *
+ * @author Virgile
+ * @author Nicolas
+ * @author Louis-Félix
  */
 @Retention(RetentionPolicy.RUNTIME)
 public @interface Column {

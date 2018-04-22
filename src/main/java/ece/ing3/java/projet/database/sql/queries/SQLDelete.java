@@ -11,6 +11,10 @@ import java.sql.SQLException;
  * SQL delete helper.
  * <p>
  * Provides a convenient way to build delete SQL queries, reactive-style, for a provided model class.
+ *
+ * @author Virgile
+ * @author Nicolas
+ * @author Louis-Félix
  */
 public class SQLDelete extends SQLWhereQuery<SQLDelete> {
 	private final Class<? extends Model> modelClass;

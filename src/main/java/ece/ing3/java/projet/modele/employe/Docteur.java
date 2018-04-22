@@ -10,6 +10,10 @@ import java.util.List;
 
 /**
  * Modèle de Docteur (un Employé) stocké en base de donnée
+ *
+ * @author Virgile
+ * @author Nicolas
+ * @author Louis-Félix
  */
 public class Docteur extends Employe {
 	private Specialite specialite;

@@ -8,6 +8,10 @@ import java.util.List;
 
 /**
  * Utilitaire de recherche de modèle Service
+ *
+ * @author Virgile
+ * @author Nicolas
+ * @author Louis-Félix
  */
 public class ServiceFinder {
 	private SQLSelect<Service> finder;

@@ -9,6 +9,10 @@ import java.awt.event.ActionEvent;
 
 /**
  * Contrôleur de boîte de dialogue de recherche de modèle générique
+ *
+ * @author Virgile
+ * @author Nicolas
+ * @author Louis-Félix
  */
 public class ModelSearchDialogController extends BaseModelInputDialogController {
 	/**

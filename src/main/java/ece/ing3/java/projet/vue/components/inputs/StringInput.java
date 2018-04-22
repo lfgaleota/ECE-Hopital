@@ -10,6 +10,10 @@ import java.awt.*;
 
 /**
  * Champ de saisie de valeur textuelle, avec possibilité de sélection en exact ou approximatif pour la recherche
+ *
+ * @author Virgile
+ * @author Nicolas
+ * @author Louis-Félix
  */
 public class StringInput extends JPanel implements BaseInput<String>, DocumentListener {
 	private String columnName;

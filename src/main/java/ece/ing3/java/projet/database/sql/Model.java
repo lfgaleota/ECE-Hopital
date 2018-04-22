@@ -59,6 +59,10 @@ import java.util.Map;
  *     // ... getters and setters for exampleId and exampleString ...
  * }
  * </pre>
+ *
+ * @author Virgile
+ * @author Nicolas
+ * @author Louis-Félix
  */
 public abstract class Model {
 	private static Map<Class<? extends Model>, Map<String, String>> columnFieldNames = new HashMap<>();

@@ -5,6 +5,10 @@ import java.lang.annotation.RetentionPolicy;
 
 /**
  * Exclude a field from being saved to database.
+ *
+ * @author Virgile
+ * @author Nicolas
+ * @author Louis-Félix
  */
 @Retention(RetentionPolicy.RUNTIME)
 public @interface ExcludedField {

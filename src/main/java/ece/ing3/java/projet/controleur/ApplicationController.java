@@ -10,6 +10,10 @@ import java.awt.event.WindowListener;
 
 /**
  * Contrôleur de fenêtre d'Application
+ *
+ * @author Virgile
+ * @author Nicolas
+ * @author Louis-Félix
  */
 public class ApplicationController implements WindowListener {
 	/**

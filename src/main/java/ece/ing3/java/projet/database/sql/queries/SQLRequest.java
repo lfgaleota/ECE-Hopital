@@ -6,6 +6,10 @@ import java.util.List;
 
 /**
  * Base SQL request interface.
+ *
+ * @author Virgile
+ * @author Nicolas
+ * @author Louis-Félix
  */
 public interface SQLRequest {
 	Class<? extends Model> getModelClass();

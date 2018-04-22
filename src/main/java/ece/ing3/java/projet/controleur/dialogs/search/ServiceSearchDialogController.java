@@ -6,6 +6,10 @@ import ece.ing3.java.projet.vue.dialogs.search.ServiceSearchDialog;
 
 /**
  * Contrôleur de boîte de dialogue de recherche de Service
+ *
+ * @author Virgile
+ * @author Nicolas
+ * @author Louis-Félix
  */
 public class ServiceSearchDialogController extends ModelSearchDialogController {
 	private ServiceSearchDialogController( ModelSearchDialog dialog, DialogListener listener ) {

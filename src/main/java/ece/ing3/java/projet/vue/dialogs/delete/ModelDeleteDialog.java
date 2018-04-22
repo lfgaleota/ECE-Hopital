@@ -9,6 +9,10 @@ import java.util.List;
 
 /**
  * Boîte de dialogue demandant à l'utilisateur s'il souhaite supprimer un certain ensemble d'instance de modèle BDD de la base de donnée.
+ *
+ * @author Virgile
+ * @author Nicolas
+ * @author Louis-Félix
  */
 public class ModelDeleteDialog extends JDialog {
 	private List<? extends Model> selectedModels;

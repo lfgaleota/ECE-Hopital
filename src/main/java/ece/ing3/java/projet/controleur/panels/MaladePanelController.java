@@ -12,6 +12,10 @@ import ece.ing3.java.projet.vue.panels.ModelPanel;
 
 /**
  * Base de contrôleur de panneau d'affichage, sélection, recherche et modification de Malade
+ *
+ * @author Virgile
+ * @author Nicolas
+ * @author Louis-Félix
  */
 public class MaladePanelController extends ModelPanelController<Malade> {
 	/**

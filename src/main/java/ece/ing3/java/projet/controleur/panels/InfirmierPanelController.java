@@ -14,6 +14,10 @@ import ece.ing3.java.projet.vue.panels.ModelPanel;
 
 /**
  * Base de contrôleur de panneau d'affichage, sélection, recherche et modification d'Infirmier
+ *
+ * @author Virgile
+ * @author Nicolas
+ * @author Louis-Félix
  */
 public class InfirmierPanelController  extends ModelPanelController<Infirmier> {
 	/**

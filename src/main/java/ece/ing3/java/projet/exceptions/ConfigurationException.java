@@ -2,6 +2,10 @@ package ece.ing3.java.projet.exceptions;
 
 /**
  * Exception thrown when a configuration operation failed.
+ *
+ * @author Virgile
+ * @author Nicolas
+ * @author Louis-Félix
  */
 public class ConfigurationException extends Exception {
 	/**

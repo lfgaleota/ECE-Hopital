@@ -11,6 +11,10 @@ import java.util.List;
 
 /**
  * Modèle d'une Hospitalisation stocké en base de donnée
+ *
+ * @author Virgile
+ * @author Nicolas
+ * @author Louis-Félix
  */
 public class Hospitalisation extends Model {
 	@Id

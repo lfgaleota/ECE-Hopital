@@ -12,6 +12,10 @@ import ece.ing3.java.projet.vue.components.inputlists.ModelInputList;
  * </p>
  *
  * @implNote Il s'agit du modèle qui fera la différence entre mise à jour et insertion dans la base de donnée.
+ *
+ * @author Virgile
+ * @author Nicolas
+ * @author Louis-Félix
  */
 public class DocteurUpdateDialog extends ModelUpdateDialog<Docteur> {
 	/**

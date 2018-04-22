@@ -12,6 +12,10 @@ import java.io.IOException;
  * Barre d'outil standard pour le panneau d'affichage, sélection, recherche et modification de modèle BDD {@link ece.ing3.java.projet.vue.panels.ModelPanel}
  * <p>
  * Comporte l'ensemble des boutons pour la manipulations des modèles BDD
+ *
+ * @author Virgile
+ * @author Nicolas
+ * @author Louis-Félix
  */
 public class ModelToolbar extends JToolBar {
 	private JButton buttonRemove, buttonAdd, buttonModify, buttonSearch, buttonRefresh;

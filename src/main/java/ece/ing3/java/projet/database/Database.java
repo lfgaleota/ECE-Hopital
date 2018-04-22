@@ -14,6 +14,10 @@ import java.sql.*;
  * <p>
  * Offers utility functions to manage a database.
  * Database configuration is loaded automatically.
+ *
+ * @author Virgile
+ * @author Nicolas
+ * @author Louis-Félix
  */
 public class Database {
 	private static Connection connection;

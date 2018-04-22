@@ -12,6 +12,10 @@ import java.awt.event.WindowListener;
 
 /**
  * Base de contrôleur de boîte de dialogue demandant d'entrer des valeurs correspondants à un modèle BDD
+ *
+ * @author Virgile
+ * @author Nicolas
+ * @author Louis-Félix
  */
 public abstract class BaseValidatedDialogController implements ActionListener, WindowListener {
 	/**

@@ -22,6 +22,10 @@ import java.util.concurrent.ExecutionException;
  * Processus en arrière-plan de récupération d'instances de modèle BDD depuis la base de donnée
  * <p>
  * Permet de récupérer les instances de modèle BDD à afficher dans un {@link ece.ing3.java.projet.vue.components.ModelList} en arrière-plan, sans bloquer l'interface.
+ *
+ * @author Virgile
+ * @author Nicolas
+ * @author Louis-Félix
  */
 public class ModelQueryWorker<M extends Model> extends SwingWorker<Map.Entry<List<M>, List<Map<String, Object>>>, Object> {
 	private ModelQueryWorkerProvider<M> provider;

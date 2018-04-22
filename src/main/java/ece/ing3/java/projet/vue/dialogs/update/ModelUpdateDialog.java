@@ -19,6 +19,10 @@ import java.util.Map;
  * </p>
  *
  * @implNote Il s'agit du modèle qui fera la différence entre mise à jour et insertion dans la base de donnée.
+ *
+ * @author Virgile
+ * @author Nicolas
+ * @author Louis-Félix
  */
 public abstract class ModelUpdateDialog<M extends Model> extends BaseModelInputDialog {
 	private M model;

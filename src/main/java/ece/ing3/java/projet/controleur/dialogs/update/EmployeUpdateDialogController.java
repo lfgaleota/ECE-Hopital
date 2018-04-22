@@ -7,6 +7,10 @@ import ece.ing3.java.projet.vue.dialogs.update.ModelUpdateDialog;
 
 /**
  * Contrôleur de boîte de dialogue de mise à jour de modèle Employe
+ *
+ * @author Virgile
+ * @author Nicolas
+ * @author Louis-Félix
  */
 public class EmployeUpdateDialogController extends ModelUpdateDialogController {
 	/**

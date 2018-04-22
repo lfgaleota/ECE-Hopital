@@ -7,6 +7,10 @@ import ece.ing3.java.projet.vue.dialogs.update.ModelUpdateDialog;
 
 /**
  * Contrôleur de boîte de dialogue de mise à jour de modèle Hospitalisation
+ *
+ * @author Virgile
+ * @author Nicolas
+ * @author Louis-Félix
  */
 public class HospitalisationUpdateDialogController extends ModelUpdateDialogController {
 	/**

@@ -10,6 +10,10 @@ import java.awt.*;
  * Ensemble de champs de saisie pour la saisie des attributs d'un modèle Hospitalisation
  * <p>
  * Cette classe dispose de quelques aménagements pour permettre de conditionner la saisie des chambres par la saisie du/des Service(s).
+ *
+ * @author Virgile
+ * @author Nicolas
+ * @author Louis-Félix
  */
 public class HospitalisationInputList extends ModelInputList {
 	private final ChambreInput chambreInput;

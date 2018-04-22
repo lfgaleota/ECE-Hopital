@@ -12,6 +12,10 @@ import java.util.Map;
  * Classe modèle d'un {@link javax.swing.JTable} pour l'affichage d'un ensemble d'instance de modèle Soigne
  * <p>
  * Affiche des informations supplémentaires par jointure
+ *
+ * @author Virgile
+ * @author Nicolas
+ * @author Louis-Félix
  */
 public class SoigneTableModel extends TableModel<Soigne> {
 	private String[] extFieldNames;

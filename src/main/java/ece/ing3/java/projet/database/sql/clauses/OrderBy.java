@@ -27,6 +27,10 @@ import ece.ing3.java.projet.database.sql.enumerations.Order;
  * <pre>
  * String v = ( new OrderBy( "col1", Order.DESC ) ).and( "col2", Order.ASC ).toString();
  * </pre>
+ *
+ * @author Virgile
+ * @author Nicolas
+ * @author Louis-Félix
  */
 public class OrderBy {
 	private String query;

@@ -6,6 +6,10 @@ import ece.ing3.java.projet.vue.dialogs.search.ModelSearchDialog;
 
 /**
  * Contrôleur de boîte de dialogue de recherche d'Employe
+ *
+ * @author Virgile
+ * @author Nicolas
+ * @author Louis-Félix
  */
 public class EmployeSearchDialogController extends ModelSearchDialogController {
 	private EmployeSearchDialogController( ModelSearchDialog dialog, DialogListener listener ) {

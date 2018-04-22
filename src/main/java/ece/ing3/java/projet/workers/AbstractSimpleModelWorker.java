@@ -10,6 +10,10 @@ import java.util.concurrent.ExecutionException;
  * Base de classe exécutant un processus de mise à jour des données d'instances de modèle BDD en arrière-plan
  * <p>
  * Se charge de la gestion des erreurs et gestion des {@link ModelWorkerProvider}
+ *
+ * @author Virgile
+ * @author Nicolas
+ * @author Louis-Félix
  */
 public abstract class AbstractSimpleModelWorker extends SwingWorker<Boolean, Object> {
 	/**

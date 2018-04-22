@@ -8,6 +8,10 @@ import java.util.List;
 
 /**
  * Utilitaire de recherche de modèle Hospitalisation
+ *
+ * @author Virgile
+ * @author Nicolas
+ * @author Louis-Félix
  */
 public class HospitalisationFinder {
 	private SQLSelect<Hospitalisation> finder;

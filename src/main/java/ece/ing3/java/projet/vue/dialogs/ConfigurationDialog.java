@@ -12,6 +12,10 @@ import java.awt.event.ActionListener;
 /**
  * Boîte de dialogue de configuration.
  * Cette boîte de dialogue est bloquante et n'est pas visible par défaut.
+ *
+ * @author Virgile
+ * @author Nicolas
+ * @author Louis-Félix
  */
 public class ConfigurationDialog extends JDialog {
 	private ConfigurationPanel panel;

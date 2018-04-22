@@ -13,6 +13,10 @@ import javax.swing.*;
 
 /**
  * Classe princiapale du programme
+ *
+ * @author Virgile
+ * @author Nicolas
+ * @author Louis-Félix
  */
 public class Main {
 	/**

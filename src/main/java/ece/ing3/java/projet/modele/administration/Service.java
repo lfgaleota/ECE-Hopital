@@ -15,6 +15,10 @@ import java.util.List;
 
 /**
  * Modèle de Service stocké en base de donnée
+ *
+ * @author Virgile
+ * @author Nicolas
+ * @author Louis-Félix
  */
 public class Service extends Model {
 	@Id

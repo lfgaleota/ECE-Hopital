@@ -10,6 +10,10 @@ import ece.ing3.java.projet.modele.tables.TableModel;
  * Interface d'objet fournissant les informations de configurations et de retour d'un {@link ece.ing3.java.projet.workers.ModelQueryWorker}, pour la récupération de donnée dans un {@link TableModel} d'un modèle BDD défini.
  *
  * @param <M> Type associé à la requête de récupération de donnée.
+ *
+ * @author Virgile
+ * @author Nicolas
+ * @author Louis-Félix
  */
 public interface ModelQueryWorkerProvider<M extends Model> {
 	/**

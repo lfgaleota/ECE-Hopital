@@ -10,6 +10,10 @@ import java.util.List;
 
 /**
  * Utilitaire de recherche de modèle Docteur
+ *
+ * @author Virgile
+ * @author Nicolas
+ * @author Louis-Félix
  */
 public class DocteurFinder {
 	private SQLSelect<Docteur> finder;

@@ -20,6 +20,10 @@ import java.util.List;
  *
  * @param <M> Type du modèle BDD considéré
  * @param <T> Type de retour utilisé (le type de la clé primaire du modèle)
+ *
+ * @author Virgile
+ * @author Nicolas
+ * @author Louis-Félix
  */
 public abstract class SearchInput<M extends Model, T> extends JPanel implements BaseInput<T>, DialogListener {
 	private String columnName;

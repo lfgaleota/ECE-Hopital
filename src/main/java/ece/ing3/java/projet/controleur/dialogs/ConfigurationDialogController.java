@@ -8,6 +8,10 @@ import java.awt.event.ActionListener;
 
 /**
  * Contrôleur de boîte de configuration
+ *
+ * @author Virgile
+ * @author Nicolas
+ * @author Louis-Félix
  */
 public class ConfigurationDialogController implements ActionListener {
 	private ConfigurationDialog dialog;

@@ -12,6 +12,10 @@ import ece.ing3.java.projet.modele.employe.Infirmier;
 /**
  * Classe fille de la classe BarChartModel
  * Permet l'affichage du diagramme en batons des salaires des infirmiers.
+ *
+ * @author Virgile
+ * @author Nicolas
+ * @author Louis-Félix
  */
 public class BarChartSalaires extends BarChartModel {
 

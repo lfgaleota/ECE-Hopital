@@ -14,6 +14,10 @@ import java.awt.*;
  * C'est le panneau principal utilisé dans les onglets de l'application.
  *
  * @param <M> Type de modèle BDD
+ *
+ * @author Virgile
+ * @author Nicolas
+ * @author Louis-Félix
  */
 public class ModelPanel<M extends Model> extends JPanel {
 	private ModelToolbar toolbar;

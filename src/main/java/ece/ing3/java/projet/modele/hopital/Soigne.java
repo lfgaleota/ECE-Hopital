@@ -11,6 +11,10 @@ import java.util.List;
 
 /**
  * Modèle d'assignation à un docteur stocké en base de donnée
+ *
+ * @author Virgile
+ * @author Nicolas
+ * @author Louis-Félix
  */
 public class Soigne extends Model {
 	@Id

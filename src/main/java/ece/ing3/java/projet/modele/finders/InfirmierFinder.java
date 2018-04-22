@@ -9,6 +9,10 @@ import ece.ing3.java.projet.modele.employe.Infirmier;
 import java.util.List;
 /**
  * Utilitaire de recherche de modèle Infirmier
+ *
+ * @author Virgile
+ * @author Nicolas
+ * @author Louis-Félix
  */
 public class InfirmierFinder {
 	private SQLSelect<Infirmier> finder;

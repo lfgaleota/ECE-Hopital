@@ -10,6 +10,10 @@ import java.util.List;
  * Processus en arrière-plan de suppression d'instances de modèle BDD de la base de donnée
  * <p>
  * Permet de supprimer des instances de modèle BDD en arrière-plan, sans bloquer l'interface.
+ *
+ * @author Virgile
+ * @author Nicolas
+ * @author Louis-Félix
  */
 public class ModelDeleteWorker extends AbstractSimpleModelWorker {
 	private List<? extends Model> selectedModels;

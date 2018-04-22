@@ -10,6 +10,10 @@ import java.awt.*;
 
 /**
  * Ensemble de champs de saisie pour la saisie des attributs d'un modèle Malade
+ *
+ * @author Virgile
+ * @author Nicolas
+ * @author Louis-Félix
  */
 public class MaladeInputList extends ModelInputList {
 	/**

@@ -143,6 +143,10 @@ import java.util.Map;
  * </p>
  *
  * @param <M> Model class
+ *
+ * @author Virgile
+ * @author Nicolas
+ * @author Louis-Félix
  */
 public class SQLSelect<M extends Model> extends SQLWhereQuery<SQLSelect> {
 	private Class<? extends Model> modelClass;

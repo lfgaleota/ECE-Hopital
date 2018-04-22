@@ -6,6 +6,10 @@ import ece.ing3.java.projet.vue.dialogs.search.ModelSearchDialog;
 
 /**
  * Contrôleur de boîte de dialogue de recherche de Chambre
+ *
+ * @author Virgile
+ * @author Nicolas
+ * @author Louis-Félix
  */
 public class ChambreSearchDialogController extends ModelSearchDialogController {
 	private ChambreSearchDialogController( ModelSearchDialog dialog, DialogListener listener ) {
