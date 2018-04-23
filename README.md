@@ -2,16 +2,20 @@
 
 Projet d'informatique du second semestre pour la première année du cycle ingénieur de l'ECE.
 
+## Téléchargement
+Les versions publiées sont disponibles ici:
+https://github.com/louisfelix90/ECE-Hopital/releases
+
+## Documentation
+Une documentation est disponible ici:
+https://louisfelix90.github.io/ECE-Hopital/
+
 ## Dépendances
  - MySQL Connector/J (https://dev.mysql.com/doc/connector-j/5.1/en/)
  - Apache Commons BeanUtils (http://commons.apache.org/proper/commons-beanutils/)
  - Apache Commons DBCP (https://commons.apache.org/proper/commons-dbcp/)
  - Apache Commons DbUtils (https://commons.apache.org/proper/commons-dbutils/)
  - JFreeChart (http://www.jfree.org/jfreechart/)
-
-## Documentation
-Une documentation est disponible ici:
-https://louisfelix90.github.io/ECE-Hopital/
 
 ## Références
 Les articles et snippets suivants ont été utilisé pour la conception de ce projet :
