@@ -90,4 +90,26 @@ public class Utils {
 	public static void error( JFrame parent, String message ) {
 		JOptionPane.showMessageDialog( parent, message, "Erreur", JOptionPane.ERROR_MESSAGE );
 	}
+
+	/**
+	 * Demande à l'utilisateur un choix
+	 *
+	 * @param title   Titre de la boîte de dialogue
+	 * @param message Message à afficher
+	 */
+	public static boolean confirm( String title, String message ) {
+		return confirm( null, title, message );
+	}
+
+	/**
+	 * Demande à l'utilisateur un choix
+	 *
+	 * @param parent  Fenêtre parente
+	 * @param title   Titre de la boîte de dialogue
+	 * @param message Message à afficher
+	 */
+	public static boolean confirm( JFrame parent, String title, String message ) {
+		int result = JOptionPane.showConfirmDialog( parent, message, title, JOptionPane.YES_NO_OPTION );
+		return (result == 0); // 0 is Yes, 1 is No
+	}
 }
