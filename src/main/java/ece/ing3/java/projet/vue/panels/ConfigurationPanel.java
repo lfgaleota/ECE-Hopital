@@ -13,14 +13,20 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class ConfigurationPanel extends JPanel {
+	private JPanel container;
 	private JButton save;
 	private JTextField databaseUrl, databaseUsername;
 	private JComboBox<JDBCDriver> databaseDriver;
 	private JPasswordField databasePassword;
+	boolean showUrl, showUsername, showPassword;
 
 	public ConfigurationPanel() {
 		setLayout( new GridBagLayout() );
 		JPanel content = new JPanel( new BorderLayout() );
+
+		showUrl = true;
+		showUsername = true;
+		showPassword = true;
 
 		save = new JButton( Strings.get( "dialog.submit.save" ) );
 		databaseUrl = new JTextField();
@@ -35,19 +41,12 @@ public class ConfigurationPanel extends JPanel {
 
 		setValues();
 
-		JPanel panel = new JPanel();
-		panel.setLayout( new FlexibleGridLayout( 4, 2 ) );
+		container = new JPanel();
+		container.setLayout( new FlexibleGridLayout( 4, 2 ) );
 
-		panel.add( new JLabel( Strings.get( "configuration.database.url" ) ) );
-		panel.add( databaseUrl );
-		panel.add( new JLabel( Strings.get( "configuration.database.username" ) ) );
-		panel.add( databaseUsername );
-		panel.add( new JLabel( Strings.get( "configuration.database.password" ) ) );
-		panel.add( databasePassword );
-		panel.add( new JLabel( Strings.get( "configuration.database.driver" ) ) );
-		panel.add( databaseDriver );
+		updateContent();
 
-		content.add( panel, BorderLayout.CENTER );
+		content.add( container, BorderLayout.CENTER );
 		content.add( save, BorderLayout.PAGE_END );
 
 		add( content, new GridBagConstraints() );
@@ -55,6 +54,49 @@ public class ConfigurationPanel extends JPanel {
 
 	public JButton getSave() {
 		return save;
+	}
+
+	public JComboBox<JDBCDriver> getDatabaseDriver() {
+		return databaseDriver;
+	}
+
+	public void isUrlShown( boolean show ) {
+		showUrl = show;
+		updateContent();
+	}
+
+	public void isUsernameShown( boolean show ) {
+		showUsername = show;
+		updateContent();
+	}
+
+	public void isPasswordShown( boolean show ) {
+		showPassword = show;
+		updateContent();
+	}
+
+	private void updateContent() {
+		container.removeAll();
+
+		if( showUrl ) {
+			container.add( new JLabel( Strings.get( "configuration.database.url" ) ) );
+			container.add( databaseUrl );
+		}
+
+		if( showUsername ) {
+			container.add( new JLabel( Strings.get( "configuration.database.username" ) ) );
+			container.add( databaseUsername );
+		}
+
+		if( showPassword ) {
+			container.add( new JLabel( Strings.get( "configuration.database.password" ) ) );
+			container.add( databasePassword );
+		}
+
+		container.add( new JLabel( Strings.get( "configuration.database.driver" ) ) );
+		container.add( databaseDriver );
+
+		updateUI();
 	}
 
 	private void setValues() {
@@ -79,5 +121,6 @@ public class ConfigurationPanel extends JPanel {
 
 	public void addActionListener( ActionListener actionListener ) {
 		this.save.addActionListener( actionListener );
+		this.databaseDriver.addActionListener( actionListener );
 	}
 }

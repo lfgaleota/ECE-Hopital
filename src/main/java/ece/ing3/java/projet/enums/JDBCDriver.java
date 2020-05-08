@@ -11,7 +11,8 @@ import java.util.Map;
  * @author Louis-Félix
  */
 public enum JDBCDriver {
-	MySQL( "com.mysql.cj.jdbc.Driver" );
+	MySQL( "com.mysql.cj.jdbc.Driver" ),
+	Embedded( "org.h2.Driver" );
 
 	private static Map<String, JDBCDriver> valueMap;
 	private String className;

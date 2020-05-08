@@ -172,4 +172,26 @@ public class Database {
 			throw new DatabaseException( e );
 		}
 	}
+
+	private static Path getEmbeddedUserDatabasePath() {
+		Path userDir = Configuration.getUserDataPath();
+		if( userDir != null ) {
+			return userDir.resolve( Constants.DB_EMBEDDED_DATABASE_FILENAME );
+		}
+		return null;
+	}
+
+	/**
+	 * Gets the embedded user database JDBC URL.
+	 * For usage with the appropriate driver.
+	 *
+	 * @return Embedded user database JDBC URL or {@code null} on error
+	 */
+	public static String getEmbeddedUserDatabaseUrl() {
+		Path dbPath = getEmbeddedUserDatabasePath();
+		if( dbPath != null ) {
+			return "jdbc:h2:file:" + dbPath.toAbsolutePath();
+		}
+		return null;
+	}
 }
