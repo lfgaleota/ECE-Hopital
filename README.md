@@ -1,14 +1,14 @@
-﻿# ECE-Hopital [![Build Status](https://www.travis-ci.com/louisfelix90/ECE-Hopital.svg?token=ELbB1pLDWUVazPTNRLJJ&branch=master)](https://www.travis-ci.com/louisfelix90/ECE-Hopital)
+﻿# ECE-Hopital [![Build Status](https://www.travis-ci.com/lfgaleota/ECE-Hopital.svg?token=ELbB1pLDWUVazPTNRLJJ&branch=master)](https://www.travis-ci.com/lfgaleota/ECE-Hopital)
 
 Projet d'informatique du second semestre pour la première année du cycle ingénieur de l'ECE.
 
 ## Téléchargement
 Les versions publiées sont disponibles ici:
-https://github.com/louisfelix90/ECE-Hopital/releases
+https://github.com/lfgaleota/ECE-Hopital/releases
 
 ## Documentation
 Une documentation est disponible ici:
-https://louisfelix90.github.io/ECE-Hopital/
+https://lfgaleota.github.io/ECE-Hopital/
 
 ## Dépendances
  - MySQL Connector/J (https://dev.mysql.com/doc/connector-j/5.1/en/)

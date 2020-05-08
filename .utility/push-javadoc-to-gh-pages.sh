@@ -21,7 +21,7 @@
 # IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 # CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-if [ "$TRAVIS_REPO_SLUG" == "louisfelix90/ECE-Hopital" ] && [ "$TRAVIS_PULL_REQUEST" == "false" ] && [ "$TRAVIS_BRANCH" == "master" ]; then
+if [ "$TRAVIS_REPO_SLUG" == "lfgaleota/ECE-Hopital" ] && [ "$TRAVIS_PULL_REQUEST" == "false" ] && [ "$TRAVIS_BRANCH" == "master" ]; then
 
 	echo -e "Publishing javadoc...\n"
 
@@ -30,7 +30,7 @@ if [ "$TRAVIS_REPO_SLUG" == "louisfelix90/ECE-Hopital" ] && [ "$TRAVIS_PULL_REQU
 	cd $HOME
 	git config --global user.email "travis@travis-ci.com"
 	git config --global user.name "travis-ci"
-	git clone --quiet --branch=gh-pages https://${GH_TOKEN}@github.com/louisfelix90/ECE-Hopital gh-pages > /dev/null
+	git clone --quiet --branch=gh-pages https://${GH_TOKEN}@github.com/lfgaleota/ECE-Hopital gh-pages > /dev/null
 
 	cd gh-pages
 	git rm -rf ./*
