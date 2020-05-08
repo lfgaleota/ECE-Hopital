@@ -12,6 +12,8 @@ import java.awt.*;
  * @author Louis-Félix
  */
 public class Constants {
+	public static final String APP_FOLDER_NAME = "ECE-Hopital";
+
 	public static final String RESOURCE_PATH_CONFIGURATION = "config.properties";
 
 	public static final String RESOURCE_PATH_APPLOGO = "imgs/logo.png";
