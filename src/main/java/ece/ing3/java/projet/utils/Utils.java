@@ -4,6 +4,7 @@ import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.io.*;
+import java.util.stream.Collectors;
 
 /**
  * Utility functions
@@ -37,6 +38,19 @@ public class Utils {
 	 */
 	public static Image getImageResource( String path ) throws IOException {
 		return ImageIO.read( new BufferedInputStream( getResource( path ) ) );
+	}
+
+	/**
+	 * Get a resource's stream from a path relative to either the execution directory, JAR, or other paths supported by the JVM.
+	 *
+	 * @param path Relative resource path
+	 * @return Resource's stream
+	 * @throws IOException Loading error
+	 */
+	public static String getTextResource( String path ) throws IOException {
+		return ( new BufferedReader( new InputStreamReader( getResource( path ) ) ) )
+				.lines()
+				.collect( Collectors.joining( "\n" ) );
 	}
 
 	/**
