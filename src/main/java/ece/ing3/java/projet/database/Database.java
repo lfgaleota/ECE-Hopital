@@ -3,10 +3,14 @@ package ece.ing3.java.projet.database;
 import ece.ing3.java.projet.configuration.Configuration;
 import ece.ing3.java.projet.exceptions.ConfigurationException;
 import ece.ing3.java.projet.exceptions.DatabaseException;
+import ece.ing3.java.projet.utils.Constants;
+import ece.ing3.java.projet.utils.Utils;
 import org.apache.commons.dbcp2.BasicDataSource;
 import org.apache.commons.dbutils.DbUtils;
 
 import javax.sql.DataSource;
+import java.io.IOException;
+import java.nio.file.Path;
 import java.sql.*;
 
 /**
@@ -24,12 +28,12 @@ public class Database {
 	private static BasicDataSource dataSource;
 
 	/**
-	 * Init the database and connect to it.
+	 * Connects to the database.
 	 *
 	 * @throws DatabaseException      Database error
 	 * @throws ConfigurationException Invalid configuration
 	 */
-	public static void init() throws ConfigurationException, DatabaseException {
+	public static void connect() throws ConfigurationException, DatabaseException {
 		try {
 			if(
 				Configuration.getString( "database.driver" ) == null ||
@@ -47,6 +51,49 @@ public class Database {
 			dataSource.setUrl( Configuration.getString( "database.url" ) );
 			connection = dataSource.getConnection();
 		} catch( SQLException e ) {
+			throw new DatabaseException( e );
+		}
+	}
+
+	/**
+	 * Validates the database's schema schema.
+	 *
+	 * @return {@code true} if the schema is correct
+	 */
+	public static boolean validate() throws DatabaseException {
+		try {
+			execute( Constants.DB_VALIDATION_QUERY );
+			return true;
+		} catch( DatabaseException e ) {
+			e.printStackTrace();
+		}
+		return false;
+	}
+
+	/**
+	 * Initialize the database with required schema.
+	 *
+	 * @throws DatabaseException      Database error
+	 */
+	public static void init() throws DatabaseException {
+		try {
+			String initIdl = Utils.getTextResource( Constants.DB_EMBEDDED_INIT_IDL_FILENAME );
+			statement().executeUpdate( initIdl );
+		} catch( IOException | SQLException e ) {
+			throw new DatabaseException( e );
+		}
+	}
+
+	/**
+	 * Fill the database with example data.
+	 *
+	 * @throws DatabaseException      Database error
+	 */
+	public static void fillWithExamples() throws DatabaseException {
+		try {
+			String exampleIdl = Utils.getTextResource( Constants.DB_EMBEDDED_EXAMPLE_IDL_FILENAME );
+			statement().executeUpdate( exampleIdl );
+		} catch( IOException | SQLException e ) {
 			throw new DatabaseException( e );
 		}
 	}

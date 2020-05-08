@@ -58,4 +58,15 @@ public class Constants {
 	public static final int UI_INPUTLIST_VGAP = 5;
 	public static final int UI_INPUTLIST_MAXVISIBLEENUMITEMS = 5;
 	public static final Border UI_INPUTLIST_INVALIDVALUE_BORDER = BorderFactory.createMatteBorder( 1, 1, 1, 1, Color.RED );
+
+	public final static String DB_VALIDATION_QUERY = "select count(numero) from employe;\n" +
+			"select count(numero) from docteur;\n" +
+			"select count(code) from service;\n" +
+			"select count(numero) from infirmier;\n" +
+			"select count(no_chambre) from chambre;\n" +
+			"select count(numero) from malade;\n" +
+			"select count(no_malade) from hospitalisation;\n" +
+			"select count(no_docteur) from soigne;\n";
+	public final static String DB_EMBEDDED_INIT_IDL_FILENAME = "init.sql";
+	public final static String DB_EMBEDDED_EXAMPLE_IDL_FILENAME = "example.sql";
 }
