@@ -82,7 +82,7 @@ public abstract class Model {
 	 * @param modelClass Model class
 	 * @return Model's table name
 	 */
-	public static String getTableName( Class<? extends Model> modelClass ) {
+	public static String getTableName( Class<?> modelClass ) {
 		String[] packages = modelClass.getName().toLowerCase().split( "\\." ); // Java's split uses RegExp so we need to escape the dot
 		return packages[ packages.length - 1 ];
 	}
@@ -94,15 +94,23 @@ public abstract class Model {
 	 * @return Field's column name or {@code null} if field should be excluded
 	 */
 	public static String getColumnName( Field modelField ) {
-		if( modelField.isAnnotationPresent( ExcludedField.class ) )
+		if( modelField.isAnnotationPresent( ExcludedField.class ) ) {
 			return null;
+		}
+
+		String columnName;
 
 		Annotation annotation = modelField.getAnnotation( Column.class );
 		if( annotation != null ) {
-			return ( (Column) annotation ).name();
+			columnName = ( (Column) annotation ).name();
+		} else {
+			columnName = modelField.getName().toLowerCase();
 		}
 
-		return modelField.getName().toLowerCase();
+		// Append table name to column name
+		columnName = getTableName( modelField.getDeclaringClass() ) + "." + columnName;
+
+		return columnName;
 	}
 
 	/**
@@ -270,7 +278,7 @@ public abstract class Model {
 	 * @param modelClass Model class
 	 * @return List of ID fields's names
 	 */
-	public String[] getIdFieldNames( Class<? extends Model> modelClass ) {
+	public static String[] getIdFieldNames( Class<? extends Model> modelClass ) {
 		if( !idFieldNames.containsKey( modelClass ) ) {
 			buildNames( modelClass );
 		}
