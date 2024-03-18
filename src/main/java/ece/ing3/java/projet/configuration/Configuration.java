@@ -89,7 +89,7 @@ public class Configuration {
 
 		if( Files.notExists( userDir ) ) {
 			try {
-				Files.createDirectory( userDir );
+				Files.createDirectories( userDir );
 			} catch( IOException e ) {
 				e.printStackTrace();
 				return null;
