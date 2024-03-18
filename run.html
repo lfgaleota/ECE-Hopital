@@ -1,0 +1,40 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>ECE-Hopital - Online version</title>
+    <style>
+      html,
+      body {
+        margin: 0;
+      }
+    
+      #container {
+        width: 100vw;
+        height: 100svh;
+      }
+      
+      #message {
+        position: absolute;
+        top: 1em;
+        left: 1em;
+        z-index: 100;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="message">CheerpJ is loading... If this message does not disappear quickly, there may be an initilization problem.</div>
+    <div id="container"></div>
+    <noscript><p>This page uses JavaScript and CheerpJ to run this Java project in the browser.</p></noscript>
+    <script src="https://cjrtnc.leaningtech.com/3.0/cj3loader.js"></script>
+    <script>
+      (async function () {
+        await cheerpjInit();
+        cheerpjCreateDisplay(-1, -1, document.getElementById("container"));
+        document.body.removeChild(document.getElementById("message"));
+        await cheerpjRunJar("/app/projet-1.0.jar");
+      })();
+    </script>
+  </body>
+</html>
