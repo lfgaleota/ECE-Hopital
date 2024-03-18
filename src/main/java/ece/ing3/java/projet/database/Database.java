@@ -190,7 +190,7 @@ public class Database {
 	public static String getEmbeddedUserDatabaseUrl() {
 		Path dbPath = getEmbeddedUserDatabasePath();
 		if( dbPath != null ) {
-			return "jdbc:h2:file:" + dbPath.toAbsolutePath();
+			return "jdbc:hsqldb:file:" + dbPath.toAbsolutePath() + ";shutdown=true;sql.syntax_mys=true";
 		}
 		return null;
 	}

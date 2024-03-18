@@ -12,7 +12,7 @@ import java.util.Map;
  */
 public enum JDBCDriver {
 	MySQL( "com.mysql.cj.jdbc.Driver" ),
-	Embedded( "org.h2.Driver" );
+	Embedded( "org.hsqldb.jdbc.JDBCDriver" );
 
 	private static Map<String, JDBCDriver> valueMap;
 	private String className;

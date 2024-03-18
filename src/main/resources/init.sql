@@ -27,7 +27,6 @@ create table if not exists service
     nom       varchar(30) not null unique,
     batiment  char(1)     not null,
     directeur decimal(4),
-    constraint employe_uk unique (nom),
     foreign key (directeur) references docteur (numero) on delete set null on update cascade
 );
 

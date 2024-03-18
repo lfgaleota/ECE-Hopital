@@ -55,11 +55,12 @@
 			<artifactId>appdirs</artifactId>
 			<version>1.1.0</version>
 		</dependency>
-		<!-- H2 -->
+		<!-- HyperSQL DB -->
 		<dependency>
-			<groupId>com.h2database</groupId>
-			<artifactId>h2</artifactId>
-			<version>2.2.220</version>
+			<groupId>org.hsqldb</groupId>
+			<artifactId>hsqldb</artifactId>
+			<version>2.7.2</version>
+			<classifier>jdk8</classifier>
 		</dependency>
 	</dependencies>
 
