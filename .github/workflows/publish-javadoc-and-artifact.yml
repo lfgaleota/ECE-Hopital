@@ -1,0 +1,49 @@
+name: Deploy Javadoc and Artifact for online version to GitHub Pages
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-java@v4
+        with:
+          java-version: 8
+          distribution: temurin
+          cache: maven
+
+      - name: Generate Javadoc with Maven
+        run: mvn javadoc:aggregate
+        shell: bash
+
+      - name: Generate Javadoc with Maven
+        run: mvn javadoc:aggregate
+        shell: bash
+
+      - name: Package and verify project with Maven
+        run: mvn --batch-mode --update-snapshots verify package
+        shell: bash
+
+      - name: Copy generated artifact to website
+        run: cp target/*.jar target/site
+        shell: bash
+
+      - name: Deploy website to GitHub Pages
+        uses: JamesIves/github-pages-deploy-action@v4.4.3
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          branch: gh-pages
+          clean: true
+          clean-exclude: |
+            index.html
+            run.html
+          folder: target/site

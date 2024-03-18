@@ -1,4 +1,4 @@
-﻿# ECE-Hopital [![Build Status](https://www.travis-ci.com/lfgaleota/ECE-Hopital.svg?token=ELbB1pLDWUVazPTNRLJJ&branch=master)](https://www.travis-ci.com/lfgaleota/ECE-Hopital)
+﻿# ECE-Hopital
 
 Projet d'informatique du second semestre pour la première année du cycle ingénieur de l'ECE.
 

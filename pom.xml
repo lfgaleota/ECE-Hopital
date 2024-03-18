@@ -137,6 +137,10 @@
 						</goals>
 					</execution>
 				</executions>
+				<configuration>
+					<outputDirectory>${project.build.outputDirectory}</outputDirectory>
+					<finalName>${project.artifactId}-${project.version}</finalName>
+				</configuration>
 			</plugin>
 		</plugins>
 	</build>
